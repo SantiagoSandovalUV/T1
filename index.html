@@ -116,14 +116,14 @@
 			}
 			*/
 		
-var h;
+var n;
 			if (Mesa1) {
 
 				if(Mesa1.position.y<=40){
-                    h+=1
-					Mesa1.position.y+=1
-                    Mesa1.position.y+=-2
-                    Mesa1.position.y+=1
+                    for (var i = 0; i < 40; i++) {
+                    n += i;
+                    Mesa1.position.y=(-1)^n;
+                    }
 				}else{
 					Mesa1.position.y=35
 
