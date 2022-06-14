@@ -2,151 +2,146 @@
 <html>
 
 <head>
-
 	<meta charset="utf-8">
-	<title>Laboratorio de tension - Universidad del Valle - Reider Muñoz</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-		crossorigin="anonymous"></script>
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css"
-		integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
-	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-
-
+	<title>My first three.js app</title>
 	<style>
-		html,
 		body {
 			margin: 0;
-			width: 100%;
-			height: 100%;
 		}
 
-		#ventana {
-			background-color: #ffffff;
-			width: 400px;
-			height: 200px;
-			position: absolute;
-			top: 0;
-			left: 0;
+		canvas {
+			width: 100%;
+			height: 100%
 		}
 	</style>
-
 </head>
 
 <body>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+
+	<script>
+
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		clock = new THREE.Clock();
+
+		scene = new THREE.Scene();
+		scene.background = new THREE.Color(0xa0a0a0);
+		scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
+
+		const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+		hemiLight.position.set(0, 20, 0);
+		scene.add(hemiLight);
+
+		const dirLight = new THREE.DirectionalLight(0xffffff);
+		dirLight.position.set(- 3, 10, - 10);
+		dirLight.castShadow = true;
+		dirLight.shadow.camera.top = 2;
+		dirLight.shadow.camera.bottom = - 2;
+		dirLight.shadow.camera.left = - 2;
+		dirLight.shadow.camera.right = 2;
+		dirLight.shadow.camera.near = 0.1;
+		dirLight.shadow.camera.far = 40;
+		scene.add(dirLight);
+
+		// scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
+
+		// ground
+
+		const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
+		mesh.rotation.x = - Math.PI / 2;
+		mesh.receiveShadow = true;
+		scene.add(mesh);
 
 	
-<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
-<script>
-var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    var garra;
+
+		//var geometryc = new THREE.SphereGeometry( 1, 32, 16 )
+		//var materialc = new THREE.MeshBasicMaterial( { color: 0xe0e0e0 } );
+		//var esfera = new THREE.Mesh( geometryc, materialc );
+		//scene.add( esfera );
+		//esfera.position.y = -2.9
 
 
-    const container = document.getElementById('3d');
 
+		
 
-    const renderer = new THREE.WebGLRenderer();
+		//var geometryc2 = new THREE.SphereGeometry( 1, 32, 16 )
+		//var materialc2 = new THREE.MeshBasicMaterial( { color: 0xe0e0e0 } );
+		//var esfera2 = new THREE.Mesh( geometryc2, materialc2 );
+		//scene.add( esfera2 );
+		//esfera2.position.y = 2
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    clock = new THREE.Clock();
-
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xa0a0a0);
-    scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
-
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-    hemiLight.position.set(0, 20, 0);
-    scene.add(hemiLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff);
-    dirLight.position.set(- 3, 10, - 10);
-    dirLight.castShadow = true;
-    dirLight.shadow.camera.top = 2;
-    dirLight.shadow.camera.bottom = - 2;
-    dirLight.shadow.camera.left = - 2;
-    dirLight.shadow.camera.right = 2;
-    dirLight.shadow.camera.near = 0.1;
-    dirLight.shadow.camera.far = 40;
-    scene.add(dirLight);
-	const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5) 
-
-		function zoom() {
-			camera.position.set(0.5, 4, 0.067); // posicion de la camara (0, 5, 5)
-			//camera.position.y=3 // posicion de la camara (0, 5, 5)
-
-		}
+		const controls = new THREE.OrbitControls(camera, renderer.domElement);
+		camera.position.set(0, 5, 5);
 
 		controls.update();
 
 
 		renderer.render(scene, camera);
 
-		function onKeyDown(event) {
+		function animate() {
+			requestAnimationFrame(animate);
+			controls.update();
 
-			switch (event.code) {
+			
 
-				case 'ArrowUp':
-				case 'KeyW': camera.position.x = camera.position.x - 1;
 
-				case 'ArrowDown':
-				case 'KeyS': camera.position.x = camera.position.x + 1;
-
-				case 'ArrowLeft':
-				case 'KeyA': camera.position.z = camera.position.z + 1;
-
-				case 'ArrowRight':
-				case 'KeyD': camera.position.z = camera.position.z - 1;
-
-				// case 'KeyC': controls.crouch = true; break;
-				// case 'Space': controls.jump = true; break;
-				// case 'ControlLeft':
-				// case 'ControlRight': controls.attack = true; break;
-
-			}
+			renderer.render(scene, camera);
 
 		}
-// Instantiate a loader
-    const loader = new THREE.GLTFLoader();
+		animate()
+		
+		// Instantiate a loader
+const loader = new THREE.GLTFLoader();
 
-    // Load a glTF resource
-    loader.load(
-        'Mesa1.gltf',//'scene.gltf'
-        function (gltf) {
-            scene.add(gltf.scene);
-            gltf.animations; // Array<THREE.AnimationClip>
-            gltf.scene; // THREE.Group
-            gltf.scenes; // Array<THREE.Group>
-            gltf.cameras; // Array<THREE.Camera>
-            gltf.asset; // Object
-            renderer.render(scene, camera);
-            console.log('loader');
 
-        },
-        // called while loading is progressing
-        function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        },
-        // called when loading has errors
-        function (error) {
-            console.log('An error happened');
-        }
-    );
-</script>
+// Load a glTF resource
+loader.load(
+	'Mesa1.gltf',
+	function ( gltf ) {
+
+		scene.add( gltf.scene );
+
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+
+
+
+		/*
+		var animate = function () {
+			requestAnimationFrame( animate );
+			cube.rotation.x += 0.01;
+			cube.rotation.y += 0.01;
+			renderer.render( scene, camera );
+		};
+		animate(); */
+
+	</script>
 </body>
 
 </html>
