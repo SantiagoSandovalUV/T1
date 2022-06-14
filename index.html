@@ -84,29 +84,7 @@ var Mesa1;
 		controls.update();
 
 
-		renderer.render(scene, camera);
-		function animate() {
-			requestAnimationFrame(animate);
-			controls.update();
-			console.log(camera.position)
-					if (Mesa1.position.y <= 0.29) {
-						Mesa1.position.y += 0.00001
-
-
-						if (contador_barra1.length % 31 == 0) {
-							chart.data.datasets[0].data.push({ x: tension_barra1[cant][0], y: tension_barra1[cant][1] });
-							chart.update();
-						}
-
-					} else {
-						Mesa1.position.y = 0.35
-					console.log(Mesa1.position.y)
-			}
-			renderer.render(scene, camera);
-		}
-
-		animate()
-
+	
 		
 		// Instantiate a loader
 const loader = new THREE.GLTFLoader();
