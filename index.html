@@ -82,7 +82,44 @@ var scene = new THREE.Scene();
     dirLight.shadow.camera.near = 0.1;
     dirLight.shadow.camera.far = 40;
     scene.add(dirLight);
+	const controls = new THREE.OrbitControls(camera, renderer.domElement);
+		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5) 
 
+		function zoom() {
+			camera.position.set(0.5, 4, 0.067); // posicion de la camara (0, 5, 5)
+			//camera.position.y=3 // posicion de la camara (0, 5, 5)
+
+		}
+
+		controls.update();
+
+
+		renderer.render(scene, camera);
+
+		function onKeyDown(event) {
+
+			switch (event.code) {
+
+				case 'ArrowUp':
+				case 'KeyW': camera.position.x = camera.position.x - 1;
+
+				case 'ArrowDown':
+				case 'KeyS': camera.position.x = camera.position.x + 1;
+
+				case 'ArrowLeft':
+				case 'KeyA': camera.position.z = camera.position.z + 1;
+
+				case 'ArrowRight':
+				case 'KeyD': camera.position.z = camera.position.z - 1;
+
+				// case 'KeyC': controls.crouch = true; break;
+				// case 'Space': controls.jump = true; break;
+				// case 'ControlLeft':
+				// case 'ControlRight': controls.attack = true; break;
+
+			}
+
+		}
 // Instantiate a loader
     const loader = new THREE.GLTFLoader();
 
