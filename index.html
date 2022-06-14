@@ -116,11 +116,12 @@
 			}
 			*/
 		
-
+var h;
 			if (Mesa1) {
 
-				if(Mesa1.position.y<=29){
-					Mesa1.position.y+=0.1
+				if(Mesa1.position.y<=40){
+                    h+=1
+					Mesa1.position.y=0.5*Math.sin(1);
 				}else{
 					Mesa1.position.y=35
 
