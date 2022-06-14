@@ -116,8 +116,7 @@ const loader = new THREE.GLTFLoader();
 loader.load(
 	'Mesa1.gltf',
 	function ( gltf ) {
-Mesa1 = gltf.scene
-		scene.add( Mesa1 );
+		scene.add( gltf.scen );
 
 		gltf.animations; // Array<THREE.AnimationClip>
 		gltf.scene; // THREE.Group
