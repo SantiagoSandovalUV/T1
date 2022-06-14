@@ -51,11 +51,10 @@
             var h;
             h=1;
 			if (Mesa1) {
-				if(h<=29){
-                    h+=1
-					Mesa1.position.y+=h
+				if(Mesa1.position.y<=2.9){
+					Mesa1.position.y+=0.1
 				}else{
-					h=35
+					Mesa1.position.y=3.5
 					
 				}
 				console.log(Mesa1.position.y)
