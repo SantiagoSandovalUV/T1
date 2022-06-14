@@ -25,7 +25,7 @@
 
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-var Mesa1;
+//var Mesa1;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
@@ -85,7 +85,27 @@ var Mesa1;
 
 
 		renderer.render(scene, camera);
-	
+		function animate() {
+			requestAnimationFrame(animate);
+			controls.update();
+			console.log(camera.position)
+					if (Mesa1.position.y <= 0.29) {
+						Mesa1.position.y += 0.00001
+
+
+						if (contador_barra1.length % 31 == 0) {
+							chart.data.datasets[0].data.push({ x: tension_barra1[cant][0], y: tension_barra1[cant][1] });
+							chart.update();
+						}
+
+					} else {
+						Mesa1.position.y = 0.35
+					console.log(Mesa1.position.y)
+			}
+			renderer.render(scene, camera);
+		}
+
+		animate()
 
 		
 		// Instantiate a loader
