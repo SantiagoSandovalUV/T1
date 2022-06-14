@@ -45,14 +45,31 @@
 		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5)
 		controls.update();
 		renderer.render(scene, camera);
-	
+		function animate() {
+			requestAnimationFrame(animate);
+			controls.update();
+            var h;
+            h=1;
+			if (Mesa1) {
+				if(Mesa1.position.y<=2.9){
+					Mesa1.position.y+=0.1
+				}else{
+					Mesa1.position.y=3.5
+					
+				}
+				console.log(Mesa1.position.y)
+			}
+			renderer.render(scene, camera);
+           
+		}
+		animate()
         Mesa1.position.y=3.5
             function animate2() {
 			requestAnimationFrame(animate);
 			controls.update();
             if (Mesa1) {
 				if(Mesa1.position.y>=2.9){
-					Mesa1.position.y+=-0.1
+					Mesa1.position.y=Mesa1.position.y-0.1
 				}else{
 					Mesa1.position.y=0
 					
