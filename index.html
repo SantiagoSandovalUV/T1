@@ -1,7 +1,550 @@
+<!DOCTYPE html>
 <html>
-    <head>
-       <body>
-Hola komuta
-       </body> 
-    </head>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Laboratorio de tension - Universidad del Valle - Reider Muñoz</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css"
+		integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+
+
+	<style>
+		html,
+		body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		#ventana {
+			background-color: #ffffff;
+			width: 400px;
+			height: 200px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="position-fixed w-100 p-3 border-bottom" style="z-index: 100000;background-color: #ffffff;">
+		<div class="row">
+			<div class="col-md-3">
+				<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+					<img src="logo.png" style="height: 30px;">
+					<span class="fs-8">LABORATORIOS VIRTUALES</span>
+				</a>
+			</div>
+			<div class="col-md-9" style="text-align: right;" >
+				<a  class="btn btn-sm btn-outline-secondary" href="index_barra2.html">Aluminio</a>
+			</div>
+		<!--	<div class="col-md-9" style="text-align: right;">
+				
+				<a class="btn btn-sm btn-outline-secondary" href="index copy.html">aaTorsión</a>
+				<a class="btn btn-sm btn-outline-secondary" href="https://reidermunoz.github.io/lab-tension.github.io/">SISTorsión</a>
+				<a class="btn btn-sm btn-outline-secondary" href="#">Torsión</a>
+				<a class="btn btn-sm btn-outline-secondary" href="#">Torsión</a>
+			</div>-->
+		</div>
+	</div>
+
+	<div class="position-fixed" style="width: 400px;background-color: #ffffff;padding: 90px 5px; height: 100%;">
+
+
+		<div class="card mb-2" style="width: 100%;">
+			<div class="card-body">
+				<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
+			</div>
+		</div>
+
+		<div class="card" style="width: 100%;">
+			<div class="card-body">
+				<div style="text-align: center;">
+					<button type="button" onclick="zoom()" class="btn btn-primary">Zoom</button>
+					<button type="button" onclick="iniciar()" class="btn btn-secondary">Iniciar</button>
+					<button type="button" href="Datos.xlsx" download="Datos.xlsx" class="btn btn-success">Datos</button>
+				</div>
+			</div>
+		</div>
+		<div class="card mt-2" style="width: 100%;">
+			<div class="card-body">
+				<form class="row g-2">
+					<div class="col-auto" style="width:180px">
+						<label class="form-label" style="font-size:14px">Punto de fluencia <i
+								data-tippy-content="Punto donde la gráfica deja de comportarse de forma lineal"
+								class="ti ti-question-mark text-primary"></i></label>
+						<input type="text" class="form-control form-control-sm" name="punto_fluencia"
+							id="punto_fluencia" placeholder="">
+					</div>
+					<div class="col-auto" style="width:180px">
+						<label class="form-label" style="font-size: 14px">Módulo elástico <i
+								data-tippy-content="El módulo de elasticidad es la pendiente del diagrama esfuerzo-deformación unitaria en la región linealmente elástica; esfuerzo/deformación"
+								class="ti ti-question-mark text-primary"></i></label>
+						<input type="text" class="form-control form-control-sm" name="modulo_elastico"
+							id="modulo_elastico" placeholder="">
+					</div>
+					<div class="col-auto" style="width:180px">
+						<label class="form-label" style="font-size: 14px">Resistencia a la tracción <i
+								data-tippy-content="Punto máximo de la grafica"
+								class="ti ti-question-mark text-primary"></i></label>
+						<input type="text" class="form-control form-control-sm" name="resistencia_traccion"
+							id="resistencia_traccion" placeholder="">
+					</div>
+					<div class="col-auto" style="width:180px">
+						<label class="form-label" style="font-size: 14px">Punto de rotura <i
+								data-tippy-content="Punto final de la gráfica, donde se rompe la probeta"
+								class="ti ti-question-mark text-primary"></i></label>
+						<input type="text" class="form-control form-control-sm" name="punto_rotura" id="punto_rotura"
+							placeholder="">
+					</div>
+					<div class="col-auto" style="width:180px">
+						<label class="form-label" style="font-size: 14px">Resiliencia <i
+								data-tippy-content="Es igual al área debajo de la curva esfuerzo-deformación hasta el límite de proporcionalidad. La resiliencia representa la capacidad de un material para absorber y liberar energía dentro del intervalo elástico"
+								class="ti ti-question-mark text-primary"></i></label>
+						<input type="text" class="form-control form-control-sm" name="resiliencia" id="resiliencia"
+							placeholder="">
+					</div>
+					<div class="col-auto" style="width:180px">
+						<label class="form-label" style="font-size: 14px">Tenacidad <i
+								data-tippy-content="Es igual al área debajo de toda la curva esfuerzo-deformación. La tenacidad, se refiere a la capacidad de un material para absorber energía sin fracturarse"
+								class="ti ti-question-mark text-primary"></i></label>
+						<input type="text" class="form-control form-control-sm" name="tenacidad" id="tenacidad"
+							placeholder="">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="tension_barra1.js"></script>
+
+
+	<script>
+		tippy('[data-tippy-content]');
+
+
+		var ctx = document.getElementById("myChart").getContext("2d");
+		const contador_barra1 = [];
+		const chart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				datasets: [{
+					borderColor: 'rgb(222,42,22)',
+					borderWidth: 2,
+					pointRadius: 0,
+					data: [],
+				}]
+			},
+			options: {
+				animation: {
+					duration: 0
+				},
+				interaction: {
+					intersect: false
+				},
+				plugins: {
+					legend: false
+				},
+				scales: {
+					x: {
+						type: 'linear',
+						max: 0.5,
+						min: 0
+					},
+					y: {
+						type: 'linear',
+						max: 400,
+						min: 1
+					}
+				}
+			}
+		});
+
+
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+		var garra;
+
+		document.addEventListener('keydown', onKeyDown);
+
+		const container = document.getElementById('3d');
+
+
+		const renderer = new THREE.WebGLRenderer();
+
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		clock = new THREE.Clock();
+
+		scene = new THREE.Scene();
+		scene.background = new THREE.Color(0xa0a0a0);
+		scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
+
+		const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+		hemiLight.position.set(0, 20, 0);
+		scene.add(hemiLight);
+
+		const dirLight = new THREE.DirectionalLight(0xffffff);
+		dirLight.position.set(- 3, 10, - 10);
+		dirLight.castShadow = true;
+		dirLight.shadow.camera.top = 2;
+		dirLight.shadow.camera.bottom = - 2;
+		dirLight.shadow.camera.left = - 2;
+		dirLight.shadow.camera.right = 2;
+		dirLight.shadow.camera.near = 0.1;
+		dirLight.shadow.camera.far = 40;
+		scene.add(dirLight);
+
+		// scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
+
+		// ground
+		/*
+		const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
+		mesh.rotation.x = - Math.PI / 2;
+		mesh.receiveShadow = true;
+		scene.add(mesh);
+		var geometry = new THREE.CylinderGeometry(0.05, 0.05, 0.3, 32);
+		var material = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cube = new THREE.Mesh(geometry, material);
+		scene.add(cube);
+		cube.position.y = 3.005
+		cube.position.z = 0.63
+		var geometryabajo = new THREE.CylinderGeometry(0.05, 0.04, 0.024, 32);
+		var materialabajo = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cubeabajo = new THREE.Mesh(geometryabajo, materialabajo);
+		scene.add(cubeabajo);
+		cubeabajo.position.y = 2.828
+		cubeabajo.position.z = 0.63
+		var geometry2 = new THREE.CylinderGeometry(0.05, 0.05, 0.4, 32);
+		var material2 = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cube2 = new THREE.Mesh(geometry2, material2);
+		scene.add(cube2);
+		cube2.position.y = 2.63
+		cube2.position.z = 0.63
+		var geometryabajo2 = new THREE.CylinderGeometry(0.04, 0.05, 0.024, 32);
+		var materialabajo2 = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cubeabajo2 = new THREE.Mesh(geometryabajo2, materialabajo2);
+		scene.add(cubeabajo2);
+		cubeabajo2.position.y = 2.84
+		cubeabajo2.position.z = 0.63
+*/
+
+		(function () {
+
+			/**
+			 * Ajuste decimal de un número.
+			 *
+			 * @param	{String}	type	El tipo de ajuste.
+			 * @param	{Number}	value	El número.
+			 * @param	{Integer}	exp		El exponente(el logaritmo en base 10 del ajuste).
+			 * @returns	{Number}			El valor ajustado.
+			 */
+			function decimalAdjust(type, value, exp) {
+				// Si el exp es indefinido o cero...
+				if (typeof exp === 'undefined' || +exp === 0) {
+					return Math[type](value);
+				}
+				value = +value;
+				exp = +exp;
+				// Si el valor no es un número o el exp no es un entero...
+				if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+					return NaN;
+				}
+				// Cambio
+				value = value.toString().split('e');
+				value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+				// Volver a cambiar
+				value = value.toString().split('e');
+				return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+			}
+
+			// Redondeo decimal
+			if (!Math.round10) {
+				Math.round10 = function (value, exp) {
+					return decimalAdjust('round', value, exp);
+				};
+			}
+			// Redondeo hacia abajo
+			if (!Math.floor10) {
+				Math.floor10 = function (value, exp) {
+					return decimalAdjust('floor', value, exp);
+				};
+			}
+			// Redondeo hacia arriba
+			if (!Math.ceil10) {
+				Math.ceil10 = function (value, exp) {
+					return decimalAdjust('ceil', value, exp);
+				};
+			}
+
+		})();
+
+
+		function modulo_elastico() {
+			var num1 = (202.358513779528 - 5.08919783464567);
+			var num2 = (0.00647290640394089 - 0);
+			var modulo_elastico = Math.round10(num1 / num2, -2);
+			document.getElementById('modulo_elastico').value = modulo_elastico + ' MPa';
+
+		}
+
+		function punto_fluencia() {
+			var num3 = (202.358513779528);
+			var punto_fluencia = Math.round10(num3, -2);
+			document.getElementById('punto_fluencia').value = punto_fluencia + ' Mpa';
+		}
+
+		function resistencia_traccion() {
+			var num4 = (338.411663385827);
+			var resistencia_traccion = Math.round10(num4, -2);
+			document.getElementById('resistencia_traccion').value = resistencia_traccion + ' Mpa';
+		}
+
+		function punto_rotura() {
+			var num5 = (250.703125);
+			var punto_rotura = Math.round10(num5, -2);
+			document.getElementById('punto_rotura').value = punto_rotura + ' Mpa';
+		}
+
+		function resiliencia() {
+			var num6 = (0.623700451034677);
+			var resiliencia = Math.round10(num6, -2);
+			document.getElementById('resiliencia').value = resiliencia + ' Mpa';
+		}
+
+		function tenacidad() {
+			var num7 = (121.844989519595);
+			var tenacidad = Math.round10(num7, -2);
+			document.getElementById('tenacidad').value = tenacidad + ' Mpa';
+		}
+
+
+
+
+
+
+		const controls = new THREE.OrbitControls(camera, renderer.domElement);
+		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5) 
+
+		function zoom() {
+			camera.position.set(0.5, 4, 0.067); // posicion de la camara (0, 5, 5)
+			//camera.position.y=3 // posicion de la camara (0, 5, 5)
+
+		}
+
+		controls.update();
+
+
+		renderer.render(scene, camera);
+
+		function onKeyDown(event) {
+
+			switch (event.code) {
+
+				case 'ArrowUp':
+				case 'KeyW': camera.position.x = camera.position.x - 1;
+
+				case 'ArrowDown':
+				case 'KeyS': camera.position.x = camera.position.x + 1;
+
+				case 'ArrowLeft':
+				case 'KeyA': camera.position.z = camera.position.z + 1;
+
+				case 'ArrowRight':
+				case 'KeyD': camera.position.z = camera.position.z - 1;
+
+				// case 'KeyC': controls.crouch = true; break;
+				// case 'Space': controls.jump = true; break;
+				// case 'ControlLeft':
+				// case 'ControlRight': controls.attack = true; break;
+
+			}
+
+		}
+
+		var iniciar_ = false;
+
+
+		function animate() {
+			requestAnimationFrame(animate);
+			controls.update();
+			console.log(camera.position)
+
+			if (iniciar_) {
+				if (garra) {
+					var cant = chart.data.datasets[0].data.length;
+					contador_barra1.push(1);
+
+					if (garra.position.y > 0.264) {
+						modulo_elastico();
+						punto_fluencia();
+						resiliencia();
+					}
+					if (garra.position.y > 0.2838) {
+						resistencia_traccion();
+					}
+					if (garra.position.y > 0.29) {
+						punto_rotura();
+						tenacidad();
+					}
+
+
+					if (garra.position.y <= 0.29) {
+						garra.position.y += 0.00001
+
+
+						if (contador_barra1.length % 31 == 0) {
+							chart.data.datasets[0].data.push({ x: tension_barra1[cant][0], y: tension_barra1[cant][1] });
+							chart.update();
+						}
+
+					} else {
+						garra.position.y = 0.35
+					}
+					console.log(garra.position.y)
+				}
+
+			}
+
+
+			renderer.render(scene, camera);
+
+		}
+
+		animate()
+
+
+		function iniciar() {
+			iniciar_ = true;
+		}
+
+
+
+
+		// Instantiate a loader
+		const loader = new THREE.GLTFLoader();
+
+		// Load a glTF resource
+		loader.load(
+			'salonfinsih.gltf',//'scene.gltf'
+			function (gltf) {
+				scene.add(gltf.scene);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				renderer.render(scene, camera);
+
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+
+
+
+		// Instantiate a loader
+		const loader2 = new THREE.GLTFLoader();
+
+		// Load a glTF resource
+		loader2.load(
+			'Garra.gltf',//'scene.gltf'
+			function (gltf) {
+				garra = gltf.scene;
+				scene.add(garra);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+
+				console.log('completado!.....')
+				garra.position.z += 1.587
+				garra.position.x += -0.001
+				garra.position.y += 0.258
+				renderer.render(scene, camera);
+
+
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+
+
+
+
+
+
+
+
+		// create an AudioListener and add it to the camera
+		const listener = new THREE.AudioListener();
+		camera.add(listener);
+
+		// create a global audio source
+		const sound = new THREE.Audio(listener);
+
+		// load a sound and set it as the Audio object's buffer
+		const audioLoader = new THREE.AudioLoader();
+		audioLoader.load('sound_ogg.ogg', function (buffer) {
+			sound.setBuffer(buffer);
+			sound.setLoop(true);
+			sound.setVolume(0.5);
+			sound.play();
+		});
+
+
+
+		/*
+		var animate = function () {
+			requestAnimationFrame( animate );
+			cube.rotation.x += 0.01;
+			cube.rotation.y += 0.01;
+			renderer.render( scene, camera );
+		};
+		animate(); */
+
+
+	</script>
+</body>
+
 </html>
