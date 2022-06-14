@@ -171,7 +171,7 @@ loader2.load(
 	'Mesa1.gltf',//'scene.gltf'
 	function ( gltf ) {
 		Mesa1 = gltf.scene; 
-		scene.add( garra );
+		scene.add( Mesa1 );
 		gltf.animations; // Array<THREE.AnimationClip>
 		gltf.scene; // THREE.Group
 		gltf.scenes; // Array<THREE.Group>
@@ -179,9 +179,9 @@ loader2.load(
 		gltf.asset; // Object
 
 		console.log('completado!.....')
-		garra.position.z+=1.587
-		garra.position.x+=-0.001
-		garra.position.y+=0.258
+		Mesa1.position.z+=1.587
+		Mesa1.position.x+=-0.001
+		Mesa1.position.y+=0.258
 
 	},
 	// called while loading is progressing
