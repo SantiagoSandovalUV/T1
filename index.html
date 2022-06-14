@@ -97,6 +97,7 @@ var scene = new THREE.Scene();
             gltf.cameras; // Array<THREE.Camera>
             gltf.asset; // Object
             renderer.render(scene, camera);
+            console.log('loader');
 
         },
         // called while loading is progressing
@@ -108,7 +109,6 @@ var scene = new THREE.Scene();
             console.log('An error happened');
         }
     );
-    console.log('loader');
 </script>
 </body>
 
