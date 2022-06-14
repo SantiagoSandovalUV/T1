@@ -41,38 +41,6 @@
 		dirLight.shadow.camera.near = 0.1;
 		dirLight.shadow.camera.far = 40;
 		scene.add(dirLight);
-		// scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
-		// ground
-		/*
-		const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
-		mesh.rotation.x = - Math.PI / 2;
-		mesh.receiveShadow = true;
-		scene.add(mesh);
-		var geometry = new THREE.CylinderGeometry(0.05, 0.05, 0.3, 32);
-		var material = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
-		var cube = new THREE.Mesh(geometry, material);
-		scene.add(cube);
-		cube.position.y = 3.005
-		cube.position.z = 0.63
-		var geometryabajo = new THREE.CylinderGeometry(0.05, 0.04, 0.024, 32);
-		var materialabajo = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
-		var cubeabajo = new THREE.Mesh(geometryabajo, materialabajo);
-		scene.add(cubeabajo);
-		cubeabajo.position.y = 2.828
-		cubeabajo.position.z = 0.63
-		var geometry2 = new THREE.CylinderGeometry(0.05, 0.05, 0.4, 32);
-		var material2 = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
-		var cube2 = new THREE.Mesh(geometry2, material2);
-		scene.add(cube2);
-		cube2.position.y = 2.63
-		cube2.position.z = 0.63
-		var geometryabajo2 = new THREE.CylinderGeometry(0.04, 0.05, 0.024, 32);
-		var materialabajo2 = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
-		var cubeabajo2 = new THREE.Mesh(geometryabajo2, materialabajo2);
-		scene.add(cubeabajo2);
-		cubeabajo2.position.y = 2.84
-		cubeabajo2.position.z = 0.63
-*/
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
 		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5)
 		controls.update();
@@ -83,6 +51,9 @@
 			if (Mesa1) {
 				if(Mesa1.position.y<=2.9){
 					Mesa1.position.y+=0.1
+                    if(Mesa1.position==2.9/2){
+                        Mesa1.position.y+=-0.1
+                    }
 				}else{
 					Mesa1.position.y=3.5
 					
