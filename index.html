@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>My first three.js app</title>
+	<title>Laboratorio de tension - Universidad del Valle - Reider Muñoz</title>
 	<style>
 		body {
 			margin: 0;
@@ -19,13 +19,15 @@
 <body>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
 
 	<script>
 
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-//var Mesa1;
+		var Mesa1;
+
+
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
@@ -54,70 +56,94 @@
 		// scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
 		// ground
-
+		/*
 		const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
 		mesh.rotation.x = - Math.PI / 2;
 		mesh.receiveShadow = true;
 		scene.add(mesh);
 
-	
+		var geometry = new THREE.CylinderGeometry(0.05, 0.05, 0.3, 32);
+		var material = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cube = new THREE.Mesh(geometry, material);
+		scene.add(cube);
+		cube.position.y = 3.005
+		cube.position.z = 0.63
 
-		//var geometryc = new THREE.SphereGeometry( 1, 32, 16 )
-		//var materialc = new THREE.MeshBasicMaterial( { color: 0xe0e0e0 } );
-		//var esfera = new THREE.Mesh( geometryc, materialc );
-		//scene.add( esfera );
-		//esfera.position.y = -2.9
+		var geometryabajo = new THREE.CylinderGeometry(0.05, 0.04, 0.024, 32);
+		var materialabajo = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cubeabajo = new THREE.Mesh(geometryabajo, materialabajo);
+		scene.add(cubeabajo);
+		cubeabajo.position.y = 2.828
+		cubeabajo.position.z = 0.63
 
 
 
-		
 
-		//var geometryc2 = new THREE.SphereGeometry( 1, 32, 16 )
-		//var materialc2 = new THREE.MeshBasicMaterial( { color: 0xe0e0e0 } );
-		//var esfera2 = new THREE.Mesh( geometryc2, materialc2 );
-		//scene.add( esfera2 );
-		//esfera2.position.y = 2
+		var geometry2 = new THREE.CylinderGeometry(0.05, 0.05, 0.4, 32);
+		var material2 = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cube2 = new THREE.Mesh(geometry2, material2);
+		scene.add(cube2);
+		cube2.position.y = 2.63
+		cube2.position.z = 0.63
+
+		var geometryabajo2 = new THREE.CylinderGeometry(0.04, 0.05, 0.024, 32);
+		var materialabajo2 = new THREE.MeshBasicMaterial({ color: 0xaa9a9a });
+		var cubeabajo2 = new THREE.Mesh(geometryabajo2, materialabajo2);
+		scene.add(cubeabajo2);
+		cubeabajo2.position.y = 2.84
+		cubeabajo2.position.z = 0.63
+*/
 
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		camera.position.set(0, 5, 5);
+		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5)
 
 		controls.update();
 
 
 		renderer.render(scene, camera);
+
 		function animate() {
 			requestAnimationFrame(animate);
 			controls.update();
-			console.log(camera.position)
-					if (Mesa1.position.y <= 0.29) {
-						Mesa1.position.y += 0.00001
+			/*
 
-
-						if (contador_barra1.length % 31 == 0) {
-							chart.data.datasets[0].data.push({ x: tension_barra1[cant][0], y: tension_barra1[cant][1] });
-							chart.update();
-						}
-
-					} else {
-						Mesa1.position.y = 0.35
-					console.log(Mesa1.position.y)
+			if (cubeabajo.position.y < 3.5) {
+				cube.position.y += 0.0002
+				cubeabajo.position.y += 0.0002
+			} else {
+				cube.position.y = 7.5
+				cubeabajo.position.y = 4
 			}
-			renderer.render(scene, camera);
-		}
-
-		animate()
-
+			*/
 		
-		// Instantiate a loader
-const loader = new THREE.GLTFLoader();
 
+			if (Mesa1) {
+
+				if(Mesa1.position.y<=0.29){
+					Mesa1.position.y+=0.0001
+				}else{
+					Mesa1.position.y=0.35
+
+					
+				}
+				console.log(Mesa1.position.y)
+
+
+			}
+
+			renderer.render(scene, camera);
+
+		}
+		animate()
+		
+// Instantiate a loader
+const loader = new THREE.GLTFLoader();
 
 // Load a glTF resource
 loader.load(
-	'Mesa1.gltf',
+	'Mesa1.gltf',//'scene.gltf'
 	function ( gltf ) {
-		scene.add( gltf.scen );
-
+		scene.add( gltf.scene );
 		gltf.animations; // Array<THREE.AnimationClip>
 		gltf.scene; // THREE.Group
 		gltf.scenes; // Array<THREE.Group>
@@ -127,17 +153,63 @@ loader.load(
 	},
 	// called while loading is progressing
 	function ( xhr ) {
-
 		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
 	},
 	// called when loading has errors
 	function ( error ) {
-
 		console.log( 'An error happened' );
-
 	}
 );
+
+
+
+// Instantiate a loader
+const loader2 = new THREE.GLTFLoader();
+
+// Load a glTF resource
+loader2.load(
+	'Mesa1.gltf',//'scene.gltf'
+	function ( gltf ) {
+		Mesa1 = gltf.scene; 
+		scene.add( garra );
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+
+		console.log('completado!.....')
+		garra.position.z+=1.587
+		garra.position.x+=-0.001
+		garra.position.y+=0.258
+
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	},
+	// called when loading has errors
+	function ( error ) {
+		console.log( 'An error happened' );
+	}
+);
+
+
+// create an AudioListener and add it to the camera
+const listener = new THREE.AudioListener();
+camera.add( listener );
+
+// create a global audio source
+const sound = new THREE.Audio( listener );
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load( 'sound_ogg.ogg', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setLoop( true );
+	sound.setVolume( 0.5 );
+	sound.play();
+});
 
 
 
@@ -149,7 +221,6 @@ loader.load(
 			renderer.render( scene, camera );
 		};
 		animate(); */
-	//Hola
 
 	</script>
 </body>
