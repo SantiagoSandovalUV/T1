@@ -60,6 +60,12 @@
 				console.log(Mesa1.position.y)
 			}
 			renderer.render(scene, camera);
+           
+		}
+		animate()
+            function animate2() {
+			requestAnimationFrame(animate);
+			controls.update();
             if (Mesa1) {
 				if(Mesa1.position.y>=2.9){
 					Mesa1.position.y+=-0.1
@@ -69,10 +75,9 @@
 				}
 				console.log(Mesa1.position.y)
 			}
-			renderer.render(scene, camera);
-
 		}
-		animate()
+		animate2()
+
 // Instantiate a loader
 const loader2 = new THREE.GLTFLoader();
 // Load a glTF resource
