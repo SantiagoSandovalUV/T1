@@ -1,6 +1,6 @@
 <head>
 	<meta charset="utf-8">
-	<title>Laboratorio de tension - Universidad del Valle - Reider Muñoz</title>
+	<title>Mesa, movida por un seno</title>
 	<style>
 		body {
 			margin: 0;
@@ -43,10 +43,10 @@
 		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5)
 		controls.update();
 		renderer.render(scene, camera);
-		var Vtiempo=[];
+		var Vtiempo=[]; 
         var Seno=[];
         var Po=0.25;
-        var Wn=2;
+        var Wn=1;
         var Segundos=60;
         function contador (){
      	 var contador1=0;
@@ -55,18 +55,18 @@
 	     Vtiempo[contador1]=contador1;
 	      Seno[contador1]=Po*Math.sin(Wn*t);
 		  Mesa1.position.z=Seno[contador1]
+		  Mesa1.position.x=-Seno[contador1]
 		  console.log(Seno[contador1]);
-		  //Mesa1.position.x=-Seno[contador1]
 	       contador1++;
 		   t=t+1;
            //console.log(Vtiempo);
 		   //console.log(Mesa1.position.y);
 		   renderer.render(scene, camera);
-         if (contador1==Segundos+1){
+         if (contador1==(Segundos+1)*50){
              clearInterval(tiempo);
                }
                   }
-          var tiempo=setInterval(Senoiterativo,1000)
+          var tiempo=setInterval(Senoiterativo,100)
                 }
           contador()
 		// function animate() {
