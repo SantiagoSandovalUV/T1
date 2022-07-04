@@ -18,7 +18,7 @@
 	<script>
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		var Mesa1;
+		var Mesa1; var esfera1;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
@@ -64,12 +64,11 @@
 	     Vtiempo[contador1]=contador1;
 	      Seno[contador1]=Po*Math.sin(Wn*t); //Desplazamiento en la base
 		  //p[contador1]=(Wn^2)*m*Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
-		  p1[contador1]=Po*Math.sin(Wn*(t+0.02));
-		  
+		  p1[contador1]=-(Wn^2)*m*Po*Math.sin(Wn*(t+0.02));
 		  p[contador1]=Seno[contador1];
 		  P[contador1]=0;
-		  Mesa1.position.z=Seno[contador1] //Posición z de la mesa
-		  Mesa1.position.sx=-Seno[contador1] //Posición x de la mesa
+		//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
+		  Mesa1.position.x=-Seno[contador1] //Posición x de la mesa
 		//   console.log(u[contador1]);
 	       contador1++;
 		   Vtiempo2[contador1]=t;
@@ -81,7 +80,7 @@
              clearInterval(tiempo);
                }
                   }
-          var tiempo=setInterval(Senoiterativo,200)
+          var tiempo=setInterval(Senoiterativo,100)
                 }
           contador()
 		// Variables necesarias para resolver el método númerico
@@ -90,8 +89,7 @@
 		 // Constantes necesarias para el método númerico
 		var m=0.2533; 
 		var a1=0; var a2=0; var a3=0; var kj=0;
-		 //a1=(4*m/(dt^2))+(2*c/(dt));
-		 a1=2548.92
+		 a1=(4*m/(dt*dt))+(2*c/(dt));
 		 a2=(4/(dt))*m+c;
          a3=m;
 		 kj=k+a1;
@@ -107,13 +105,15 @@
 				   u2[contador1+1]=[P[contador1]]/kj;
 				   up2[contador1+1]=[2/dt]*[u2[contador1+1]-u2[contador1]]-up2[contador1];
 				   upp2[contador1+1]=(4/((dt*dt)))*[u2[contador1+1]-u2[contador1]]-[4/dt]*up2[contador1]-upp2[contador1];
+				   esfera1.position.x=u2[contador1]+Seno[contador1];
+				//    esfera1.position.z=u2[contador1]+Seno[contador1];
 				   contador1++;
 		            t=t+0.02;
-                    if (contador1==(Segundos+1)){
+                    if (contador1==(Segundos*60+1)){
                     clearInterval(tiempo);
                         }
                       }
-                       var tiempo=setInterval(Newmark,200)
+                       var tiempo=setInterval(Newmark,100)
                                   }
          contador2()
 
@@ -131,9 +131,36 @@ loader2.load(
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
 		console.log('completado!.....')
-		Mesa1.position.z+=1.587
-		Mesa1.position.x+=-0.001
-		Mesa1.position.y+=0.258
+		Mesa1.position.z+=0
+		Mesa1.position.x+=-0
+		Mesa1.position.y+=0
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	},
+	// called when loading has errors
+	function ( error ) {
+		console.log( 'An error happened' );
+	}
+); 
+// Instantiate a loader
+const loader3 = new THREE.GLTFLoader();
+// Load a glTF resource
+loader3.load(
+	'esfera1.gltf',//'scene.gltf'
+	function ( gltf ) {
+		esfera1 = gltf.scene; 
+		scene.add( esfera1 );
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+		console.log('completado!.....')
+		esfera1.position.z+=2
+		esfera1.position.x+=-2
+		esfera1.position.y+=2
 	},
 	// called while loading is progressing
 	function ( xhr ) {
