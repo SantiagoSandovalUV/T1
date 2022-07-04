@@ -51,7 +51,10 @@
         var Segundos=60;
 		var m=4*5;
 		var p=[]; var p1=[]; 
-		var u=[]; var up=[]; var upp=[]; var P=[]
+		var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
+		u2[0]=0;
+		up2[0]=0;
+		upp2[0]=0;
 		//Función para mover el seno y la animación
         function contador (){
      	 var contador1=0;
@@ -61,12 +64,13 @@
 	     Vtiempo[contador1]=contador1;
 	      Seno[contador1]=Po*Math.sin(Wn*t); //Desplazamiento en la base
 		  //p[contador1]=(Wn^2)*m*Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
+		  p1[contador1]=Po*Math.sin(Wn*(t+0.02));
+		  
 		  p[contador1]=Seno[contador1];
-		  u[contador1]=0;up[contador1]=0;upp[contador1]=0;
+		  P[contador1]=0;
 		  Mesa1.position.z=Seno[contador1] //Posición z de la mesa
 		  Mesa1.position.sx=-Seno[contador1] //Posición x de la mesa
 		//   console.log(u[contador1]);
-		   p1[contador1+1]=p[contador1];
 	       contador1++;
 		   Vtiempo2[contador1]=t;
 		   t=t+0.02;
@@ -77,7 +81,7 @@
              clearInterval(tiempo);
                }
                   }
-          var tiempo=setInterval(Senoiterativo,100)
+          var tiempo=setInterval(Senoiterativo,200)
                 }
           contador()
 		// Variables necesarias para resolver el método númerico
@@ -91,29 +95,25 @@
 		 a2=(4/(dt))*m+c;
          a3=m;
 		 kj=k+a1;
+		 console.log(p[0])
 		 // Llenar los vectores con zeros
 		 function contador2 (){
      	       var contador1=0;
 			   var contadorr=1;
 		       var t=0;
                  function Newmark (){
-				   p[contador1];
-		           P[contador1-1]=p[contador1]+a1*u[contador1]+a2*up[contador1]+a3*upp[contador1];
-				   //console.log(p[contador1]);
-                   u[contador1+1]=[P[contador1-1]]/kj;
-                   up[contador1+1]=[2/dt]*[u[contador1+1]-u[contador1]]-up[contador1];
-                   upp[contador1+1]=(4/((dt*dt)))*[u[contador1+1]-u[contador1]]-[4/dt]*up[contador1]-upp[contador1];
-				   console.log(u[contador1+1]);
-				  //console.log(up[contador1+1]);
-				  //console.log(upp[contador1+1]);
+				   p[contadorr];
+		           P[contador1]=p1[contador1]+a1*u2[contador1]+a2*up2[contador1]+a3*upp2[contador1];
+				   u2[contador1+1]=[P[contador1]]/kj;
+				   up2[contador1+1]=[2/dt]*[u2[contador1+1]-u2[contador1]]-up2[contador1];
+				   upp2[contador1+1]=(4/((dt*dt)))*[u2[contador1+1]-u2[contador1]]-[4/dt]*up2[contador1]-upp2[contador1];
 				   contador1++;
-				   //console.log(P[contador1+2]);
 		            t=t+0.02;
                     if (contador1==(Segundos+1)){
                     clearInterval(tiempo);
                         }
                       }
-                       var tiempo=setInterval(Newmark,100)
+                       var tiempo=setInterval(Newmark,200)
                                   }
          contador2()
 
