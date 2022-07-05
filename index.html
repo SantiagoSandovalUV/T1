@@ -46,10 +46,10 @@
 		//Varibles necesaria para generar el desplazamiento en la base
 		var Vtiempo=[]; var Vtiempo2=[];
         var Seno=[];
-        var Po=10;
+        var Po=2.8;
         var Wn=5*Math.PI/3;
         var Segundos=60;
-		var m=4*5;
+		var m=0.2533;
 		var p=[]; var p1=[]; 
 		var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
 		u2[0]=0;
@@ -80,14 +80,13 @@
              clearInterval(tiempo);
                }
                   }
-          var tiempo=setInterval(Senoiterativo,100)
+          var tiempo=setInterval(Senoiterativo,35)
                 }
           contador()
 		// Variables necesarias para resolver el método númerico
 		var u0=0; var up0=0; var p0=0; //Condiciones inciales
 		var k=10; var c=0.1592; var dt=0.02; // Masa, Rigidez, Amortiguamiento
 		 // Constantes necesarias para el método númerico
-		var m=0.2533; 
 		var a1=0; var a2=0; var a3=0; var kj=0;
 		 a1=(4*m/(dt*dt))+(2*c/(dt));
 		 a2=(4/(dt))*m+c;
@@ -113,10 +112,35 @@
                     clearInterval(tiempo);
                         }
                       }
-                       var tiempo=setInterval(Newmark,100)
+                       var tiempo=setInterval(Newmark,35)
                                   }
          contador2()
-
+const loader1 = new THREE.GLTFLoader();
+// Load a glTF resource
+loader1.load(
+	'lab.gltf',//'scene.gltf'
+	function ( gltf ) {
+		lab = gltf.scene; 
+		scene.add( lab );
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+		console.log('completado!.....')
+		lab.position.z+=0
+		lab.position.x+=0
+		lab.position.y+=-0.2
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	},
+	// called when loading has errors
+	function ( error ) {
+		console.log( 'An error happened' );
+	}
+); 
 // Instantiate a loader
 const loader2 = new THREE.GLTFLoader();
 // Load a glTF resource
@@ -158,9 +182,9 @@ loader3.load(
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
 		console.log('completado!.....')
-		esfera1.position.z+=2
-		esfera1.position.x+=-2
-		esfera1.position.y+=2
+		esfera1.position.z+=0
+		esfera1.position.x+=0
+		esfera1.position.y+=1
 	},
 	// called while loading is progressing
 	function ( xhr ) {
