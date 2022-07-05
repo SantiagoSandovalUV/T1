@@ -46,7 +46,7 @@
 		//Varibles necesaria para generar el desplazamiento en la base
 		var Vtiempo=[]; var Vtiempo2=[];
         var Seno=[];
-        var Po=2.8;
+        var Po=1.5;
         var Wn=5*Math.PI/3;
         var Segundos=60;
 		var m=0.2533;
@@ -64,7 +64,7 @@
 	     Vtiempo[contador1]=contador1;
 	      Seno[contador1]=Po*Math.sin(Wn*t); //Desplazamiento en la base
 		  //p[contador1]=(Wn^2)*m*Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
-		  p1[contador1]=-(Wn^2)*m*Po*Math.sin(Wn*(t+0.02));
+		  p1[contador1]=(Wn^2)*m*Po*Math.sin(Wn*(t+0.02));
 		  p[contador1]=Seno[contador1];
 		  P[contador1]=0;
 		//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
@@ -80,7 +80,7 @@
              clearInterval(tiempo);
                }
                   }
-          var tiempo=setInterval(Senoiterativo,35)
+          var tiempo=setInterval(Senoiterativo,50)
                 }
           contador()
 		// Variables necesarias para resolver el método númerico
@@ -112,7 +112,7 @@
                     clearInterval(tiempo);
                         }
                       }
-                       var tiempo=setInterval(Newmark,35)
+                       var tiempo=setInterval(Newmark,50)
                                   }
          contador2()
 const loader1 = new THREE.GLTFLoader();
