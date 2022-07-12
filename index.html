@@ -1,6 +1,23 @@
 <head>
 	<meta charset="utf-8">
 	<title>Mesa movida por un seno</title>
+	<meta charset="utf-8">
+	<title>Laboratorio de tension - Universidad del Valle - Reider Muñoz</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css"
+		integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 	<style>
 		body {
 			margin: 0;
@@ -9,16 +26,117 @@
 			width: 100%;
 			height: 100%
 		}
+		#ventana {
+			background-color: #ffffff;
+			width: 400px;
+			height: 200px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 	</style>
 </head>
 <body>
+
+		<div class="position-fixed w-100 p-3 border-bottom" style="z-index: 100000;background-color: #ffffff;">
+			<div class="row">
+				<div class="col-md-3">
+					<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+						<img src="logo.png" style="height: 30px;">
+						<span class="fs-8">LABORATORIOS VIRTUALES</span>
+					</a>
+				</div>
+				<div class="col-md-9" style="text-align: right;">
+					<a class="btn btn-sm btn-outline-secondary" href="index.html">Dinámica Experimental</a>
+	
+				</div>
+			<!--	<div class="col-md-9" style="text-align: right;">
+					
+					<a class="btn btn-sm btn-outline-secondary" href="index copy.html">aaTorsión</a>
+					<a class="btn btn-sm btn-outline-secondary" href="https://reidermunoz.github.io/lab-tension.github.io/">SISTorsión</a>
+					<a class="btn btn-sm btn-outline-secondary" href="#">Torsión</a>
+					<a class="btn btn-sm btn-outline-secondary" href="#">Torsión</a>
+				</div>-->
+			</div>
+		</div>
+	
+		<div class="position-fixed" style="width: 400px;background-color: #ffffff;padding: 90px 5px; height: 100%;">
+	
+	
+			<div class="card mb-2" style="width: 100%;">
+				<div class="card-body">
+					<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
+				</div>
+			</div>
+	
+			<div class="card" style="width: 100%;">
+				<div class="card-body">
+					<div style="text-align: center;">
+						<button type="button" onclick="zoom()" class="btn btn-primary">Zoom</button>
+						<button type="button" onclick="iniciar()" class="btn btn-secondary">Iniciar</button>
+						<button type="button" download="Datos.xlsx" class="btn btn-success">Datos</button>
+					</div>
+				</div>
+			</div>
+			<div class="card mt-2" style="width: 100%;">
+				<div class="card-body">
+					<form class="row g-2">
+						<div class="col-auto" style="width:180px">
+							<label class="form-label" style="font-size:14px">Amplitud Po<i
+									data-tippy-content="Punto donde la gráfica deja de comportarse de forma lineal"
+									class="ti ti-question-mark text-primary"></i></label>
+							<input type="text" class="form-control form-control-sm" name="punto_fluencia"
+								id="punto_fluencia" placeholder="">
+						</div>
+						<div class="col-auto" style="width:180px">
+							<label class="form-label" style="font-size: 14px">Frecuencia angular Wn <i
+									data-tippy-content="El módulo de elasticidad es la pendiente del diagrama esfuerzo-deformación unitaria en la región linealmente elástica; esfuerzo/deformación"
+									class="ti ti-question-mark text-primary"></i></label>
+							<input type="text" class="form-control form-control-sm" name="modulo_elastico"
+								id="modulo_elastico" placeholder="">
+						</div>
+						<div class="col-auto" style="width:180px">
+							<label class="form-label" style="font-size: 14px">Masa <i
+									data-tippy-content="Punto máximo de la grafica"
+									class="ti ti-question-mark text-primary"></i></label>
+							<input type="text" class="form-control form-control-sm" name="resistencia_traccion"
+								id="resistencia_traccion" placeholder="">
+						</div>
+						<div class="col-auto" style="width:180px">
+							<label class="form-label" style="font-size: 14px">Amortiguamiento c <i
+									data-tippy-content="Punto final de la gráfica, donde se rompe la probeta"
+									class="ti ti-question-mark text-primary"></i></label>
+							<input type="text" class="form-control form-control-sm" name="punto_rotura" id="punto_rotura"
+								placeholder="">
+						</div>
+						<div class="col-auto" style="width:180px">
+							<label class="form-label" style="font-size: 14px">Rigidez K <i
+									data-tippy-content="Es igual al área debajo de la curva esfuerzo-deformación hasta el límite de proporcionalidad. La resiliencia representa la capacidad de un material para absorber y liberar energía dentro del intervalo elástico"
+									class="ti ti-question-mark text-primary"></i></label>
+							<input type="text" class="form-control form-control-sm" name="resiliencia" id="resiliencia"
+								placeholder="">
+						</div>
+						<div class="col-auto" style="width:180px">
+							<label class="form-label" style="font-size: 14px">Paso Δt <i
+									data-tippy-content="Es igual al área debajo de toda la curva esfuerzo-deformación. La tenacidad, se refiere a la capacidad de un material para absorber energía sin fracturarse"
+									class="ti ti-question-mark text-primary"></i></label>
+							<input type="text" class="form-control form-control-sm" name="tenacidad" id="tenacidad"
+								placeholder="">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="tension_barra2.js"></script>
 	<script>
+
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		var Mesa1; var esfera1;
+		var Mesa1; var esfera2;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
@@ -46,12 +164,13 @@
 		//Varibles necesaria para generar el desplazamiento en la base
 		var Vtiempo=[]; var Vtiempo2=[];
         var Seno=[];
-        var Po=1.5;
-        var Wn=5*Math.PI/3;
+        var Po=0.8;
+        var Wn=4*Math.PI/3;
         var Segundos=60;
 		var m=0.2533;
 		var p=[]; var p1=[]; 
 		var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
+		var dt=0.02;
 		u2[0]=0;
 		up2[0]=0;
 		upp2[0]=0;
@@ -63,16 +182,17 @@
          function Senoiterativo (){
 	     Vtiempo[contador1]=contador1;
 	      Seno[contador1]=Po*Math.sin(Wn*t); //Desplazamiento en la base
-		  //p[contador1]=(Wn^2)*m*Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
-		  p1[contador1]=(Wn^2)*m*Po*Math.sin(Wn*(t+0.02));
-		  p[contador1]=Seno[contador1];
+		  p[contador1]=(Wn*Wn)*m*Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
+		  p1[contador1]=(Wn*Wn)*m*Po*Math.sin(Wn*(t+dt)); //P+1
+		//   p1[contador1]=Po*Math.sin(Wn*(t+dt)); Para probar el método
+		//   p[contador1]=Seno[contador1]; // Para probar el método
 		  P[contador1]=0;
 		//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
-		  Mesa1.position.x=-Seno[contador1] //Posición x de la mesa
+		  Mesa1.position.x=Seno[contador1]+5 //Posición x de la mesa
 		//   console.log(u[contador1]);
 	       contador1++;
 		   Vtiempo2[contador1]=t;
-		   t=t+0.02;
+		   t=t+dt;
            //console.log(Vtiempo);
 		   //console.log(Mesa1.position.y);
 		   renderer.render(scene, camera);
@@ -85,14 +205,13 @@
           contador()
 		// Variables necesarias para resolver el método númerico
 		var u0=0; var up0=0; var p0=0; //Condiciones inciales
-		var k=10; var c=0.1592; var dt=0.02; // Masa, Rigidez, Amortiguamiento
+		var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
 		 // Constantes necesarias para el método númerico
 		var a1=0; var a2=0; var a3=0; var kj=0;
 		 a1=(4*m/(dt*dt))+(2*c/(dt));
 		 a2=(4/(dt))*m+c;
          a3=m;
 		 kj=k+a1;
-		 console.log(p[0])
 		 // Llenar los vectores con zeros
 		 function contador2 (){
      	       var contador1=0;
@@ -104,10 +223,13 @@
 				   u2[contador1+1]=[P[contador1]]/kj;
 				   up2[contador1+1]=[2/dt]*[u2[contador1+1]-u2[contador1]]-up2[contador1];
 				   upp2[contador1+1]=(4/((dt*dt)))*[u2[contador1+1]-u2[contador1]]-[4/dt]*up2[contador1]-upp2[contador1];
-				   esfera1.position.x=u2[contador1]+Seno[contador1];
+				   esfera2.position.x=u2[contador1]+Seno[contador1]+5;
 				//    esfera1.position.z=u2[contador1]+Seno[contador1];
+				   chart.data.datasets[0].data.push({y: u2[contador1], x: t })
+			       chart.update();
 				   contador1++;
-		            t=t+0.02;
+		            t=t+dt;
+					
                     if (contador1==(Segundos*60+1)){
                     clearInterval(tiempo);
                         }
@@ -115,8 +237,46 @@
                        var tiempo=setInterval(Newmark,50)
                                   }
          contador2()
+		 tippy('[data-tippy-content]');
+
+
+var ctx = document.getElementById("myChart").getContext("2d"); //Grafica
+const contador_barra1 = [];
+const chart = new Chart(ctx, {
+	type: 'line',
+	data: {
+		datasets: [{
+			borderColor: 'rgb(222,42,22)',
+			borderWidth: 2,
+			pointRadius: 0,
+		}]
+	},
+	options: {
+		animation: {
+			duration: 0
+		},
+		interaction: {
+			intersect: false
+		},
+		plugins: {
+			legend: false
+		},
+		scales: {
+			x: {
+				type: 'linear',
+				max: 10,
+				min: 0
+			},
+			y: {
+				type: 'linear',
+				max: Po+Po/(10*Po),
+				min: -Po-Po/(10*Po)
+			}
+		}
+	}
+});
 const loader1 = new THREE.GLTFLoader();
-// Load a glTF resource
+// Load a glTF resource, Lab loading
 loader1.load(
 	'lab.gltf',//'scene.gltf'
 	function ( gltf ) {
@@ -129,8 +289,8 @@ loader1.load(
 		gltf.asset; // Object
 		console.log('completado!.....')
 		lab.position.z+=0
-		lab.position.x+=0
-		lab.position.y+=-0.2
+		lab.position.x+=5
+		lab.position.y+=-1.2
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -143,7 +303,7 @@ loader1.load(
 ); 
 // Instantiate a loader
 const loader2 = new THREE.GLTFLoader();
-// Load a glTF resource
+// Load a glTF resource, Mesa1 Loading
 loader2.load(
 	'Mesa1.gltf',//'scene.gltf'
 	function ( gltf ) {
@@ -157,7 +317,7 @@ loader2.load(
 		console.log('completado!.....')
 		Mesa1.position.z+=0
 		Mesa1.position.x+=-0
-		Mesa1.position.y+=0
+		Mesa1.position.y+=-1
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -170,21 +330,21 @@ loader2.load(
 ); 
 // Instantiate a loader
 const loader3 = new THREE.GLTFLoader();
-// Load a glTF resource
+// Load a glTF resource, Esfera1 Loading
 loader3.load(
-	'esfera1.gltf',//'scene.gltf'
+	'esfera2.gltf',//'scene.gltf'
 	function ( gltf ) {
-		esfera1 = gltf.scene; 
-		scene.add( esfera1 );
+		esfera2 = gltf.scene; 
+		scene.add( esfera2 );
 		gltf.animations; // Array<THREE.AnimationClip>
 		gltf.scene; // THREE.Group
 		gltf.scenes; // Array<THREE.Group>
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
 		console.log('completado!.....')
-		esfera1.position.z+=0
-		esfera1.position.x+=0
-		esfera1.position.y+=1
+		esfera2.position.z+=0
+		esfera2.position.x+=0
+		esfera2.position.y+=-1
 	},
 	// called while loading is progressing
 	function ( xhr ) {
