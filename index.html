@@ -125,6 +125,7 @@
 				</div>
 			</div>
 		</div>
+	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -235,6 +236,49 @@
                        var tiempo=setInterval(Newmark,50)
                                   }
          contador2()
+            {
+			const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(-1, 2, 4);
+            scene.add(light);
+             }
+                 // Cargar Cubo
+				const color = 0xFFFFFF;
+				const geometry = new THREE.BoxGeometry(0.3,2,0.3,200,200); //Geomtria del cubo, en el espacio
+					const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
+					const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png'); //Extrae la textura
+					// const texture = loader8.load('https://r105.threejsfundamentals.org/threejs/resources/images/wall.jpg'); //Extrae la textura
+					const material = new THREE.MeshPhongMaterial({color, map: texture}); //Crea el material, apartir del color y la textura
+					const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
+					const geometry2 = new THREE.PlaneBufferGeometry(30, 30, 200, 200);
+                    const plane = new THREE.Mesh(geometry2, new THREE.MeshPhongMaterial({ color: 0xf2a23a }));
+					// let line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: 0x888888 }))
+					// scene.add(line);
+					scene.add(cube);
+					var h=geometry.attributes.position.count 
+		 function contador3 (){
+     	       var contador1=0;
+			   var contadorr=1;
+		       var t=0;
+			   const now = Date.now() / 300;
+                 function BarDeformation (){
+					const x = geometry.attributes.position.getX(contador1)
+					contador1++;
+                    const y = geometry.attributes.position.getY(contador1)
+                    const xsin = 0.1*Math.sin(x+contador1)
+                    const ycos = Math.cos(contador1)
+                    h=cube.geometry.attributes.position.setZ(contador1, xsin)
+					geometry.attributes.position.needsUpdate = true;
+					console.log(h)
+					renderer.render(scene, camera);
+                    if (contador1==(Segundos*60+1)){
+                    clearInterval(tiempo);
+                        }
+                      }
+                       var tiempo=setInterval(BarDeformation,50)
+                                  }
+         contador3()
 		 tippy('[data-tippy-content]');
 
 
@@ -397,6 +441,33 @@ loader5.load(
 		Mesa2.position.z+=0
 		Mesa2.position.x+=5
 		Mesa2.position.y+=-1.5
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	},
+	// called when loading has errors
+	function ( error ) {
+		console.log( 'An error happened' );
+	}
+); 
+// Instantiate a loader
+const loader6 = new THREE.GLTFLoader();
+// Load a glTF resource, Barra Loading
+loader6.load(
+	'Barra.gltf',//'scene.gltf'
+	function ( gltf ) {
+		Barra = gltf.scene; 
+		scene.add(Barra);
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+		console.log('completado!.....')
+		Barra.position.z+=0
+		Barra.position.x+=5
+		Barra.position.y+=1
 	},
 	// called while loading is progressing
 	function ( xhr ) {
