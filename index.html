@@ -71,7 +71,7 @@
 				<div class="card-body">
 					<div style="text-align: center;">
 						<button type="button" onclick="zoom()" class="btn btn-primary">Zoom</button>
-						<button type="button" onclick="iniciar()" class="btn btn-secondary">Iniciar</button>
+						<button type="button" onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),contador(),contador2(),contador3(),ConsMDI()" class="btn btn-secondary">Iniciar</button>
 						<button type="button" download="Datos.xlsx" class="btn btn-success">Datos</button>
 					</div>
 				</div>
@@ -83,42 +83,42 @@
 							<label class="form-label" style="font-size:14px">Amplitud Po<i
 									data-tippy-content="Punto donde la gráfica deja de comportarse de forma lineal"
 									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="punto_fluencia"
-								id="punto_fluencia" placeholder="">
+							<input type="text" class="form-control form-control-sm" name="Po_box"
+								id="Po_box" placeholder="">
 						</div>
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size: 14px">Frecuencia angular Wn <i
 									data-tippy-content="El módulo de elasticidad es la pendiente del diagrama esfuerzo-deformación unitaria en la región linealmente elástica; esfuerzo/deformación"
 									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="modulo_elastico"
-								id="modulo_elastico" placeholder="">
+							<input type="text" class="form-control form-control-sm" name="Wn_box"
+								id="Wn_box" placeholder="">
 						</div>
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size: 14px">Masa <i
 									data-tippy-content="Punto máximo de la grafica"
 									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="resistencia_traccion"
-								id="resistencia_traccion" placeholder="">
+							<input type="text" class="form-control form-control-sm" name="Masa_box"
+								id="Masa_box" placeholder="">
 						</div>
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size: 14px">Amortiguamiento c <i
 									data-tippy-content="Punto final de la gráfica, donde se rompe la probeta"
 									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="punto_rotura" id="punto_rotura"
+							<input type="text" class="form-control form-control-sm" name="c_box" id="c_box"
 								placeholder="">
 						</div>
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size: 14px">Rigidez K <i
 									data-tippy-content="Es igual al área debajo de la curva esfuerzo-deformación hasta el límite de proporcionalidad. La resiliencia representa la capacidad de un material para absorber y liberar energía dentro del intervalo elástico"
 									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="resiliencia" id="resiliencia"
+							<input type="text" class="form-control form-control-sm" name="k_box" id="k_box"
 								placeholder="">
 						</div>
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size: 14px">Paso Δt <i
 									data-tippy-content="Es igual al área debajo de toda la curva esfuerzo-deformación. La tenacidad, se refiere a la capacidad de un material para absorber energía sin fracturarse"
 									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="tenacidad" id="tenacidad"
+							<input type="text" class="form-control form-control-sm" name="Dt_box" id="Dt_box"
 								placeholder="">
 						</div>
 					</form>
@@ -134,7 +134,7 @@
 	<script>
 
 		var scene = new THREE.Scene();
-		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
 		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
@@ -157,23 +157,69 @@
 		dirLight.shadow.camera.far = 40;
 		scene.add(dirLight);
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		camera.position.set(5, 2, 0); // posicion de la camara (0, 5, 5)
+		camera.position.set(0, 4, 15); // posicion de la camara (0, 5, 5)
 		controls.update();
 		renderer.render(scene, camera);
 		//Varibles necesaria para generar el desplazamiento en la base
 		var Vtiempo=[]; var Vtiempo2=[];
         var Seno=[];
-        var Po=0.8;
-        var Wn=4*Math.PI/3;
+        var Po=0;
+        var Wn=0;
         var Segundos=60;
-		var m=0.2533;
+		var m=0;
 		var p=[]; var p1=[]; 
 		var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
-		var dt=0.02;
+		var dt=0;
 		u2[0]=0;
 		up2[0]=0;
 		upp2[0]=0;
-		//Función para mover el seno y la animación
+		var u0=0; var up0=0; var p0=0; //Condiciones inciales
+		var k=0; var c=0;// Masa, Rigidez, Amortiguamiento
+		var a1=1; var a2=1; var a3=1; var kj=1; //Constantes pa el método númerico
+		// // Variables necesarias para resolver el método númerico
+		// var u0=0; var up0=0; var p0=0; //Condiciones inciales
+		// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
+		// var Vtiempo=[]; var Vtiempo2=[];
+        // var Seno=[];
+        // var Po=0.8;
+        // var Wn=4*Math.PI/3;
+        // var Segundos=60;
+		// var m=0.2533;
+		// var p=[]; var p1=[]; 
+		// var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
+		// var dt=0.02;
+		// u2[0]=0;
+		// up2[0]=0;
+		// upp2[0]=0;
+		// // Variables necesarias para resolver el método númerico
+		// var u0=0; var up0=0; var p0=0; //Condiciones inciales
+		// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
+		//Obtención de Variables desde las cajas
+		function Masa_box(){
+	     m = parseFloat(document.getElementById('Masa_box').value);
+         }
+		function Po_box(){
+	     Po = parseFloat(document.getElementById('Po_box').value);
+         } 
+		function Wn_box(){
+	     Wn = parseFloat(document.getElementById('Wn_box').value);
+         }
+		function c_box(){
+	     c = parseFloat(document.getElementById('c_box').value);
+         }
+		function k_box(){
+	     k = parseFloat(document.getElementById('k_box').value);
+          }
+		function Dt_box(){
+	     dt = parseFloat(document.getElementById('Dt_box').value);
+		 iniciar2=1;
+          } 
+		function ConsMDI(){
+		 a1=(4*m/(dt*dt))+(2*c/(dt));
+		 a2=(4/(dt))*m+c;
+         a3=m;
+		 kj=k+a1;
+		}
         function contador (){
      	 var contador1=0;
 		 var t=0;
@@ -202,16 +248,8 @@
                   }
           var tiempo=setInterval(Senoiterativo,50)
                 }
-          contador()
-		// Variables necesarias para resolver el método númerico
-		var u0=0; var up0=0; var p0=0; //Condiciones inciales
-		var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
+        //   contador()
 		 // Constantes necesarias para el método númerico
-		var a1=0; var a2=0; var a3=0; var kj=0;
-		 a1=(4*m/(dt*dt))+(2*c/(dt));
-		 a2=(4/(dt))*m+c;
-         a3=m;
-		 kj=k+a1;
 		 // Llenar los vectores con zeros
 		 function contador2 (){
      	       var contador1=0;
@@ -236,7 +274,7 @@
                       }
                        var tiempo=setInterval(Newmark,50)
                                   }
-         contador2()
+        //  contador2()
             {
 			const color = 0xFFFFFF; //Ligth color
             const intensity = 0.1;  // Ligth intensity
@@ -306,10 +344,9 @@
                       }
                        var tiempo=setInterval(BarDeformation,500)
                                   }
-         contador3()
+        //  contador3()	
 		 tippy('[data-tippy-content]');
-
-
+		 console.log(Po)
 var ctx = document.getElementById("myChart").getContext("2d"); //Grafica
 const contador_barra1 = [];
 const chart = new Chart(ctx, {
@@ -361,6 +398,7 @@ loader1.load(
 		lab.position.z+=0
 		lab.position.x+=5
 		lab.position.y+=-1.2
+		renderer.render(scene,camera);
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -386,8 +424,9 @@ loader2.load(
 		gltf.asset; // Object
 		console.log('completado!.....')
 		Mesa1.position.z+=0
-		Mesa1.position.x+=-0
+		Mesa1.position.x+=5
 		Mesa1.position.y+=-1
+		renderer.render(scene,camera);
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -413,8 +452,9 @@ loader3.load(
 		gltf.asset; // Object
 		console.log('completado!.....')
 		esfera2.position.z+=0
-		esfera2.position.x+=0
+		esfera2.position.x+=5
 		esfera2.position.y+=-1
+		renderer.render(scene,camera);
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -442,6 +482,7 @@ loader4.load(
 		Cilindros.position.z+=0
 		Cilindros.position.x+=5
 		Cilindros.position.y+=-1
+		renderer.render(scene,camera);
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -469,6 +510,8 @@ loader5.load(
 		Mesa2.position.z+=0
 		Mesa2.position.x+=5
 		Mesa2.position.y+=-1.5
+		renderer.render(scene,camera);
+
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -496,6 +539,8 @@ loader6.load(
 		Barra.position.z+=0
 		Barra.position.x+=5
 		Barra.position.y+=0.5
+		renderer.render(scene,camera);
+
 	},
 	// called while loading is progressing
 	function ( xhr ) {
