@@ -188,6 +188,7 @@
 		  P[contador1]=0;
 		//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
 		  Mesa1.position.x=Seno[contador1]+5 //Posición x de la mesa
+		  Barra.position.x=Seno[contador1]+5 //Posición barra en x
 		//   console.log(u[contador1]);
 	       contador1++;
 		   Vtiempo2[contador1]=t;
@@ -237,15 +238,15 @@
                                   }
          contador2()
             {
-			const color = 0xFFFFFF;
-            const intensity = 1;
-            const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(-1, 2, 4);
-            scene.add(light);
+			const color = 0xFFFFFF; //Ligth color
+            const intensity = 0.1;  // Ligth intensity
+            const light = new THREE.DirectionalLight(color, intensity); //Ligth Set
+            light.position.set(-1, 2, 4); //Ligth position set
+            scene.add(light); //Ligth Add
              }
                  // Cargar Cubo
 				// const color = 0xFFFFFF;
-				const geometry = new THREE.BoxGeometry(0.3,2,0.3,5,5,5); //Geomtria del cubo, en el espacio
+				let geometry = new THREE.BoxGeometry(0.3,2,0.3,5,5,5); //Geomtria del cubo, en el espacio
 					// const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
 					// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
 					// const material = new THREE.MeshPhongMaterial({color, map: texture}); //Crea el material, apartir del color y la textura
@@ -258,6 +259,30 @@
 					cube.rotation.y = - Math.PI / 2;
 					scene.add(cube);
 					geometry.attributes.position.count 
+		// function contador3 (){
+     	//    var contador1=0;
+		//    var div=1;
+		//    var t=0;
+		//    let geometry = new THREE.BoxGeometry(5,20,5,5,5,5);
+		//    console.log(geometry)
+		// 			const material = new THREE.MeshBasicMaterial({
+		// 				color: 0x88FF88, //Color del cubo
+		// 				wireframe: true, //Mostrar los segmentos con hil
+		// 			});
+		// 			const cube = new THREE.Mesh(geometry, material);
+		// 			cube.rotation.y = - Math.PI / 2;
+		// 			scene.add(cube);
+        //          function BarDeformation (){
+					
+		// 			console.log('HolaMundo')
+		// 			renderer.render(scene, camera);
+        //             if (contador1==(Segundos*40+1)){
+        //             clearInterval(tiempo);
+        //                 }
+        //               }
+        //                var tiempo=setInterval(BarDeformation,500)
+        //                           }
+        //  contador3()
 		 function contador3 (){
      	       var contador1=0;
 			   var div=1;
@@ -274,7 +299,6 @@
 					geometry.attributes.position.needsUpdate = true;
 					cube.geometry.attributes.position.setZ(contador1, -Po/(div))
 					geometry.attributes.position.needsUpdate = true;
-					console.log(h)
 					renderer.render(scene, camera);
                     if (contador1==(Segundos*40+1)){
                     clearInterval(tiempo);
@@ -471,7 +495,7 @@ loader6.load(
 		console.log('completado!.....')
 		Barra.position.z+=0
 		Barra.position.x+=5
-		Barra.position.y+=1
+		Barra.position.y+=0.5
 	},
 	// called while loading is progressing
 	function ( xhr ) {
@@ -483,26 +507,5 @@ loader6.load(
 	}
 ); 
 	</script>
-	<!-- <script>
-var Vtiempo=[];
-var Seno=[];
-var Po=5;
-var Wn=2*Math.PI;
-var Segundos=20;
-function contador (){
-	var contador1=0;
- function Senoiterativo (){
-	Vtiempo[contador1]=contador1;
-	Seno[contador1]=Po*Math.sin(Wn*contador1);
-	contador1++;
-console.log(Vtiempo);
-if (contador1==Segundos+1){
-clearInterval(tiempo);
-}
-}
-var tiempo=setInterval(Senoiterativo,1000)
-}
-contador()
-	</script> -->
 </body>
 </html>
