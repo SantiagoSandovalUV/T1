@@ -134,7 +134,7 @@
 	<script>
 
 		var scene = new THREE.Scene();
-		var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
 		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
@@ -157,7 +157,7 @@
 		dirLight.shadow.camera.far = 40;
 		scene.add(dirLight);
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		camera.position.set(0, 4, 15); // posicion de la camara (0, 5, 5)
+		camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
 		controls.update();
 		renderer.render(scene, camera);
 		//Varibles necesaria para generar el desplazamiento en la base
@@ -277,7 +277,7 @@
         //  contador2()
             {
 			const color = 0xFFFFFF; //Ligth color
-            const intensity = 0.1;  // Ligth intensity
+            const intensity = 0.04;  // Ligth intensity
             const light = new THREE.DirectionalLight(color, intensity); //Ligth Set
             light.position.set(-1, 2, 4); //Ligth position set
             scene.add(light); //Ligth Add
