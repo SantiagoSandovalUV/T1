@@ -132,8 +132,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script async="" src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/OBJLoader.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
-
 	<script>
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -301,6 +299,7 @@
              }
                  // Cargar Cubo
 				const color = 0xFFFFFF;
+				let pos = {x:3, y:-0.1 ,z:1}
 				const geometry = new THREE.BoxGeometry(3,2,4,32,32,32); //Geomtria del cubo, en el espacio
 					const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
 					const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
@@ -313,6 +312,7 @@
 					// });
 					const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
 					cube.rotation.y = - Math.PI / 2;
+					cube.position.set(pos.x, pos.y, pos.z)
 					scene.add(cube);
 					cube.userData.draggable = true 
 					cube.userData.name ='Cube'
@@ -347,38 +347,38 @@
 		       var t=0;
 			   const now = Date.now() / 300;
                  function BarDeformation (){
-					const x = geometry.attributes.position.getX(contador1)
-					contador1++;
-					div=div+0.1
-                    const y = geometry.attributes.position.getY(contador1)
-                    const xsin = -Math.pow(contador1,2)
-                    const ycos = 0.8*contador1*Math.cos(contador1)
-                    // cube.geometry.attributes.position.setZ(contador1, 3*xsin)
-					// // cube.geometry.attributes.position.setX(contador1, ycos)
-                    // // cube.geometry.attributes.position.setY(contador1, ycos)
+					// const x = geometry.attributes.position.getX(contador1)
+					// contador1++;
+					// div=div+0.1
+                    // const y = geometry.attributes.position.getY(contador1)
+                    // const xsin = -Math.pow(contador1,2)
+                    // const ycos = 0.8*contador1*Math.cos(contador1)
+                    // // cube.geometry.attributes.position.setZ(contador1, 3*xsin)
+					// // // cube.geometry.attributes.position.setX(contador1, ycos)
+                    // // // cube.geometry.attributes.position.setY(contador1, ycos)
+					// // geometry.attributes.position.needsUpdate = true;
+					// // cube.geometry.attributes.position.setZ(contador1, -contador1)
+					// // cube.geometry.attributes.position.sety(contador1, -10)
+                    // // cube.geometry.attributes.position.setx(contador1, -10)
+					// 	// for the second morph target, we'll twist the cubes vertices
+				    //    const twistPositions = [];
+				    //    const direction = new THREE.Vector3( 1, 0, 0 );
+				    //    const vertex = new THREE.Vector3();
+					// // geometry.morphAttributes.position = [];
+					// const positionAttribute = geometry.attributes.position;
+					// for ( let i = 0; i < positionAttribute.count; i ++ ) {
+
+                    //       const x = positionAttribute.getX( i );
+                    //       const y = positionAttribute.getY( i );
+                    //       const z = positionAttribute.getZ( i );
+                    //             // stretch along the x-axis so we can see the twist better
+                    //                vertex.set( x * 2, y, z );
+                    //                vertex.applyAxisAngle( direction, Math.PI * x / 2 ).toArray( twistPositions, twistPositions.length );
+					// 			//    geometry.morphAttributes.position[ 1 ] = new THREE.Float32BufferAttribute( twistPositions, 3 );
+
+					// 			}
 					// geometry.attributes.position.needsUpdate = true;
-					// cube.geometry.attributes.position.setZ(contador1, -contador1)
-					// cube.geometry.attributes.position.sety(contador1, -10)
-                    // cube.geometry.attributes.position.setx(contador1, -10)
-						// for the second morph target, we'll twist the cubes vertices
-				       const twistPositions = [];
-				       const direction = new THREE.Vector3( 1, 0, 0 );
-				       const vertex = new THREE.Vector3();
-					// geometry.morphAttributes.position = [];
-					const positionAttribute = geometry.attributes.position;
-					for ( let i = 0; i < positionAttribute.count; i ++ ) {
-
-                          const x = positionAttribute.getX( i );
-                          const y = positionAttribute.getY( i );
-                          const z = positionAttribute.getZ( i );
-                                // stretch along the x-axis so we can see the twist better
-                                   vertex.set( x * 2, y, z );
-                                   vertex.applyAxisAngle( direction, Math.PI * x / 2 ).toArray( twistPositions, twistPositions.length );
-								//    geometry.morphAttributes.position[ 1 ] = new THREE.Float32BufferAttribute( twistPositions, 3 );
-
-								}
-					geometry.attributes.position.needsUpdate = true;
-					renderer.render(scene, camera);
+					// renderer.render(scene, camera);
                     if (contador1==(Segundos*40+1)){
                     clearInterval(tiempo3);
                         }
@@ -431,8 +431,14 @@ function animate (){
 const raycaster = new THREE.Raycaster();
 const moveMouse = new THREE.Vector3();
 const clickMouse = new THREE.Vector2();
-var draggable = [];
+var draggable  = new THREE.Object3D();
+// draggable = THREE.Object3D;
 window.addEventListener('click',event =>{
+	// if (draggable){
+	//    console.log('Droping draggable') 
+	//    draggable= null 
+	//    return;
+	// }
 	clickMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	clickMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 	raycaster.setFromCamera( moveMouse, camera );
@@ -453,17 +459,15 @@ function dragObject(){
 		if (found.length >0){
 			for (let o of found){
 				if(!o.object.userData.ground){
-					continue
-					draggable.position.x=o.point.x
-					draggable.position.z=o.point.x
-
+					draggable.position.x= o.point.x
+					// draggable.position.y= o.point.y
+					draggable.position.z= o.point.z
 				}
 			}
 
 		}
 	}
 }
-draggable = THREE.Object3D;
 const loader1 = new THREE.GLTFLoader();
 // Load a glTF resource, Lab loading
 loader1.load(
