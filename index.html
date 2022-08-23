@@ -191,7 +191,7 @@
 		var a1 = 1; var a2 = 1; var a3 = 1; var kj = 1; //Constantes pa el método númerico
 		var Cube1gdl = Caja1Gdl();
 		var Cilindro1 = Cilindro();
-		Barra11= Barra1();
+		Barra11 = Barra1();
 		// // Variables necesarias para resolver el método númerico
 		// var u0=0; var up0=0; var p0=0; //Condiciones inciales
 		// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
@@ -320,7 +320,7 @@
 		// Cargar Cubo
 		const color = 0xFFFFFF;
 		let pos = { x: 5, y: 0.2, z: 0 }
-		const geometry = new THREE.BoxGeometry(0.2, 2, 0.2, 100, 100, 100); //Geomtria del cubo, en el espacio
+		const geometry = new THREE.BoxGeometry(0.2, 2, 0.2, 50, 50, 50); //Geomtria del cubo, en el espacio
 		const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
 		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
 		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
@@ -377,19 +377,34 @@
 			color: 0x88FF88, //Color del cubo
 			// wireframe: true, //Mostrar los segmentos con hil
 		});
+		var zeta = []
+		function DATOSZ() {
+			for (let i = 0; i < geometry.attributes.position.count; i++) {
+				zeta[i] = geometry.attributes.position.getZ(i);
+
+			}
+		}
+		DATOSZ()
+		var contador6 = 0;
 		const Plano = new THREE.Mesh(geometry1, material2);
 		function Movimiento_Sen() {
 			const now = Date.now() / 300
 			const Move = new THREE.Vector3(1, 1, 1);
+			contador6++;
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
 				const x = geometry.attributes.position.getY(i);
 				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
-				const xflex = (x * x * x) / (200000);
-				const xcos = 5 * Math.cos(x + 1 / 2 * now);
+				const xflex = (x * x) / 2 - (x * x * x) / 12;
+				const xcos = Math.cos(now * 3 / 4);
+				const z = geometry.attributes.position.getY(i);
 				// geometry.attributes.position.setX(i, xcos);
 				s = i;
-				geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
-				// geometry.attributes.position.setZ(s, 1)
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
+				// geometry.attributes.position.setZ(s,xsin ); //Funcional
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
+				// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
+				geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos);
+
 				// geometry.attributes.position.setZ(s+1, 100)
 
 				// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
@@ -580,14 +595,14 @@
 			scene.add(cylinder);
 			return cylinder;
 		}
-		var pb1=0
+		var pb1 = 0
 		function CambiarAltura() {
 			var geometryF = new THREE.CylinderGeometry(0.075, 0.075, 3, 32);
 			const materialF = new THREE.MeshPhongMaterial({
 				color: 0xFFCE30,
 				flatShading: true,
 			});
-			santiago=santiago+0.1;
+			santiago = santiago + 0.1;
 			// geometryF.morphAttributes.position[0]= new THREE.CylinderGeometry(0.075, 0.075, 4+santiago, 32);
 			geometryF.morphAttributes.position = [];
 			const positionAttribute = geometryF.attributes.position;
@@ -599,11 +614,11 @@
 				const y = positionAttribute.getY(i);
 				const z = positionAttribute.getZ(i);
 				spherePositions.push(
-					x *(1),
-					y *(1+1),
-					z *(1)
+					x * (1),
+					y * (1 + 1),
+					z * (1)
 				);
-				
+
 			}
 			pb1++;
 			geometryF.morphAttributes.position[0] = new THREE.Float32BufferAttribute(spherePositions, 3);
@@ -614,13 +629,13 @@
 			scene.add(Prueba6);
 
 		}
-		function drag (){
+		function drag() {
 			Cilindro1.userData.draggable = true;
-		    Cilindro1.userData.name = 'Cilindro1';
+			Cilindro1.userData.name = 'Cilindro1';
 			Cube1gdl.userData.draggable = true;
-		    Cube1gdl.userData.name = 'Cube1gdl';
+			Cube1gdl.userData.name = 'Cube1gdl';
 			Barra11.userData.draggable = true;
-		    Barra11.userData.name = 'Barra';
+			Barra11.userData.name = 'Barra';
 		}
 		drag()
 		function initGUI() {
