@@ -323,14 +323,14 @@
 		const geometry = new THREE.BoxGeometry(0.2, 2, 0.2, 50, 50, 50); //Geomtria del cubo, en el espacio
 		const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
 		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
-		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
-		const material = new THREE.MeshPhongMaterial({ color, map: texture }); //Crea el material, apartir del color y la textura
+		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
+		// const material = new THREE.MeshPhongMaterial({ color, map: texture }); //Crea el material, apartir del color y la textura
 		// geometry.morphAttributes.position = []
-		// const material = new THREE.MeshBasicMaterial({
-		// 	color: 0xFFFFF, //Color del cubo
-		// 	wireframe: true, //Mostrar los segmentos con hilos
+		const material = new THREE.MeshBasicMaterial({
+			color: 0x7f69a5, //Color del cubo
+			wireframe: true, //Mostrar los segmentos con hilos
 
-		// });
+		});
 		const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
 		cube.rotation.y = - Math.PI / 2;
 		cube.rotation.x = - Math.PI;
@@ -394,9 +394,8 @@
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
 				const x = geometry.attributes.position.getY(i);
 				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
-				const xflex = (x * x) / 2 - (x * x * x) / 12;
+				const xflex = (x * x) / 4 - (x * x * x) / 12;
 				const xcos = Math.cos(now * 3 / 4);
-				const z = geometry.attributes.position.getY(i);
 				// geometry.attributes.position.setX(i, xcos);
 				s = i;
 				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
@@ -506,7 +505,6 @@
 				const y = geometry.attributes.position.getY(contador1);
 				const z = geometry.attributes.position.getZ(contador1);
 				var matriz = [x, y, z];
-				console.log(matriz)
 				// geometry.attributes.position.setZ(1,-4*0.6)
 				// geometry.attributes.position.setZ(0,-4*0.9)
 				// geometry.attributes.position.setZ(2,-2*0.6)
