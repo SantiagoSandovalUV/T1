@@ -157,7 +157,7 @@
 			<div class="card" style="width: 100%;">
 				<div class="card-body">
 					<div style="text-align: center;">
-						<button type="button" onclick="	exportCSVFile(headers,data,'Aceleración_Data')"
+						<button type="button" onclick="	exportCSVFile(headers,data1,'Desp_Data')"
 							class="btn btn-primary">Exportar
 							datos</button>
 						<button type="button" onclick="	recargar()" class="btn btn-success">Limpiar
@@ -424,7 +424,7 @@
 						cube.position.x = pos.x + Desp_Data[contador1].Datos;//Arreglar
 						//Mover cilindro
 						Cilindro1.position.x = 4 + u2[contador1] + parseFloat(Ac_Data[contador1].Datos);
-						suma_w[contadorglobal] = (u2[contadorglobal] + parseFloat(Ac_Data[contador1].Datos));
+						suma_w[contadorglobal] = (u2[contadorglobal] + parseFloat(Desp_Data[contador1].Datos));
 						// CambiarAltura();
 						//    esfera1.position.z=u2[contador1]+Seno[contador1];
 						chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
@@ -1174,7 +1174,8 @@
 						data1[i][2]=u2[i];
 						data1[i][3]=suma_w[i];
 					}
-					return data
+					console.log('Datos Organizados')
+					return data1
 				}
 				function recargar() {
 					window.location.href = window.location.href;
