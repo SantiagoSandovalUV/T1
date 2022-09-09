@@ -69,11 +69,13 @@
 	</div>
 	<div class="position-fixed" style="width: 400px;background-color: #ffffff;padding: 90px 5px; height: 100%;">
 		<div class="card mb-2" style="width: 100%;">
+			<h4 style="text-align: center;"><span class="badge bg-dark">Respuesta total</span></h4>
 			<div class="card-body">
 				<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
 			</div>
 		</div>
 		<div class="card" style="width: 100%;">
+			<div class="card-header" style="text-align: center;">Movimiento sinusoidal</div>
 			<div class="card-body">
 				<div style="text-align: center;">
 					<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener Desp</button>
@@ -84,25 +86,32 @@
 				</div>
 			</div>
 		</div>
-		<div class="card mt-2" style="width: 100%;">
-			<div class="btn-group">
-				<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()" class="btn btn-primary" id="Cargar1"
-					accept=".xls,.xlsx">
-			</div>
-			<div class="card mt-2" class="btn-group">
-				<input type="file" onclick="  SeleccionarDatos(),CargarExcel()" class="btn btn-danger" id="Cargar"
-					accept=".xls,.xlsx">
-			</div>
-			<div class="card mt-2" style="width: 100%;">
-				<div class="btn-group">
-					<button type="button"
-						onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),ConsMDI(),Aceleracion_sismos(),Newmark_sismos(),Movimiento_SenSismo()"
-						class="btn btn-success">Iniciar sismo</button>
+		<div class="card text-bg-primary mt-2" style="width: 100%;">
+			<div class="card-header" style="text-align: center;">Sismos</div>
+			<div class="card-body">
+				<div class="card mt-2" class="btn-group">
+					<h4 style="text-align: center;"><span class="badge bg-primary">Datos de desplazamiento</span></h4>
+					<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()" class="btn btn-primary"
+						id="Cargar1" accept=".xls,.xlsx">
+				</div>
+				<div class="card mt-2" class="btn-group">
+					<h4 style="text-align: center;"><span class="badge bg-danger">Datos de aceleración</span></h4>
+					<input type="file" onclick="  SeleccionarDatos(),CargarExcel()" class="btn btn-danger" id="Cargar"
+						accept=".xls,.xlsx">
+				</div>
+				<div class="card mt-2" style="width: 100%;">
+					<div class="btn-group">
+						<button type="button"
+							onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),ConsMDI(),Aceleracion_sismos(),Newmark_sismos(),Movimiento_SenSismo()"
+							class="btn btn-success">Iniciar sismo</button>
+					</div>
 				</div>
 			</div>
+		</div>
+		<div class="card mt-2" style="width: 100%;">
 			<div class="card mt-2" style="width: 100%;">
 				<div class="card-body">
-					<form class="row g-2">
+					<form class="row g-3">
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size:14px">Amplitud Po<i
 									data-tippy-content="Punto donde la gráfica deja de comportarse de forma lineal"
@@ -122,7 +131,7 @@
 			</div>
 			<div class="card mt-2" style="width: 100%;">
 				<div div class="card-body">
-					<form class="row g-2">
+					<form class="row g-3">
 						<div class="col-auto" style="width:180px">
 							<label class="form-label" style="font-size: 14px">Masa <i
 									data-tippy-content="Punto máximo de la grafica"
@@ -154,1084 +163,1088 @@
 					</form>
 				</div>
 			</div>
-			<div class="card" style="width: 100%;">
-				<div class="card-body">
-					<div style="text-align: center;">
-						<button type="button" onclick="	exportCSVFile(headers,data1,'Desp_Data')"
-							class="btn btn-primary">Exportar
-							datos</button>
-						<button type="button" onclick="	recargar()" class="btn btn-success">Limpiar
-							campos</button>
-						<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
-						accept=".xls,xlsx">Cargar</button> -->
-					</div>
+		</div>
+		<div class="card mt-2" style="width: 100%;">
+			<div class="card-body">
+				<div style="text-align: center;">
+					<button type="button" onclick="	exportCSVFile(headers,data1,'Desp_Data')"
+						class="btn btn-primary">Exportar
+						datos</button>
+					<button type="button" onclick="	recargar()" class="btn btn-success">Limpiar
+						campos</button>
+					<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
+					accept=".xls,xlsx">Cargar</button> -->
 				</div>
 			</div>
-			<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-			<script async="" src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
-			<!-- <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/OBJLoader.js"></script> -->
-			<script src="https://cdn.jsdelivr.net/npm/three-obj-loader@1.1.3/dist/index.min.js"></script>
-			<!-- <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/libs/lil-gui.module.min.js"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"
-				integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg=="
-				crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-			<script>
-				var scene = new THREE.Scene();
-				var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
-				var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11;
-				const renderer = new THREE.WebGLRenderer();
-				renderer.setSize(window.innerWidth, window.innerHeight);
-				document.body.appendChild(renderer.domElement);
-				clock = new THREE.Clock();
-				scene = new THREE.Scene();
-				scene.background = new THREE.Color(0xa0a0a0);
-				scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
-				const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-				hemiLight.position.set(0, 20, 0);
-				scene.add(hemiLight);
-				const dirLight = new THREE.DirectionalLight(0xffffff);
-				dirLight.position.set(- 3, 10, - 10);
-				dirLight.castShadow = true;
-				dirLight.shadow.camera.top = 2;
-				dirLight.shadow.camera.bottom = - 2;
-				dirLight.shadow.camera.left = - 2;
-				dirLight.shadow.camera.right = 2;
-				dirLight.shadow.camera.near = 0.1;
-				dirLight.shadow.camera.far = 40;
-				scene.add(dirLight);
-				const controls = new THREE.OrbitControls(camera, renderer.domElement);
-				camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
-				controls.update();
+		</div>
+	</div>
+
+
+
+	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script async="" src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/OBJLoader.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/three-obj-loader@1.1.3/dist/index.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/libs/lil-gui.module.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"
+		integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11;
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+		clock = new THREE.Clock();
+		scene = new THREE.Scene();
+		scene.background = new THREE.Color(0xa0a0a0);
+		scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
+		const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+		hemiLight.position.set(0, 20, 0);
+		scene.add(hemiLight);
+		const dirLight = new THREE.DirectionalLight(0xffffff);
+		dirLight.position.set(- 3, 10, - 10);
+		dirLight.castShadow = true;
+		dirLight.shadow.camera.top = 2;
+		dirLight.shadow.camera.bottom = - 2;
+		dirLight.shadow.camera.left = - 2;
+		dirLight.shadow.camera.right = 2;
+		dirLight.shadow.camera.near = 0.1;
+		dirLight.shadow.camera.far = 40;
+		scene.add(dirLight);
+		const controls = new THREE.OrbitControls(camera, renderer.domElement);
+		camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
+		controls.update();
+		renderer.render(scene, camera);
+		//Varibles necesaria para generar el desplazamiento en la base
+		var Vtiempo = []; var Vtiempo2 = [0];
+		var Seno = [];
+		var Po = 0;
+		var Wn = 0;
+		var StopVar = 1;
+		var Segundos = 20;
+		var m = 0;
+		var p = []; var p1 = [];
+		var u = []; var up = []; var upp = []; var P = []; var u2 = []; var up2 = []; var upp2 = [];
+		var dt = 0;
+		u2[0] = 0;
+		up2[0] = 0;
+		upp2[0] = 0;
+		var t1 = 0;
+		var tiempo1;
+		var tiempo2;
+		var tiempo3;
+		var Xaxes = 10;
+		var u0 = 0; var up0 = 0; var p0 = 0; //Condiciones inciales
+		var k = 0; var c = 0;// Masa, Rigidez, Amortiguamiento
+		var a1 = 1; var a2 = 1; var a3 = 1; var kj = 1; //Constantes pa el método númerico
+		var Cube1gdl = Caja1Gdl();
+		var Cilindro1 = Cilindro();
+		Barra11 = Barra1();
+		var contadorglobal = 0;
+		var suma_w = [0];
+		var Relativa = JSON.parse(
+			JSON.stringify(u2)
+		);
+		var Total = JSON.parse(
+			JSON.stringify(suma_w)
+		);
+		var data = [];
+		// // Variables necesarias para resolver el método númerico
+		// var u0=0; var up0=0; var p0=0; //Condiciones inciales
+		// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
+		// var Vtiempo=[]; var Vtiempo2=[];
+		// var Seno=[];
+		// var Po=0.8;
+		// var Wn=4*Math.PI/3;
+		// var Segundos=60;
+		// var m=0.2533;
+		// var p=[]; var p1=[];
+		// var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
+		// var dt=0.02;
+		// u2[0]=0;
+		// up2[0]=0;
+		// upp2[0]=0;
+		// // Variables necesarias para resolver el método númerico
+		// var u0=0; var up0=0; var p0=0; //Condiciones inciales
+		// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
+		//Obtención de Variables desde las cajas
+		function Masa_box() {
+			m = parseFloat(document.getElementById('Masa_box').value);
+		}
+		function Po_box() {
+			Po = parseFloat(document.getElementById('Po_box').value);
+		}
+		function Wn_box() {
+			Wn = parseFloat(document.getElementById('Wn_box').value);
+		}
+		function c_box() {
+			c = parseFloat(document.getElementById('c_box').value);
+		}
+		function k_box() {
+			k = parseFloat(document.getElementById('k_box').value);
+		}
+		function Dt_box() {
+			dt = parseFloat(document.getElementById('Dt_box').value);
+			iniciar2 = 1;
+		}
+		function ConsMDI() {
+			a1 = (4 * m / (dt * dt)) + (2 * c / (dt));
+			a2 = (4 / (dt)) * m + c;
+			a3 = m;
+			kj = k + a1;
+		}
+		function StopMotion() {
+			StopVar = 0;
+			Po = 0;
+		}
+		function StopInterval() {
+			clearInterval(tiempo1)
+			clearInterval(tiempo2)
+			clearInterval(tiempo3)
+			Relativa = JSON.parse(
+				JSON.stringify(u2)
+			);
+			Total = JSON.parse(
+				JSON.stringify(suma_w)
+			);
+			organizador()
+		}
+		function contador() {
+			var contador1 = 0;
+			var t = 0;
+			p1[0] = 0;
+			function Senoiterativo() {
+				Vtiempo[contador1] = contador1;
+				Seno[contador1] = Po * Math.sin(Wn * t); //Desplazamiento en la base
+				p[contador1] = (Wn * Wn) * m * Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
+				p1[contador1] = (Wn * Wn) * m * Po * Math.sin(Wn * (t + dt)); //P+1
+				//   p1[contador1]=Po*Math.sin(Wn*(t+dt)); Para probar el método
+				//   p[contador1]=Seno[contador1]; // Para probar el método
+				P[contador1] = 0;
+				//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
+				Mesa1.position.x = Seno[contador1] + 5 //Posición x de la mesa
+				//Mover la Barra
+				Barra11.position.x = Seno[contador1] + 5 //Posición barra en x
+				//   console.log(u[contador1]);
+				Vtiempo2[contador1] = t;
+				contador1++;
+				t = t + dt;
+				t1 = t1 + dt;
+				//console.log(Vtiempo);
+				//console.log(Mesa1.position.y);
 				renderer.render(scene, camera);
-				//Varibles necesaria para generar el desplazamiento en la base
-				var Vtiempo = []; var Vtiempo2 = [0];
-				var Seno = [];
-				var Po = 0;
-				var Wn = 0;
-				var StopVar = 1;
-				var Segundos = 20;
-				var m = 0;
-				var p = []; var p1 = [];
-				var u = []; var up = []; var upp = []; var P = []; var u2 = []; var up2 = []; var upp2 = [];
-				var dt = 0;
-				u2[0] = 0;
-				up2[0] = 0;
-				upp2[0] = 0;
-				var t1 = 0;
-				var tiempo1;
-				var tiempo2;
-				var tiempo3;
-				var Xaxes = 10;
-				var u0 = 0; var up0 = 0; var p0 = 0; //Condiciones inciales
-				var k = 0; var c = 0;// Masa, Rigidez, Amortiguamiento
-				var a1 = 1; var a2 = 1; var a3 = 1; var kj = 1; //Constantes pa el método númerico
-				var Cube1gdl = Caja1Gdl();
-				var Cilindro1 = Cilindro();
-				Barra11 = Barra1();
-				var contadorglobal = 0;
-				var suma_w = [0];
-				var Relativa = JSON.parse(
-					JSON.stringify(u2)
-				);
-				var Total = JSON.parse(
-					JSON.stringify(suma_w)
-				);
-				var data = [];
-				// // Variables necesarias para resolver el método númerico
-				// var u0=0; var up0=0; var p0=0; //Condiciones inciales
-				// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
-				// var Vtiempo=[]; var Vtiempo2=[];
-				// var Seno=[];
-				// var Po=0.8;
-				// var Wn=4*Math.PI/3;
-				// var Segundos=60;
-				// var m=0.2533;
-				// var p=[]; var p1=[];
-				// var u=[]; var up=[]; var upp=[]; var P=[]; var u2=[]; var up2=[]; var upp2=[];
-				// var dt=0.02;
-				// u2[0]=0;
-				// up2[0]=0;
-				// upp2[0]=0;
-				// // Variables necesarias para resolver el método númerico
-				// var u0=0; var up0=0; var p0=0; //Condiciones inciales
-				// var k=10; var c=0.1592;// Masa, Rigidez, Amortiguamiento
-				//Obtención de Variables desde las cajas
-				function Masa_box() {
-					m = parseFloat(document.getElementById('Masa_box').value);
+				if (contador1 == (Segundos * 120 + 1)) {
+					clearInterval(tiempo1);
 				}
-				function Po_box() {
-					Po = parseFloat(document.getElementById('Po_box').value);
-				}
-				function Wn_box() {
-					Wn = parseFloat(document.getElementById('Wn_box').value);
-				}
-				function c_box() {
-					c = parseFloat(document.getElementById('c_box').value);
-				}
-				function k_box() {
-					k = parseFloat(document.getElementById('k_box').value);
-				}
-				function Dt_box() {
-					dt = parseFloat(document.getElementById('Dt_box').value);
-					iniciar2 = 1;
-				}
-				function ConsMDI() {
-					a1 = (4 * m / (dt * dt)) + (2 * c / (dt));
-					a2 = (4 / (dt)) * m + c;
-					a3 = m;
-					kj = k + a1;
-				}
-				function StopMotion() {
-					StopVar = 0;
-					Po = 0;
-				}
-				function StopInterval() {
-					clearInterval(tiempo1)
-					clearInterval(tiempo2)
-					clearInterval(tiempo3)
+			}
+			tiempo1 = setInterval(Senoiterativo, 50)
+		}
+		//   contador()
+		// Constantes necesarias para el método númerico
+		// Llenar los vectores con zeros
+		function contador2() {
+			var contador1 = 0;
+			var contadorr = 1;
+			var t = 0;
+			function Newmark() {
+				p[contadorr];
+				P[contador1] = p1[contador1] + a1 * u2[contador1] + a2 * up2[contador1] + a3 * upp2[contador1];
+				u2[contador1 + 1] = [P[contador1]] / kj;
+				up2[contador1 + 1] = [2 / dt] * [u2[contador1 + 1] - u2[contador1]] - up2[contador1];
+				upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
+				//Mover la esfera
+				esfera2.position.x = u2[contador1] + Seno[contador1] + 5;
+				//Mover la caja
+				let pos = { x: 5, y: 0.2, z: 0 };
+				cube.position.x = pos.x + Seno[contador1];
+				//Mover cilindro
+				Cilindro1.position.x = 4 + u2[contador1] + Seno[contador1];
+				suma_w[contadorglobal] = (u2[contadorglobal] + Seno[contadorglobal])
+				// CambiarAltura();
+				//    esfera1.position.z=u2[contador1]+Seno[contador1];
+				// chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
+				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
+				chart.update();
+				contador1++;
+				contadorglobal++;
+				t = t + dt;
+				Xaxes = Xaxes + dt;
+				if (contador1 == (Segundos * 120 * +1)) {
+					clearInterval(tiempo2);
 					Relativa = JSON.parse(
 						JSON.stringify(u2)
-					);
+					)
 					Total = JSON.parse(
 						JSON.stringify(suma_w)
-					);
+					)
 					organizador()
 				}
-				function contador() {
-					var contador1 = 0;
-					var t = 0;
-					p1[0] = 0;
-					function Senoiterativo() {
-						Vtiempo[contador1] = contador1;
-						Seno[contador1] = Po * Math.sin(Wn * t); //Desplazamiento en la base
-						p[contador1] = (Wn * Wn) * m * Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
-						p1[contador1] = (Wn * Wn) * m * Po * Math.sin(Wn * (t + dt)); //P+1
-						//   p1[contador1]=Po*Math.sin(Wn*(t+dt)); Para probar el método
-						//   p[contador1]=Seno[contador1]; // Para probar el método
-						P[contador1] = 0;
-						//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
-						Mesa1.position.x = Seno[contador1] + 5 //Posición x de la mesa
-						//Mover la Barra
-						Barra11.position.x = Seno[contador1] + 5 //Posición barra en x
-						//   console.log(u[contador1]);
-						Vtiempo2[contador1] = t;
-						contador1++;
-						t = t + dt;
-						t1 = t1 + dt;
-						//console.log(Vtiempo);
-						//console.log(Mesa1.position.y);
-						renderer.render(scene, camera);
-						if (contador1 == (Segundos * 120 + 1)) {
-							clearInterval(tiempo1);
-						}
-					}
-					tiempo1 = setInterval(Senoiterativo, 50)
+			}
+			tiempo2 = setInterval(Newmark, 50)
+		}
+		function Aceleracion_sismos() {
+			var contador1 = 0;
+			var t = 0;
+			p1[0] = 0;
+			console.log(-1 * m * parseFloat(Ac_Data[1].Datos))
+			function Aceleracion_Sismos() {
+				Vtiempo[contador1] = contador1;
+				Seno[contador1] = Po * Math.sin(Wn * t); //Desplazamiento en la base
+				p[contador1] = -m * parseFloat(Ac_Data[contador1].Datos); //Aceleración en el grado de libertad debido al desplazamiento
+				p1[contador1] = -m * parseFloat(Ac_Data[contador1 + 1].Datos); //P+1
+				//   p1[contador1]=Po*Math.sin(Wn*(t+dt)); Para probar el método
+				//   p[contador1]=Seno[contador1]; // Para probar el método
+				P[contador1] = 0;
+				//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
+				Mesa1.position.x = Desp_Data[contador1].Datos + 5; //Posición x de la mesa
+				//Mover la Barra
+				// Barra11.position.x = parseFloat(Ac_Data[contador1].Datos) + 5; //Arreglar
+				Barra11.position.x = u2[contador1] + 5; //Posición barra en x
+				//   console.log(u[contador1]);
+				Vtiempo2[contador1] = t;
+				contador1++;
+				t = t + dt;
+				t1 = t1 + dt;
+				//console.log(Vtiempo);
+				//console.log(Mesa1.position.y);
+				renderer.render(scene, camera);
+				if (contador1 == (Segundos * 120 + 1)) {
+					clearInterval(tiempo1);
 				}
-				//   contador()
-				// Constantes necesarias para el método númerico
-				// Llenar los vectores con zeros
-				function contador2() {
-					var contador1 = 0;
-					var contadorr = 1;
-					var t = 0;
-					function Newmark() {
-						p[contadorr];
-						P[contador1] = p1[contador1] + a1 * u2[contador1] + a2 * up2[contador1] + a3 * upp2[contador1];
-						u2[contador1 + 1] = [P[contador1]] / kj;
-						up2[contador1 + 1] = [2 / dt] * [u2[contador1 + 1] - u2[contador1]] - up2[contador1];
-						upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
-						//Mover la esfera
-						esfera2.position.x = u2[contador1] + Seno[contador1] + 5;
-						//Mover la caja
-						let pos = { x: 5, y: 0.2, z: 0 };
-						cube.position.x = pos.x + Seno[contador1];
-						//Mover cilindro
-						Cilindro1.position.x = 4 + u2[contador1] + Seno[contador1];
-						suma_w[contadorglobal] = (u2[contadorglobal] + Seno[contadorglobal])
-						// CambiarAltura();
-						//    esfera1.position.z=u2[contador1]+Seno[contador1];
-						// chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
-						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-						chart.update();
-						contador1++;
-						contadorglobal++;
-						t = t + dt;
-						Xaxes = Xaxes + dt;
-						if (contador1 == (Segundos * 120 * +1)) {
-							clearInterval(tiempo2);
-							Relativa = JSON.parse(
-								JSON.stringify(u2)
-							)
-							Total = JSON.parse(
-								JSON.stringify(suma_w)
-							)
-							organizador()
-						}
-					}
-					tiempo2 = setInterval(Newmark, 50)
+			}
+			tiempo1 = setInterval(Aceleracion_Sismos, 25)
+		}
+		function Newmark_sismos() {
+			var contador1 = 0;
+			var contadorr = 1;
+			var t = 0;
+			function Newmark_Sismos() {
+				p[contadorr];
+				P[contador1] = p1[contador1] + a1 * u2[contador1] + a2 * up2[contador1] + a3 * upp2[contador1];
+				u2[contador1 + 1] = [P[contador1]] / kj;
+				up2[contador1 + 1] = [2 / dt] * [u2[contador1 + 1] - u2[contador1]] - up2[contador1];
+				upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
+				//Mover la esfera
+				// esfera2.position.x = u2[contador1] + parseFloat(Ac_Data[contador1].Datos) + 5; ////Arreglar
+				esfera2.position.x = u2[contador1] + 5 + Desp_Data[contador1].Datos;
+				//Mover la caja
+				let pos = { x: 5, y: 0.2, z: 0 };
+				cube.position.x = pos.x + Desp_Data[contador1].Datos;//Arreglar
+				//Mover cilindro
+				Cilindro1.position.x = 4 + u2[contador1] + parseFloat(Ac_Data[contador1].Datos);
+				suma_w[contadorglobal] = (u2[contadorglobal] + parseFloat(Desp_Data[contador1].Datos));
+				// CambiarAltura();
+				//    esfera1.position.z=u2[contador1]+Seno[contador1];
+				chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
+				chart.update();
+				contador1++;
+				contadorglobal++;
+				t = t + dt;
+				Xaxes = Xaxes + dt;
+				if (contador1 == (Segundos * 120 * +1)) {
+					clearInterval(tiempo2);
+					Relativa = JSON.parse(
+						JSON.stringify(u2)
+					)
+					Total = JSON.parse(
+						JSON.stringify(suma_w)
+					)
+					organizador()
 				}
-				function Aceleracion_sismos() {
-					var contador1 = 0;
-					var t = 0;
-					p1[0] = 0;
-					console.log(-1 * m * parseFloat(Ac_Data[1].Datos))
-					function Aceleracion_Sismos() {
-						Vtiempo[contador1] = contador1;
-						Seno[contador1] = Po * Math.sin(Wn * t); //Desplazamiento en la base
-						p[contador1] = -m * parseFloat(Ac_Data[contador1].Datos); //Aceleración en el grado de libertad debido al desplazamiento
-						p1[contador1] = -m * parseFloat(Ac_Data[contador1 + 1].Datos); //P+1
-						//   p1[contador1]=Po*Math.sin(Wn*(t+dt)); Para probar el método
-						//   p[contador1]=Seno[contador1]; // Para probar el método
-						P[contador1] = 0;
-						//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
-						Mesa1.position.x = Desp_Data[contador1].Datos + 5; //Posición x de la mesa
-						//Mover la Barra
-						// Barra11.position.x = parseFloat(Ac_Data[contador1].Datos) + 5; //Arreglar
-						Barra11.position.x = u2[contador1] + 5; //Posición barra en x
-						//   console.log(u[contador1]);
-						Vtiempo2[contador1] = t;
-						contador1++;
-						t = t + dt;
-						t1 = t1 + dt;
-						//console.log(Vtiempo);
-						//console.log(Mesa1.position.y);
-						renderer.render(scene, camera);
-						if (contador1 == (Segundos * 120 + 1)) {
-							clearInterval(tiempo1);
-						}
-					}
-					tiempo1 = setInterval(Aceleracion_Sismos, 25)
+			}
+			tiempo2 = setInterval(Newmark_Sismos, 25)
+		}
+		//  contador2()
+		{
+			const color = 0xFFFFFF; //Ligth color
+			const intensity = 0.04;  // Ligth intensity
+			const light = new THREE.DirectionalLight(color, intensity); //Ligth Set
+			light.position.set(-1, 2, 4); //Ligth position set
+			scene.add(light); //Ligth Add
+		}
+		// Cargar Cubo
+		const color = 0xFFFFFF;
+		// let pos = { x: 5, y: 0.35, z: 0 }
+		let pos = { x: 5, y: -0.4 * 4 / 3, z: 0 }
+		const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 50, 50, 50); //Geomtria del cubo, en el espacio
+		const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
+		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
+		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
+		// const texture = loader8.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEq4TqAAJOutO-nC2IQOQ66WIdsMnVWvJb5tFlj3lJ8eraRAacv3fjBMFnCSBX7lp9HU&usqp=CAU')
+		// const material = new THREE.MeshPhongMaterial({ color, map: texture }); //Crea el material, apartir del color y la textura
+		// geometry.morphAttributes.position = []
+		const material = new THREE.MeshBasicMaterial({
+			color: 0xCACACA, //Color del cubo
+			wireframe: true, //Mostrar los segmentos con hilos
+
+		});
+		const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
+		cube.rotation.y = - Math.PI / 2;
+		cube.rotation.x = - Math.PI;
+		const position_clone = JSON.parse(
+			JSON.stringify(geometry.attributes.position.array)
+		)
+		const normals_clone = JSON.parse(
+			JSON.stringify(geometry.attributes.normal.array)
+		)
+		cube.position.set(pos.x, pos.y, pos.z)
+		scene.add(cube);
+		cube.userData.draggable = true
+		cube.userData.name = 'Cube'
+		geometry.attributes.position.count
+		// function contador4 (){
+		//    var contador1=0;
+		//    var div=1;
+		//    var t=0;
+		//    let geometry1 = new THREE.PlaneGeometry( 1, 1, 200, 200 );
+		// 			const material = new THREE.MeshBasicMaterial({
+		// 				color: 0x88FF88, //Color del cubo
+		// 				wireframe: true, //Mostrar los segmentos con hil
+		// 			});
+		// 			const Plano = new THREE.Mesh(geometry1, material);
+		// 			// Plano.rotation.y = - Math.PI / 2;
+		// 			const now = Date.now()/300
+		// 			scene.add(Plano);
+		//             function BarDeformation (){
+		// 			 const x = geometry1.attributes.position.getY(contador1)
+		// 			 const xsin = Math.sin(x+now)
+		// 			 console.log(xsin)
+		// 			 geometry1.attributes.position.setX(contador1,xsin)
+		// 			 geometry1.attributes.position.needsUpdate=true;
+		// 			 renderer.render(scene, camera);
+		//             if (contador1==(Segundos*40+1)){
+		//             clearInterval(tiempo);
+		//                 }
+		//               }
+		//                var tiempo=setInterval(BarDeformation,500)
+		//                           }
+		//  contador4()
+		let geometry1 = new THREE.PlaneGeometry(1, 1, 200, 200);
+		const material2 = new THREE.MeshBasicMaterial({
+			color: 0x88FF88, //Color del cubo
+			// wireframe: true, //Mostrar los segmentos con hil
+		});
+		var zeta = []
+		function DATOSZ() {
+			for (let i = 0; i < geometry.attributes.position.count; i++) {
+				zeta[i] = geometry.attributes.position.getZ(i);
+
+			}
+		}
+		DATOSZ()
+		var contador6 = 0;
+		const Plano = new THREE.Mesh(geometry1, material2);
+		function Movimiento_Sen() {
+			const now = Date.now() / 300
+			const Move = new THREE.Vector3(1, 1, 1);
+			contador6++;
+			var t = 0;
+			for (let i = 0; i < geometry.attributes.position.count; i++) {
+				const x = geometry.attributes.position.getY(i);
+				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
+				// const xflex = (x * x) / 4 - (x * x * x) / 12;
+				const xflex = (x * x) / 1.5 - (x * x * x) / 3;
+				const xflex2 = (x * x) / 60 - (x * x * x) / 6;
+				const xcos = -1 * Math.cos(now * 3 / 8);
+				const xsint = Po * Math.sin(Wn * t);
+				// geometry.attributes.position.setX(i, xcos);
+				s = i;
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
+				// geometry.attributes.position.setZ(s,xsin ); //Funcional
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
+				// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
+				geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
+
+				// geometry.attributes.position.setZ(s+1, 100)
+				// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
+			}
+			// // geometry.computeVertexNormals();
+			geometry.attributes.position.needsUpdate = true;
+			renderer.render(scene, camera)
+			requestAnimationFrame(Movimiento_Sen)
+		}
+		function Movimiento_SenSismo() {
+			var Wn1 = 4.18;
+			var Po1 = 0.9
+			const now = Date.now() / 300
+			const Move = new THREE.Vector3(1, 1, 1);
+			contador6++;
+			var t = 0;
+			for (let i = 0; i < geometry.attributes.position.count; i++) {
+				const x = geometry.attributes.position.getY(i);
+				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
+				// const xflex = (x * x) / 4 - (x * x * x) / 12;
+				const xflex = (x * x) / 1.5 - (x * x * x) / 3;
+				const xflex2 = (x * x) / 60 - (x * x * x) / 6;
+				const xcos = -1 * Math.cos(now * 3 / 8);
+				const xsint = Po1 * Math.sin(Wn1 * t);
+				// geometry.attributes.position.setX(i, xcos);
+				s = i;
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
+				// geometry.attributes.position.setZ(s,xsin ); //Funcional
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
+				// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
+				geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po1 * Math.sin(Wn1 * t1) * (0.005 / k)) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
+
+				// geometry.attributes.position.setZ(s+1, 100)
+				// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
+			}
+			// // geometry.computeVertexNormals();
+			geometry.attributes.position.needsUpdate = true;
+			renderer.render(scene, camera)
+			requestAnimationFrame(Movimiento_SenSismo)
+		}
+		function contador3() {
+			var contador1 = 0;
+			var div = 1;
+			var t = 0;
+			const now = Date.now() / 200;
+			function BarDeformation() {
+				// const position_clone= JSON.parse(
+				// 	JSON.stringify(geometry.attributes.position.array)
+				// )
+				// const normals_clone= JSON.parse(
+				// 	JSON.stringify(geometry.attributes.normal.array)
+				// )
+				// const uX= geometry.attributes.uv.getX(contador1)*Math.PI*16
+				// const uY= geometry.attributes.uv.getY(contador1)*Math.PI*16
+				// const xangle= (uX+now)
+				// const xsin=Math.sin(xangle)*0.2;
+				// const yangle= (uX+now)
+				// const ycos=Math.cos(xangle)*0.2;
+				// //Indices
+				// const ix= contador1*3
+				// const iy= contador1*3+1
+				// const iz= contador1*3+2
+				// geometry.attributes.position.
+				// setX(contador1, position_clone[ix]+normals_clone[ix]*(xsin+ycos))
+				// geometry.attributes.position.
+				// setY(contador1, position_clone[iy]+normals_clone[iy]*(xsin+ycos))
+				// geometry.attributes.position.
+				// setZ(contador1, position_clone[iz]+normals_clone[iz]*(xsin+ycos))
+				// const x = geometry.attributes.position.getX(contador1)
+				// contador1++;
+				// div=div+0.1
+				// const y = geometry.attributes.position.getY(contador1)
+				// const xsin = -Math.pow(contador1,2)
+				// const ycos = 0.8*contador1*Math.cos(contador1)
+				// console.log('Cargo_Hola_mundo')
+				// cube.geometry.attributes.position.setZ(contador1, 3*xsin)
+				// cube.geometry.attributes.position.setX(contador1, ycos)
+				// cube.geometry.attributes.position.setY(contador1, ycos)
+				// geometry.attributes.position.needsUpdate = true;
+				// cube.geometry.attributes.position.setZ(contador1, -contador1)
+				// cube.geometry.attributes.position.sety(contador1, -10)
+				// cube.geometry.attributes.position.setx(contador1, -10)
+				// for the second morph target, we'll twist the cubes vertices
+				//    const twistPositions = [];
+				//    const direction = new THREE.Vector3( 1, 0, 0 );
+				//    const vertex = new THREE.Vector3();
+				// //    geometry.attributes.position = [];
+				// const positionAttribute = geometry.attributes.position;
+				// for ( let i = 0; i < positionAttribute.count; i ++ ) {
+
+				//       const x = positionAttribute.getX( i );
+				//       const y = positionAttribute.getY( i );
+				//       const z = positionAttribute.getZ( i );
+				//             // stretch along the x-axis so we can see the twist better
+				//                vertex.set( x * 2, y, z );
+				//                vertex.applyAxisAngle( direction, Math.PI * x / 2 ).toArray( twistPositions, twistPositions.length );
+				// 			//    geometry.attributes.position[ 1 ] = new THREE.Float32BufferAttribute( twistPositions, 3 );
+
+				// 			}
+				// geometry.attributes.position.setZ(contador1,contador1)
+				// geometry.attributes.position.setX(contador1,contador1)
+				// geometry.attributes.position.setY(1,0.6)
+				// geometry.attributes.position.setY(0,0.6)
+				geometry.attributes.position.setZ(1, -2 * 0.6)
+				geometry.attributes.position.setZ(0, -2 * 0.9)
+				geometry.attributes.position.setZ(2, 0.6)
+				geometry.attributes.position.setZ(3, 0.9)
+				geometry.attributes.position.setZ(6, 2 * 0.6)
+				geometry.attributes.position.setZ(7, 2 * 0.9)
+				// geometry.attributes.position.setZ(8,0.6)
+				// geometry.attributes.position.setZ(9,0.9)
+				// geometry.attributes.position.setZ(10,2*0.6)
+				// geometry.attributes.position.setZ(11,2*0.9)
+				// geometry.attributes.position.setZ(12,0.6)
+				// geometry.attributes.position.setZ(13,0.9)
+				// geometry.attributes.position.setZ(14,2*0.6)
+				// geometry.attributes.position.setZ(15,2*0.9)
+				// geometry.attributes.position.setZ(16,1)
+				// geometry.attributes.position.setZ(17,0.9)
+				const prueba1 = geometry.attributes.position.getZ(1)
+				const prueba2 = geometry.attributes.position.getZ(0)
+				const prueba3 = geometry.attributes.position.getZ(2)
+				const prueba4 = geometry.attributes.position.getZ(3)
+				geometry.attributes.position.needsUpdate = true;
+				contador1++;
+				const x = geometry.attributes.position.getX(contador1);
+				const y = geometry.attributes.position.getY(contador1);
+				const z = geometry.attributes.position.getZ(contador1);
+				var matriz = [x, y, z];
+				// geometry.attributes.position.setZ(1,-4*0.6)
+				// geometry.attributes.position.setZ(0,-4*0.9)
+				// geometry.attributes.position.setZ(2,-2*0.6)
+				// geometry.attributes.position.setZ(3,-2*0.9)
+				geometry.computeVertexNormals();
+				geometry.attributes.position.needsUpdate = true;
+				renderer.render(scene, camera);
+				if (contador1 == (Segundos * 40 + 1)) {
+					clearInterval(tiempo3);
 				}
-				function Newmark_sismos() {
-					var contador1 = 0;
-					var contadorr = 1;
-					var t = 0;
-					function Newmark_Sismos() {
-						p[contadorr];
-						P[contador1] = p1[contador1] + a1 * u2[contador1] + a2 * up2[contador1] + a3 * upp2[contador1];
-						u2[contador1 + 1] = [P[contador1]] / kj;
-						up2[contador1 + 1] = [2 / dt] * [u2[contador1 + 1] - u2[contador1]] - up2[contador1];
-						upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
-						//Mover la esfera
-						// esfera2.position.x = u2[contador1] + parseFloat(Ac_Data[contador1].Datos) + 5; ////Arreglar
-						esfera2.position.x = u2[contador1] + 5+ Desp_Data[contador1].Datos;
-						//Mover la caja
-						let pos = { x: 5, y: 0.2, z: 0 };
-						cube.position.x = pos.x + Desp_Data[contador1].Datos;//Arreglar
-						//Mover cilindro
-						Cilindro1.position.x = 4 + u2[contador1] + parseFloat(Ac_Data[contador1].Datos);
-						suma_w[contadorglobal] = (u2[contadorglobal] + parseFloat(Desp_Data[contador1].Datos));
-						// CambiarAltura();
-						//    esfera1.position.z=u2[contador1]+Seno[contador1];
-						chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
-						chart.update();
-						contador1++;
-						contadorglobal++;
-						t = t + dt;
-						Xaxes = Xaxes + dt;
-						if (contador1 == (Segundos * 120 * +1)) {
-							clearInterval(tiempo2);
-							Relativa = JSON.parse(
-								JSON.stringify(u2)
-							)
-							Total = JSON.parse(
-								JSON.stringify(suma_w)
-							)
-							organizador()
-						}
-					}
-					tiempo2 = setInterval(Newmark_Sismos, 25)
-				}
-				//  contador2()
-				{
-					const color = 0xFFFFFF; //Ligth color
-					const intensity = 0.04;  // Ligth intensity
-					const light = new THREE.DirectionalLight(color, intensity); //Ligth Set
-					light.position.set(-1, 2, 4); //Ligth position set
-					scene.add(light); //Ligth Add
-				}
-				// Cargar Cubo
-				const color = 0xFFFFFF;
-				// let pos = { x: 5, y: 0.35, z: 0 }
-				let pos = { x: 5, y: -0.4 * 4 / 3, z: 0 }
-				const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 50, 50, 50); //Geomtria del cubo, en el espacio
-				const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
-				// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
-				const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
-				// const texture = loader8.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEq4TqAAJOutO-nC2IQOQ66WIdsMnVWvJb5tFlj3lJ8eraRAacv3fjBMFnCSBX7lp9HU&usqp=CAU')
-				// const material = new THREE.MeshPhongMaterial({ color, map: texture }); //Crea el material, apartir del color y la textura
-				// geometry.morphAttributes.position = []
-				const material = new THREE.MeshBasicMaterial({
-					color: 0xCACACA, //Color del cubo
-					wireframe: true, //Mostrar los segmentos con hilos
-
-				});
-				const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
-				cube.rotation.y = - Math.PI / 2;
-				cube.rotation.x = - Math.PI;
-				const position_clone = JSON.parse(
-					JSON.stringify(geometry.attributes.position.array)
-				)
-				const normals_clone = JSON.parse(
-					JSON.stringify(geometry.attributes.normal.array)
-				)
-				cube.position.set(pos.x, pos.y, pos.z)
-				scene.add(cube);
-				cube.userData.draggable = true
-				cube.userData.name = 'Cube'
-				geometry.attributes.position.count
-				// function contador4 (){
-				//    var contador1=0;
-				//    var div=1;
-				//    var t=0;
-				//    let geometry1 = new THREE.PlaneGeometry( 1, 1, 200, 200 );
-				// 			const material = new THREE.MeshBasicMaterial({
-				// 				color: 0x88FF88, //Color del cubo
-				// 				wireframe: true, //Mostrar los segmentos con hil
-				// 			});
-				// 			const Plano = new THREE.Mesh(geometry1, material);
-				// 			// Plano.rotation.y = - Math.PI / 2;
-				// 			const now = Date.now()/300
-				// 			scene.add(Plano);
-				//             function BarDeformation (){
-				// 			 const x = geometry1.attributes.position.getY(contador1)
-				// 			 const xsin = Math.sin(x+now)
-				// 			 console.log(xsin)
-				// 			 geometry1.attributes.position.setX(contador1,xsin)
-				// 			 geometry1.attributes.position.needsUpdate=true;
-				// 			 renderer.render(scene, camera);
-				//             if (contador1==(Segundos*40+1)){
-				//             clearInterval(tiempo);
-				//                 }
-				//               }
-				//                var tiempo=setInterval(BarDeformation,500)
-				//                           }
-				//  contador4()
-				let geometry1 = new THREE.PlaneGeometry(1, 1, 200, 200);
-				const material2 = new THREE.MeshBasicMaterial({
-					color: 0x88FF88, //Color del cubo
-					// wireframe: true, //Mostrar los segmentos con hil
-				});
-				var zeta = []
-				function DATOSZ() {
-					for (let i = 0; i < geometry.attributes.position.count; i++) {
-						zeta[i] = geometry.attributes.position.getZ(i);
-
-					}
-				}
-				DATOSZ()
-				var contador6 = 0;
-				const Plano = new THREE.Mesh(geometry1, material2);
-				function Movimiento_Sen() {
-					const now = Date.now() / 300
-					const Move = new THREE.Vector3(1, 1, 1);
-					contador6++;
-					var t = 0;
-					for (let i = 0; i < geometry.attributes.position.count; i++) {
-						const x = geometry.attributes.position.getY(i);
-						const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
-						// const xflex = (x * x) / 4 - (x * x * x) / 12;
-						const xflex = (x * x) / 1.5 - (x * x * x) / 3;
-						const xflex2 = (x * x) / 60 - (x * x * x) / 6;
-						const xcos = -1 * Math.cos(now * 3 / 8);
-						const xsint = Po * Math.sin(Wn * t);
-						// geometry.attributes.position.setX(i, xcos);
-						s = i;
-						// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
-						// geometry.attributes.position.setZ(s,xsin ); //Funcional
-						// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
-						// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
-						geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
-
-						// geometry.attributes.position.setZ(s+1, 100)
-						// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
-					}
-					// // geometry.computeVertexNormals();
-					geometry.attributes.position.needsUpdate = true;
-					renderer.render(scene, camera)
-					requestAnimationFrame(Movimiento_Sen)
-				}
-				function Movimiento_SenSismo() {
-					var Wn1=4.18;
-					var Po1=0.9
-					const now = Date.now() / 300
-					const Move = new THREE.Vector3(1, 1, 1);
-					contador6++;
-					var t = 0;
-					for (let i = 0; i < geometry.attributes.position.count; i++) {
-						const x = geometry.attributes.position.getY(i);
-						const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
-						// const xflex = (x * x) / 4 - (x * x * x) / 12;
-						const xflex = (x * x) / 1.5 - (x * x * x) / 3;
-						const xflex2 = (x * x) / 60 - (x * x * x) / 6;
-						const xcos = -1 * Math.cos(now * 3 / 8);
-						const xsint = Po1 * Math.sin(Wn1 * t);
-						// geometry.attributes.position.setX(i, xcos);
-						s = i;
-						// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
-						// geometry.attributes.position.setZ(s,xsin ); //Funcional
-						// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
-						// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
-						geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po1 * Math.sin(Wn1 * t1) * (0.005 / k)) * -1);//SuperBien
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
-						// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
-
-						// geometry.attributes.position.setZ(s+1, 100)
-						// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
-					}
-					// // geometry.computeVertexNormals();
-					geometry.attributes.position.needsUpdate = true;
-					renderer.render(scene, camera)
-					requestAnimationFrame(Movimiento_SenSismo)
-				}
-				function contador3() {
-					var contador1 = 0;
-					var div = 1;
-					var t = 0;
-					const now = Date.now() / 200;
-					function BarDeformation() {
-						// const position_clone= JSON.parse(
-						// 	JSON.stringify(geometry.attributes.position.array)
-						// )
-						// const normals_clone= JSON.parse(
-						// 	JSON.stringify(geometry.attributes.normal.array)
-						// )
-						// const uX= geometry.attributes.uv.getX(contador1)*Math.PI*16
-						// const uY= geometry.attributes.uv.getY(contador1)*Math.PI*16
-						// const xangle= (uX+now)
-						// const xsin=Math.sin(xangle)*0.2;
-						// const yangle= (uX+now)
-						// const ycos=Math.cos(xangle)*0.2;
-						// //Indices
-						// const ix= contador1*3
-						// const iy= contador1*3+1
-						// const iz= contador1*3+2
-						// geometry.attributes.position.
-						// setX(contador1, position_clone[ix]+normals_clone[ix]*(xsin+ycos))
-						// geometry.attributes.position.
-						// setY(contador1, position_clone[iy]+normals_clone[iy]*(xsin+ycos))
-						// geometry.attributes.position.
-						// setZ(contador1, position_clone[iz]+normals_clone[iz]*(xsin+ycos))
-						// const x = geometry.attributes.position.getX(contador1)
-						// contador1++;
-						// div=div+0.1
-						// const y = geometry.attributes.position.getY(contador1)
-						// const xsin = -Math.pow(contador1,2)
-						// const ycos = 0.8*contador1*Math.cos(contador1)
-						// console.log('Cargo_Hola_mundo')
-						// cube.geometry.attributes.position.setZ(contador1, 3*xsin)
-						// cube.geometry.attributes.position.setX(contador1, ycos)
-						// cube.geometry.attributes.position.setY(contador1, ycos)
-						// geometry.attributes.position.needsUpdate = true;
-						// cube.geometry.attributes.position.setZ(contador1, -contador1)
-						// cube.geometry.attributes.position.sety(contador1, -10)
-						// cube.geometry.attributes.position.setx(contador1, -10)
-						// for the second morph target, we'll twist the cubes vertices
-						//    const twistPositions = [];
-						//    const direction = new THREE.Vector3( 1, 0, 0 );
-						//    const vertex = new THREE.Vector3();
-						// //    geometry.attributes.position = [];
-						// const positionAttribute = geometry.attributes.position;
-						// for ( let i = 0; i < positionAttribute.count; i ++ ) {
-
-						//       const x = positionAttribute.getX( i );
-						//       const y = positionAttribute.getY( i );
-						//       const z = positionAttribute.getZ( i );
-						//             // stretch along the x-axis so we can see the twist better
-						//                vertex.set( x * 2, y, z );
-						//                vertex.applyAxisAngle( direction, Math.PI * x / 2 ).toArray( twistPositions, twistPositions.length );
-						// 			//    geometry.attributes.position[ 1 ] = new THREE.Float32BufferAttribute( twistPositions, 3 );
-
-						// 			}
-						// geometry.attributes.position.setZ(contador1,contador1)
-						// geometry.attributes.position.setX(contador1,contador1)
-						// geometry.attributes.position.setY(1,0.6)
-						// geometry.attributes.position.setY(0,0.6)
-						geometry.attributes.position.setZ(1, -2 * 0.6)
-						geometry.attributes.position.setZ(0, -2 * 0.9)
-						geometry.attributes.position.setZ(2, 0.6)
-						geometry.attributes.position.setZ(3, 0.9)
-						geometry.attributes.position.setZ(6, 2 * 0.6)
-						geometry.attributes.position.setZ(7, 2 * 0.9)
-						// geometry.attributes.position.setZ(8,0.6)
-						// geometry.attributes.position.setZ(9,0.9)
-						// geometry.attributes.position.setZ(10,2*0.6)
-						// geometry.attributes.position.setZ(11,2*0.9)
-						// geometry.attributes.position.setZ(12,0.6)
-						// geometry.attributes.position.setZ(13,0.9)
-						// geometry.attributes.position.setZ(14,2*0.6)
-						// geometry.attributes.position.setZ(15,2*0.9)
-						// geometry.attributes.position.setZ(16,1)
-						// geometry.attributes.position.setZ(17,0.9)
-						const prueba1 = geometry.attributes.position.getZ(1)
-						const prueba2 = geometry.attributes.position.getZ(0)
-						const prueba3 = geometry.attributes.position.getZ(2)
-						const prueba4 = geometry.attributes.position.getZ(3)
-						geometry.attributes.position.needsUpdate = true;
-						contador1++;
-						const x = geometry.attributes.position.getX(contador1);
-						const y = geometry.attributes.position.getY(contador1);
-						const z = geometry.attributes.position.getZ(contador1);
-						var matriz = [x, y, z];
-						// geometry.attributes.position.setZ(1,-4*0.6)
-						// geometry.attributes.position.setZ(0,-4*0.9)
-						// geometry.attributes.position.setZ(2,-2*0.6)
-						// geometry.attributes.position.setZ(3,-2*0.9)
-						geometry.computeVertexNormals();
-						geometry.attributes.position.needsUpdate = true;
-						renderer.render(scene, camera);
-						if (contador1 == (Segundos * 40 + 1)) {
-							clearInterval(tiempo3);
-						}
-					}
-					tiempo3 = setInterval(BarDeformation, 500)
-				}
-				//  Crear geometrias
-				const geometry2 = createGeometry();
-				const material3 = new THREE.MeshPhongMaterial({
-					color: 0xff0000,
-					flatShading: true
-				});
-				// Crear mesh y agregar la escena
-				mesh = new THREE.Mesh(geometry2, material3);
-				//Funciones para crear geometrias
-				function createGeometry() {
-					const geometry = new THREE.BoxGeometry(2, 2, 2, 32, 32, 32);
-					geometry.morphAttributes.position = [];
-					const positionAttribute = geometry.attributes.position;
-					const spherePositions = [];
-					const twistPositions = [];
-					const direction = new THREE.Vector3(1, 0, 0);
-					const vertex = new THREE.Vector3();
-					for (let i = 0; i < positionAttribute.count; i++) {
-						const x = positionAttribute.getX(i);
-						const y = positionAttribute.getY(i);
-						const z = positionAttribute.getZ(i);
-						spherePositions.push(
-							x * Math.sqrt(1 - (y * y / 2) - (z * z / 2) + (y * y * z * z / 3)),
-							y * Math.sqrt(1 - (z * z / 2) - (x * x / 2) + (z * z * x * x / 3)),
-							z * Math.sqrt(1 - (x * x / 2) - (y * y / 2) + (x * x * y * y / 3))
-						);
-						vertex.set(x * 2, y, z);
-						vertex.applyAxisAngle(direction, Math.PI * x / 2).toArray(twistPositions, twistPositions.length);
-					}
-					geometry.morphAttributes.position[0] = new THREE.Float32BufferAttribute(spherePositions, 3);
-					geometry.morphAttributes.position[1] = new THREE.Float32BufferAttribute(twistPositions, 3);
-					return geometry;
-				}
-				function Caja1Gdl() {
-					const geometryF = new THREE.BoxGeometry(0.7, 0.7, 0.7, 32, 32, 32);
-					const materialF = new THREE.MeshPhongMaterial({
-						color: 0xff0000,
-						flatShading: true
-					});
-					let pos = { x: 5, y: 0, z: 0 };
-					cubo1 = new THREE.Mesh(geometryF, materialF);
-					cubo1.position.set(pos.x, pos.y, pos.z);
-					// scene.add(cubo1)
-					return cubo1;
-				}
-				function Barra1() {
-					const geometryF = new THREE.BoxGeometry(0.2, 2, 0.2, 32, 32, 32);
-					const materialF = new THREE.MeshPhongMaterial({
-						color: 0xFFFFFF,
-						flatShading: true
-					});
-					let pos = { x: 5, y: 0.5, z: 0 };
-					cubo1 = new THREE.Mesh(geometryF, materialF);
-					cubo1.position.set(pos.x, pos.y, pos.z);
-					// scene.add(cubo1)
-					return cubo1;
-				}
-				var santiago1 = 1;
-				var santiago = 0;
-				function Cilindro() {
-					santiago1++
-					let pos = { x: 4, y: 0.19, z: 0 };
-					const materialF = new THREE.MeshPhongMaterial({
-						color: 0xFFCE30,
-						flatShading: true
-					});
-					var geometryF = new THREE.CylinderGeometry(0.075, 0.075, 2, 32);
-					const cylinder = new THREE.Mesh(geometryF, materialF);
-					cylinder.position.set(pos.x, pos.y, pos.z);
-					cylinder.rotation.x = - Math.PI / 2;
-					cylinder.rotation.z = - Math.PI / 2;
-
-					// scene.add(cylinder);
-					return cylinder;
-				}
-				var pb1 = 0
-				function CambiarAltura() {
-					var geometryF = new THREE.CylinderGeometry(0.075, 0.075, 3, 32);
-					const materialF = new THREE.MeshPhongMaterial({
-						color: 0xFFCE30,
-						flatShading: true,
-					});
-					santiago = santiago + 0.1;
-					// geometryF.morphAttributes.position[0]= new THREE.CylinderGeometry(0.075, 0.075, 4+santiago, 32);
-					geometryF.morphAttributes.position = [];
-					const positionAttribute = geometryF.attributes.position;
-					const spherePositions = [];
-					const twistPositions = [];
-					const vertex = new THREE.Vector3();
-					for (let i = 0; i < positionAttribute.count; i++) {
-						const x = positionAttribute.getX(i);
-						const y = positionAttribute.getY(i);
-						const z = positionAttribute.getZ(i);
-						spherePositions.push(
-							x * (1),
-							y * (1 + 1),
-							z * (1)
-						);
-
-					}
-					pb1++;
-					geometryF.morphAttributes.position[0] = new THREE.Float32BufferAttribute(spherePositions, 3);
-					geometryF.computeVertexNormals();
-					var Prueba6 = new THREE.Mesh(geometryF, materialF);
-					Prueba6.morphTargetInfluences[0] = 0.2;
-
-					scene.add(Prueba6);
-
-				}
-				function drag() {
-					Cilindro1.userData.draggable = true;
-					Cilindro1.userData.name = 'Cilindro1';
-					Cube1gdl.userData.draggable = true;
-					Cube1gdl.userData.name = 'Cube1gdl';
-					Barra11.userData.draggable = true;
-					Barra11.userData.name = 'Barra';
-				}
-				drag()
-				function initGUI() {
-
-					// Set up dat.GUI to control targets
-					const params = {
-						Spherify: 0,
-						Twist: 0,
-					};
-					const gui = new dat.GUI({ title: 'Morph Targets', option: { width: 400 } });
-
-
-					gui.add(params, 'Spherify', 0, 1).step(0.01).onChange(function (value) {
-
-						mesh.morphTargetInfluences[0] = value;
-
-					});
-					gui.add(params, 'Twist', 0, 1).step(0.01).onChange(function (value) {
-
-						mesh.morphTargetInfluences[1] = value;
-
-					});
-
-				}
-				// initGUI()
-				tippy('[data-tippy-content]'); //Cargar datos a la gráfica
-				console.log(Po)
-				var ejex = parseFloat(0)
-				var ctx = document.getElementById("myChart").getContext("2d"); //Grafica
-				const contador_barra1 = [];
-				const chart = new Chart(ctx, {
-					type: 'line',
-					data: {
-						datasets: [{
-							borderColor: 'rgb(222,42,22)',
-							borderWidth: 2,
-							pointRadius: 0,
-						}]
-					},
-					options: {
-						animation: {
-							duration: 0
-						},
-						interaction: {
-							intersect: false
-						},
-						plugins: {
-							legend: false
-						},
-						scales: {
-							x: {
-								type: 'linear',
-								max: 50,
-								min: 0,
-								title: {
-									display: true,
-									text: 'tiempo [s]'
-
-								}
-							},
-							y: {
-								type: 'linear',
-								// max: Po + Po / (10 * Po),
-								// min: -Po - Po / (10 * Po),
-								max: 2,
-								min: -2,
-								title: {
-									display: true,
-									text: 'u'
-
-								}
-							}
-						}
-					}
-				});
-				function animate() {
-					dragObject()
-					renderer.render(scene, camera);
-					requestAnimationFrame(animate);
-				}
-				const raycaster = new THREE.Raycaster();
-				const moveMouse = new THREE.Vector3();
-				const clickMouse = new THREE.Vector2();
-				var draggable = new THREE.Object3D();
-				window.addEventListener('click', event => {
-					if (draggable) {
-						console.log('Droping draggable')
-						draggable = null
-						return;
-					}
-					clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-					clickMouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-					raycaster.setFromCamera(moveMouse, camera);
-					const found = raycaster.intersectObjects(scene.children);
-					if (found.length > 0 && found[0].object.userData.draggable) {
-						draggable = found[0].object
-						console.log('Found draggable')
-					}
-				})
-				window.addEventListener('mousemove', event => {
-					moveMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-					moveMouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-				})
-				function dragObject() {
-					if (draggable != null) {
-						raycaster.setFromCamera(moveMouse, camera)
-						const found = raycaster.intersectObjects(scene.children)
-						if (found.length > 0) {
-							for (let o of found) {
-								if (!o.object.userData.ground) {
-									draggable.position.x = o.point.x
-									// draggable.position.y= o.point.y
-									draggable.position.z = o.point.z
-								}
-							}
-
-						}
-					}
-				}
-				animate()
-				const loader1 = new THREE.GLTFLoader();
-				// Load a glTF resource, Lab loading
-				loader1.load(
-					'lab2.gltf',//'scene.gltf'
-					function (gltf) {
-						lab = gltf.scene;
-						scene.add(lab);
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
-						console.log('completado!.....')
-						lab.position.z += 0
-						lab.position.x += 5
-						lab.position.y += -1.2
-						renderer.render(scene, camera);
-					},
-					// called while loading is progressing
-					function (xhr) {
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-					},
-					// called when loading has errors
-					function (error) {
-						console.log('An error happened');
-					}
+			}
+			tiempo3 = setInterval(BarDeformation, 500)
+		}
+		//  Crear geometrias
+		const geometry2 = createGeometry();
+		const material3 = new THREE.MeshPhongMaterial({
+			color: 0xff0000,
+			flatShading: true
+		});
+		// Crear mesh y agregar la escena
+		mesh = new THREE.Mesh(geometry2, material3);
+		//Funciones para crear geometrias
+		function createGeometry() {
+			const geometry = new THREE.BoxGeometry(2, 2, 2, 32, 32, 32);
+			geometry.morphAttributes.position = [];
+			const positionAttribute = geometry.attributes.position;
+			const spherePositions = [];
+			const twistPositions = [];
+			const direction = new THREE.Vector3(1, 0, 0);
+			const vertex = new THREE.Vector3();
+			for (let i = 0; i < positionAttribute.count; i++) {
+				const x = positionAttribute.getX(i);
+				const y = positionAttribute.getY(i);
+				const z = positionAttribute.getZ(i);
+				spherePositions.push(
+					x * Math.sqrt(1 - (y * y / 2) - (z * z / 2) + (y * y * z * z / 3)),
+					y * Math.sqrt(1 - (z * z / 2) - (x * x / 2) + (z * z * x * x / 3)),
+					z * Math.sqrt(1 - (x * x / 2) - (y * y / 2) + (x * x * y * y / 3))
 				);
-				// Instantiate a loader
-				const loader2 = new THREE.GLTFLoader();
-				// Load a glTF resource, Mesa1 Loading
-				loader2.load(
-					'Mesa1.gltf',//'scene.gltf'
-					function (gltf) {
-						Mesa1 = gltf.scene;
-						scene.add(Mesa1);
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
-						console.log('completado!.....')
-						Mesa1.position.z += 0
-						Mesa1.position.x += 5
-						Mesa1.position.y += -1
-						renderer.render(scene, camera);
-					},
-					// called while loading is progressing
-					function (xhr) {
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-					},
-					// called when loading has errors
-					function (error) {
-						console.log('An error happened');
-					}
-				);
-				// Instantiate a loader
-				const loader3 = new THREE.GLTFLoader();
-				// Load a glTF resource, Esfera1 Loading
-				loader3.load(
-					'esfera2.gltf',//'scene.gltf'
-					function (gltf) {
-						esfera2 = gltf.scene;
-						scene.add(esfera2);
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
-						console.log('completado!.....')
-						esfera2.position.z += 0
-						esfera2.position.x += 5
-						esfera2.position.y += -1
-						renderer.render(scene, camera);
-					},
-					// called while loading is progressing
-					function (xhr) {
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-					},
-					// called when loading has errors
-					function (error) {
-						console.log('An error happened');
-					}
-				);
-				// Instantiate a loader
-				const loader4 = new THREE.GLTFLoader();
-				// Load a glTF resource, Mesa1 Loading
-				loader4.load(
-					'Cilindros.gltf',//'scene.gltf'
-					function (gltf) {
-						Cilindros = gltf.scene;
-						scene.add(Cilindros);
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
-						console.log('completado!.....')
-						Cilindros.position.z += 0
-						Cilindros.position.x += 5
-						Cilindros.position.y += -1
-						renderer.render(scene, camera);
-					},
-					// called while loading is progressing
-					function (xhr) {
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-					},
-					// called when loading has errors
-					function (error) {
-						console.log('An error happened');
-					}
-				);
-				// Instantiate a loader
-				const loader5 = new THREE.GLTFLoader();
-				// Load a glTF resource, Mesa1 Loading
-				loader5.load(
-					'Mesa2.gltf',//'scene.gltf'
-					function (gltf) {
-						Mesa2 = gltf.scene;
-						scene.add(Mesa2);
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
-						console.log('completado!.....')
-						Mesa2.position.z += 0
-						Mesa2.position.x += 5
-						Mesa2.position.y += -1.5
-						renderer.render(scene, camera);
+				vertex.set(x * 2, y, z);
+				vertex.applyAxisAngle(direction, Math.PI * x / 2).toArray(twistPositions, twistPositions.length);
+			}
+			geometry.morphAttributes.position[0] = new THREE.Float32BufferAttribute(spherePositions, 3);
+			geometry.morphAttributes.position[1] = new THREE.Float32BufferAttribute(twistPositions, 3);
+			return geometry;
+		}
+		function Caja1Gdl() {
+			const geometryF = new THREE.BoxGeometry(0.7, 0.7, 0.7, 32, 32, 32);
+			const materialF = new THREE.MeshPhongMaterial({
+				color: 0xff0000,
+				flatShading: true
+			});
+			let pos = { x: 5, y: 0, z: 0 };
+			cubo1 = new THREE.Mesh(geometryF, materialF);
+			cubo1.position.set(pos.x, pos.y, pos.z);
+			// scene.add(cubo1)
+			return cubo1;
+		}
+		function Barra1() {
+			const geometryF = new THREE.BoxGeometry(0.2, 2, 0.2, 32, 32, 32);
+			const materialF = new THREE.MeshPhongMaterial({
+				color: 0xFFFFFF,
+				flatShading: true
+			});
+			let pos = { x: 5, y: 0.5, z: 0 };
+			cubo1 = new THREE.Mesh(geometryF, materialF);
+			cubo1.position.set(pos.x, pos.y, pos.z);
+			// scene.add(cubo1)
+			return cubo1;
+		}
+		var santiago1 = 1;
+		var santiago = 0;
+		function Cilindro() {
+			santiago1++
+			let pos = { x: 4, y: 0.19, z: 0 };
+			const materialF = new THREE.MeshPhongMaterial({
+				color: 0xFFCE30,
+				flatShading: true
+			});
+			var geometryF = new THREE.CylinderGeometry(0.075, 0.075, 2, 32);
+			const cylinder = new THREE.Mesh(geometryF, materialF);
+			cylinder.position.set(pos.x, pos.y, pos.z);
+			cylinder.rotation.x = - Math.PI / 2;
+			cylinder.rotation.z = - Math.PI / 2;
 
-					},
-					// called while loading is progressing
-					function (xhr) {
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-					},
-					// called when loading has errors
-					function (error) {
-						console.log('An error happened');
-					}
+			// scene.add(cylinder);
+			return cylinder;
+		}
+		var pb1 = 0
+		function CambiarAltura() {
+			var geometryF = new THREE.CylinderGeometry(0.075, 0.075, 3, 32);
+			const materialF = new THREE.MeshPhongMaterial({
+				color: 0xFFCE30,
+				flatShading: true,
+			});
+			santiago = santiago + 0.1;
+			// geometryF.morphAttributes.position[0]= new THREE.CylinderGeometry(0.075, 0.075, 4+santiago, 32);
+			geometryF.morphAttributes.position = [];
+			const positionAttribute = geometryF.attributes.position;
+			const spherePositions = [];
+			const twistPositions = [];
+			const vertex = new THREE.Vector3();
+			for (let i = 0; i < positionAttribute.count; i++) {
+				const x = positionAttribute.getX(i);
+				const y = positionAttribute.getY(i);
+				const z = positionAttribute.getZ(i);
+				spherePositions.push(
+					x * (1),
+					y * (1 + 1),
+					z * (1)
 				);
-				// Instantiate a loader
-				const loader6 = new THREE.GLTFLoader();
-				// Load a glTF resource, Barra Loading
-				loader6.load(
-					'Barra.gltf',//'scene.gltf'
-					function (gltf) {
-						Barra = gltf.scene;
-						// scene.add(Barra);
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
-						console.log('completado!.....')
-						Barra.position.z += 0
-						Barra.position.x += 5
-						Barra.position.y += 0.5
-						renderer.render(scene, camera);
 
-					},
-					// called while loading is progressing
-					function (xhr) {
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-					},
-					// called when loading has errors
-					function (error) {
-						console.log('An error happened');
-					}
-				);
-				//Exportar Datos a excel
-				function convertToCSV(objArray) {
-					var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-					var str = '';
+			}
+			pb1++;
+			geometryF.morphAttributes.position[0] = new THREE.Float32BufferAttribute(spherePositions, 3);
+			geometryF.computeVertexNormals();
+			var Prueba6 = new THREE.Mesh(geometryF, materialF);
+			Prueba6.morphTargetInfluences[0] = 0.2;
 
-					for (var i = 0; i < array.length; i++) {
-						var line = '';
-						for (var index in array[i]) {
-							if (line != '') line += ','
+			scene.add(Prueba6);
 
-							if (array[i][index] != null) {
-								line += array[i][index];
-							} else {
-								line += ''
-							}
+		}
+		function drag() {
+			Cilindro1.userData.draggable = true;
+			Cilindro1.userData.name = 'Cilindro1';
+			Cube1gdl.userData.draggable = true;
+			Cube1gdl.userData.name = 'Cube1gdl';
+			Barra11.userData.draggable = true;
+			Barra11.userData.name = 'Barra';
+		}
+		drag()
+		function initGUI() {
+
+			// Set up dat.GUI to control targets
+			const params = {
+				Spherify: 0,
+				Twist: 0,
+			};
+			const gui = new dat.GUI({ title: 'Morph Targets', option: { width: 400 } });
+
+
+			gui.add(params, 'Spherify', 0, 1).step(0.01).onChange(function (value) {
+
+				mesh.morphTargetInfluences[0] = value;
+
+			});
+			gui.add(params, 'Twist', 0, 1).step(0.01).onChange(function (value) {
+
+				mesh.morphTargetInfluences[1] = value;
+
+			});
+
+		}
+		// initGUI()
+		tippy('[data-tippy-content]'); //Cargar datos a la gráfica
+		console.log(Po)
+		var ejex = parseFloat(0)
+		var ctx = document.getElementById("myChart").getContext("2d"); //Grafica
+		const contador_barra1 = [];
+		const chart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				datasets: [{
+					borderColor: 'rgb(222,42,22)',
+					borderWidth: 2,
+					pointRadius: 0,
+				}]
+			},
+			options: {
+				animation: {
+					duration: 0
+				},
+				interaction: {
+					intersect: false
+				},
+				plugins: {
+					legend: false
+				},
+				scales: {
+					x: {
+						type: 'linear',
+						max: 50,
+						min: 0,
+						title: {
+							display: true,
+							text: 'tiempo [s]'
+
 						}
+					},
+					y: {
+						type: 'linear',
+						// max: Po + Po / (10 * Po),
+						// min: -Po - Po / (10 * Po),
+						max: 2,
+						min: -2,
+						title: {
+							display: true,
+							text: 'u'
 
-						str += line + '\r\n';
+						}
 					}
-
-					return str;
 				}
-
-				function exportCSVFile(headers, items, fileName) {
-					if (headers) {
-						items.unshift(headers);
+			}
+		});
+		function animate() {
+			dragObject()
+			renderer.render(scene, camera);
+			requestAnimationFrame(animate);
+		}
+		const raycaster = new THREE.Raycaster();
+		const moveMouse = new THREE.Vector3();
+		const clickMouse = new THREE.Vector2();
+		var draggable = new THREE.Object3D();
+		window.addEventListener('click', event => {
+			if (draggable) {
+				console.log('Droping draggable')
+				draggable = null
+				return;
+			}
+			clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+			clickMouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+			raycaster.setFromCamera(moveMouse, camera);
+			const found = raycaster.intersectObjects(scene.children);
+			if (found.length > 0 && found[0].object.userData.draggable) {
+				draggable = found[0].object
+				console.log('Found draggable')
+			}
+		})
+		window.addEventListener('mousemove', event => {
+			moveMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+			moveMouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+		})
+		function dragObject() {
+			if (draggable != null) {
+				raycaster.setFromCamera(moveMouse, camera)
+				const found = raycaster.intersectObjects(scene.children)
+				if (found.length > 0) {
+					for (let o of found) {
+						if (!o.object.userData.ground) {
+							draggable.position.x = o.point.x
+							// draggable.position.y= o.point.y
+							draggable.position.z = o.point.z
+						}
 					}
 
-					const jsonObject = JSON.stringify(items);
+				}
+			}
+		}
+		animate()
+		const loader1 = new THREE.GLTFLoader();
+		// Load a glTF resource, Lab loading
+		loader1.load(
+			'lab2.gltf',//'scene.gltf'
+			function (gltf) {
+				lab = gltf.scene;
+				scene.add(lab);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				console.log('completado!.....')
+				lab.position.z += 0
+				lab.position.x += 5
+				lab.position.y += -1.2
+				renderer.render(scene, camera);
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+		// Instantiate a loader
+		const loader2 = new THREE.GLTFLoader();
+		// Load a glTF resource, Mesa1 Loading
+		loader2.load(
+			'Mesa1.gltf',//'scene.gltf'
+			function (gltf) {
+				Mesa1 = gltf.scene;
+				scene.add(Mesa1);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				console.log('completado!.....')
+				Mesa1.position.z += 0
+				Mesa1.position.x += 5
+				Mesa1.position.y += -1
+				renderer.render(scene, camera);
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+		// Instantiate a loader
+		const loader3 = new THREE.GLTFLoader();
+		// Load a glTF resource, Esfera1 Loading
+		loader3.load(
+			'esfera2.gltf',//'scene.gltf'
+			function (gltf) {
+				esfera2 = gltf.scene;
+				scene.add(esfera2);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				console.log('completado!.....')
+				esfera2.position.z += 0
+				esfera2.position.x += 5
+				esfera2.position.y += -1
+				renderer.render(scene, camera);
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+		// Instantiate a loader
+		const loader4 = new THREE.GLTFLoader();
+		// Load a glTF resource, Mesa1 Loading
+		loader4.load(
+			'Cilindros.gltf',//'scene.gltf'
+			function (gltf) {
+				Cilindros = gltf.scene;
+				scene.add(Cilindros);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				console.log('completado!.....')
+				Cilindros.position.z += 0
+				Cilindros.position.x += 5
+				Cilindros.position.y += -1
+				renderer.render(scene, camera);
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+		// Instantiate a loader
+		const loader5 = new THREE.GLTFLoader();
+		// Load a glTF resource, Mesa1 Loading
+		loader5.load(
+			'Mesa2.gltf',//'scene.gltf'
+			function (gltf) {
+				Mesa2 = gltf.scene;
+				scene.add(Mesa2);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				console.log('completado!.....')
+				Mesa2.position.z += 0
+				Mesa2.position.x += 5
+				Mesa2.position.y += -1.5
+				renderer.render(scene, camera);
 
-					const csv = convertToCSV(jsonObject);
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+		// Instantiate a loader
+		const loader6 = new THREE.GLTFLoader();
+		// Load a glTF resource, Barra Loading
+		loader6.load(
+			'Barra.gltf',//'scene.gltf'
+			function (gltf) {
+				Barra = gltf.scene;
+				// scene.add(Barra);
+				gltf.animations; // Array<THREE.AnimationClip>
+				gltf.scene; // THREE.Group
+				gltf.scenes; // Array<THREE.Group>
+				gltf.cameras; // Array<THREE.Camera>
+				gltf.asset; // Object
+				console.log('completado!.....')
+				Barra.position.z += 0
+				Barra.position.x += 5
+				Barra.position.y += 0.5
+				renderer.render(scene, camera);
 
-					const exportName = fileName + ".csv" || "export.csv";
+			},
+			// called while loading is progressing
+			function (xhr) {
+				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+			},
+			// called when loading has errors
+			function (error) {
+				console.log('An error happened');
+			}
+		);
+		//Exportar Datos a excel
+		function convertToCSV(objArray) {
+			var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+			var str = '';
 
-					const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-					if (navigator.msSaveBlob) {
-						navigator.msSaveBlob(blob, exportName);
+			for (var i = 0; i < array.length; i++) {
+				var line = '';
+				for (var index in array[i]) {
+					if (line != '') line += ','
+
+					if (array[i][index] != null) {
+						line += array[i][index];
 					} else {
-						const link = document.createElement("a");
-						if (link.download !== undefined) {
-							const url = URL.createObjectURL(blob);
-							link.setAttribute("href", url);
-							link.setAttribute("download", exportName);
-							link.style.visibility = "hidden";
-							document.body.appendChild(link);
-							link.click();
-							document.body.removeChild(link);
-						}
+						line += ''
 					}
 				}
-				const headers = {
-					id: 'Tiempo',
-					nombre: ' Resp. Relativa',
-					nombre2: 'Resp. Total'
-				};
-				// function organizador() {
-				// 	data = [{ id: 'Relativa' },
-				// 	{ Relativa },
-				// 	{ id: 'Total' },
-				// 	{ Total }
-				// 	];
-				// 	return data
-				// }
-				var data1 = new Array();
-				function organizador() {
-					for (let i = 0; i < u2.length; i++) {
-						data1[i]=new Array();
-						data1[i][1]=Vtiempo2[i];
-						data1[i][2]=u2[i];
-						data1[i][3]=suma_w[i];
+
+				str += line + '\r\n';
+			}
+
+			return str;
+		}
+		function exportCSVFile(headers, items, fileName) {
+			if (headers) {
+				items.unshift(headers);
+			}
+
+			const jsonObject = JSON.stringify(items);
+
+			const csv = convertToCSV(jsonObject);
+
+			const exportName = fileName + ".csv" || "export.csv";
+
+			const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+			if (navigator.msSaveBlob) {
+				navigator.msSaveBlob(blob, exportName);
+			} else {
+				const link = document.createElement("a");
+				if (link.download !== undefined) {
+					const url = URL.createObjectURL(blob);
+					link.setAttribute("href", url);
+					link.setAttribute("download", exportName);
+					link.style.visibility = "hidden";
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+				}
+			}
+		}
+		const headers = {
+			id: 'Tiempo',
+			nombre: ' Resp. Relativa',
+			nombre2: 'Resp. Total'
+		};
+		// function organizador() {
+		// 	data = [{ id: 'Relativa' },
+		// 	{ Relativa },
+		// 	{ id: 'Total' },
+		// 	{ Total }
+		// 	];
+		// 	return data
+		// }
+		var data1 = new Array();
+		function organizador() {
+			for (let i = 0; i < u2.length; i++) {
+				data1[i] = new Array();
+				data1[i][1] = Vtiempo2[i];
+				data1[i][2] = u2[i];
+				data1[i][3] = suma_w[i];
+			}
+			console.log('Datos Organizados')
+			return data1
+		}
+		function recargar() {
+			window.location.href = window.location.href;
+		}
+		//cargar datos de excel
+		let selectfile;
+		function SeleccionarDatos() {
+			document.getElementById('Cargar').addEventListener("change", (event) => {
+				selectfile = event.target.files[0];
+			})
+		}
+		let selectfile1;
+		function SeleccionarDatos1() {
+			document.getElementById('Cargar1').addEventListener("change", (event) => {
+				selectfile1 = event.target.files[0];
+			})
+		}
+		let Ac_Data;
+		let Desp_Data;
+		function CargarExcel() {
+			document.getElementById('Cargar').addEventListener("change", (event) => {
+				if (selectfile) {
+					let fileReader = new FileReader
+					fileReader.readAsBinaryString(selectfile)
+					fileReader.onload = (event) => {
+						let Excel_data = event.target.result;
+						let woorkBook = XLSX.read(Excel_data, { type: "binary" });
+						woorkBook.SheetNames.forEach(sheet => {
+							Ac_Data = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet]);
+							console.log(Ac_Data)
+							cambio = 1;
+						})
 					}
-					console.log('Datos Organizados')
-					return data1
-				}
-				function recargar() {
-					window.location.href = window.location.href;
-				}
-				//cargar datos de excel
-				let selectfile;
-				function SeleccionarDatos() {
-					document.getElementById('Cargar').addEventListener("change", (event) => {
-						selectfile = event.target.files[0];
-					})
-				}
-				let selectfile1;
-				function SeleccionarDatos1() {
-					document.getElementById('Cargar1').addEventListener("change", (event) => {
-						selectfile1 = event.target.files[0];
-					})
-				}
-				let Ac_Data;
-				let Desp_Data;
-				function CargarExcel() {
-					document.getElementById('Cargar').addEventListener("change", (event) => {
-						if (selectfile) {
-							let fileReader = new FileReader
-							fileReader.readAsBinaryString(selectfile)
-							fileReader.onload = (event) => {
-								let Excel_data = event.target.result;
-								let woorkBook = XLSX.read(Excel_data, { type: "binary" });
-								woorkBook.SheetNames.forEach(sheet => {
-									Ac_Data = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet]);
-									console.log(Ac_Data)
-									cambio=1;
-								})	
-							}
 
-						}
-					})
 				}
-				function CargarExcel1() {
-					document.getElementById('Cargar1').addEventListener("change", (event) => {
-						if (selectfile1) {
-							let fileReader = new FileReader
-							fileReader.readAsBinaryString(selectfile1)
-							fileReader.onload = (event) => {
-								let Excel_data = event.target.result;
-								let woorkBook = XLSX.read(Excel_data, { type: "binary" });
-								woorkBook.SheetNames.forEach(sheet => {
-									Desp_Data = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet]);
-									console.log(Desp_Data)
-									cambio=1;
-								})	
-							}
+			})
+		}
+		function CargarExcel1() {
+			document.getElementById('Cargar1').addEventListener("change", (event) => {
+				if (selectfile1) {
+					let fileReader = new FileReader
+					fileReader.readAsBinaryString(selectfile1)
+					fileReader.onload = (event) => {
+						let Excel_data = event.target.result;
+						let woorkBook = XLSX.read(Excel_data, { type: "binary" });
+						woorkBook.SheetNames.forEach(sheet => {
+							Desp_Data = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet]);
+							console.log(Desp_Data)
+							cambio = 1;
+						})
+					}
 
-						}
-					})
 				}
-			</script>
+			})
+		}
+	</script>
 </body>
 
 </html>
