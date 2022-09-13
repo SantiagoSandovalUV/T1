@@ -3,23 +3,29 @@
 	<title>Lab Dinámica</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<!-- Menú desplegable -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-		crossorigin="anonymous"></script>
+	<!-- Menú desplegable -->
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css"
 		integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- grafica -->
 	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
 	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-		integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-		crossorigin="anonymous"></script>
+	<!-- grafica -->
+	<!-- Excel   -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
+	<!-- Excel   -->
 	<style>
 		body {
 			margin: 0;
@@ -74,95 +80,216 @@
 				<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
 			</div>
 		</div>
-		<div class="card" style="width: 100%;">
-			<div class="card-header" style="text-align: center;">Movimiento sinusoidal</div>
-			<div class="card-body">
-				<div style="text-align: center;">
-					<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener Desp</button>
-					<button type="button"
-						onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),contador(),contador2(),contador3(),ConsMDI(),Movimiento_Sen()"
-						class="btn btn-success">Iniciar</button>
-					<button type="button" onclick="StopInterval()" class="btn btn-danger">Detener</button>
+		<div class="card mb-2" style="width: 100%;">
+			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+				aria-expanded="false" aria-controls="collapseExample">
+				Asignar propiedades físicas o dinámicas al sistema
+			</button>
+		</div>
+		<div class="collapse" id="collapseExample">
+			<div class="card text-bg-primary mt-2" style="width: 100%;">
+				<div class="accordion accordion-flush" id="accordionFlushExample1">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingOne1">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseOne1" aria-expanded="false"
+								aria-controls="flush-collapseOne1">
+								Modelo MCK
+							</button>
+						</h2>
+						<div id="flush-collapseOne1" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample1">
+							<div class="accordion-body">
+								<div class="card mt-2" style="width: 100%;">
+									<div div class="card-body">
+										<form class="row g-2">
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px">Masa <i
+														data-tippy-content="Punto máximo de la grafica"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="Masa_box"
+													id="Masa_box" placeholder="">
+											</div>
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px">Amortiguamiento c <i
+														data-tippy-content="Punto final de la gráfica, donde se rompe la probeta"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="c_box"
+													id="c_box" placeholder="">
+											</div>
+										</form>
+										<form class="row g-2">
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px">Rigidez K <i
+														data-tippy-content="Es igual al área debajo de la curva esfuerzo-deformación hasta el límite de proporcionalidad. La resiliencia representa la capacidad de un material para absorber y liberar energía dentro del intervalo elástico"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="k_box"
+													id="k_box" placeholder="">
+											</div>
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px">Paso Δt <i
+														data-tippy-content="Es igual al área debajo de toda la curva esfuerzo-deformación. La tenacidad, se refiere a la capacidad de un material para absorber energía sin fracturarse"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="Dt_box"
+													id="Dt_box" placeholder="">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingTwo1">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
+								aria-controls="flush-collapseTwo1">
+								Modelo ζWn
+							</button>
+						</h2>
+						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingTwo1" data-bs-parent="#accordionFlushExample1">
+							<div class="accordion-body">
+								<div class="card mt-2" style="width: 100%;">
+									<div div class="card-body">
+										<form class="row g-3">
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px"> Razón de amortiguamiento ζ<i
+														data-tippy-content="Punto máximo de la grafica"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="zeta_box"
+													id="zeta_box" placeholder="">
+											</div>
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px"> Frecuencia natural Wn<i
+														data-tippy-content="Punto final de la gráfica, donde se rompe la probeta"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="Wna_box"
+													id="Wna_box" placeholder="">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="card text-bg-primary mt-2" style="width: 100%;">
-			<div class="card-header" style="text-align: center;">Sismos</div>
-			<div class="card-body">
-				<div class="card mt-2" class="btn-group">
-					<h4 style="text-align: center;"><span class="badge bg-primary">Datos de desplazamiento</span></h4>
-					<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()" class="btn btn-primary"
-						id="Cargar1" accept=".xls,.xlsx">
-				</div>
-				<div class="card mt-2" class="btn-group">
-					<h4 style="text-align: center;"><span class="badge bg-danger">Datos de aceleración</span></h4>
-					<input type="file" onclick="  SeleccionarDatos(),CargarExcel()" class="btn btn-danger" id="Cargar"
-						accept=".xls,.xlsx">
-				</div>
-				<div class="card mt-2" style="width: 100%;">
-					<div class="btn-group">
-						<button type="button"
-							onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),ConsMDI(),Aceleracion_sismos(),Newmark_sismos(),Movimiento_SenSismo()"
-							class="btn btn-success">Iniciar sismo</button>
+		<div class="card mb-2" style="width: 100%;">
+			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+				aria-expanded="false" aria-controls="collapseExample2">
+				Seleccionar tipo de carga
+			</button>
+		</div>
+		<div class="collapse" id="collapseExample2">
+			<div class="card text-bg-primary mt-2" style="width: 100%;">
+				<div class="accordion accordion-flush" id="accordionFlushExample2">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingOne">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseOne" aria-expanded="false"
+								aria-controls="flush-collapseOne">
+								Movimiento sinusoidal
+							</button>
+						</h2>
+						<div id="flush-collapseOne" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample2">
+							<div class="accordion-body">
+								<div class="card-header" style="text-align: center;">Movimiento sinusoidal</div>
+								<div class="card mt-2" style="width: 100%;">
+									<div class="card-body">
+										<form class="row g-2">
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size:14px">Amplitud uo<i
+														data-tippy-content="Punto donde la gráfica deja de comportarse de forma lineal"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="Po_box"
+													id="Po_box" placeholder="">
+											</div>
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size: 14px">Frecuencia angular W
+													<i data-tippy-content="El módulo de elasticidad es la pendiente del diagrama esfuerzo-deformación unitaria en la región linealmente elástica; esfuerzo/deformación"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm" name="Wn_box"
+													id="Wn_box" placeholder="">
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="card mt-3" style="width: 100%;">
+									<div class="card-body" style="text-align: center;">
+										<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener
+											Desp</button>
+										<button type="button"
+											onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),contador(),contador2(),contador3(),ConsMDI(),Movimiento_Sen()"
+											class="btn btn-success">Iniciar</button>
+										<button type="button" onclick="StopInterval()"
+											class="btn btn-danger">Detener</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseTwo" aria-expanded="false"
+								aria-controls="flush-collapseTwo">
+								Cargar sismos
+							</button>
+						</h2>
+						<div id="flush-collapseTwo" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2">
+							<div class="accordion-body">
+								<div class="card-header" style="text-align: center;">Sismos</div>
+								<div class="card-body">
+									<div class="card mt-2" class="btn-group">
+										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
+												desplazamiento</span>
+										</h4>
+										<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
+											class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
+									</div>
+									<div class="card mt-2" class="btn-group">
+										<h4 style="text-align: center;"><span class="badge bg-danger">Datos de
+												aceleración</span></h4>
+										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
+											class="btn btn-danger" id="Cargar" accept=".xls,.xlsx">
+									</div>
+									<div class="card mt-2" style="width: 100%;">
+										<div class="btn-group">
+											<button type="button"
+												onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),ConsMDI(),Aceleracion_sismos(),Newmark_sismos(),Movimiento_SenSismo()"
+												class="btn btn-success">Iniciar sismo</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingThree">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseThree" aria-expanded="false"
+								aria-controls="flush-collapseThree">
+								Sismos predefindos
+							</button>
+						</h2>
+						<div id="flush-collapseThree" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
+							<div class="accordion-body">Placeholder content for this accordion, which is intended to
+								demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion
+								body. Nothing more exciting happening here in terms of content, but just filling up the
+								space to make it look, at least at first glance, a bit more representative of how this
+								would look in a real-world application.</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="card mt-2" style="width: 100%;">
-			<div class="card mt-2" style="width: 100%;">
-				<div class="card-body">
-					<form class="row g-3">
-						<div class="col-auto" style="width:180px">
-							<label class="form-label" style="font-size:14px">Amplitud Po<i
-									data-tippy-content="Punto donde la gráfica deja de comportarse de forma lineal"
-									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="Po_box" id="Po_box"
-								placeholder="">
-						</div>
-						<div class="col-auto" style="width:180px">
-							<label class="form-label" style="font-size: 14px">Frecuencia angular W <i
-									data-tippy-content="El módulo de elasticidad es la pendiente del diagrama esfuerzo-deformación unitaria en la región linealmente elástica; esfuerzo/deformación"
-									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="Wn_box" id="Wn_box"
-								placeholder="">
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="card mt-2" style="width: 100%;">
-				<div div class="card-body">
-					<form class="row g-3">
-						<div class="col-auto" style="width:180px">
-							<label class="form-label" style="font-size: 14px">Masa <i
-									data-tippy-content="Punto máximo de la grafica"
-									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="Masa_box" id="Masa_box"
-								placeholder="">
-						</div>
-						<div class="col-auto" style="width:180px">
-							<label class="form-label" style="font-size: 14px">Amortiguamiento c <i
-									data-tippy-content="Punto final de la gráfica, donde se rompe la probeta"
-									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="c_box" id="c_box"
-								placeholder="">
-						</div>
-						<div class="col-auto" style="width:180px">
-							<label class="form-label" style="font-size: 14px">Rigidez K <i
-									data-tippy-content="Es igual al área debajo de la curva esfuerzo-deformación hasta el límite de proporcionalidad. La resiliencia representa la capacidad de un material para absorber y liberar energía dentro del intervalo elástico"
-									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="k_box" id="k_box"
-								placeholder="">
-						</div>
-						<div class="col-auto" style="width:180px">
-							<label class="form-label" style="font-size: 14px">Paso Δt <i
-									data-tippy-content="Es igual al área debajo de toda la curva esfuerzo-deformación. La tenacidad, se refiere a la capacidad de un material para absorber energía sin fracturarse"
-									class="ti ti-question-mark text-primary"></i></label>
-							<input type="text" class="form-control form-control-sm" name="Dt_box" id="Dt_box"
-								placeholder="">
-						</div>
-					</form>
-				</div>
-			</div>
+
 		</div>
 		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
@@ -177,10 +304,18 @@
 				</div>
 			</div>
 		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+				data-bs-toggle="dropdown" aria-expanded="false">
+				Dropdown button
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				<li><a class="dropdown-item" href="#">Action</a></li>
+				<li><a class="dropdown-item" href="#">Another action</a></li>
+				<li><a class="dropdown-item" href="#">Something else here</a></li>
+			</ul>
+		</div>
 	</div>
-
-
-
 	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
@@ -562,7 +697,8 @@
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
-				geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+				geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] / (0.15 * k) + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
 
@@ -1192,6 +1328,7 @@
 		}
 		function recargar() {
 			window.location.href = window.location.href;
+			console.log('Reload')
 		}
 		//cargar datos de excel
 		let selectfile;
