@@ -821,10 +821,10 @@
 			color: 0x88FF88, //Color del cubo
 			// wireframe: true, //Mostrar los segmentos con hil
 		});
-		var zeta = []
+		var zetaxd = []
 		function DATOSZ() {
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
-				zeta[i] = geometry.attributes.position.getZ(i);
+				zetaxd[i] = geometry.attributes.position.getZ(i);
 
 			}
 		}
@@ -853,13 +853,12 @@
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
-				if (validador == 0) {
-					k=10;
-					geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+				if (validador == 0)  {
+					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 				} else {
 					k=10;
-					// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 /(10))) * -1);//SuperBien
-					geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 /(4/3*Wn))) * -1);//SuperBien
+					// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 				}
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] / (0.15 * k) + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien2
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
@@ -897,7 +896,7 @@
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
-				geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po1 * Math.sin(Wn1 * t1) * (0.005 / k)) * -1);//SuperBien
+				geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po1 * Math.sin(Wn1 * t1) * (0.005 / k)) * -1);//SuperBien
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
 
