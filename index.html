@@ -467,19 +467,15 @@
 			if (zeta_box.value.length || Wna_box.value.length) {
 				document.getElementById('flexSwitchCheckChecked2').setAttribute('checked', 'checked')
 				document.getElementById('modelock').setAttribute('disabled', 'disabled')
-				if (Masa_box1.value.length > 0 && c_box1.value.length > 0 && k_box1.value.length > 0) {
-					k = parseFloat(document.getElementById('k_box1').value);
-					m = parseFloat(document.getElementById('Masa_box1').value);
-					c = parseFloat(document.getElementById('c_box1').value);
-					if (k == 0) {
-						k = 1;
-						ConsMDI()
+				if (zeta_box.value.length > 0 && Wna_box.value.length > 0) {
+					zeta = parseFloat(document.getElementById('zeta_box').value);
+					Wna = parseFloat(document.getElementById('Wna_box').value);
+					if (Wna == 0) {
+						Wna = 0.5;
+						ConsWnZe();
 
-					} else if (m == 0) {
-						m = 1;
-						ConsMDI();
-					} else {
-						ConsMDI();
+					}else {
+						ConsWnZe();
 					}
 				}
 				validador = 1;
@@ -854,10 +850,9 @@
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
 				if (validador == 0)  {
-					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 				} else {
-					k=10;
-					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 /(4/3*Wn))) * -1);//SuperBien
+					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 /(4/3*Wn))) * -1);//SuperBien
 					// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 				}
 				// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] / (0.15 * k) + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien2
