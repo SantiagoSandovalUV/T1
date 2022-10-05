@@ -365,7 +365,14 @@
 										</li>
 										<li><a class="dropdown-item" href="#" onclick="Gilroy()">Gilroy</a></li>
 									</ul>
-							
+									<!-- <select>
+										<option value="1" onclick="Elcentro()">El Centro</option>
+										<option value="2" onclick="LaVega()">La Vega</option>
+										<option value="3" onclick="Armenia()">Armenia</option>
+										<option value="4" onclick="LomaPrieta()">Loma Prieta</option>
+										<option value="5" onclick="Gilroy()">Gilroy</option>
+
+									</select> -->
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
@@ -405,7 +412,7 @@
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
 											<button type="button"
-												onclick="Po_box(),Masa_box(),Wn_box(),c_box(),Dt_box(),k_box(),ConsMDI(),Aceleracion_sismos(),Newmark_sismos(),Movimiento_SenSismo()"
+												onclick="CallFunction4()"
 												class="btn btn-primary">Iniciar</button>
 										</div>
 									</div>
@@ -419,13 +426,20 @@
 		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
 				<div style="text-align: center;">
-					<button type="button" onclick="	exportCSVFile(headers,data1,'Desp_Data')"
+					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
 						class="btn btn-primary">Exportar
 						datos</button>
 					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Limpiar
 						campos</button>
 					<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
 					accept=".xls,xlsx">Cargar</button> -->
+				</div>
+			</div>
+		</div>
+		<div class="card mt-2" style="width: 100%;">
+			<div class="card-body">
+				<div style="text-align: center;">
+					<button type="button" id="Limpiar" onclick="ChangeCameraP()" class="btn btn-primary">Perspectiva</button>
 				</div>
 			</div>
 		</div>
@@ -467,7 +481,8 @@
 		dirLight.shadow.camera.far = 40;
 		scene.add(dirLight);
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
+		// camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
+		camera.position.set(15, 4.5, 10); // posicion de la camara (0, 5, 5)
 		controls.update();
 		renderer.render(scene, camera);
 		//Varibles necesaria para generar el desplazamiento en la base
@@ -506,12 +521,14 @@
 		var tiempo1;
 		var tiempo2;
 		var tiempo3;
+		var exporC=0;
 		var Xaxes = 10;
 		var u0 = 0; var up0 = 0; var p0 = 0; //Condiciones inciales
 		var a1 = 1; var a2 = 1; var a3 = 1; var kj = 1; //Constantes pa el método númerico
 		var Cube1gdl = Caja1Gdl();
 		var Cilindro1 = Cilindro();
 		Barra11 = Barra1();
+		var Perspective=0;
 		var suma_w = [0];
 		var Relativa = JSON.parse(
 			JSON.stringify(u2)
@@ -595,6 +612,19 @@
 			}
 
 		}
+		//Función call Para Sismos
+		function CallFunction4() {
+			if (validador == 0) {
+				//Modelo MCK
+				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
+				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
+			} else {
+				//MOdelo Zeta y Wn
+				Po_box(); Wn_box(); Zeta_boxF();Dt2_boxF();
+				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
+			}
+
+		}
 		//Función call para Barrido
 		function CallFunction3() {
 			if (validador == 0) {
@@ -644,10 +674,22 @@
 			W2 = 2 * Math.PI * parseFloat(document.getElementById('W2_box').value);
 			IntervaloB = parseFloat(document.getElementById('Inter_box').value);
 			Po = parseFloat(document.getElementById('PoB_box').value);
-			Vel = (W2 - W1) / IntervaloB;
+			Vel = (W2 - W1) / (50*IntervaloB);
 			Wv[0] = W1;
 			validador3 = 2;
 
+		}
+		function ExportarAnyTiempo(){
+			if (exporC==1){
+				} else{
+					Relativa = JSON.parse(
+						JSON.stringify(u2)
+					)
+					Total = JSON.parse(
+						JSON.stringify(suma_w)
+					)
+					organizador()
+				}
 		}
 		//Constantes para el modelo MCK
 		function ConsMDI() {
@@ -663,6 +705,32 @@
 			a3 = 1;
 			kj = Wna * Wna + a1;
 		}
+		//Cambiar Perspectiva 
+		function ChangeCameraP() {
+                        Perspective +=1;
+                        if (Perspective == 2) {
+                            camera.position.set(15, 4.5, 10); // 3D Izquierdo
+							controls.target.set(1,1,1);
+                            controls.update();
+                        renderer.render(scene, camera);
+                        } else if ((Perspective == 1)) {
+                            camera.position.set(-7.5, 2.1, 10); // 3D Derecho
+							controls.target.set(1.55,1.5,1.31);
+                            controls.update();
+                        renderer.render(scene, camera);
+                        } else if ((Perspective == 3)) {
+                            camera.position.set(0, 7, 0); // Vista Superior
+                        controls.update();
+                        renderer.render(scene, camera);
+						controls.target.set(7,-5,4);
+                        } else if ((Perspective == 4)) {
+                            Perspective = 0;
+							controls.target.set(2 , -0.7676576971701257, -103);
+                            camera.position.set(4,1, 12); // Vista Frontal
+							controls.update();
+                        renderer.render(scene, camera);
+                        }
+                    }
 		//Simos predefinidos
 		function Elcentro() {
 			console.log("Elcentro")
@@ -805,7 +873,7 @@
 				esfera2.position.x = u2[contador1] + Seno[contador1] + 5;
 				//Mover la caja
 				let pos = { x: 5, y: 0.2, z: 0 };
-				cube.position.x = pos.x + Seno[contador1];
+				cube.position.x = 5 + Seno[contador1];
 				//Mover cilindro
 				Cilindro1.position.x = 4 + u2[contador1] + Seno[contador1];
 				suma_w[contadorglobal] = (u2[contadorglobal] + Seno[contadorglobal])
@@ -828,6 +896,7 @@
 					Total = JSON.parse(
 						JSON.stringify(suma_w)
 					)
+					exporC=1;
 					organizador()
 				}
 						break;
@@ -840,6 +909,7 @@
 					Total = JSON.parse(
 						JSON.stringify(suma_w)
 					)
+					exporC=1;
 					organizador()
 						}
 						break;
@@ -959,6 +1029,7 @@
 					Total = JSON.parse(
 						JSON.stringify(suma_w)
 					)
+					exporC=1;
 					organizador()
 				}
 			}
@@ -976,7 +1047,7 @@
 		const color = 0xFFFFFF;
 		// let pos = { x: 5, y: 0.35, z: 0 }
 		let pos = { x: 5, y: -0.35 * 4 / 3, z: 0 }
-		const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 50, 50, 50); //Geomtria del cubo, en el espacio
+		const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 1,50, 1); //Geomtria del cubo, en el espacio
 		const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
 		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
 		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
@@ -1043,20 +1114,21 @@
 		}
 		DATOSZ()
 		var contador6 = 0;
+		var PruebaV=[];
 		const Plano = new THREE.Mesh(geometry1, material2);
 		function Movimiento_Sen() {
 			const now = Date.now() / 300
 			const Move = new THREE.Vector3(1, 1, 1);
 			contador6++;
 			var t = 0;
-			var Kef=k*4.9/3;
+			var Kef=k*8/3;
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
 				const x = geometry.attributes.position.getY(i);
 				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
 				// const xflex = (x * x) / 4 - (x * x * x) / 12;
-				const xflex = (x * x) / 1.5 - (x * x * x) / 3;
+				// const xflex = (x * x) / 1.5 - (x * x * x) / 3;
 				const xflex2 = (x * x) / 60 - (x * x * x) / 6;
-				const xflex3 = (x * x) / (2*Kef) - (x * x * x) / (6*Kef);
+				const xflex3 = (x * x) / (2.5*Kef) - (x * x * x) / (6.7*Kef);
 				const xcos = -1 * Math.cos(now * 3 / 8);
 				const xsint = Po * Math.sin(Wn * t);
 				// geometry.attributes.position.setX(i, xcos);
@@ -1071,8 +1143,8 @@
 				switch (validador3) {
 					case 1:
 						if (validador == 0) {
-							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
-							// geometry.attributes.position.setZ(s, zetaxd[s] + xflex3 * ( -Wn*Wn*m*Po * Math.sin(Wn * t1)));//SuperBien
+							// geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
+							geometry.attributes.position.setZ(s, zetaxd[s] + -xflex3 * u2[contadorglobal]*k);//SuperBien
 						} else {
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
 							// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
@@ -1422,7 +1494,7 @@
 						// min: -2,
 						title: {
 							display: true,
-							text: 'u'
+							text: 'u [m]'
 
 						}
 					}
