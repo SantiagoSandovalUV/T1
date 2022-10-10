@@ -85,50 +85,6 @@
 			</div>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
-				aria-expanded="false" aria-controls="collapseExample3">
-				Asignar sensores
-			</button>
-		</div>
-		<div class="collapse" id="collapseExample3">
-			<div class="card card-body">
-				<div class="accordion" id="accordionExample">
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingOne">
-							<div style="text-align: center;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-									LVDT
-								</button>
-							</div>
-						</h2>
-						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Activar</button>
-							</div>
-						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingTwo">
-							<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								LVDT1
-							</button>
-							</div>
-						</h2>
-						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Activar</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 				aria-expanded="false" aria-controls="collapseExample">
 				Asignar propiedades físicas o dinámicas al sistema
@@ -152,7 +108,7 @@
 									<div class="card-body">
 										<form class="row g-2">
 											<form class="col-2">
-												<!-- <div class="form-check form-switch">
+												<div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox"
 														id="flexSwitchCheckChecked" unchecked="unchecked"
 														disabled="disabled">
@@ -160,7 +116,7 @@
 														for="flexSwitchCheckChecked"></label><i data-tippy-content="Cuando este elemento se encuentra activo 
 														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
 														class="ti ti-question-mark text-primary"></i>
-												</div> -->
+												</div>
 												<div>
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
@@ -174,9 +130,6 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
-														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
-														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
 										</form>
@@ -232,7 +185,7 @@
 									<div class="card-body">
 										<form class="row">
 											<form class="col-auto">
-												<!-- <div class="form-check form-switch">
+												<div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox"
 														id="flexSwitchCheckChecked2" unchecked="unchecked"
 														disabled="disabled">
@@ -241,7 +194,7 @@
 														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
 														class="ti ti-question-mark text-primary"></i>
 
-												</div> -->
+												</div>
 												<div>
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
@@ -249,18 +202,12 @@
 														<path
 															d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
-														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
-														class="ti ti-question-mark text-primary"></i>
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-unlock-fill"
 														viewBox="0 0 20 20" id="UnLocke1">
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
-														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
-														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
 										</form>
@@ -517,40 +464,47 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="card mt-2" style="width: 100%;">
+		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
 				<div style="text-align: center;">
 					<button type="button" id="Limpiar" onclick="ChangeCameraP()"
 						class="btn btn-primary">Perspectiva</button>
 				</div>
 			</div>
-		</div> -->
-		<div class="card mt-1" style="width: 100%;">
+		</div>
+		<div class="card mt-2" style="width: 100%;">
 			<form class="row g-6">
-				<div class="col-3" style="text-align: center;">
+				<div class="col-3">
 					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD1()" class="col">
+						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="ChangeCameraP()" class="col">
 						<path fill-rule="evenodd"
 							d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
 					</svg>
 				</div>
 				<div class="col-3">
 					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD2()">
+						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="ChangeCameraP()">
 						<path fill-rule="evenodd"
 							d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
 					</svg>
 				</div>
 				<div class="col-3">
 					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD3 ()">
+						class="bi bi-arrows-move" viewBox="0 0 20 20">
 						<path fill-rule="evenodd"
 							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
 					</svg>
 				</div>
 				<div class="col-3">
 					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD4 ()">
+						class="bi bi-arrows-move" viewBox="0 0 20 20">
+						<path fill-rule="evenodd"
+							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
+					</svg>
+				</div>
+				<div class="col-3">
+					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
+						class="bi bi-arrows-move" viewBox="0 0 20 20">
 						<path fill-rule="evenodd"
 							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
 					</svg>
@@ -574,7 +528,7 @@
 	<script>
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
-		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11; var LVDt1;
+		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
@@ -828,27 +782,8 @@
 			kj = Wna * Wna + a1;
 		}
 		//Cambiar Perspectiva 
-		function PerspectiveD1() {
-			Perspective = 2;
-			ChangeCameraP();
-			console.log(Perspective)
-		}
-		function PerspectiveD2() {
-			Perspective = 1;
-			ChangeCameraP();
-		}
-		function PerspectiveD3() {
-			Perspective = 3;
-			ChangeCameraP();
-		}
-		function PerspectiveD4() {
-			Perspective = 4;
-			ChangeCameraP();
-		}
-		function LoadSensor(){
-			scene.add(LVDt1)
-		}
 		function ChangeCameraP() {
+			Perspective += 1;
 			if (Perspective == 2) {
 				camera.position.set(15, 4.5, 10); // 3D Izquierdo
 				controls.target.set(1, 1, 1);
@@ -1197,7 +1132,7 @@
 		// geometry.morphAttributes.position = []
 		const material = new THREE.MeshBasicMaterial({
 			color: 0xCACACA, //Color del cubo
-			// wireframe: true, //Mostrar los segmentos con hilos
+			wireframe: true, //Mostrar los segmentos con hilos
 
 		});
 		const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
@@ -1844,34 +1779,6 @@
 				Barra.position.z += 0
 				Barra.position.x += 5
 				Barra.position.y += 0.5
-				renderer.render(scene, camera);
-
-			},
-			// called while loading is progressing
-			function (xhr) {
-				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-			},
-			// called when loading has errors
-			function (error) {
-				console.log('An error happened');
-			}
-		);
-		// Cargar Sensores
-		const loader10 = new THREE.GLTFLoader();
-		// Load a glTF resource, Barra Loading
-		loader10.load(
-			'LVDt1.gltf',//'scene.gltf'
-			function (gltf) {
-				LVDt1 = gltf.scene;
-				gltf.animations; // Array<THREE.AnimationClip>
-				gltf.scene; // THREE.Group
-				gltf.scenes; // Array<THREE.Group>
-				gltf.cameras; // Array<THREE.Camera>
-				gltf.asset; // Object
-				console.log('completado!.....')
-				LVDt1.position.z += 0
-				LVDt1.position.x += 3.5
-				LVDt1.position.y += -0.3
 				renderer.render(scene, camera);
 
 			},
