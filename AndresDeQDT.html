@@ -112,10 +112,10 @@
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="headingTwo">
 							<div style="text-align: center;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-									LVDT1
-								</button>
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+								LVDT1
+							</button>
 							</div>
 						</h2>
 						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -205,11 +205,11 @@
 													id="k_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<!-- <label class="form-label" style="font-size: 14px">Paso Δt <i
+												<label class="form-label" style="font-size: 14px">Paso Δt <i
 														data-tippy-content="Paso de integración del método númerico"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Dt_box1"
-													id="Dt_box1" placeholder=""> -->
+													id="Dt_box1" placeholder="">
 											</div>
 										</form>
 									</div>
@@ -249,6 +249,9 @@
 														<path
 															d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
 													</svg>
+													<i data-tippy-content="Cuando este elemento se encuentra activo 
+														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
+														class="ti ti-question-mark text-primary"></i>
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-unlock-fill"
 														viewBox="0 0 20 20" id="UnLocke1">
@@ -279,11 +282,11 @@
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<!-- <label class="form-label" style="font-size: 14px"> Paso
+												<label class="form-label" style="font-size: 14px"> Paso
 													Δt <i data-tippy-content="Razón de amortiguamiento"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="dt_box2"
-													id="dt_box2" placeholder=""> -->
+													id="dt_box2" placeholder="">
 											</div>
 										</form>
 									</div>
@@ -361,17 +364,31 @@
 							<div class="accordion-body">
 								<div class="card mt-2" style="width: 100%;" id="BarridoFrec">
 									<div class="card-body">
+										<form class="row">
+											<form class="col-auto">
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox"
+														id="flexSwitchCheckChecked2" unchecked="unchecked"
+														disabled="disabled">
+													<label class="form-check-label"
+														for="flexSwitchCheckCheckedBrr"></label><i
+														data-tippy-content="Texto"
+														class="ti ti-question-mark text-primary"></i>
+
+												</div>
+											</form>
+										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f1 [Hz]<i
-														data-tippy-content="Frecuencia incial"
+														data-tippy-content="Razón de amortiguamiento"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W1_box"
 													id="W1_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f2 [Hz]<i
-														data-tippy-content="Frecuencia final"
+														data-tippy-content="Frecuencia natural del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W2_box"
 													id="W2_box" placeholder="">
@@ -380,14 +397,14 @@
 										<form class="row g-4">
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px">Duración [s] <i
-														data-tippy-content="Duración"
+														data-tippy-content="Razón de amortiguamiento"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Inter_box"
 													id="Inter_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> uo [m]<i
-														data-tippy-content="Máximo desplazamiento en la base"
+														data-tippy-content="Razón de amortiguamiento"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="PoB_box"
 													id="PoB_box" placeholder="">
@@ -558,7 +575,7 @@
 		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
 		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11; var LVDt1;
-		var Pared11; var sensorB;
+		var Pared11;
 		const renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
@@ -610,8 +627,6 @@
 		var Po1 = 0;
 		var gm = 9.81; //Valor de g
 		var TimeLength = 0; //Tamaño del vector de sismos
-		// Inciar y Detener simulación
-		var validador4 = 0;
 		//Variables método númerico
 		var p = []; var p1 = [];
 		var u = []; var up = []; var upp = []; var P = []; var u2 = []; var up2 = []; var upp2 = [];
@@ -628,12 +643,8 @@
 		var a1 = 1; var a2 = 1; var a3 = 1; var kj = 1; //Constantes pa el método númerico
 		var Cube1gdl = Caja1Gdl();
 		var Cilindro1 = Cilindro();
-		Barra11 = Barra1(); //Sensor en en GDL
-		Pared11 = Pared1();  // Sensor de desplazamiento
-		SensorB = Barra1(); // Sensor en la base
-		SensorB.position.y = -0.3;
-		SensorB.position.x = 6.954;
-		SensorB.position.z = 1.9;
+		Barra11 = Barra1();
+		Pared11= Pared1();
 		var Perspective = 0;
 		var suma_w = [0];
 		var Relativa = JSON.parse(
@@ -644,7 +655,7 @@
 		);
 		var data = [];
 		mck.addEventListener('input', () => {
-			if (Masa_box1.value.length > 0 || c_box1.value.length > 0 || k_box1.value.length > 0) {
+			if (Masa_box1.value.length > 0 || c_box1.value.length > 0 || k_box1.value.length > 0 || Dt_box1.value.length > 0) {
 				// document.getElementById('flexSwitchCheckChecked').setAttribute('checked', 'checked')
 				document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
 				document.getElementById('Locke').style.display = 'block';
@@ -768,26 +779,8 @@
 			k = parseFloat(document.getElementById('k_box1').value);
 		}
 		function Dt_box() {
-			// dt = parseFloat(document.getElementById('Dt_box1').value);
-			dt = 0.02;
+			dt = parseFloat(document.getElementById('Dt_box1').value);
 			iniciar2 = 1;
-			validador4 = 1;
-			if (validador4 > 0) {
-				//Modelo MCK
-				chart.data.datasets[0].data.length = 0;
-				chart.update();
-				clearInterval(tiempo1)
-				clearInterval(tiempo2)
-				clearInterval(tiempo3)
-				Relativa = JSON.parse(
-					JSON.stringify(u2)
-				);
-				Total = JSON.parse(
-					JSON.stringify(suma_w)
-				);
-				organizador();
-			}
-
 		}
 		//Obtención de variables de las cajas, modelo Wn y Zeta
 		function Zeta_boxF() {
@@ -797,25 +790,8 @@
 			Wna = parseFloat(document.getElementById('Wna_box').value);
 		}
 		function Dt2_boxF() {
-			// dt = parseFloat(document.getElementById('dt_box2').value);
-			dt = 0.02;
+			dt = parseFloat(document.getElementById('dt_box2').value);
 			iniciar2 = 1;
-			validador4 = 1;
-			if (validador4 > 0) {
-				//Modelo MCK
-				chart.data.datasets[0].data.length = 0;
-				chart.update();
-				clearInterval(tiempo1)
-				clearInterval(tiempo2)
-				clearInterval(tiempo3)
-				Relativa = JSON.parse(
-					JSON.stringify(u2)
-				);
-				Total = JSON.parse(
-					JSON.stringify(suma_w)
-				);
-				organizador();
-			}
 		}
 		function BarridoVar() {
 			W1 = 2 * Math.PI * parseFloat(document.getElementById('W1_box').value);
@@ -870,7 +846,7 @@
 			Perspective = 4;
 			ChangeCameraP();
 		}
-		function LoadSensor() {
+		function LoadSensor(){
 			scene.add(LVDt1)
 		}
 		function ChangeCameraP() {
@@ -955,13 +931,12 @@
 			Total = JSON.parse(
 				JSON.stringify(suma_w)
 			);
-			organizador();
+			organizador()
 		}
 		//Movimiento Sinusoildal MCK
 		function contador() {
 			var contador1 = 0;
 			var t = 0;
-			contadorglobal = 0;
 			p1[0] = 0;
 			function Senoiterativo() {
 				Vtiempo[contador1] = contador1;
@@ -995,7 +970,6 @@
 				P[contador1] = 0;
 				//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
 				Mesa1.position.x = Seno[contador1] + 5 //Posición x de la mesa
-				SensorB.position.x = Seno[contador1] + 6.954;
 				//Mover la Barra
 				// Barra11.position.x = Seno[contador1] + 5 //Posición barra en x
 				//   console.log(u[contador1]);
@@ -1030,9 +1004,7 @@
 		function contador2() {
 			var contador1 = 0;
 			var contadorr = 1;
-			contadorglobal = 0;
 			var t = 0;
-			var tc=0;
 			function Newmark() {
 				p[contadorr];
 				P[contador1] = p1[contador1] + a1 * u2[contador1] + a2 * up2[contador1] + a3 * upp2[contador1];
@@ -1047,22 +1019,16 @@
 				//Mover cilindro
 				Cilindro1.position.x = 4 + u2[contador1] + Seno[contador1];
 				suma_w[contadorglobal] = (u2[contadorglobal] + Seno[contadorglobal]);
-				Barra11.position.x = u2[contador1] + 5.4 + Seno[contador1]; //Posición barra en x
-				Pared11.position.x = 6.92 + Seno[contador1]; //Posición Pared en x
+				Barra11.position.x = u2[contador1] + 5.4+Seno[contador1]; //Posición barra en x
+				Pared11.position.x = 6.92+Seno[contador1]; //Posición Pared en x
 				// CambiarAltura();
 				//    esfera1.position.z=u2[contador1]+Seno[contador1];
 				// chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
 				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
 				chart.update();
-				if (tc>=10 && tc<10+dt){
-				chart.data.datasets[0].data.length = 0;
-				chart.update();
-				tc=0
-				}
 				contador1++;
 				contadorglobal++;
 				t = t + dt;
-				tc = tc + dt;
 				Xaxes = Xaxes + dt;
 				switch (validador3) {
 					case 1:
@@ -1099,7 +1065,6 @@
 		}
 		function Aceleracion_sismos() {
 			var contador1 = 0;
-			contadorglobal = 0;
 			var t = 0;
 			p1[0] = 0;
 			// console.log(-1 * m * parseFloat(Ac_Data[1].Datos))
@@ -1158,7 +1123,6 @@
 		// Newmark_Sismos 
 		function Newmark_sismos() {
 			var contador1 = 0;
-			contadorglobal = 0;
 			var contadorr = 1;
 			var t = 0;
 			function Newmark_Sismos() {
@@ -1167,8 +1131,8 @@
 				u2[contador1 + 1] = [P[contador1]] / kj;
 				up2[contador1 + 1] = [2 / dt] * [u2[contador1 + 1] - u2[contador1]] - up2[contador1];
 				upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
-				Barra11.position.x = u2[contador1] + 5.4 + Seno[contador1]; //Posición barra en x
-				Pared11.position.x = 6.92 + Seno[contador1]; //Posición Pared en x
+				Barra11.position.x = u2[contador1] + 5.4+Seno[contador1]; //Posición barra en x
+				Pared11.position.x = 6.92+Seno[contador1]; //Posición Pared en x
 				//Mover la esfera
 				// esfera2.position.x = u2[contador1] + parseFloat(Ac_Data[contador1].Datos) + 5; ////Arreglar
 				switch (validador2) {
@@ -1228,7 +1192,7 @@
 		const color = 0xFFFFFF;
 		// let pos = { x: 5, y: 0.35, z: 0 }
 		let pos = { x: 5, y: -0.35 * 4 / 3, z: 0 }
-		const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 1, 25, 1); //Geomtria del cubo, en el espacio
+		const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 1, 15, 1); //Geomtria del cubo, en el espacio
 		const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila
 		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
 		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
@@ -1542,7 +1506,7 @@
 			const geometryF = new THREE.BoxGeometry(0.15, 0.15, 0.15, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
-				color: 0x252850,
+				color: 	0x252850,
 				flatShading: true
 			});
 			let pos = { x: 5.4, y: 1.55, z: 0 };
@@ -1555,7 +1519,7 @@
 			const geometryF = new THREE.BoxGeometry(0.15, 2, 2, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
-				color: 0x252850,
+				color: 	0x252850,
 				flatShading: true
 			});
 			let pos = { x: 6.92, y: 0.5, z: 0 };
