@@ -98,7 +98,7 @@
 							<div style="text-align: center;">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-									LVDT
+									Ac
 								</button>
 							</div>
 						</h2>
@@ -394,9 +394,11 @@
 											</div>
 										</form>
 										<div class="card mt-3" style="width: 100%;">
-											<div class="btn-group" style="text-align: center;">
+											<div class="card-body" style="text-align: center;">
 												<button type="button" onclick="CallFunction3(),BarridoVar()"
 													class="btn btn-primary">Iniciar barrido</button>
+												<button type="button" onclick="StopInterval()"
+													class="btn btn-primary">Detener</button>
 											</div>
 										</div>
 									</div>
@@ -445,6 +447,12 @@
 											sismo</button>
 									</div>
 								</div>
+								<div class="card mt-2" style="width: 100%;">
+									<div class="btn-group">
+										<button type="button" onclick="StopInterval()"
+											class="btn btn-primary">Detener</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -478,6 +486,12 @@
 										<div class="btn-group">
 											<button type="button" onclick="CallFunction4()"
 												class="btn btn-primary">Iniciar</button>
+										</div>
+									</div>
+									<div class="card mt-2" style="width: 100%;">
+										<div class="btn-group">
+											<button type="button" onclick="StopInterval()"
+												class="btn btn-primary">Detener</button>
 										</div>
 									</div>
 								</div>
@@ -749,7 +763,6 @@
 				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			}
-
 		}
 		//Obtención de Variables desde las cajas, modelo MCK
 		function Masa_box() {
@@ -825,7 +838,22 @@
 			Vel = (W2 - W1) / (50 * IntervaloB);
 			Wv[0] = W1;
 			validador3 = 2;
-
+			validador4=validador4+1;
+			if (validador4 > 2) {
+				Wv = [0];
+				chart.data.datasets[0].data.length = 0;
+				chart.update();
+				clearInterval(tiempo1)
+				clearInterval(tiempo2)
+				clearInterval(tiempo3)
+				Relativa = JSON.parse(
+					JSON.stringify(u2)
+				);
+				Total = JSON.parse(
+					JSON.stringify(suma_w)
+				);
+				organizador();
+			}
 		}
 		function ExportarAnyTiempo() {
 			if (exporC == 1) {
@@ -886,9 +914,9 @@
 				renderer.render(scene, camera);
 			} else if ((Perspective == 3)) {
 				camera.position.set(0, 7, 0); // Vista Superior
+				controls.target.set(7, -5, 4);
 				controls.update();
 				renderer.render(scene, camera);
-				controls.target.set(7, -5, 4);
 			} else if ((Perspective == 4)) {
 				Perspective = 0;
 				controls.target.set(2, -0.7676576971701257, -103);
@@ -1032,7 +1060,7 @@
 			var contadorr = 1;
 			contadorglobal = 0;
 			var t = 0;
-			var tc=0;
+			var tc = 0;
 			function Newmark() {
 				p[contadorr];
 				P[contador1] = p1[contador1] + a1 * u2[contador1] + a2 * up2[contador1] + a3 * upp2[contador1];
@@ -1054,10 +1082,10 @@
 				// chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
 				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
 				chart.update();
-				if (tc>=10 && tc<10+dt){
-				chart.data.datasets[0].data.length = 0;
-				chart.update();
-				tc=0
+				if (tc >= 10 && tc < 10 + dt) {
+					chart.data.datasets[0].data.length = 0;
+					chart.update();
+					tc = 0
 				}
 				contador1++;
 				contadorglobal++;
