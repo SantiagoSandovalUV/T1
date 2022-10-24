@@ -410,13 +410,11 @@
 					</div>
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="flush-headingThree">
-							<div class="card mb-2" style="width: 100%;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#flush-collapseThree" aria-expanded="false"
-									aria-controls="flush-collapseThree">
-									Sismos predefindos
-								</button>
-							</div>
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseThree" aria-expanded="false"
+								aria-controls="flush-collapseThree">
+								Sismos predefindos
+							</button>
 						</h2>
 						<div id="flush-collapseThree" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
@@ -714,6 +712,15 @@
 
 			}
 		})
+		//Función para limpiar el método númerico
+		function CleanerMS(){
+		// p = [];  p1 = [];
+		// P = [];  u2 = []; var up2 = []; var upp2 = [];
+		// u2[0] = 0;
+		// up2[0] = 0;
+		// upp2[0] = 0;
+		console.log("Método númerico limpio")
+		}
 		//Función call para Sinusoidal
 		function CallFunction() {
 			validador3 = 1;
@@ -732,7 +739,7 @@
 		function CallFunction2() {
 			if (validador == 0) {
 				//Modelo MCK
-				Po_box(); Masa_box(); Wn_box(); c_box();Dt_box();
+				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			} else {
 				//MOdelo Zeta y Wn
@@ -801,7 +808,8 @@
 					JSON.stringify(suma_w)
 				);
 				organizador();
-				t1=0;
+				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
+				CleanerMS(); //Limpiar método númerico
 			}
 
 		}
@@ -831,7 +839,8 @@
 					JSON.stringify(suma_w)
 				);
 				organizador();
-				t1=0;
+				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
+				CleanerMS(); //Limpiar método númerico
 			}
 		}
 		function BarridoVar() {
@@ -1027,7 +1036,7 @@
 				P[contador1] = 0;
 				//   Mesa1.position.z=Seno[contador1] //Posición z de la mesa
 				Mesa1.position.x = Seno[contador1] + 5 //Posición x de la mesa
-				SensorB.position.x = Seno[contador1] + 6.954;
+				SensorB.position.x = Seno[contador1] + 6.954; //Sensor en la Base
 				//Mover la Barra
 				// Barra11.position.x = Seno[contador1] + 5 //Posición barra en x
 				//   console.log(u[contador1]);
@@ -1073,7 +1082,7 @@
 				upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
 				//Mover la esfera
 				esfera2.position.x = u2[contador1] + Seno[contador1] + 5;
-				//Mover la caja
+				//Mover la barra vertical
 				let pos = { x: 5, y: 0.2, z: 0 };
 				cube.position.x = 5 + Seno[contador1];
 				//Mover cilindro
@@ -1199,8 +1208,9 @@
 				u2[contador1 + 1] = [P[contador1]] / kj;
 				up2[contador1 + 1] = [2 / dt] * [u2[contador1 + 1] - u2[contador1]] - up2[contador1];
 				upp2[contador1 + 1] = (4 / ((dt * dt))) * [u2[contador1 + 1] - u2[contador1]] - [4 / dt] * up2[contador1] - upp2[contador1];
-				Barra11.position.x = u2[contador1] + 5.4 + Seno[contador1]; //Posición barra en x
-				Pared11.position.x = 6.92 + Seno[contador1]; //Posición Pared en x
+				Barra11.position.x = u2[contador1] + 5.4 + Desp_Data[contador1]; //Posición barra en x
+				Pared11.position.x = 6.92 + Desp_Data[contador1]; //Posición Pared en x
+				SensorB.position.x = Desp_Data[contador1] + 6.954; //Sensor en la Base
 				//Mover la esfera
 				// esfera2.position.x = u2[contador1] + parseFloat(Ac_Data[contador1].Datos) + 5; ////Arreglar
 				switch (validador2) {
