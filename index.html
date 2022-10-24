@@ -26,6 +26,8 @@
 	<!-- Excel   -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 	<!-- Excel   -->
+	<!-- <script src="sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="sweetalert2.min.css"> -->
 	<style>
 		body {
 			margin: 0;
@@ -730,11 +732,11 @@
 		function CallFunction2() {
 			if (validador == 0) {
 				//Modelo MCK
-				Po_box(); Masa_box(); Wn_box(); c_box();
+				Po_box(); Masa_box(); Wn_box(); c_box();Dt_box();
 				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			} else {
 				//MOdelo Zeta y Wn
-				Po_box(); Wn_box(); Zeta_boxF();
+				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			}
 
@@ -799,6 +801,7 @@
 					JSON.stringify(suma_w)
 				);
 				organizador();
+				t1=0;
 			}
 
 		}
@@ -828,6 +831,7 @@
 					JSON.stringify(suma_w)
 				);
 				organizador();
+				t1=0;
 			}
 		}
 		function BarridoVar() {
@@ -838,7 +842,7 @@
 			Vel = (W2 - W1) / (50 * IntervaloB);
 			Wv[0] = W1;
 			validador3 = 2;
-			validador4=validador4+1;
+			validador4 = validador4 + 1;
 			if (validador4 > 2) {
 				Wv = [0];
 				chart.data.datasets[0].data.length = 0;
