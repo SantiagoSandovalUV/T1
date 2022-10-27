@@ -26,8 +26,7 @@
 	<!-- Excel   -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 	<!-- Excel   -->
-	<!-- <script src="sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="sweetalert2.min.css"> -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<style>
 		body {
 			margin: 0;
@@ -81,7 +80,7 @@
 	</div>
 	<div class="position-fixed" style="width: 400px;background-color: #ffffff;padding: 90px 5px; height: 100%;">
 		<div class="card mb-2" style="width: 100%;">
-			<h4 style="text-align: center;"><span class="badge bg-dark">Respuesta total</span></h4>
+			<h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4>
 			<div class="card-body">
 				<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
 			</div>
@@ -93,38 +92,38 @@
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample3">
-			<div class="card card-body">
-				<div class="accordion" id="accordionExample">
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingOne">
-							<div style="text-align: center;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-									Ac
-								</button>
-							</div>
-						</h2>
-						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Activar</button>
-							</div>
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+								Ac
+							</button>
+						</div>
+					</h2>
+					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
+							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
 						</div>
 					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingTwo">
-							<div style="text-align: center;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-									LVDT1
-								</button>
-							</div>
-						</h2>
-						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Activar</button>
-							</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingTwo">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+								LVDT1
+							</button>
+						</div>
+					</h2>
+					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
+							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
 						</div>
 					</div>
 				</div>
@@ -570,7 +569,7 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		var scene = new THREE.Scene();
-		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 75);
 		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11; var LVDt1;
 		var Pared11; var sensorB;
 		const renderer = new THREE.WebGLRenderer();
@@ -713,13 +712,13 @@
 			}
 		})
 		//Función para limpiar el método númerico
-		function CleanerMS(){
-		// p = [];  p1 = [];
-		// P = [];  u2 = []; var up2 = []; var upp2 = [];
-		// u2[0] = 0;
-		// up2[0] = 0;
-		// upp2[0] = 0;
-		console.log("Método númerico limpio")
+		function CleanerMS() {
+			// p = [];  p1 = [];
+			// P = [];  u2 = []; var up2 = []; var upp2 = [];
+			// u2[0] = 0;
+			// up2[0] = 0;
+			// upp2[0] = 0;
+			console.log("Método númerico limpio")
 		}
 		//Función call para Sinusoidal
 		function CallFunction() {
@@ -911,8 +910,19 @@
 			Perspective = 4;
 			ChangeCameraP();
 		}
+		function LoadLVDT() {
+			Mostrar(Pared11); //Pared lvdt
+		}
+		function RemoveLVDT() {
+			Remover(Pared11);
+		}
 		function LoadSensor() {
-			scene.add(LVDt1)
+			Mostrar(SensorB); //Sensor en la Base
+			Mostrar(Barra11); //Sensor en el GDL
+		}
+		function RemoveSensor() {
+			Remover(SensorB);
+			Remover(Barra11);
 		}
 		function ChangeCameraP() {
 			if (Perspective == 2) {
@@ -1098,7 +1108,10 @@
 				if (tc >= 10 && tc < 10 + dt) {
 					chart.data.datasets[0].data.length = 0;
 					chart.update();
-					tc = 0
+					tc = 0;
+				}
+				if (Math.abs(u2[contadorglobal]) >= 1.5) {
+					Alerta();
 				}
 				contador1++;
 				contadorglobal++;
@@ -1590,11 +1603,10 @@
 			let pos = { x: 5.4, y: 1.55, z: 0 };
 			cubo1 = new THREE.Mesh(geometryF, materialF);
 			cubo1.position.set(pos.x, pos.y, pos.z);
-			scene.add(cubo1)
 			return cubo1;
 		}
 		function Pared1() {
-			const geometryF = new THREE.BoxGeometry(0.15, 2, 2, 1, 1, 1);
+			const geometryF = new THREE.BoxGeometry(0.15, 2.2, 1, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
 				color: 0x252850,
@@ -1603,8 +1615,15 @@
 			let pos = { x: 6.92, y: 0.5, z: 0 };
 			Pared = new THREE.Mesh(geometryF, materialF);
 			Pared.position.set(pos.x, pos.y, pos.z);
-			scene.add(Pared)
 			return Pared;
+		}
+		function Mostrar(Obj) {
+			scene.add(Obj);
+			return Obj;
+
+		}
+		function Remover(Obj) {
+			scene.remove(Obj);
 		}
 		var santiago1 = 1;
 		var santiago = 0;
@@ -1692,6 +1711,32 @@
 
 		}
 		// initGUI()
+		function Alerta() {
+			let timerInterval
+			Swal.fire({
+				title: 'El montaje  experimental falló, los desplzamientos totales excedieron los limítes de la mesa, por favor verifique los parámetros de entrada',
+				text: 'El desplzamiento totalexcedio los limítes de la mesa, el montaje falló',
+				html: '<b></b>',
+				timer: 6000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('b')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			}).then((result) => {
+				/* Read more about handling dismissals below */
+				if (result.dismiss === Swal.DismissReason.timer) {
+					console.log('I was closed by the timer')
+				}
+			})
+			StopInterval();
+		}
 		tippy('[data-tippy-content]'); //Cargar datos a la gráfica
 		var ejex = parseFloat(0)
 		var ctx = document.getElementById("myChart").getContext("2d"); //Grafica
