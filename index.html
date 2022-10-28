@@ -810,7 +810,8 @@
 				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
 				CleanerMS(); //Limpiar método númerico
 			}
-
+			LoadLVDT();
+			LoadSensor();
 		}
 		//Obtención de variables de las cajas, modelo Wn y Zeta
 		function Zeta_boxF() {
@@ -841,6 +842,8 @@
 				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
 				CleanerMS(); //Limpiar método númerico
 			}
+			LoadLVDT();
+			LoadSensor();
 		}
 		function BarridoVar() {
 			W1 = 2 * Math.PI * parseFloat(document.getElementById('W1_box').value);
@@ -1770,7 +1773,7 @@
 						}
 					},
 					y: {
-						// type: 'linear',
+						 type: 'linear',
 						// // max: Po + Po / (10 * Po),
 						// // min: -Po - Po / (10 * Po),
 						// max: 2,
