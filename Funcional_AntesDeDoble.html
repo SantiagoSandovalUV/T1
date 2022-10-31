@@ -80,7 +80,7 @@
 	</div>
 	<div class="position-fixed" style="width: 400px;background-color: #ffffff;padding: 90px 5px; height: 100%;">
 		<div class="card mb-2" style="width: 100%;">
-			<!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
+			<h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4>
 			<div class="card-body">
 				<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
 			</div>
@@ -796,7 +796,6 @@
 			if (validador4 > 0) {
 				//Modelo MCK
 				chart.data.datasets[0].data.length = 0;
-				chart.data.datasets[1].data.length = 0;
 				chart.update();
 				clearInterval(tiempo1)
 				clearInterval(tiempo2)
@@ -829,7 +828,6 @@
 			if (validador4 > 0) {
 				//Modelo MCK
 				chart.data.datasets[0].data.length = 0;
-				chart.data.datasets[1].data.length = 0;
 				chart.update();
 				clearInterval(tiempo1)
 				clearInterval(tiempo2)
@@ -1109,11 +1107,9 @@
 				//    esfera1.position.z=u2[contador1]+Seno[contador1];
 				// chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
 				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-				chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
 				chart.update();
 				if (tc >= 10 && tc < 10 + dt) {
 					chart.data.datasets[0].data.length = 0;
-					chart.data.datasets[1].data.length = 0;
 					chart.update();
 					tc = 0;
 				}
@@ -1258,8 +1254,7 @@
 						alert("Desconozco estos valores");
 				}
 				//    esfera1.position.z=u2[contador1]+Seno[contador1];
-				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-				chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+				chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
 				chart.update();
 				contador1++;
 				contadorglobal++;
@@ -1753,18 +1748,10 @@
 			type: 'line',
 			data: {
 				datasets: [{
-					label:'Respueta total',
 					borderColor: 'rgb(222,42,22)',
 					borderWidth: 2,
 					pointRadius: 0,
-				},
-				{
-					label:'Respueta relativa',
-					borderColor: 'rgb(30,144,255)',
-					borderWidth: 2,
-					pointRadius: 0,
-				}
-			]
+				}]
 			},
 			options: {
 				animation: {
@@ -1774,9 +1761,7 @@
 					intersect: false
 				},
 				plugins: {
-					legend: {
-						position: 'top',
-					},
+					legend: false
 				},
 				scales: {
 					x: {
