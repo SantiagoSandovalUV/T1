@@ -708,12 +708,10 @@
 		//Función para limpiar el método númerico
 		function CleanerMS() {
 			p = [];  p1 = [];
-			P = [];  u2 = [];  up2 = [];  upp2 = [];
-			Vtiempo2=[];
+			P = [];  u2 = []; var up2 = []; var upp2 = [];
 			u2[0] = 0;
 			up2[0] = 0;
 			upp2[0] = 0;
-			Vtiempo2[0]=0;
 			console.log("Método númerico limpio")
 		}
 		//Función call para Sinusoidal
@@ -1133,7 +1131,6 @@
 							)
 							exporC = 1;
 							organizador()
-							LoadCharData()
 						}
 						break;
 					case 2:
@@ -1147,7 +1144,6 @@
 							)
 							exporC = 1;
 							organizador()
-							LoadCharData()
 						}
 						break;
 					default:
@@ -1273,7 +1269,6 @@
 					)
 					exporC = 1;
 					organizador()
-					LoadCharData()
 				}
 			}
 			tiempo2 = setInterval(Newmark_Sismos, 25)
@@ -2115,20 +2110,8 @@
 				data1[i][2] = u2[i];
 				data1[i][3] = suma_w[i];
 			}
-			chart.update();
 			console.log('Datos Organizados')
 			return data1
-		}
-		function LoadCharData(){
-			console.log('Cargar toda la gráfica')
-			chart.data.datasets[0].data.length = 0;
-			chart.data.datasets[1].data.length = 0;
-			for (let i = 0; i < u2.length; i++) {
-				chart.data.datasets[0].data.push({ y: suma_w[i], x: Vtiempo2[i]})
-				chart.data.datasets[1].data.push({ y: u2[i], x: Vtiempo2[i]})
-
-			}
-			chart.update();
 		}
 		function recargar() {
 			window.location.href = window.location.href;
