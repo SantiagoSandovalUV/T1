@@ -869,10 +869,8 @@
 					Ac_Data[i]=Ac_Data[i]*Escalar;
 					Desp_Data[i] = Desp_Data[i] * Escalar;
 			}
-				console.log('Hola')
 			} else {
 				Escalar = 1;
-				console.log('Chao')
 			}
 		} else{
 			Escalar = parseFloat(document.getElementById('Escalar_box1').value);
@@ -977,7 +975,9 @@
 				controls.update();
 				renderer.render(scene, camera);
 			} else if ((Perspective == 1)) {
-				camera.position.set(-7.5, 2.1, 10); // 3D Derecho
+				// camera.position.set(-7.5, 2.1, 10); // 3D Derecho
+				// controls.target.set(1.55, 1.5, 1.31);
+				camera.position.set(-3.3402587933468473, 1.8242160525975815, 6.00572916178829); // 3D Derecho
 				controls.target.set(1.55, 1.5, 1.31);
 				controls.update();
 				renderer.render(scene, camera);
