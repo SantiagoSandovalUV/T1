@@ -62,15 +62,22 @@
 	<div class="position-fixed w-100 p-3 border-bottom" style="z-index: 100000;background-color: #ffffff;">
 		<div class="row">
 			<div class="col-md-3">
-				<a href="https://bayron479.github.io/estruclab_web/"
+				<a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/index.html"
 					class="d-flex align-items-center text-dark text-decoration-none">
 					<img src="logo.png" style="height: 30px;">
 					<span class="fs-8">LABORATORIOS VIRTUALES</span>
 				</a>
 			</div>
-			<div class="col-md-9" style="text-align: right;">
+			<div class="col-md-6" style="text-align: center;">
+			<h4>LABORATORIO DE DINÁMICA E INGENIERÍA SÍSMICA</h4>
+			</div>
+			<div class="col-md-1" style="text-align: left;">
+				<a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/manual-dinamica.pdf" 
+				class="btn btn-sm btn-outline-secondary">Manual dinámica</a>
+			</div>
+			<div class="col-md-2" style="text-align: right;">
 				<a class="btn btn-sm btn-outline-secondary"
-					href="https://bayron479.github.io/estruclab_web/modulo-dinamica.html">Dinámica
+					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Dinámica
 					Experimental</a>
 			</div>
 		</div>
@@ -1682,7 +1689,7 @@
 			return cubo1;
 		}
 		function Pared1() {
-			const geometryF = new THREE.BoxGeometry(0.15, 2.2, 1, 1, 1, 1);
+			const geometryF = new THREE.BoxGeometry(0.15, 2.2, 1.5, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
 				color: 0x252850,
