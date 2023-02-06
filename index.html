@@ -84,7 +84,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="position-fixed" style="width: 450px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
+	<div class="position-fixed"
+		style="width: 450px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
 		<div class="card mb-2" style="width: 100%;">
 			<!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
 			<div class="card-body">
@@ -92,8 +93,16 @@
 			</div>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
-				aria-expanded="false" aria-controls="collapseExample3">
+			<select id="select_barra" class="form-select" aria-label="Default select example"
+				onchange="ResponseEditor()">
+				<option value="Despl" selected>Desplazamiento</option>
+				<option value="Vel">Velocidad</option>
+				<option value="Acel">Aceleración</option>
+			</select>
+		</div>
+		<div class="card mb-2" style="width: 100%;">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
 				Asignar sensores
 			</button>
 		</div>
@@ -136,8 +145,8 @@
 			</div>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-				aria-expanded="false" aria-controls="collapseExample">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 				Asignar propiedades físicas o dinámicas al sistema
 			</button>
 		</div>
@@ -302,8 +311,8 @@
 			</div>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
-				aria-expanded="false" aria-controls="collapseExample2">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
 				Seleccionar tipo de desplazamiento
 			</button>
 		</div>
@@ -1053,6 +1062,27 @@
 			StopVar = 0;
 			Po = 0;
 		}
+		// Cambiar la respuesta
+		var EditResponse = 1; //Cambia la respuesta
+		var CleanResponse = false; // Limpia la respuesta anteriror
+		function ResponseEditor() {// Función para cambiar la respuesta
+			var sl = 1;
+			switch (document.getElementById('select_barra').value) {
+				case 'Despl':
+					sl = 1;
+					CleanResponse = true;
+					break;
+				case 'Vel':
+					sl = 2;
+					CleanResponse = true;
+					break;
+				case 'Acel':
+					sl = 3;
+					CleanResponse = true;
+					break;
+			}
+			EditResponse = sl;
+		}
 		//Detener la iteración
 		function StopInterval() {
 			clearInterval(tiempo1)
@@ -1167,8 +1197,53 @@
 				// CambiarAltura();
 				//    esfera1.position.z=u2[contador1]+Seno[contador1];
 				// chart.data.datasets[0].data.push({ y: u2[contador1], x: t })
-				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-				chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+				// chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
+				// chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+				switch (EditResponse) {
+					case 1:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: u2[i], x: Vtiempo2[i] })
+							// 	chart.update();
+							// }
+							CleanResponse = false;
+						}
+						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
+						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+						chart.update();
+						break;
+					case 2:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: up2[i], x: Vtiempo2[i] })
+							// 	chart.update();
+							// }
+							CleanResponse = false;
+						}
+						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
+						chart.update();
+						break;
+					case 3:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+							// 	chart.update();
+							// }
+							CleanResponse = false;
+						}
+						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
+						chart.update();
+						break;
+				}
 				chart.update();
 				if (tc >= 10 && tc < 10 + dt) {
 					chart.data.datasets[0].data.length = 0;
@@ -1334,8 +1409,53 @@
 						alert("Desconozco estos valores");
 				}
 				//    esfera1.position.z=u2[contador1]+Seno[contador1];
-				chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-				chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+				// chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
+				// chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+				switch (EditResponse) {
+					case 1:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: u2[i], x: Vtiempo2[i] })
+							// 	chart.update();
+							// }
+							CleanResponse = false;
+						}
+						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
+						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+						chart.update();
+						break;
+					case 2:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: up2[i], x: Vtiempo2[i] })
+							// 	chart.update();
+							// }
+							CleanResponse = false;
+						}
+						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
+						chart.update();
+						break;
+					case 3:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+							// 	chart.update();
+							// }
+							CleanResponse = false;
+						}
+						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
+						chart.update();
+						break;
+				}
 				chart.update();
 				contador1++;
 				contadorglobal++;
@@ -1694,7 +1814,7 @@
 			return cubo1;
 		}
 		function Pared1() {
-			const geometryF = new THREE.BoxGeometry(0.15,2.2, 4, 1, 1, 1);
+			const geometryF = new THREE.BoxGeometry(0.15, 2.2, 4, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
 				color: 0x252850,
@@ -1880,7 +2000,7 @@
 				}
 			}
 		});
-
+        // Ajusta el tamaño de la pantalla 
 		window.addEventListener('resize', AdjustSize);
 		function AdjustSize() {
 			camera.aspect = window.innerWidth / window.innerHeight;
@@ -1888,6 +2008,7 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.render(scene, camera);
 		}
+		// Arrastrar objetos con el mause
 		function animate() {
 			dragObject();
 			renderer.render(scene, camera);
