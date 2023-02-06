@@ -52,8 +52,14 @@
 			font-family: Arial, Arial, Helvetica, sans-serif
 		}
 
-		html {
-			scrollbar-width: normal;
+		#sidebar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 400px;
+			height: 100%;
+
+		 
 		}
 	</style>
 </head>
@@ -78,82 +84,83 @@
 				</div>-->
 		</div>
 	</div>
-	<div class="position-fixed" style="width: 400px;background-color: #ffffff;padding: 90px 5px; height: 100%;">
-		<div class="card mb-2" style="width: 100%;">
-			<h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4>
-			<div class="card-body">
-				<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
-			</div>
-		</div>
-		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
-				aria-expanded="false" aria-controls="collapseExample3">
-				Asignar sensores
-			</button>
-		</div>
-		<div class="collapse" id="collapseExample3">
-			<div class="accordion" id="accordionExample">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingOne">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Ac
-							</button>
-						</div>
-					</h2>
-					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
-							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingTwo">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								LVDT1
-							</button>
-						</div>
-					</h2>
-					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
-							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
-						</div>
-					</div>
+	<div class="scrollbox">
+		<div class="position-fixed" style="width: 450px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
+			<div class="card mb-2" style="width: 100%;">
+				<h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4>
+				<div class="card-body">
+					<canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
 				</div>
 			</div>
-		</div>
-		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-				aria-expanded="false" aria-controls="collapseExample">
-				Asignar propiedades físicas o dinámicas al sistema
-			</button>
-		</div>
-		<div class="collapse" id="collapseExample">
-			<div class="card text-bg-primary mt-2" style="width: 100%;">
-				<div class="accordion accordion-flush" id="accordionFlushExample1">
+			<div class="card mb-2" style="width: 100%;">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+					Asignar sensores
+				</button>
+			</div>
+			<div class="collapse" id="collapseExample3">
+				<div class="accordion" id="accordionExample">
 					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-headingOne1">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#flush-collapseOne1" aria-expanded="false"
-								aria-controls="flush-collapseOne1" id="modelock">
-								Modelo MCK
-							</button>
+						<h2 class="accordion-header" id="headingOne">
+							<div style="text-align: center;">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									Ac
+								</button>
+							</div>
 						</h2>
-						<div id="flush-collapseOne1" class="accordion-collapse collapse"
-							aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample1">
-							<div class="accordion-body">
-								<div class="card mt-2" style="width: 100%;" id="mck">
-									<div class="card-body">
-										<form class="row g-2">
-											<form class="col-2">
-												<!-- <div class="form-check form-switch">
+						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body" style="text-align: center;">
+								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
+								<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="headingTwo">
+							<div style="text-align: center;">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+									LVDT1
+								</button>
+							</div>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body" style="text-align: center;">
+								<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
+								<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card mb-2" style="width: 100%;">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					Asignar propiedades físicas o dinámicas al sistema
+				</button>
+			</div>
+			<div class="collapse" id="collapseExample">
+				<div class="card text-bg-primary mt-2" style="width: 100%;">
+					<div class="accordion accordion-flush" id="accordionFlushExample1">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="flush-headingOne1">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#flush-collapseOne1" aria-expanded="false"
+									aria-controls="flush-collapseOne1" id="modelock">
+									Modelo MCK
+								</button>
+							</h2>
+							<div id="flush-collapseOne1" class="accordion-collapse collapse"
+								aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample1">
+								<div class="accordion-body">
+									<div class="card mt-2" style="width: 100%;" id="mck">
+										<div class="card-body">
+											<form class="row g-2">
+												<form class="col-2">
+													<!-- <div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox"
 														id="flexSwitchCheckChecked" unchecked="unchecked"
 														disabled="disabled">
@@ -162,78 +169,78 @@
 														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
 														class="ti ti-question-mark text-primary"></i>
 												</div> -->
-												<div>
-													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
-														style="display: none;" id="Locke">
-														<path
-															d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-													</svg>
-													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-														fill="currentColor" class="bi bi-unlock-fill"
-														viewBox="0 0 20 20" id="UnLocke">
-														<path
-															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
-													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
+													<div>
+														<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+															fill="currentColor" class="bi bi-lock-fill"
+															viewBox="0 0 20 20" style="display: none;" id="Locke">
+															<path
+																d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+														</svg>
+														<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+															fill="currentColor" class="bi bi-unlock-fill"
+															viewBox="0 0 20 20" id="UnLocke">
+															<path
+																d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+														</svg>
+														<i data-tippy-content="Cuando este elemento se encuentra activo 
 														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
-														class="ti ti-question-mark text-primary"></i>
+															class="ti ti-question-mark text-primary"></i>
+													</div>
+												</form>
+											</form>
+											<form class="row g-10">
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px">Masa [kg] <i
+															data-tippy-content="Masa del sistema"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="Masa_box1" id="Masa_box1" placeholder="">
+												</div>
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px">Amort. C [N*s/m]<i
+															data-tippy-content="Amortiguamiento del sistema"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="c_box1" id="c_box1" placeholder="">
 												</div>
 											</form>
-										</form>
-										<form class="row g-10">
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Masa [kg] <i
-														data-tippy-content="Masa del sistema"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="Masa_box1"
-													id="Masa_box1" placeholder="">
-											</div>
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Amort. C [N*s/m]<i
-														data-tippy-content="Amortiguamiento del sistema"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="c_box1"
-													id="c_box1" placeholder="">
-											</div>
-										</form>
-										<form class="row g-1">
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Rigidez K [N/m] <i
-														data-tippy-content="Rigidez a la flexión del sistema"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="k_box1"
-													id="k_box1" placeholder="">
-											</div>
-											<div class="col" style="width:180px">
-												<!-- <label class="form-label" style="font-size: 14px">Paso Δt <i
+											<form class="row g-1">
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px">Rigidez K [N/m] <i
+															data-tippy-content="Rigidez a la flexión del sistema"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="k_box1" id="k_box1" placeholder="">
+												</div>
+												<div class="col" style="width:180px">
+													<!-- <label class="form-label" style="font-size: 14px">Paso Δt <i
 														data-tippy-content="Paso de integración del método númerico"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Dt_box1"
 													id="Dt_box1" placeholder=""> -->
-											</div>
-										</form>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-headingTwo1">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
-								aria-controls="flush-collapseTwo1" id="ZetaWn">
-								Modelo Wn y ζ
-							</button>
-						</h2>
-						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
-							aria-labelledby="flush-headingTwo1" data-bs-parent="#accordionFlushExample1">
-							<div class="accordion-body">
-								<div class="card mt-2" style="width: 100%;" id="ZWn">
-									<div class="card-body">
-										<form class="row">
-											<form class="col-auto">
-												<!-- <div class="form-check form-switch">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="flush-headingTwo1">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#flush-collapseTwo1" aria-expanded="false"
+									aria-controls="flush-collapseTwo1" id="ZetaWn">
+									Modelo Wn y ζ
+								</button>
+							</h2>
+							<div id="flush-collapseTwo1" class="accordion-collapse collapse"
+								aria-labelledby="flush-headingTwo1" data-bs-parent="#accordionFlushExample1">
+								<div class="accordion-body">
+									<div class="card mt-2" style="width: 100%;" id="ZWn">
+										<div class="card-body">
+											<form class="row">
+												<form class="col-auto">
+													<!-- <div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox"
 														id="flexSwitchCheckChecked2" unchecked="unchecked"
 														disabled="disabled">
@@ -243,50 +250,53 @@
 														class="ti ti-question-mark text-primary"></i>
 
 												</div> -->
-												<div>
-													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
-														style="display: none;" id="Locke1">
-														<path
-															d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-													</svg>
-													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-														fill="currentColor" class="bi bi-unlock-fill"
-														viewBox="0 0 20 20" id="UnLocke1">
-														<path
-															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
-													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
+													<div>
+														<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+															fill="currentColor" class="bi bi-lock-fill"
+															viewBox="0 0 20 20" style="display: none;" id="Locke1">
+															<path
+																d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+														</svg>
+														<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+															fill="currentColor" class="bi bi-unlock-fill"
+															viewBox="0 0 20 20" id="UnLocke1">
+															<path
+																d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+														</svg>
+														<i data-tippy-content="Cuando este elemento se encuentra activo 
 														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
-														class="ti ti-question-mark text-primary"></i>
+															class="ti ti-question-mark text-primary"></i>
+													</div>
+												</form>
+											</form>
+											<form class="row g-3">
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px"> Razón de
+														amortiguamiento ζ<i
+															data-tippy-content="Razón de amortiguamiento"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="zeta_box" id="zeta_box" placeholder="">
+												</div>
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px"> Frecuencia
+														natural
+														Wn [rad/s]<i data-tippy-content="Frecuencia natural del sistema"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="Wna_box" id="Wna_box" placeholder="">
 												</div>
 											</form>
-										</form>
-										<form class="row g-3">
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Razón de
-													amortiguamiento ζ<i data-tippy-content="Razón de amortiguamiento"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="zeta_box"
-													id="zeta_box" placeholder="">
-											</div>
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Frecuencia natural
-													Wn [rad/s]<i data-tippy-content="Frecuencia natural del sistema"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="Wna_box"
-													id="Wna_box" placeholder="">
-											</div>
-										</form>
-										<form class="row g-3">
-											<div class="col" style="width:180px">
-												<!-- <label class="form-label" style="font-size: 14px"> Paso
+											<form class="row g-3">
+												<div class="col" style="width:180px">
+													<!-- <label class="form-label" style="font-size: 14px"> Paso
 													Δt <i data-tippy-content="Razón de amortiguamiento"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="dt_box2"
 													id="dt_box2" placeholder=""> -->
-											</div>
-										</form>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -294,144 +304,145 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
-				aria-expanded="false" aria-controls="collapseExample2">
-				Seleccionar tipo de carga
-			</button>
-		</div>
-		<div class="collapse" id="collapseExample2">
-			<div class="card text-bg-primary mt-2" style="width: 100%;">
-				<div class="accordion accordion-flush" id="accordionFlushExample2">
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-headingOne">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#flush-collapseOne" aria-expanded="false"
-								aria-controls="flush-collapseOne">
-								Movimiento sinusoidal
-							</button>
-						</h2>
-						<div id="flush-collapseOne" class="accordion-collapse collapse"
-							aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample2">
-							<div class="accordion-body">
-								<div class="card-header" style="text-align: center;">Movimiento sinusoidal</div>
-								<div class="card mt-2" style="width: 100%;">
-									<div class="card-body">
-										<form class="row g-2">
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size:14px">Amplitud uo [m]<i
-														data-tippy-content="Amplitud dinámica del desplazamiento sinusoidal"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="Po_box1"
-													id="Po_box1" placeholder="">
-											</div>
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Frecuencia W [rad/s]
-													<i data-tippy-content="Frecuencia angular del desplazamiento sinusoidal W"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="Wn_box1"
-													id="Wn_box1" placeholder="">
-											</div>
-										</form>
+			<div class="card mb-2" style="width: 100%;">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+					Seleccionar tipo de carga
+				</button>
+			</div>
+			<div class="collapse" id="collapseExample2">
+				<div class="card text-bg-primary mt-2" style="width: 100%;">
+					<div class="accordion accordion-flush" id="accordionFlushExample2">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="flush-headingOne">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#flush-collapseOne" aria-expanded="false"
+									aria-controls="flush-collapseOne">
+									Movimiento sinusoidal
+								</button>
+							</h2>
+							<div id="flush-collapseOne" class="accordion-collapse collapse"
+								aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample2">
+								<div class="accordion-body">
+									<div class="card-header" style="text-align: center;">Movimiento sinusoidal</div>
+									<div class="card mt-2" style="width: 100%;">
+										<div class="card-body">
+											<form class="row g-2">
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size:14px">Amplitud uo [m]<i
+															data-tippy-content="Amplitud dinámica del desplazamiento sinusoidal"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="Po_box1" id="Po_box1" placeholder="">
+												</div>
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px">Frecuencia W
+														[rad/s]
+														<i data-tippy-content="Frecuencia angular del desplazamiento sinusoidal W"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="Wn_box1" id="Wn_box1" placeholder="">
+												</div>
+											</form>
+										</div>
 									</div>
-								</div>
-								<div class="card mt-3" style="width: 100%;">
-									<div class="card-body" style="text-align: center;">
-										<button type="button" onclick="CallFunction()"
-											class="btn btn-primary">Iniciar</button>
-										<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener
-											mesa</button>
-										<button type="button" onclick="StopInterval()"
-											class="btn btn-primary">Detener</button>
+									<div class="card mt-3" style="width: 100%;">
+										<div class="card-body" style="text-align: center;">
+											<button type="button" onclick="CallFunction()"
+												class="btn btn-primary">Iniciar</button>
+											<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener
+												mesa</button>
+											<button type="button" onclick="StopInterval()"
+												class="btn btn-primary">Detener</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-headingTwo55">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#flush-collapseTwo55" aria-expanded="false"
-								aria-controls="flush-collapseTwo55" id="Barrido">
-								Barrido de frecuencias
-							</button>
-						</h2>
-						<div id="flush-collapseTwo55" class="accordion-collapse collapse"
-							aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
-							<div class="accordion-body">
-								<div class="card mt-2" style="width: 100%;" id="BarridoFrec">
-									<div class="card-body">
-										<form class="row g-3">
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> f1 [Hz]<i
-														data-tippy-content="Frecuencia incial"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="W1_box"
-													id="W1_box" placeholder="">
-											</div>
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> f2 [Hz]<i
-														data-tippy-content="Frecuencia final"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="W2_box"
-													id="W2_box" placeholder="">
-											</div>
-										</form>
-										<form class="row g-4">
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Duración [s] <i
-														data-tippy-content="Duración"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="Inter_box"
-													id="Inter_box" placeholder="">
-											</div>
-											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> uo [m]<i
-														data-tippy-content="Máximo desplazamiento en la base"
-														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="PoB_box"
-													id="PoB_box" placeholder="">
-											</div>
-										</form>
-										<div class="card mt-3" style="width: 100%;">
-											<div class="card-body" style="text-align: center;">
-												<button type="button" onclick="CallFunction3(),BarridoVar()"
-													class="btn btn-primary">Iniciar barrido</button>
-												<button type="button" onclick="StopInterval()"
-													class="btn btn-primary">Detener</button>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="flush-headingTwo55">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#flush-collapseTwo55" aria-expanded="false"
+									aria-controls="flush-collapseTwo55" id="Barrido">
+									Barrido de frecuencias
+								</button>
+							</h2>
+							<div id="flush-collapseTwo55" class="accordion-collapse collapse"
+								aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
+								<div class="accordion-body">
+									<div class="card mt-2" style="width: 100%;" id="BarridoFrec">
+										<div class="card-body">
+											<form class="row g-3">
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px"> f1 [Hz]<i
+															data-tippy-content="Frecuencia incial"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="W1_box" id="W1_box" placeholder="">
+												</div>
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px"> f2 [Hz]<i
+															data-tippy-content="Frecuencia final"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="W2_box" id="W2_box" placeholder="">
+												</div>
+											</form>
+											<form class="row g-4">
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px">Duración [s] <i
+															data-tippy-content="Duración"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="Inter_box" id="Inter_box" placeholder="">
+												</div>
+												<div class="col" style="width:180px">
+													<label class="form-label" style="font-size: 14px"> uo [m]<i
+															data-tippy-content="Máximo desplazamiento en la base"
+															class="ti ti-question-mark text-primary"></i></label>
+													<input type="text" class="form-control form-control-sm"
+														name="PoB_box" id="PoB_box" placeholder="">
+												</div>
+											</form>
+											<div class="card mt-3" style="width: 100%;">
+												<div class="card-body" style="text-align: center;">
+													<button type="button" onclick="CallFunction3(),BarridoVar()"
+														class="btn btn-primary">Iniciar barrido</button>
+													<button type="button" onclick="StopInterval()"
+														class="btn btn-primary">Detener</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-headingThree">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#flush-collapseThree" aria-expanded="false"
-								aria-controls="flush-collapseThree">
-								Sismos predefindos
-							</button>
-						</h2>
-						<div id="flush-collapseThree" class="accordion-collapse collapse"
-							aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
-							<div class="accordion-body">
-								<div class="card mt-2" class="btn-group">
-									<button type="button" class="btn btn-primary dropdown-toggle"
-										data-bs-toggle="dropdown" aria-expanded="false">
-										Sismos</button>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#" onclick="Elcentro()">El centro</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LaVega()">La Vega</a></li>
-										<!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
-										<li><a class="dropdown-item" href="#" onclick="Armenia()">Armenia</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LomaPrieta()">Loma Prieta</a>
-										</li>
-										<li><a class="dropdown-item" href="#" onclick="Gilroy()">Gilroy</a></li>
-									</ul>
-									<!-- <select>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="flush-headingThree">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#flush-collapseThree" aria-expanded="false"
+									aria-controls="flush-collapseThree">
+									Sismos predefindos
+								</button>
+							</h2>
+							<div id="flush-collapseThree" class="accordion-collapse collapse"
+								aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
+								<div class="accordion-body">
+									<div class="card mt-2" class="btn-group">
+										<button type="button" class="btn btn-primary dropdown-toggle"
+											data-bs-toggle="dropdown" aria-expanded="false">
+											Sismos</button>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" href="#" onclick="Elcentro()">El centro</a>
+											</li>
+											<li><a class="dropdown-item" href="#" onclick="LaVega()">La Vega</a></li>
+											<!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
+											<li><a class="dropdown-item" href="#" onclick="Armenia()">Armenia</a></li>
+											<li><a class="dropdown-item" href="#" onclick="LomaPrieta()">Loma Prieta</a>
+											</li>
+											<li><a class="dropdown-item" href="#" onclick="Gilroy()">Gilroy</a></li>
+										</ul>
+										<!-- <select>
 										<option value="1" onclick="Elcentro()">El Centro</option>
 										<option value="2" onclick="LaVega()">La Vega</option>
 										<option value="3" onclick="Armenia()">Armenia</option>
@@ -439,52 +450,12 @@
 										<option value="5" onclick="Gilroy()">Gilroy</option>
 
 									</select> -->
-								</div>
-								<div class="card mt-2" style="width: 100%;">
-									<div class="btn-group">
-										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Iniciar
-											sismo</button>
-									</div>
-								</div>
-								<div class="card mt-2" style="width: 100%;">
-									<div class="btn-group">
-										<button type="button" onclick="StopInterval()"
-											class="btn btn-primary">Detener</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-headingTwo">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#flush-collapseTwo" aria-expanded="false"
-								aria-controls="flush-collapseTwo">
-								Cargar desplazamiento y aceleración
-							</button>
-						</h2>
-						<div id="flush-collapseTwo" class="accordion-collapse collapse"
-							aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2">
-							<div class="accordion-body">
-								<div class="card-header" style="text-align: center;">Datos</div>
-								<div class="card-body">
-									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
-												desplazamiento</span>
-										</h4>
-										<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
-											class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
-									</div>
-									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
-												aceleración</span></h4>
-										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
-											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
 									</div>
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
-											<button type="button" onclick="CallFunction4()"
-												class="btn btn-primary">Iniciar</button>
+											<button type="button" onclick="CallFunction2()"
+												class="btn btn-primary">Iniciar
+												sismo</button>
 										</div>
 									</div>
 									<div class="card mt-2" style="width: 100%;">
@@ -496,24 +467,65 @@
 								</div>
 							</div>
 						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="flush-headingTwo">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#flush-collapseTwo" aria-expanded="false"
+									aria-controls="flush-collapseTwo">
+									Cargar desplazamiento y aceleración
+								</button>
+							</h2>
+							<div id="flush-collapseTwo" class="accordion-collapse collapse"
+								aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2">
+								<div class="accordion-body">
+									<div class="card-header" style="text-align: center;">Datos</div>
+									<div class="card-body">
+										<div class="card mt-2" class="btn-group">
+											<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
+													desplazamiento</span>
+											</h4>
+											<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
+												class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
+										</div>
+										<div class="card mt-2" class="btn-group">
+											<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
+													aceleración</span></h4>
+											<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
+												class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
+										</div>
+										<div class="card mt-2" style="width: 100%;">
+											<div class="btn-group">
+												<button type="button" onclick="CallFunction4()"
+													class="btn btn-primary">Iniciar</button>
+											</div>
+										</div>
+										<div class="card mt-2" style="width: 100%;">
+											<div class="btn-group">
+												<button type="button" onclick="StopInterval()"
+													class="btn btn-primary">Detener</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="card mt-2" style="width: 100%;">
-			<div class="card-body">
-				<div style="text-align: center;">
-					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
-						class="btn btn-primary">Exportar
-						datos</button>
-					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Limpiar
-						campos</button>
-					<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
+			<div class="card mt-2" style="width: 100%;">
+				<div class="card-body">
+					<div style="text-align: center;">
+						<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
+							class="btn btn-primary">Exportar
+							datos</button>
+						<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Limpiar
+							campos</button>
+						<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
 					accept=".xls,xlsx">Cargar</button> -->
+					</div>
 				</div>
 			</div>
-		</div>
-		<!-- <div class="card mt-2" style="width: 100%;">
+			<!-- <div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
 				<div style="text-align: center;">
 					<button type="button" id="Limpiar" onclick="ChangeCameraP()"
@@ -521,39 +533,41 @@
 				</div>
 			</div>
 		</div> -->
-		<div class="card mt-1" style="width: 100%;">
-			<form class="row g-6">
-				<div class="col-3" style="text-align: center;">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD1()" class="col">
-						<path fill-rule="evenodd"
-							d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-					</svg>
-				</div>
-				<div class="col-3">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD2()">
-						<path fill-rule="evenodd"
-							d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-					</svg>
-				</div>
-				<div class="col-3">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD3 ()">
-						<path fill-rule="evenodd"
-							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
-					</svg>
-				</div>
-				<div class="col-3">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD4 ()">
-						<path fill-rule="evenodd"
-							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
-					</svg>
-				</div>
+			<div class="card mt-1" style="width: 100%;">
+				<form class="row g-6">
+					<div class="col-3" style="text-align: center;">
+						<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
+							class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD1()" class="col">
+							<path fill-rule="evenodd"
+								d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+						</svg>
+					</div>
+					<div class="col-3">
+						<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
+							class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD2()">
+							<path fill-rule="evenodd"
+								d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+						</svg>
+					</div>
+					<div class="col-3">
+						<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
+							class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD3 ()">
+							<path fill-rule="evenodd"
+								d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
+						</svg>
+					</div>
+					<div class="col-3">
+						<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
+							class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD4 ()">
+							<path fill-rule="evenodd"
+								d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
+						</svg>
+					</div>
+			</div>
+			</form>
 		</div>
-		</form>
 	</div>
+
 	</div>
 	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
@@ -1773,7 +1787,7 @@
 						}
 					},
 					y: {
-						 type: 'linear',
+						type: 'linear',
 						// // max: Po + Po / (10 * Po),
 						// // min: -Po - Po / (10 * Po),
 						// max: 2,

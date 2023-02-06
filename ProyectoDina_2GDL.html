@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>"hola"</title>
+</head>
+
+<body>
+  <!-- Librerías para la página web -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Menú desplegable -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <!-- Menú desplegable -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css"
+    integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- grafica -->
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+  <!-- grafica -->
+  <!-- Excel   -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- Excel   -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Librerías para la página web  -->
+
+  <!-- Librerías para la Three.js -->
+  <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script async="" src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three-obj-loader@1.1.3/dist/index.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"
+    integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Librerías para la Three.js -->
+
+  <!-- Librerías para operaciones matriciales -->
+  <!-- <script src="https://www.cs.bham.ac.uk/~pxc/js/Matrix.js"></script> -->
+  <script src="http://sismilab.univalle.edu.co/FLab/Matrix.js"></script>
+  <script src="https://www.cs.bham.ac.uk/~pxc/js/EVDecomposition.js"></script>
+  <script src="https://www.cs.bham.ac.uk/~pxc/js/LUDecomposition.js"></script>
+  <script src="https://www.cs.bham.ac.uk/~pxc/js/QRDecomposition.js"></script>
+  <script src="https://www.cs.bham.ac.uk/~pxc/js/IOUtils.js"></script>
+  <script>src = "http://sismilab.univalle.edu.co/FLab/Sismos.js"</script>
+  <!-- Librerías para operaciones matriciales -->
+
+  <script>
+    // Cargar escena en la página
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 75);
+    var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11; var LVDt1;
+    var Pared11; var sensorB;
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    clock = new THREE.Clock();
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xa0a0a0);
+    scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+    hemiLight.position.set(0, 20, 0);
+    scene.add(hemiLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff);
+    dirLight.position.set(- 3, 10, - 10);
+    dirLight.castShadow = true;
+    dirLight.shadow.camera.top = 2;
+    dirLight.shadow.camera.bottom = - 2;
+    dirLight.shadow.camera.left = - 2;
+    dirLight.shadow.camera.right = 2;
+    dirLight.shadow.camera.near = 0.1;
+    dirLight.shadow.camera.far = 40;
+    scene.add(dirLight);
+    camera.position.set(15, 4.5, 10); // posicion de la camara (0, 5, 5)
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
+    controls.update();
+    controls.addEventListener('change', () => { renderer.render(scene, camera) });
+    renderer.render(scene, camera);
+
+    // Código
+
+    // with (Matrix) {
+    //   var K_c = create([[6.8148 * 1000, -5.4518 * 1000], [-5.4518 * 1000, 5.4518* 1000]]);
+    //   var M = create([[40, 0], [0, 20]]);
+    //   // var po = create([[1], [2]]);
+    //   // var uo = create([[2], [2]]);
+    //   // var upo = create([[2.9], [8]]);
+    //   var po = create([[1], [1]]);
+    //   var pa = create([[0], [0]]);
+    //   var uo = create([[0], [0]]);
+    //   var upo = create([[0], [0]]);
+    //   // var C = Zero(2, 2);
+    //   var zeta = transpose(scale(create([[1], [1]]), 5 / 100))
+    //   var dt = 0.02;
+    // }
+    with (Matrix) { //Chopra
+      var K_c = scale(create([[2, -1, 0, 0, 0], [-1, 2, -1, 0, 0], [0, -1, 2, -1, 0], [0, 0, -1, 2, -1], [0, 0, 0, -1, 1]]), 100);
+      var M = scale(create([[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, 0, 0, 0, 1]]), 0.259);
+      var po = create([[1], [1], [1], [1], [1]]);
+      var pa = create([[0], [0], [0], [0], [0]]);
+      var uo = create([[0], [0], [0], [0], [0]]);
+      var upo = create([[0], [0], [0], [0], [0]]);
+      var zeta = transpose(scale(create([[1], [1], [1], [1], [1]]), 5 / 100))
+      var dt = 0.1;
+    }
+    // with (Matrix) { // Proyecto
+    //   var K_c = scale(create([[3.8283, 0, 0, -1.5937, 0, 0], [0, 3.8283, 0, 0, -1.5937, 0], [0, 0, 39.240, 0, 0, -16.335], [-1.5937, 0, 0, 1.1182, 0, 0], [0, -1.5937, 0, 0, 1.1182, 0], [0, 0, -16.335, 0, 0, 11.461]]), 10000000);
+    //   var M = MatrizMaP(750, 4, 5);
+    //   var po = create([[1], [1], [1], [1], [1], [1]]);
+    //   var pa = create([[0], [0], [0], [0], [0], [0]]);
+    //   var uo = create([[0], [0], [0], [0], [0], [0]]);
+    //   var upo = create([[0], [0], [0], [0], [0], [0]]);
+    //   var zeta = transpose(scale(create([[1], [1], [1], [1], [1], [1]]), 3 / 100))
+    //   var dt = 0.02;
+    // }
+    function modos(K_c, M, zeta) {
+      with (Matrix) { //Calcula los modos y frecuencias naturales del sistema
+        var a = inverse(M);
+        var b = mult(a, K_c);
+        v = eigenstructure(b);
+        W = diagOf(v.L);
+        W = transpose(W);
+        var w2 = W.mat[0];
+        var PHI2 = transpose(v.V);
+        var w = new Array();
+        var PHI = new Array();
+        var PHIM = new Array();
+        var PHIT = new Array();
+        for (var i = w2.length - 1; i >= 0; i--) {
+          var j = w2.length - i - 1;
+          w[j] = Math.sqrt(w2[i]);
+          PHI[j] = PHI2.mat[i];
+        }
+        PHI = create(PHI);
+        PHI = transpose(PHI);
+        MT2 = mult(mult(transpose(PHI), M), PHI);
+        KT2 = mult(mult(transpose(PHI), K_c), PHI);
+        var C = new Array();
+        C = Zero(M.mat.length, M.mat.length);
+        for (let i = 0; i < C.mat.length; i++) { //Calculo de la Matriz C
+          C.mat[i][i] = 2 * w[i] * M.mat[i][i] * zeta.mat[0][i];
+        }
+        C = mult(mult(PHI, C), transpose(PHI));
+        var Mx = new Array();
+        Mx = mult(mult(transpose(PHI), M), PHI);
+        PHIT = transpose(PHI);
+        PHIM = Zero(PHI.mat.length, PHI.mat.length);
+        for (let j = 0; j < Mx.mat.length; j++) { // Normalizar modos con respecto a la Masa
+          for (let i = 0; i < Mx.mat.length; i++) {
+            PHIM.mat[j][i] = (1 / Math.sqrt(Mx.mat[j][j])) * PHIT.mat[j][i];
+          }
+        }
+        PHIM = transpose(PHIM);
+      }
+      return [PHIM, w, C]
+    }
+    const [U1, q1, qp1, Mne, Cne, Kne] = Newmark_Multiples(M, K_c, po, uo, upo, dt, pa);
+    // Newmark_Multiples(M, K_c, C, po, uo, upo);
+    function Newmark_Multiples(M, K, po, uo, upo, dt, pa) { //Calcula la respuesta en el tiempo
+      var gamma = 1 / 2;
+      var betta = 1 / 6;
+      const [PHI, w, C] = modos(K, M, zeta);
+      with (Matrix) {
+        //Crear condiciones inciales de velocidad y desplazamiento
+        var qno = Zero(PHI.mat.length, 1);
+        var qnpo = Zero(PHI.mat.length, 1);
+        for (let i = 0; i < PHI.mat.length; i++) {
+          var num1 = new Array();
+          var dem1 = new Array();
+          var num2 = new Array();
+          var dem2 = new Array();
+          var PHIT = new Array();
+          var PHITN = new Array();
+          var PHIN = new Array();
+          PHIT = transpose(PHI);
+          PHITN[0] = PHI.mat[i];
+          PHITN = create(PHITN); //PHIT n-ésimo
+          PHIN[0] = PHIT.mat[i];
+          PHIN = transpose(create(PHIN)); // PHI  n-ésimo
+          num1 = mult(mult(PHITN, M), uo);
+          dem1 = mult(mult(PHITN, M), PHIN);
+          num2 = mult(mult(PHITN, M), upo);
+          dem2 = mult(mult(PHITN, M), PHIN);
+          qno.mat[i][0] = mult(num1, inverse(dem1)).mat[0][0]; //Condiciones inciales [Desplazamiento]
+          qnpo.mat[i][0] = mult(num2, inverse(dem2)).mat[0][0]; //Condiciones inciales [Velocidad]
+        }
+        //1.2
+        var Po = new Array();
+        Po = mult(PHIT, pa);
+        //1.3P
+        var Mne = new Array();
+        var Cne = new Array();
+        var Kne = new Array();
+        var qppo = new Array();
+        Mne = mult(mult(PHIT, M), PHI);
+        Cne = mult(mult(PHIT, C), PHI);
+        Kne = mult(mult(PHIT, K), PHI);
+        qppo = solve(M, sub(sub(Po, mult(Cne, qnpo)), mult(Kne, qno)));
+        //1.5
+        var a1 = new Array();
+        var a2 = new Array();
+        var a3 = new Array();
+        a1 = add(scale(Mne, (1 / (betta * dt * dt))), scale(Cne, (gamma / (betta * dt))));
+        a2 = add(scale(Mne, (1 / (betta * dt))), scale(Cne, ((gamma / (betta)) - 1)));
+        a3 = add(scale(Mne, ((1 / (2 * betta)) - 1)), scale(Cne, (dt * ((gamma / (2 * betta)) - 1))));
+        //1.6
+        var Kg = new Array();
+        Kg = add(Kne, a1);
+        //2.1
+        const [Ac_Data, dt2] = Seno();
+        var Pg1 = new Array();
+        Pg1 = Zero(PHI.mat.length, transpose(Ac_Data).mat.length);
+        //2.2
+        var q1 = new Array();
+        q1 = Zero(PHI.mat.length, transpose(Ac_Data).mat.length);
+        var qp1 = new Array();
+        qp1 = Zero(PHI.mat.length, transpose(Ac_Data).mat.length);
+        var qpp1 = new Array();
+        qpp1 = Zero(PHI.mat.length, transpose(Ac_Data).mat.length);
+        for (let jx = 0; jx < PHI.mat.length; jx++) {
+          q1.mat[jx][0] = qno.mat[jx][0];
+          qp1.mat[jx][0] = qnpo.mat[jx][0];
+        }
+        var Pg1C = new Array();
+        Pg1C = Zero(PHI.mat.length, transpose(Ac_Data).mat.length);
+        Pg1C = mult(mult(PHIT, mult(M, scale(po, -1))), Ac_Data);
+        var U1 = new Array();
+        U1 = Zero(PHI.mat.length, transpose(Ac_Data).mat.length);
+        // for (let j = 0; j < PHI.mat.length; j++) { // Generalizado para n grados de libertad
+        for (let j = 0; j < 2; j++) { // Para verificar comparando con el chopra
+          for (let i = 1; i < transpose(Ac_Data).mat.length - 1; i++) {
+            Pg1.mat[j][i] = add(add(add(create([[Pg1C.mat[j][i]]]), mult(create([[a1.mat[j][j]]]), create([[q1.mat[j][i - 1]]]))), mult(create([[a2.mat[j][j]]]), create([[qp1.mat[j][i - 1]]]))), mult(create([[a3.mat[j][j]]]), create([[qpp1.mat[j][i - 1]]]))).mat[0][0];
+
+            q1.mat[j][i] = solve(create([[Kg.mat[j][j]]]), create([[Pg1.mat[j][i]]])).mat[0][0];
+
+            qp1.mat[j][i] = add(add(scale(sub(create([[q1.mat[j][i]]]), create([[q1.mat[j][i - 1]]])), (gamma / (betta * dt))), scale(create([[qp1.mat[j][i - 1]]]), (1 - (gamma / (betta))))), scale(create([[qpp1.mat[j][i - 1]]]), dt * (1 - (gamma / (2 * betta))))).mat[0][0];
+
+            qpp1.mat[j][i] = sub(sub(scale(sub(create([[q1.mat[j][i]]]), create([[q1.mat[j][i - 1]]])), (1 / (betta * dt * dt))), scale(create([[qp1.mat[j][i - 1]]]), (1 / (betta * dt)))), scale(create([[qpp1.mat[j][i - 1]]]), ((1 / (2 * betta)) - 1))).mat[0][0];
+          }
+        }
+        U1 = mult(PHI, q1);
+        //2.3
+        return [U1, q1, qp1, Mne, Cne, Kne];
+        // return [U1, q1, qp1];
+      }
+    }
+    const [r1, mt1] = TransfCoorde(4, 5);
+    function TransfCoorde(a, b) { //Matrices de transformación T
+      //[Preliminar para dos pisos]
+      with (Matrix) {
+        var CMP1 = new Array();
+        var Coord = new Array();
+        CMP1 = create([[a / 2, b / 2]]); // Centro de Masa de cada piso
+        Coord = create([[0, b, a, b], [0, 0, a, 0], [0, 0, 0, b], [a, 0, a, b]]); // Cordenadas de cada piso
+        var d = new Array();
+        d = Zero(Coord.mat.length, 1);
+        var S = new Array();
+        S = Zero(Coord.mat.length, 1);
+        var Co = new Array();
+        Co = Zero(Coord.mat.length, 1);
+        var r1 = new Array();
+        r1 = Zero(Coord.mat.length, 1);
+        var mt1 = new Array();
+        mt1 = Zero(Coord.mat.length, 3);
+        for (let i = 0; i < d.mat.length; i++) {
+          //Calcular d
+          d.mat[i][0] = Math.sqrt(Math.pow((Coord.mat[i][2] - Coord.mat[i][0]), 2) + Math.pow((Coord.mat[i][3] - Coord.mat[i][1]), 2));
+          Co.mat[i][0] = (Coord.mat[i][2] - Coord.mat[i][0]) / d.mat[i][0];
+          S.mat[i][0] = (Coord.mat[i][3] - Coord.mat[i][1]) / d.mat[i][0];
+          //Definir vector desde c/pórtico hasta el CM de piso 1
+          r1.mat[i][0] = (CMP1.mat[0][1] - Coord.mat[i][1]) * Co.mat[i][0] - (CMP1.mat[0][0] - Coord.mat[i][0]) * S.mat[i][0];
+          //Matriz de transformación piso 1
+          mt1.mat[i][0] = Co.mat[i][0];
+          mt1.mat[i][1] = S.mat[i][0];
+          mt1.mat[i][2] = r1.mat[i][0];
+        }
+        mt1 = transpose(mt1);
+        return [r1, mt1];
+      }
+    }
+    const [TA, TB, T1, T2] = MatTransCP();
+    function MatTransCP() { //Matrices de transformación T
+      //[Preliminar para dos pisos]
+      with (Matrix) {
+        const [r1, mt1] = TransfCoorde(4, 5);
+        const [r2, mt2] = TransfCoorde(4, 5);
+        var TA = new Array();
+        var TB = new Array();
+        var T1 = new Array();
+        var T2 = new Array();
+        TA = LlenarT(0, mt1, mt2);
+        TB = LlenarT(1, mt1, mt2);
+        T1 = LlenarT(2, mt1, mt2);
+        T2 = LlenarT(3, mt1, mt2);
+      }
+      return [TA, TB, T1, T2];
+    }
+    function LlenarT(n, mt1, mt2) { //Matrices de transformación T
+      //[Preliminar para dos pisos]
+      with (Matrix) {
+        var T = new Array();
+        T = Zero(6, 2);
+        //n es la posición del pórtico en la matriz mt
+        for (let i = 0; i < 3; i++) {
+          T.mat[i][0] = mt1.mat[i][n];    // Portico A
+          T.mat[3 + i][1] = mt2.mat[i][n];  // Portico A
+        }
+        return T;
+      }
+    }
+    function MatrizMaP(Carga, a, b) { //Matriz de Masa MM
+      //[Preliminar para dos pisos]
+      //Carga: Carga piso
+      with (Matrix) {
+        var n = 2; // Número de pisos
+        var mtx = 0;
+        var mty = 0;
+        AreaPi = a * b;
+        var mm = new Array();
+        mm = Zero(3 * n, 1);
+        mm.mat[0][0] = AreaPi * Carga;
+        mm.mat[1][0] = mm.mat[0][0];
+        mm.mat[2][0] = mm.mat[0][0] * (Math.pow(a, 2) + Math.pow(b, 2)) / 12;
+        var MM = new Array();
+        MM = Zero(3 * n, 3 * n);
+        for (let i = 0; i < 3; i++) {
+          MM.mat[i][i] = mm.mat[i][0];
+          MM.mat[3 + i][3 + i] = mm.mat[i][0];
+        }
+      }
+      return MM;
+    }
+    function Seno() {
+      var Ac_Data = new Array();
+      var j = 0;
+      for (let i = 0; i < 1.1;) {
+        Ac_Data[j] = 193 * Math.sin(2 * Math.PI * i);
+        i = i + 0.1;
+        j = j + 1;
+      }
+      Ac_Data = Matrix.create([Ac_Data])
+      dt = 1 / 50;
+      return [Ac_Data, dt];
+    }
+    function Elcentro() {
+      var Ac_Data = new Array();
+      Ac_Data = [0, 0.0062, 0.0036, 0.0010, 0.0042, 0.0074, 0.0107, 0.0067, 0.0027, -0.0013, 0.0036, 0.0085, 0.0133, 0.0071, 0.0009, 0.0041, 0.0022, 0.0002, 0.0044, 0.0085, 0.0126, 0.0168, -0.0034, -0.0235, -0.0097, 0.0041, 0.0052, 0.0162, 0.0272, 0.0382, 0.0240, 0.0098, 0.0094, 0.0091, 0.0087, -0.0048, -0.0182, -0.0318, -0.0330, -0.0561, -0.0444, -0.0328, -0.0314, -0.0300, -0.0285, -0.0271, -0.0404, -0.0536, -0.0668, -0.0801, -0.0671, -0.0542, -0.0413, -0.0417, -0.0422, -0.0238, -0.0053, 0.0131, 0.0316, 0.0500, 0.0685, 0.0869, 0.0443, 0.0018, -0.0409, -0.0834, -0.1264, -0.1686, -0.1264, -0.0844, -0.0872, -0.0901, -0.0929, -0.0913, -0.0899, -0.0929, -0.0959, -0.1264, -0.0750, -0.0235, 0.0279, 0.0794, 0.1313, 0.1823, 0.2342, 0.2156, 0.1970, 0.1793, 0.1607, 0.1431, 0.1578, 0.1735, 0.1294, 0.0854, 0.0412, -0.0031, -0.0472, -0.0914, -0.1352, -0.1803, -0.2244, -0.2685, -0.3126, -0.2450, -0.1784, -0.1107, -0.0436, 0.0236, 0.0908, 0.1578, 0.2254, 0.2920, 0.2274, 0.1627, 0.0971, 0.0320, -0.0330, -0.0980, -0.1637, -0.2283, -0.2930, -0.0041, 0.2852, 0.2195, 0.1539, 0.0876, 0.0218, -0.0441, 0.0179, 0.0800, 0.1421, 0.2038, 0.1862, 0.1676, 0.1352, 0.1019, 0.0689, 0.0359, 0.0029, -0.0301, -0.0055, 0.0191, 0.0437, 0.0634, 0.0831, 0.1029, 0.0578, 0.0127, -0.0322, -0.0772, -0.0349, 0.0076, 0.0500, 0.0099, -0.0301, -0.0702, -0.1098, -0.1499, -0.1107, -0.0715, -0.0322, 0.0070, -0.0622, -0.1313, -0.2009, -0.1225, -0.0440, 0.0344, 0.1127, 0.1911, 0.1205, 0.0499, -0.0207, -0.0913, -0.0261, 0.0392, 0.1049, 0.1695, 0.1107, 0.0515, -0.0076, 0.0104, 0.0284, 0.0465, 0.0644, 0.0198, -0.0248, -0.0694, -0.0403, -0.0111, 0.0028, 0.0168, 0.0307, -0.0223, -0.0754, -0.1284, -0.1813, -0.1401, -0.1000, -0.0591, -0.0184, 0.0223, -0.0098, -0.0418, -0.0211, -0.0002, 0.0206, -0.0143, -0.0492, -0.0842, -0.1186, -0.1539, -0.1891, -0.2234, -0.1774, -0.1323, -0.0858, -0.0399, 0.0061, 0.0521, 0.0980, 0.1441, 0.0955, 0.0471, -0.0014, 0.0504, 0.1019, 0.1539, 0.2058, 0.2577, 0.1666, 0.0758, -0.0150, -0.1058, -0.1970, -0.0665, 0.0635, 0.0164, -0.0308, -0.0779, -0.1254, -0.1725, -0.2195, -0.2666, -0.1558, -0.0444, 0.0666, 0.1774, 0.1421, 0.1058, 0.0700, 0.0340, 0.0948, 0.1558, 0.2166, 0.1793, 0.1421, 0.1058, 0.0688, 0.0320, 0.0652, 0.0980, 0.1313, 0.1009, 0.0711, 0.0410, 0.0108, -0.0194, 0.0435, 0.1068, 0.1695, 0.1019, 0.0348, -0.0325, -0.1000, -0.0711, -0.0425, -0.0140, 0.0146, -0.0199, -0.0543, -0.0888, -0.1235, -0.1578, -0.1921, -0.1450, -0.0976, -0.0503, -0.0029, -0.0191, -0.0354, -0.0515, -0.0410, -0.0305, -0.0284, -0.0265, 0.0247, 0.0173, 0.0217, 0.0261, 0.0041, -0.0178, -0.0398, -0.0616, -0.0237, 0.0143, 0.0523, 0.0238, -0.0047, -0.0332, -0.0055, 0.0222, 0.0067, -0.0090, -0.0246, -0.0402, -0.0559, -0.0179, 0.0201, 0.0044, -0.0112, -0.0021, 0.0069, 0.0049, 0.0028, 0.0007, -0.0052, -0.0112, 0.0035, 0.0182, 0.0330, 0.0477, 0.0298, 0.0119, -0.0060, -0.0239, 0.0135, 0.0108, 0.0081, 0.0054, 0.0080, 0.0106, -0.0068, -0.0241, -0.0415, -0.0588, -0.0761, -0.0935, -0.0609, -0.0282, 0.0044, 0.0370, 0.0173, -0.0023, -0.0220, 0.0175, 0.0570, 0.0367, 0.0163, -0.0041, -0.0245, -0.0448, -0.0203, 0.0042, 0.0288, 0.0150, 0.0177, 0.0205, 0.0078, -0.0049, -0.0176, -0.0303, -0.0180, -0.0058, 0.0064, -0.0247, -0.0558, -0.0397, -0.0235, -0.0073, 0.0088, 0.0038, -0.0013, -0.0063, -0.0114, -0.0257, -0.0400, -0.0544, -0.0428, -0.0313, -0.0682, -0.0552, -0.0421, -0.0291, -0.0161, -0.0030, 0.0100, 0.0230, 0.0361, 0.0491, 0.0239, -0.0014, -0.0266, -0.0030, 0.0206, 0.0441, 0.0677, 0.0565, 0.0455, 0.0344, 0.0329, 0.0315, 0.0300, 0.0319, 0.0337, 0.0357, 0.0132, -0.0092, -0.0317, -0.0294, -0.0304, -0.0313, -0.0254, -0.0194, -0.0135, -0.0076, -0.0142, -0.0208, 0.0149, 0.0507, 0.0864, 0.1225, 0.1578, 0.1274, 0.0966, 0.0661, 0.0355, 0.0049, 0.0041, 0.0034, 0.0026, -0.0580, -0.1186, -0.1793, -0.1176, -0.0566, 0.0047, 0.0661, 0.1274, 0.0820, 0.0367, 0.0684, 0.1000, -0.0345, -0.1686, -0.1352, -0.1009, -0.0665, -0.0324, -0.0358, -0.0390, -0.0051, 0.0289, 0.0629, 0.0968, 0.1313, 0.0580, -0.0147, -0.0875, -0.1607, -0.0598, 0.0408, 0.0152, -0.0104, -0.0360, -0.0616, -0.0872, -0.0532, -0.0192, 0.0148, 0.0488, 0.0828, 0.0492, 0.0157, -0.0178, -0.0515, -0.0850, -0.0663, -0.0477, -0.0291, -0.0105, 0.0081, -0.0031, 0.0291, 0.0612, -0.0023, -0.0658, -0.0397, -0.0136, 0.0124, 0.0079, 0.0296, 0.0514, 0.0230, -0.0053, -0.0336, -0.0619, -0.0904, -0.1186, -0.0828, -0.0469, -0.0112, 0.0247, 0.0606, 0.0395, 0.0184, 0.0437, 0.0689, 0.0942, 0.1196, 0.0622, 0.0051, -0.0521, -0.0306, -0.0091, 0.0123, 0.0339, 0.0321, 0.0305, 0.0288, 0.0442, 0.0597, 0.0751, 0.0906, 0.0563, 0.0221, -0.0123, 0.0067, 0.0256, 0.0445, 0.0154, -0.0137, -0.0428, -0.0720, -0.0391, -0.0062, 0.0267, 0.0596, 0.0360, 0.0123, -0.0113, -0.0349, -0.0066, 0.0217, 0.0500, 0.0783, 0.0678, 0.0573, 0.0468, 0.0364, 0.0259, 0.0570, 0.0883, 0.1196, 0.0990, 0.0778, 0.0570, 0.0362, 0.0153, -0.0055, -0.0264, -0.0472, -0.0680, -0.0889, -0.1098, -0.1127, -0.1156, -0.1196, -0.1225, -0.1617, -0.2009, -0.1539, -0.1068, -0.0601, -0.0131, 0.0339, 0.0809, 0.0743, 0.0677, 0.0612, 0.0857, 0.1098, 0.1343, 0.1196, 0.1039, 0.0888, 0.0735, 0.0785, 0.0835, 0.0886, 0.0609, 0.0331, 0.0054, -0.0223, -0.0533, -0.0395, -0.0257, -0.0118, -0.0199, -0.0280, -0.0612, -0.0345, -0.0079, -0.0485, -0.0357, -0.0229, -0.0330, -0.0184, -0.0038, 0.0108, 0.0254, 0.0142, 0.0030, -0.0082, 0.0045, 0.0173, 0.0301, 0.0428, 0.0213, -0.0004, -0.0221, -0.0437, -0.0357, -0.0276, -0.0196, -0.0116, -0.0240, -0.0364, -0.0487, -0.0576, -0.0666, -0.0756, -0.0845, -0.0934, -0.0615, -0.0296, 0.0023, 0.0343, 0.0431, 0.0519, 0.0312, 0.0103, -0.0105, -0.0314, -0.0521, 0.0018, 0.0559, 0.0195, -0.0170, -0.0533, -0.0118, 0.0297, 0.0712, 0.1127, 0.0710, 0.0292, -0.0126, 0.0119, 0.0364, 0.0345, 0.0325, 0.0181, 0.0038, 0.0034, -0.0214, -0.0461, -0.0709, -0.0955, -0.1205, -0.0815, -0.0427, -0.0040, 0.0348, 0.0735, 0.1127, 0.0761, 0.0400, 0.0038, 0.0028, 0.0018, -0.0540, 0.0464, 0.0512, 0.0561, 0.0609, 0.0657, 0.0705, 0.0266, -0.0174, -0.0613, -0.1049, -0.1490, -0.1235, -0.0975, -0.0716, -0.0458, -0.0199, 0.0060, 0.0319, 0.0084, -0.0151, -0.0385, -0.0620, -0.0325, -0.0031, 0.0264, 0.0118, -0.0029, 0.0033, 0.0095, 0.0158, 0.0220, 0.0414, 0.0607, 0.0801, 0.0341, -0.0119, -0.0128, -0.0138, -0.0516, -0.0249, 0.0018, 0.0286, 0.0554, 0.0821, 0.0171, -0.0477, -0.0203, 0.0071, 0.0345, -0.0052, -0.0448, -0.0845, -0.0682, -0.0519, -0.0358, -0.0195, -0.0033, 0.0130, 0.0292, 0.0108, -0.0077, -0.0261, -0.0055, 0.0151, 0.0357, 0.0562, 0.0310, 0.0057, -0.0195, -0.0020, 0.0156, -0.0100, -0.0357, -0.0612, -0.0468, -0.0324, -0.0484, -0.0644, -0.0804, -0.0488, -0.0172, 0.0143, 0.0459, 0.0774, 0.0466, 0.0157, -0.0152, -0.0010, 0.0132, 0.0274, 0.0416, 0.0558, 0.0370, 0.0183, -0.0004, -0.0191, -0.0042, 0.0108, 0.0257, 0.0407, 0.0178, -0.0050, -0.0086, -0.0366, -0.0645, -0.0255, 0.0135, 0.0525, 0.0915, 0.0576, 0.0238, -0.0101, -0.0439, -0.0106, -0.0183, -0.0261, -0.0337, -0.0245, -0.0153, -0.0061, -0.0099, -0.0136, 0.0146, 0.0428, 0.0339, 0.0206, 0.0072, -0.0062, -0.0196, 0.0075, 0.0346, 0.0334, 0.0322, 0.0310, 0.0235, 0.0161, 0.0096, 0.0032, -0.0033, 0.0216, -0.0190, -0.0597, -0.1000, -0.0769, -0.0536, -0.0302, -0.0069, 0.0165, 0.0191, 0.0217, 0.0243, 0.0177, -0.0020, -0.0217, -0.0027, 0.0163, 0.0352, 0.0542, 0.0731, 0.0608, 0.0485, 0.0362, -0.0014, 0.0451, 0.0400, 0.0349, 0.0298, 0.0356, 0.0414, 0.0470, 0.0528, 0.0485, 0.0441, 0.0398, 0.0354, 0.0311, 0.0060, -0.0190, -0.0440, -0.0690, -0.0940, -0.0760, -0.0578, -0.0397, -0.0217, -0.0035, 0.0146, 0.0099, 0.0051, 0.0004, -0.0043, -0.0090, -0.0117, -0.0149, -0.0182, -0.0215, -0.0096, 0.0022, 0.0140, 0.0033, -0.0074, -0.0182, -0.0072, 0.0038, 0.0147, 0.0257, 0.0100, -0.0058, -0.0216, -0.0012, 0.0191, 0.0395, 0.0277, 0.0160, 0.0042, 0.0019, -0.0003, -0.0025, -0.0048, -0.0070, -0.0092, -0.0115, -0.0137, -0.0171, -0.0206, -0.0241, -0.0275, -0.0311, -0.0345, -0.0413, -0.0479, -0.0349, -0.0219, -0.0088, 0.0042, 0.0172, 0.0070, -0.0033, -0.0135, 0.0128, 0.0393, 0.0658, 0.0472, 0.0287, 0.0102, -0.0083, -0.0268, -0.0453, -0.0310, -0.0166, -0.0022, 0.0122, 0.0263, 0.0404, 0.0545, 0.0319, 0.0093, -0.0133, -0.0140, -0.0147, -0.0155, -0.0413, -0.0264, -0.0114, 0.0036, 0.0185, 0.0334, 0.0306, 0.0276, 0.0286, 0.0296, 0.0305, 0.0038, -0.0229, -0.0496, -0.0374, -0.0253, -0.0131, -0.0009, 0.0113, 0.0234, 0.0356, 0.0103, -0.0151, -0.0404, -0.0657, -0.0511, -0.0365, -0.0218, -0.0072, 0.0075, 0.0221, 0.0367, 0.0392, 0.0417, 0.0442, 0.0466, 0.0491, 0.0446, 0.0400, 0.0282, 0.0164, 0.0046, -0.0072, -0.0011, 0.0050, 0.0111, 0.0171, -0.0021, -0.0213, -0.0406, -0.0598, -0.0790, -0.0686, -0.0581, -0.0477, -0.0373, -0.0251, -0.0128, -0.0006, 0.0117, 0.0238, 0.0361, 0.0483, 0.0291, 0.0100, -0.0091, -0.0282, -0.0474, -0.0665, -0.0476, -0.0287, -0.0099, 0.0090, 0.0279, 0.0468, 0.0241, 0.0013, -0.0215, -0.0442, -0.0670, -0.0488, -0.0306, -0.0123, 0.0058, 0.0240, 0.0422, 0.0605, 0.0787, 0.0969, 0.0632, 0.0296, -0.0041, -0.0377, -0.0713, -0.0588, -0.0463, -0.0337, -0.0317, -0.0297, -0.0276, -0.0039, 0.0199, 0.0031, -0.0138, -0.0306, -0.0474, -0.0643, -0.0503, -0.0363, -0.0222, -0.0083, 0.0058, 0.0198, 0.0265, 0.0331, 0.0398, 0.0465, 0.0531, 0.0347, 0.0162, 0.0159, 0.0157, 0.0154, 0.0073, -0.0008, -0.0089, 0.0007, 0.0103, 0.0199, 0.0295, 0.0391, 0.0341, 0.0291, 0.0241, 0.0302, 0.0362, 0.0422, 0.0483, 0.0544, 0.0605, -0.0052, -0.0708, -0.0621, -0.0534, -0.0448, -0.0361, -0.0361, -0.0361, -0.0360, -0.0173, 0.0014, 0.0201, 0.0388, 0.0575, 0.0349, 0.0123, -0.0105, -0.0331, -0.0558, -0.0441, -0.0325, -0.0209, -0.0093, 0.0023, -0.0020, -0.0064, -0.0108, -0.0152, -0.0118, -0.0083, -0.0049, -0.0015, 0.0019, 0.0005, -0.0009, 0.0112, 0.0231, 0.0352, 0.0472, 0.0593, 0.0712, 0.0279, -0.0155, -0.0588, -0.0497, -0.0405, -0.0314, -0.0308, -0.0301, -0.0295, -0.0182, -0.0070, 0.0042, 0.0154, 0.0266, 0.0378, 0.0292, 0.0205, 0.0228, 0.0253, 0.0276, 0.0300, 0.0323, 0.0134, -0.0055, -0.0244, -0.0217, -0.0188, -0.0161, -0.0132, -0.0123, -0.0115, -0.0017, 0.0082, 0.0179, 0.0278, 0.0376, 0.0474, 0.0367, 0.0261, 0.0154, 0.0047, -0.0059, -0.0167, -0.0076, 0.0013, 0.0103, 0.0193, 0.0282, -0.0049, -0.0381, -0.0229, -0.0078, 0.0074, 0.0226, 0.0069, -0.0088, -0.0245, -0.0402, -0.0559, -0.0286, -0.0013, 0.0260, 0.0532, 0.0352, 0.0171, -0.0009, -0.0190, -0.0370, -0.0223, -0.0077, 0.0070, 0.0217, 0.0364, 0.0510, 0.0657, 0.0804, 0.0303, -0.0199, -0.0700, -0.1205, -0.0847, -0.0494, -0.0140, 0.0214, 0.0567, 0.0921, 0.1274, 0.0354, -0.0567, -0.0470, -0.0374, -0.0277, -0.0181, -0.0084, -0.0358, -0.0631, -0.0605, -0.0577, -0.0551, -0.0595, -0.0640, -0.0454, -0.0268, -0.0081, 0.0105, 0.0291, 0.0308, 0.0324, 0.0340, 0.0357, 0.0448, 0.0540, 0.0631, 0.0722, 0.0813, 0.0354, -0.0107, -0.0567, -0.0461, -0.0353, -0.0246, -0.0138, -0.0349, -0.0560, -0.0770, -0.0617, -0.0466, -0.0314, -0.0162, -0.0010, 0.0090, 0.0191, 0.0291, 0.0391, 0.0492, 0.0592, 0.0693, 0.0793, -0.0019, -0.0830, -0.0689, -0.0548, -0.0407, -0.0519, -0.0631, -0.0744, -0.0857, -0.0969, -0.0666, -0.0364, -0.0061, 0.0242, 0.0544, 0.0847, 0.1147, 0.1450, 0.0855, 0.0257, -0.0342, -0.0939, -0.0696, -0.0453, -0.0209, 0.0035, 0.0278, 0.0521, -0.0046, -0.0613, -0.1176, -0.0976, -0.0771, -0.0566, -0.0363, -0.0158, 0.0047, 0.0252, 0.0457, 0.0661, 0.0865, 0.1068, 0.1274, 0.1078, 0.0880, 0.0683, 0.0486, 0.0393, 0.0300, 0.0207, 0.0114, 0.0076, 0.0039, 0.0002, -0.0035, -0.0072, -0.0109, -0.0076, -0.0044, -0.0012, 0.0021, 0.0053, -0.0081, -0.0216, -0.0351, -0.0485, -0.0619, -0.0495, -0.0369, -0.0245, -0.0121, 0.0005, 0.0047, 0.0090, 0.0133, 0.0175, 0.0219, 0.0087, -0.0045, -0.0177, -0.0309, -0.0223, -0.0137, -0.0052, 0.0034, 0.0121, 0.0206, 0.0141, 0.0076, 0.0011, 0.0081, 0.0151, 0.0221, 0.0168, 0.0116, 0.0062, 0.0135, 0.0207, 0.0279, 0.0352, 0.0424, 0.0339, 0.0254, 0.0169, 0.0083, -0.0003, -0.0088, -0.0012, 0.0063, 0.0139, 0.0200, 0.0261, 0.0321, 0.0383, 0.0444, 0.0357, 0.0270, 0.0182, 0.0095, 0.0008, -0.0130, -0.0270, -0.0409, -0.0275, -0.0142, -0.0009, 0.0123, 0.0257, 0.0166, 0.0074, -0.0017, -0.0109, -0.0200, -0.0292, -0.0383, -0.0239, -0.0095, 0.0049, 0.0193, 0.0336, 0.0201, 0.0066, -0.0069, -0.0205, -0.0340, -0.0261, -0.0182, -0.0104, -0.0025, -0.0006, 0.0013, 0.0031, 0.0050, 0.0098, 0.0146, 0.0078, 0.0009, -0.0059, 0.0034, 0.0126, 0.0220, 0.0312, 0.0405, 0.0266, 0.0126, -0.0013, -0.0152, -0.0292, -0.0431, -0.0354, -0.0277, -0.0200, -0.0123, -0.0047, 0.0030, 0.0107, 0.0096, 0.0086, 0.0075, 0.0065, 0.0121, 0.0177, 0.0233, 0.0289, 0.0346, 0.0272, 0.0200, 0.0127, -0.0335, -0.0062, -0.0061, -0.0060, -0.0060, -0.0059, -0.0058, -0.0058, -0.0057, -0.0057, -0.0056, -0.0055, -0.0055, -0.0054, -0.0053, -0.0053, -0.0052, -0.0052, -0.0051, -0.0050, -0.0050, -0.0049, -0.0048, -0.0048, -0.0047, -0.0047, -0.0046, -0.0045, -0.0045, -0.0044, -0.0044, -0.0043, -0.0042, -0.0042, -0.0041, -0.0040, -0.0040, -0.0039, -0.0039, -0.0038, -0.0037, -0.0037, -0.0036, -0.0035, -0.0035, -0.0034, -0.0034, -0.0033, -0.0032, -0.0032, -0.0031, -0.0030, -0.0030, -0.0029, -0.0029, -0.0028, -0.0027, -0.0027, -0.0026, -0.0025, -0.0025, -0.0024, -0.0024, -0.0023, -0.0022, -0.0022, -0.0021, -0.0020, -0.0020, -0.0019, -0.0019, -0.0018, -0.0017, -0.0017, -0.0016, -0.0015, -0.0015, -0.0014, -0.0014, -0.0013, -0.0012, -0.0012, -0.0011, -0.0011, -0.0010, -0.0009, -0.0009, -0.0008, -0.0007, -0.0007, -0.0006, -0.0006, -0.0005, -0.0004, -0.0004, -0.0003, -0.0002, -0.0002, -0.0001, -0.0001, 0.0001];
+      Ac_Data = Matrix.create([Ac_Data])
+      dt = 1 / 50;
+      return [Ac_Data, dt];
+    }
+    const [Ac_Data, dt2] = Seno();
+    const [PHI, w, h] = modos(K_c, M, zeta);
+
+    // Funciones para Three.js
+    window.addEventListener('resize', AdjustSize);
+
+    function AdjustSize() { //Adjustar el tamaño de la ventana dinámicamente
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.render(scene, camera);
+    }
+
+    function Rec_Es(a, t, b, u1, u2, u3) { //Crear geometrías rectangulares
+      const geometryF = new THREE.BoxGeometry(a, t, b, 1, 50, 1);
+      const materialF = new THREE.MeshPhongMaterial({
+        color: 0xDC7633,
+        flatShading: true
+        // wireframe: true, //Mostrar los segmentos con hilos
+
+      });
+      let pos = { x: u1, y: u2, z: u3 };
+      cubo1 = new THREE.Mesh(geometryF, materialF);
+      cubo1.position.set(pos.x, pos.y, pos.z);
+      cubo1.rotation.y = - Math.PI / 2;
+      cubo1.rotation.x = - Math.PI;
+      scene.add(cubo1);
+      return cubo1;
+    }
+
+
+    function Esf_Es(a, t, b, u1, u2, u3) { //Crear geometrías esfericas
+      const geometry = new THREE.SphereGeometry(a, 32, 16);
+      const material = new THREE.MeshBasicMaterial({ color: 0x45F9EA0});
+      const sphere = new THREE.Mesh(geometry, material);
+      let pos = { x: u1, y: u2, z: u3 };
+      sphere.position.set(pos.x, pos.y, pos.z);
+
+      scene.add(sphere);
+      return(sphere)
+    }
+
+    // function Mostrar(Obj) {
+    // 	scene.add(Obj);
+    // 	return Obj;
+
+    // }
+    // Cargar escenas
+    // Losas
+    // var L1 = Rec_Es(3.5, 0.2, 3.5, 5, 3, 0);
+    // var L2 = Rec_Es(3.5, 0.2, 3.5, 5, 1, 0);
+    // Columnas
+    var C1 = Rec_Es(0.3, 2, 0.3, 3.5, 0, 1.5);
+    // var C2 = Rec_Es(0.3, 2, 0.3, 3.5, 2, 1.5);
+    // var C3 = Rec_Es(0.3, 2, 0.3, 6.5, 2, 1.5);
+    // var C4 = Rec_Es(0.3, 2, 0.3, 6.5, 0, 1.5);
+    //Columnas
+    var C5 = Rec_Es(0.3, 2, 0.3, 3.5, 0, -1.5);
+    var C6 = Rec_Es(0.3, 2, 0.3, 3.5, 2, -1.5);
+    var zetaxd = new Array();
+    // var C7 = Rec_Es(0.3, 2, 0.3, 6.5, 2, -1.5);
+    // var C8 = Rec_Es(0.3, 2, 0.3, 6.5, 0, -1.5);
+    //
+    // var L1=CopiaDeDataZ(L1);
+    // var L2=CopiaDeDataZ(L2);
+    // zesaas(C1);
+    // var C1 = CopiaDeDataZ(C1);
+    // var C2 = CopiaDeDataZ(C2);
+    // var C3 = CopiaDeDataZ(C3);
+    // var C4 = CopiaDeDataZ(C4);
+    // var C5 = CopiaDeDataZ(C5);
+    // var C6 = CopiaDeDataZ(C6);
+    // var C7 = CopiaDeDataZ(C7);
+    // var C8 = CopiaDeDataZ(C8);
+    // Circulos
+    var Esf1=Esf_Es(0.35, 2, 2, 2.9, 1.05, -1.5)
+    var Esf2=Esf_Es(0.35, 2, 2, 2.9, 3.15, -1.5)
+    var contadorglobal = 0;
+    // Movimiento_defor()
+    function Movimiento_defor() {
+      with (Matrix) {
+        contadorglobal = contadorglobal + 1;
+        const now = Date.now() / Date.now();
+        const Move = new THREE.Vector3(1, 1, 1);
+        var t = 0;
+        var zetaxd = zesaas(C1)
+        for (let i = 0; i < C1.geometry.attributes.position.count; i++) {
+          const x = C1.geometry.attributes.position.getY(i);
+          const xflex2 = (x * x) / 60 - (x * x * x) / 6;
+          s = i;
+          C1.geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (U1.mat[0][contadorglobal] * 2.16 / 3 + 2 * (0.005 / 3)) * -1);//SuperBien
+        }
+        // // geometry.computeVertexNormals();
+        C1.geometry.attributes.position.needsUpdate = true;
+        renderer.render(scene, camera)
+        requestAnimationFrame(Movimiento_defor)
+      }
+    }
+    var sn = new Array();
+    var xs = new Array();
+    var xf = new Array();
+    var avisame = new Array();
+    for (let i = 0; i < C5.geometry.attributes.position.count; i++) {
+      sn[i] = 0;
+      xs[i] = C5.geometry.attributes.position.getY(i); // Lineas para expandir
+      xf[i] = (xs[i] * xs[i]) / 120 - (xs[i] * xs[i] * xs[i]) / 6;
+      if (xs[i] == -0) {
+        avisame[i] = i;
+
+      }
+
+    }
+    function Movimiento_Sen() {
+      const now = Date.now() / 300;
+      renderer.render(scene, camera);
+      var t = 0;
+      var s = 0;
+      var xds = 0;
+      var acumaladora = 0;
+      // Mesa2.position.x //Posición x de la mesa
+      for (let i = 0; i < C5.geometry.attributes.position.count; i++) {
+        if (i == 104 || i == 208) {
+          avisame[i] = i;
+          s = 0;
+          acumaladora = 0;
+
+        } else {
+
+        }
+        sn[i] = acumaladora;
+        acumaladora = 2 / 50 + acumaladora;
+        // (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1
+        // const x = geometry.attributes.position.getY(i)
+        const x = sn[s] / 2.5;
+        if (xds == 12) {
+          xds = 0;
+
+        }
+        // console.log(sn)
+        // const x = geometry.attributes.position.getY(i)+4/20; // Lineas para expandir
+        const xsin = Math.sin(2 * x / 3 + 1 / 2 * now);
+        const xflex2 = (x * x) / 2 - (x * x * x) / 6;
+        const xflex3 = -(x * x) / 6 - (x * x * x) / 6;
+        s = s + 1;
+        // geometry.attributes.position.setZ(s, zeta[s] + xflex2 * Math.sin(now));//SuperBien
+        // geometry.attributes.position.setZ(s, zeta[s] + zeta[s] * Math.sin(now));//Lineas de código para expandir
+        // C5.geometry.attributes.position.setZ(i, zetaxd[i] + xflex2 *U1.mat[0][xds] *Math.sin(now));//SuperBien
+        // C6.geometry.attributes.position.setZ(i, zetaxd[i] + xflex2*U1.mat[0][xds] * Math.sin(now));//SuperBien
+        C5.geometry.attributes.position.setZ(i, zetaxd[i] + xflex2 * Math.sin(now));//SuperBien
+        C6.geometry.attributes.position.setZ(i, zetaxd[i] + xflex3 * Math.sin(now));//SuperBien
+        C6.position.x = (3.5-zetaxd[i] - xflex2 * Math.sin(now));
+        Esf1.position.x = (3.5-zetaxd[i] - xflex2 * Math.sin(now));
+        Esf2.position.x = ((C6.position.x)-zetaxd[i] - xflex3 * Math.sin(now));
+
+
+
+        xds = xds + 1;
+
+
+
+
+      }
+      // // geometry.computeVertexNormals();
+      C5.geometry.attributes.position.needsUpdate = true; //Aplica los cambios
+      C6.geometry.attributes.position.needsUpdate = true; //Aplica los cambios
+      Esf1.geometry.attributes.position.needsUpdate = true; //Aplica los cambios
+      Esf2.geometry.attributes.position.needsUpdate = true; //Aplica los cambios
+      renderer.render(scene, camera) //Rendizar
+      requestAnimationFrame(Movimiento_Sen)
+    }
+    function zesaas(L) {
+      var zetaxd = new Array();
+      var ye = new Array();
+      var equis = new Array();
+      for (let i = 0; i < L.geometry.attributes.position.count; i++) {
+        zetaxd[i] = Math.sin(L.geometry.attributes.position.getZ(i));
+        // zetaxd[i] = L.geometry.attributes.position.getZ(i);
+        //   equis[i]= Math.sin(L.geometry.attributes.position.getZ(i));
+        //   ye[i]=Math.sin(L.geometry.attributes.position.getZ(i));
+        //   L.geometry.attributes.position.setZ(i,zetaxd[i]);
+      }
+      return zetaxd;
+    }
+    function DATOSZ() {
+      var vec = new Array();
+      vec[0] = 0;
+      for (let i = 0; i < C5.geometry.attributes.position.count; i++) {
+        zetaxd[i] = C5.geometry.attributes.position.getZ(i);
+        vec[i] = 2 / 5;
+
+
+      }
+      return vec;
+    }
+    var vec = DATOSZ();
+    function CopiaDeDataZ(L) {
+      var zetaxd = new Array();
+      var ye = new Array();
+      var equis = new Array();
+      for (let i = 0; i < L.geometry.attributes.position.count; i++) {
+        // zetaxd[i] = Math.sin(L.geometry.attributes.position.getZ(i));
+        zetaxd[i] = L.geometry.attributes.position.getZ(i);
+
+      }
+      return L;
+    }
+    Movimiento_Sen();
+    // Exportar datos de excel
+    function exportCSVFile(headers, items, fileName) {
+      if (headers) {
+        items.unshift(headers);
+      }
+
+      const jsonObject = JSON.stringify(items);
+
+      const csv = convertToCSV(jsonObject);
+
+      const exportName = fileName + ".csv" || "export.csv";
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      if (navigator.msSaveBlob) {
+        navigator.msSaveBlob(blob, exportName);
+      } else {
+        const link = document.createElement("a");
+        if (link.download !== undefined) {
+          const url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", exportName);
+          link.style.visibility = "hidden";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+    }
+    // const loader2 = new THREE.GLTFLoader();
+    // Load a glTF resource, Mesa1, parte de arriba de los cilindros
+    loader2.load(
+      'Mesa1.gltf',//'scene.gltf'
+      function (gltf) {
+        Mesa1 = gltf.scene;
+        scene.add(Mesa1);
+        gltf.animations; // Array<THREE.AnimationClip>
+        gltf.scene; // THREE.Group
+        gltf.scenes; // Array<THREE.Group>
+        gltf.cameras; // Array<THREE.Camera>
+        gltf.asset; // Object
+        console.log('completado!.....')
+        Mesa1.position.z += 0
+        Mesa1.position.x += 5
+        Mesa1.position.y += -1.5
+        renderer.render(scene, camera);
+      },
+      // called while loading is progressing
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      // called when loading has errors
+      function (error) {
+        console.log('An error happened');
+      }
+    );
+    // const loader4 = new THREE.GLTFLoader();
+    // Load a glTF resource, Cilindros Loading
+    loader4.load(
+      'Cilindros.gltf',//'scene.gltf'
+      function (gltf) {
+        Cilindros = gltf.scene;
+        scene.add(Cilindros);
+        gltf.animations; // Array<THREE.AnimationClip>
+        gltf.scene; // THREE.Group
+        gltf.scenes; // Array<THREE.Group>
+        gltf.cameras; // Array<THREE.Camera>
+        gltf.asset; // Object
+        console.log('completado!.....')
+        Cilindros.position.z += 0
+        Cilindros.position.x += 5
+        Cilindros.position.y += -1.5
+        renderer.render(scene, camera);
+      },
+      // called while loading is progressing
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      // called when loading has errors
+      function (error) {
+        console.log('An error happened');
+      }
+    );
+    const loader5 = new THREE.GLTFLoader();
+    // Load a glTF resource, Mesa, parte de abajo de los cilindros
+    loader5.load(
+      'Mesa2.gltf',//'scene.gltf'
+      function (gltf) {
+        Mesa2 = gltf.scene;
+        scene.add(Mesa2);
+        gltf.animations; // Array<THREE.AnimationClip>
+        gltf.scene; // THREE.Group
+        gltf.scenes; // Array<THREE.Group>
+        gltf.cameras; // Array<THREE.Camera>
+        gltf.asset; // Object
+        console.log('completado!.....')
+        Mesa2.position.z += 0
+        Mesa2.position.x += 5
+        Mesa2.position.y += -2.0
+        renderer.render(scene, camera);
+
+      },
+      // called while loading is progressing
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      // called when loading has errors
+      function (error) {
+        console.log('An error happened');
+      }
+    );
+  </script>
+
+</body>
+
+</html>
