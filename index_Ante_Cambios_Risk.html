@@ -94,10 +94,10 @@
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<select id="select_barra" class="form-select" aria-label="Default select example"
-				onchange="ResponseEditor(),LoadCharDataOnChange()">
-				<option value="Despl" selected>Desplazamiento [m]</option>
-				<option value="Vel">Velocidad [m/s]</option>
-				<option value="Acel">Aceleración [m/s^2]</option>
+				onchange="ResponseEditor()">
+				<option value="Despl" selected>Desplazamiento</option>
+				<option value="Vel">Velocidad</option>
+				<option value="Acel">Aceleración</option>
 			</select>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
@@ -446,13 +446,13 @@
 										data-bs-toggle="dropdown" aria-expanded="false">
 										Sismos</button>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#" onclick="Elcentro(),Alerta_Sismo()">El centro</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LaVega(),Alerta_Sismo()">La Vega</a></li>
+										<li><a class="dropdown-item" href="#" onclick="Elcentro()">El centro</a></li>
+										<li><a class="dropdown-item" href="#" onclick="LaVega()">La Vega</a></li>
 										<!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
-										<li><a class="dropdown-item" href="#" onclick="Armenia(),Alerta_Sismo()">Armenia</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LomaPrieta(),Alerta_Sismo()">Loma Prieta</a>
+										<li><a class="dropdown-item" href="#" onclick="Armenia()">Armenia</a></li>
+										<li><a class="dropdown-item" href="#" onclick="LomaPrieta()">Loma Prieta</a>
 										</li>
-										<li><a class="dropdown-item" href="#" onclick="Gilroy(),Alerta_Sismo()">Gilroy</a></li>
+										<li><a class="dropdown-item" href="#" onclick="Gilroy()">Gilroy</a></li>
 									</ul>
 									<!-- <select>
 										<option value="1" onclick="Elcentro()">El Centro</option>
@@ -682,7 +682,7 @@
 			JSON.stringify(suma_w)
 		);
 		var data = [];
-		mck.addEventListener('input', () => { //Identifica cómo se esta modelando el sistema 
+		mck.addEventListener('input', () => { //Identifica cómo esta modelando el sistema el usuario
 			if (Masa_box1.value.length > 0 || c_box1.value.length > 0 || k_box1.value.length > 0) {
 				// document.getElementById('flexSwitchCheckChecked').setAttribute('checked', 'checked')
 				document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
@@ -711,7 +711,7 @@
 				document.getElementById('Locke').style.display = 'none';
 			}
 		})
-		ZWn.addEventListener('input', () => { //Identifica cómo se esta modelando el sistema 
+		ZWn.addEventListener('input', () => { //Identifica cómo esta modelando el sistema el usuario
 			if (zeta_box.value.length || Wna_box.value.length) {
 				// document.getElementById('flexSwitchCheckChecked2').setAttribute('checked', 'checked')
 				document.getElementById('Locke1').style.display = 'block';
@@ -1209,12 +1209,12 @@
 						if (CleanResponse == true) {
 							chart.data.datasets[0].data.length = 0;
 							chart.data.datasets[1].data.length = 0;
+							chart.update();
 							// for (let i = 0; i < contadorglobal; i++) {
-							// 	chart.data.datasets[1].data.push({ y: u2[i], x: Vtiempo2[i] })
-							// 	chart.data.datasets[0].data.push({ y: suma_w[i], x: Vtiempo2[i] })
+							// 	chart.data.datasets[0].data.push({ y: u2[i], x: Vtiempo2[i] })
+							// 	chart.update();
 							// }
 							CleanResponse = false;
-							chart.update();
 						}
 						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
 						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
@@ -1224,11 +1224,12 @@
 						if (CleanResponse == true) {
 							chart.data.datasets[0].data.length = 0;
 							chart.data.datasets[1].data.length = 0;
+							chart.update();
 							// for (let i = 0; i < contadorglobal; i++) {
-							// 	chart.data.datasets[1].data.push({ y: up2[i], x: Vtiempo2[i] })
+							// 	chart.data.datasets[0].data.push({ y: up2[i], x: Vtiempo2[i] })
+							// 	chart.update();
 							// }
 							CleanResponse = false;
-							chart.update();
 						}
 						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
 						chart.update();
@@ -1240,9 +1241,9 @@
 							chart.update();
 							// for (let i = 0; i < contadorglobal; i++) {
 							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+							// 	chart.update();
 							// }
 							CleanResponse = false;
-							chart.update();
 						}
 						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
 						chart.update();
@@ -1421,11 +1422,12 @@
 						if (CleanResponse == true) {
 							chart.data.datasets[0].data.length = 0;
 							chart.data.datasets[1].data.length = 0;
+							chart.update();
 							// for (let i = 0; i < contadorglobal; i++) {
 							// 	chart.data.datasets[0].data.push({ y: u2[i], x: Vtiempo2[i] })
+							// 	chart.update();
 							// }
 							CleanResponse = false;
-							chart.update();
 						}
 						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
 						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
@@ -1435,11 +1437,12 @@
 						if (CleanResponse == true) {
 							chart.data.datasets[0].data.length = 0;
 							chart.data.datasets[1].data.length = 0;
+							chart.update();
 							// for (let i = 0; i < contadorglobal; i++) {
 							// 	chart.data.datasets[0].data.push({ y: up2[i], x: Vtiempo2[i] })
+							// 	chart.update();
 							// }
 							CleanResponse = false;
-							chart.update();
 						}
 						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
 						chart.update();
@@ -1451,9 +1454,9 @@
 							chart.update();
 							// for (let i = 0; i < contadorglobal; i++) {
 							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+							// 	chart.update();
 							// }
 							CleanResponse = false;
-							chart.update();
 						}
 						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
 						chart.update();
@@ -1520,6 +1523,33 @@
 		cube.userData.draggable = true;
 		cube.userData.name = 'Cube';
 		geometry.attributes.position.count;
+		// function contador4 (){
+		//    var contador1=0;
+		//    var div=1;
+		//    var t=0;
+		//    let geometry1 = new THREE.PlaneGeometry( 1, 1, 200, 200 );
+		// 			const material = new THREE.MeshBasicMaterial({
+		// 				color: 0x88FF88, //Color del cubo
+		// 				wireframe: true, //Mostrar los segmentos con hil
+		// 			});
+		// 			const Plano = new THREE.Mesh(geometry1, material);
+		// 			// Plano.rotation.y = - Math.PI / 2;
+		// 			const now = Date.now()/300
+		// 			scene.add(Plano);
+		//             function BarDeformation (){
+		// 			 const x = geometry1.attributes.position.getY(contador1)
+		// 			 const xsin = Math.sin(x+now)
+		// 			 console.log(xsin)
+		// 			 geometry1.attributes.position.setX(contador1,xsin)
+		// 			 geometry1.attributes.position.needsUpdate=true;
+		// 			 renderer.render(scene, camera);
+		//             if (contador1==(Segundos*40+1)){
+		//             clearInterval(tiempo);
+		//                 }
+		//               }
+		//                var tiempo=setInterval(BarDeformation,500)
+		//                           }
+		//  contador4()
 		let geometry1 = new THREE.PlaneGeometry(1, 1, 200, 200);
 		const material2 = new THREE.MeshBasicMaterial({
 			color: 0x88FF88, //Color del cubo
@@ -1533,7 +1563,7 @@
 
 			}
 		}
-		DATOSZ();
+		DATOSZ(); 
 		var contador6 = 0;
 		var PruebaV = [];
 		const Plano = new THREE.Mesh(geometry1, material2);
@@ -1546,17 +1576,29 @@
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
 				const x = geometry.attributes.position.getY(i);
 				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
+				// const xflex = (x * x) / 4 - (x * x * x) / 12;
+				// const xflex = (x * x) / 1.5 - (x * x * x) / 3;
 				const xflex2 = (x * x) / 59 - (x * x * x) / 5;
 				const xflex3 = (x * x) / (2.5 * Kef) - (x * x * x) / (6.5 * Kef);
 				const xcos = -1 * Math.cos(now * 3 / 8);
 				const xsint = Po * Math.sin(Wn * t);
+				// geometry.attributes.position.setX(i, xcos);
 				s = i;
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
+				// geometry.attributes.position.setZ(s,xsin ); //Funcional
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
+				// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
 				switch (validador3) {
 					case 1:
 						if (validador == 0) {
+							// geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 							geometry.attributes.position.setZ(s, zetaxd[s] + -xflex3 * u2[contadorglobal] * k);//SuperBien
 						} else {
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
+							// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 						}
 						break;
 					case 2:
@@ -1564,9 +1606,16 @@
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / k)) * -1);//SuperBien
 						} else {
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
+							// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 						}
 						break;
 				}
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] / (0.15 * k) + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien2
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
+
+				// geometry.attributes.position.setZ(s+1, 100)
+				// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
 			}
 			// // geometry.computeVertexNormals();
 			geometry.attributes.position.needsUpdate = true;
@@ -1581,20 +1630,138 @@
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
 				const x = geometry.attributes.position.getY(i);
 				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
+				// const xflex = (x * x) / 4 - (x * x * x) / 12;
 				const xflex = (x * x) / 1.5 - (x * x * x) / 3;
 				const xflex2 = (x * x) / 60 - (x * x * x) / 6;
 				const xcos = -1 * Math.cos(now * 3 / 8);
+				// const xsint = Po1 * Math.sin(Wn1 * t);
+				// geometry.attributes.position.setX(i, xcos);
 				s = i;
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xsin ); //Funcional
+				// geometry.attributes.position.setZ(s,xsin ); //Funcional
+				// geometry.attributes.position.setZ(s, position_clone[s] / 2 + xflex*xcos);
+				// geometry.attributes.position.setZ(s, position_clone[s] / 4 + xflex * xcos);//Mejorcita
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * xcos*Po * Math.sin(Wn * t));//Mejorcita1
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal]) * -1);//SuperBien
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (u2[contadorglobal] + Po * Math.sin(Wn * t1) * (0.5 / k)) * -1);//SuperBien
 				if (validador == 0) {
 					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1);//SuperBien
 				} else {
 					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
+					// geometry.attributes.position.setZ(s, zeta[s] + xflex2 * (u2[contadorglobal] * 2 / 3 + Po * Math.sin(Wn * t1) * (0.005 / k)) * -1);//SuperBien
 				}
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (suma_w[contadorglobal]) * -1);//TryOne
+				// geometry.attributes.position.setZ(s, zeta[s] + xflex * (prueba[contadorglobal]) * -1);//TryOne
+
+				// geometry.attributes.position.setZ(s+1, 100)
+				// geometry.attributes.position.setZ(i, position_clone.getZ(i)+xsin);
 			}
 			// // geometry.computeVertexNormals();
 			geometry.attributes.position.needsUpdate = true;
 			renderer.render(scene, camera)
 			requestAnimationFrame(Movimiento_SenSismo)
+		}
+		function contador3() {
+			var contador1 = 0;
+			var div = 1;
+			var t = 0;
+			const now = Date.now() / 200;
+			function BarDeformation() {
+				// const position_clone= JSON.parse(
+				// 	JSON.stringify(geometry.attributes.position.array)
+				// )
+				// const normals_clone= JSON.parse(
+				// 	JSON.stringify(geometry.attributes.normal.array)
+				// )
+				// const uX= geometry.attributes.uv.getX(contador1)*Math.PI*16
+				// const uY= geometry.attributes.uv.getY(contador1)*Math.PI*16
+				// const xangle= (uX+now)
+				// const xsin=Math.sin(xangle)*0.2;
+				// const yangle= (uX+now)
+				// const ycos=Math.cos(xangle)*0.2;
+				// //Indices
+				// const ix= contador1*3
+				// const iy= contador1*3+1
+				// const iz= contador1*3+2
+				// geometry.attributes.position.
+				// setX(contador1, position_clone[ix]+normals_clone[ix]*(xsin+ycos))
+				// geometry.attributes.position.
+				// setY(contador1, position_clone[iy]+normals_clone[iy]*(xsin+ycos))
+				// geometry.attributes.position.
+				// setZ(contador1, position_clone[iz]+normals_clone[iz]*(xsin+ycos))
+				// const x = geometry.attributes.position.getX(contador1)
+				// contador1++;
+				// div=div+0.1
+				// const y = geometry.attributes.position.getY(contador1)
+				// const xsin = -Math.pow(contador1,2)
+				// const ycos = 0.8*contador1*Math.cos(contador1)
+				// console.log('Cargo_Hola_mundo')
+				// cube.geometry.attributes.position.setZ(contador1, 3*xsin)
+				// cube.geometry.attributes.position.setX(contador1, ycos)
+				// cube.geometry.attributes.position.setY(contador1, ycos)
+				// geometry.attributes.position.needsUpdate = true;
+				// cube.geometry.attributes.position.setZ(contador1, -contador1)
+				// cube.geometry.attributes.position.sety(contador1, -10)
+				// cube.geometry.attributes.position.setx(contador1, -10)
+				// for the second morph target, we'll twist the cubes vertices
+				//    const twistPositions = [];
+				//    const direction = new THREE.Vector3( 1, 0, 0 );
+				//    const vertex = new THREE.Vector3();
+				// //    geometry.attributes.position = [];
+				// const positionAttribute = geometry.attributes.position;
+				// for ( let i = 0; i < positionAttribute.count; i ++ ) {
+
+				//       const x = positionAttribute.getX( i );
+				//       const y = positionAttribute.getY( i );
+				//       const z = positionAttribute.getZ( i );
+				//             // stretch along the x-axis so we can see the twist better
+				//                vertex.set( x * 2, y, z );
+				//                vertex.applyAxisAngle( direction, Math.PI * x / 2 ).toArray( twistPositions, twistPositions.length );
+				// 			//    geometry.attributes.position[ 1 ] = new THREE.Float32BufferAttribute( twistPositions, 3 );
+
+				// 			}
+				// geometry.attributes.position.setZ(contador1,contador1)
+				// geometry.attributes.position.setX(contador1,contador1)
+				// geometry.attributes.position.setY(1,0.6)
+				// geometry.attributes.position.setY(0,0.6)
+				geometry.attributes.position.setZ(1, -2 * 0.6)
+				geometry.attributes.position.setZ(0, -2 * 0.9)
+				geometry.attributes.position.setZ(2, 0.6)
+				geometry.attributes.position.setZ(3, 0.9)
+				geometry.attributes.position.setZ(6, 2 * 0.6)
+				geometry.attributes.position.setZ(7, 2 * 0.9)
+				// geometry.attributes.position.setZ(8,0.6)
+				// geometry.attributes.position.setZ(9,0.9)
+				// geometry.attributes.position.setZ(10,2*0.6)
+				// geometry.attributes.position.setZ(11,2*0.9)
+				// geometry.attributes.position.setZ(12,0.6)
+				// geometry.attributes.position.setZ(13,0.9)
+				// geometry.attributes.position.setZ(14,2*0.6)
+				// geometry.attributes.position.setZ(15,2*0.9)
+				// geometry.attributes.position.setZ(16,1)
+				// geometry.attributes.position.setZ(17,0.9)
+				const prueba1 = geometry.attributes.position.getZ(1)
+				const prueba2 = geometry.attributes.position.getZ(0)
+				const prueba3 = geometry.attributes.position.getZ(2)
+				const prueba4 = geometry.attributes.position.getZ(3)
+				geometry.attributes.position.needsUpdate = true;
+				contador1++;
+				const x = geometry.attributes.position.getX(contador1);
+				const y = geometry.attributes.position.getY(contador1);
+				const z = geometry.attributes.position.getZ(contador1);
+				var matriz = [x, y, z];
+				// geometry.attributes.position.setZ(1,-4*0.6)
+				// geometry.attributes.position.setZ(0,-4*0.9)
+				// geometry.attributes.position.setZ(2,-2*0.6)
+				// geometry.attributes.position.setZ(3,-2*0.9)
+				geometry.computeVertexNormals();
+				geometry.attributes.position.needsUpdate = true;
+				renderer.render(scene, camera);
+				if (contador1 == (Segundos * 40 + 1)) {
+					clearInterval(tiempo3);
+				}
+			}
+			tiempo3 = setInterval(BarDeformation, 500)
 		}
 		//  Crear geometrias
 		const geometry2 = createGeometry();
@@ -1783,33 +1950,6 @@
 			})
 			StopInterval();
 		}
-		// Alerta Sismos
-		function Alerta_Sismo() {
-			let timerInterval
-			Swal.fire({
-				title: 'El sismo fue seleccionado correctamente',
-				text: 'Sismos',
-				html: '<b></b>',
-				timer: 1500,
-				timerProgressBar: true,
-				didOpen: () => {
-					Swal.showLoading()
-					const b = Swal.getHtmlContainer().querySelector('b')
-					timerInterval = setInterval(() => {
-						b.textContent = Swal.getTimerLeft()
-					}, 100)
-				},
-				willClose: () => {
-					clearInterval(timerInterval)
-				}
-			}).then((result) => {
-				/* Read more about handling dismissals below */
-				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
-				}
-			})
-			StopInterval();
-		}
 		tippy('[data-tippy-content]'); //Cargar datos a la gráfica
 		var ejex = parseFloat(0)
 		var ctx = document.getElementById("myChart").getContext("2d"); //Grafica
@@ -1860,14 +2000,14 @@
 						// min: -2,
 						title: {
 							display: true,
-							text: 'y'
+							text: 'u [m]'
 
 						}
 					}
 				}
 			}
 		});
-		// Ajusta el tamaño de la pantalla 
+        // Ajusta el tamaño de la pantalla 
 		window.addEventListener('resize', AdjustSize);
 		function AdjustSize() {
 			camera.aspect = window.innerWidth / window.innerHeight;
@@ -2194,35 +2334,14 @@
 			console.log('Datos Organizados')
 			return data1
 		}
-		var LoadCharDataVer = true;
-		function LoadCharDataOnChange() {
-			console.log('Cambio de gráfica')
-			if (LoadCharDataVer == false) {
-				LoadCharData();
-			}
-		}
 		function LoadCharData() {
 			console.log('Cargar toda la gráfica')
 			chart.data.datasets[0].data.length = 0;
 			chart.data.datasets[1].data.length = 0;
-			LoadCharDataVer = false;
-			switch (EditResponse) {
-				case 1:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: suma_w[i], x: Vtiempo2[i] })
-						chart.data.datasets[1].data.push({ y: u2[i], x: Vtiempo2[i] })
-					}
-					break;
-				case 2:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[1].data.push({ y: up2[i], x: Vtiempo2[i] })
-					}
-					break;
-				case 3:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
-					}
-					break;
+			for (let i = 0; i < u2.length; i++) {
+				chart.data.datasets[0].data.push({ y: suma_w[i], x: Vtiempo2[i] })
+				chart.data.datasets[1].data.push({ y: u2[i], x: Vtiempo2[i] })
+
 			}
 			chart.update();
 		}
@@ -2283,4 +2402,5 @@
 		}
 	</script>
 </body>
+
 </html>
