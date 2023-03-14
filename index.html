@@ -1354,6 +1354,9 @@
 				//console.log(Vtiempo);
 				//console.log(Mesa1.position.y);
 				renderer.render(scene, camera); //Carga la escena
+				if (Math.abs(Desp_Data[contador1]) >= 1.5) {
+					Alerta();
+				}
 				if (contador1 == TimeLength - 1) {
 					clearInterval(tiempo1);
 				}
