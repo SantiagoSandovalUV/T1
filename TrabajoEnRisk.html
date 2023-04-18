@@ -86,6 +86,50 @@
 	</div>
 	<div class="position-fixed"
 		style="width: 450px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
+		<div class="card mt-1" style="width: 100%;">
+				<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseExample4_D" aria-expanded="false" aria-controls="collapseExample">
+					Opciones Avanzadas
+				</button>
+			<div class="collapse" id="collapseExample4_D">
+				<div class="accordion" id="accordionExample4_D">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="headingOne4D">
+							<div style="text-align: center;">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseOne4D" aria-expanded="false" aria-controls="collapseOne4D">
+									Gráficar la excitación de la mesa [m/s^2]
+								</button>
+							</div>
+						</h2>
+						<div id="collapseOne4D" class="accordion-collapse collapse" aria-labelledby="headingOne"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body" style="text-align: center;">
+								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
+								<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="headingTwo4D">
+							<div style="text-align: center;">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseTwo4D" aria-expanded="true" aria-controls="collapseTwo4D">
+									Agregar ruido a la señal y amplitud
+								</button>
+							</div>
+						</h2>
+						<div id="collapseTwo4D" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body" style="text-align: center;">
+								<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
+								<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
 			<div class="card-body">
@@ -98,7 +142,6 @@
 				<option value="Despl" selected>Desplazamiento [m]</option>
 				<option value="Vel">Velocidad [m/s]</option>
 				<option value="Acel">Aceleración [m/s^2]</option>
-				<option value="RespEx">Excitación y Respuesta</option>
 			</select>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
@@ -114,7 +157,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Acelerometros
+								Ac
 							</button>
 						</div>
 					</h2>
@@ -131,7 +174,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Sensor de desplazamiento relativo
+								LVDT1
 							</button>
 						</div>
 					</h2>
@@ -140,25 +183,6 @@
 						<div class="accordion-body" style="text-align: center;">
 							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
 							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingThree">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Agregar ruido a la señal y amplitud
-							</button>
-						</div>
-					</h2>
-					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="Escalar_GA(),Alerta_RuidoA()"
-								class="btn btn-primary">Agregar</button>
-							<button type="button" onclick="Escalar_GR(),Alerta_RuidoR()"
-								class="btn btn-primary">Remover</button>
 						</div>
 					</div>
 				</div>
@@ -300,7 +324,7 @@
 										<form class="row g-3">
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> Razón de
-													amortiguamiento ζ [ ]<i
+													amortiguamiento ζ<i
 														data-tippy-content="Razón de amortiguamiento adimensional"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="zeta_box"
@@ -374,9 +398,9 @@
 												<label class="form-label" style="font-size: 14px">Duración [s] <i
 														data-tippy-content="Duración"
 														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm"
-													name="DuracionSM_box" id="DuracionSM_box" placeholder="">
-
+												<input type="text" class="form-control form-control-sm" name="DuracionSM_box"
+													id="DuracionSM_box" placeholder="">
+													
 											</div>
 										</form>
 									</div>
@@ -477,18 +501,18 @@
 										data-bs-toggle="dropdown" aria-expanded="false">
 										Sismos</button>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#" onclick="Elcentro(),Alerta_Sismo()">El
+										<li><a class="dropdown-item" href="#" onclick="Elcentro(),AlertaSismos() ">El
 												centro</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LaVega(),Alerta_Sismo()">La
+										<li><a class="dropdown-item" href="#" onclick="LaVega(),AlertaSismos()">La
 												Vega</a></li>
 										<!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
 										<li><a class="dropdown-item" href="#"
-												onclick="Armenia(),Alerta_Sismo()">Armenia</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LomaPrieta(),Alerta_Sismo()">Loma
+												onclick="Armenia(),AlertaSismos()">Armenia</a></li>
+										<li><a class="dropdown-item" href="#" onclick="LomaPrieta(),AlertaSismos()">Loma
 												Prieta</a>
 										</li>
 										<li><a class="dropdown-item" href="#"
-												onclick="Gilroy(),Alerta_Sismo()">Gilroy</a></li>
+												onclick="Gilroy(),AlertaSismos()">Gilroy</a></li>
 									</ul>
 									<!-- <select>
 										<option value="1" onclick="Elcentro()">El Centro</option>
@@ -507,7 +531,7 @@
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
-										<button type="button" onclick="StopInterval(),LoadCharData()"
+										<button type="button" onclick="StopInterval()"
 											class="btn btn-primary">Detener</button>
 									</div>
 								</div>
@@ -547,7 +571,7 @@
 									</div>
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
-											<button type="button" onclick="StopInterval(),LoadCharData()"
+											<button type="button" onclick="StopInterval()"
 												class="btn btn-primary">Detener</button>
 										</div>
 									</div>
@@ -571,14 +595,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="card mt-2" style="width: 100%;">
-			<div class="card-body">
-				<div style="text-align: center;">
-					<button type="button" id="Limpiar" onclick="ChangeCameraP()"
-						class="btn btn-primary">Perspectiva</button>
-				</div>
-			</div>
-		</div> -->
 		<div class="card mt-1" style="width: 100%;">
 			<form class="row g-6">
 				<div class="col-3" style="text-align: center;">
@@ -611,7 +627,6 @@
 				</div>
 		</div>
 		</form>
-	</div>
 	</div>
 	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
@@ -664,7 +679,7 @@
 		var Po = 0;
 		var Wn = 0;
 		var StopVar = 1;
-		var Segundos = 20;
+		var Segundos = 10;
 		var validador = 0; //Validar modelo MCK
 		var validador2 = 1; //Validar Sismos
 		//Modelo MCK
@@ -679,14 +694,13 @@
 		var Escalar = 2;
 		//Barrido
 		var Wv = [];
-		var validador3 = 1; //Determina si se va a trabajar con barrido de frecuencias o movim sinusoidal
+		var validador3 = 1; //Determina si se encuentra en barrido o en sismos
 		//Sismos
 		var Po1 = 0;
 		var gm = 9.81; //Valor de g
 		var TimeLength = 0; //Tamaño del vector de sismos
 		// Inciar y Detener simulación
-		var validador4 = 0; //Limpia el método númerico y las gráficas para que se puede iniciar y detener la simulación varias veces
-		var validador5 = true; //Determina si se usará Newmkar o Newmark Sismos
+		var validador4 = 0;
 		//Variables método númerico
 		var p = []; var p1 = [];
 		var u = []; var up = []; var upp = []; var P = []; var u2 = []; var up2 = []; var upp2 = [];
@@ -787,7 +801,6 @@
 		}
 		//Función call para Sinusoidal
 		function CallFunction() {
-			validador5 = true;
 			validador3 = 1;
 			if (validador == 0) {
 				//Modelo MCK
@@ -802,7 +815,6 @@
 		}
 		//Función call Para Sismos
 		function CallFunction2() {
-			validador5 = false;
 			if (validador == 0) {
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
@@ -818,7 +830,6 @@
 		}
 		//Función call Para Sismos
 		function CallFunction4() {
-			validador5 = false;
 			if (validador == 0) {
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
@@ -832,7 +843,6 @@
 		}
 		//Función call para Barrido
 		function CallFunction3() {
-			validador5 = true;
 			if (validador == 0) {
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
@@ -920,13 +930,14 @@
 		}
 		//Función para cambiar la duración del ensayo
 		function Duracion_SM() {
-			if (DuracionSM_box.value.length > 0) {
-				Segundos = (10 / 24) * parseFloat(document.getElementById('DuracionSM_box').value);
-			} else {
-				Segundos = 20;
-			}
+				if (DuracionSM_box.value.length > 0) {
+					Segundos = (10/24)*parseFloat(document.getElementById('DuracionSM_box').value);
+				} else{
+					Segundos=20;
+				}
 		}
-		var ContadorEntry = false;
+		//Función para multiplicar los sismos de diseño por un escalar
+		var ContadorEntry = false; //Controla la asignación y el cambio de los escalares
 		function Escalar_box() {
 			if (ContadorEntry === false) {
 				if (Escalar_box1.value.length > 0) {
@@ -953,21 +964,7 @@
 			}
 			ContadorEntry = true;
 		}
-		//Funciones para controlar el Ruido Gauseano
-		var Escalar_Gauseano = 0; // Puede cambiar para desactivar/activar el ruido
-		function Escalar_GA() {
-			Escalar_Gauseano = 0.05;
-		}
-		function Escalar_GR() {
-			Escalar_Gauseano = 0;
-		}
-		function Ruido_Gaus(media, desviS) {
-			var r1 = Math.random();
-			var r2 = Math.random();
-			var z0 = Escalar_Gauseano * Math.sqrt(-2.0 * Math.log(r1)) * Math.cos(2 * Math.PI * r2);
-			return z0 * desviS + media;
-		}
-		// Función que crea las variables necesarias para realizar el barrido de frecuencias
+		// Crea las variables necesarias para realizar el barrido de frecuencias
 		function BarridoVar() {
 			W1 = 2 * Math.PI * parseFloat(document.getElementById('W1_box').value);
 			W2 = 2 * Math.PI * parseFloat(document.getElementById('W2_box').value);
@@ -1148,58 +1145,8 @@
 					sl = 3;
 					CleanResponse = true;
 					break;
-				case 'RespEx':
-					sl = 4;
-					CleanResponse = true;
-					break;
 			}
 			EditResponse = sl;
-		}
-		var LoadCharDataVer = true;
-		function LoadCharDataOnChange() { //Función para cambiar la respuesta que se gráfica
-			console.log('Cambio de gráfica')
-			if (LoadCharDataVer == false) {
-				LoadCharData();
-			}
-		}
-		function LoadCharData() { //Función para cambiar la respuesta que se gráfica
-			console.log('Cargar toda la gráfica')
-			chart.data.datasets[0].data.length = 0;
-			chart.data.datasets[1].data.length = 0;
-			LoadCharDataVer = false;
-			switch (EditResponse) {
-				case 1:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-						chart.data.datasets[1].data.push({ y: u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-					}
-					break;
-				case 2:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[1].data.push({ y: up2[i] + 5 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-					}
-					break;
-				case 3:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: upp2[i] + 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-					}
-					break;
-				case 4:
-					for (let i = 0; i < u2.length; i++) {
-						if (validador5 == true) {
-							chart.data.datasets[0].data.push({ y: Seno[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-						} else {
-							if (validador2 == 2) {
-								chart.data.datasets[0].data.push({ y: Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-							} else {
-								chart.data.datasets[0].data.push({ y: Ac_Data[i].Datos + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-							}
-						}
-						chart.data.datasets[1].data.push({ y: u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-					}
-					break;
-			}
-			chart.update();
 		}
 		//Detener la iteración
 		function StopInterval() {
@@ -1329,8 +1276,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: u2[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
+						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1343,7 +1290,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[1].data.push({ y: up2[contadorglobal] + 5 * Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
 						chart.update();
 						break;
 					case 3:
@@ -1357,22 +1304,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: upp2[contadorglobal] + 50 * Ruido_Gaus(0, 1), x: t })
-						chart.update();
-						break;
-					case 4:
-						if (CleanResponse == true) {
-							chart.data.datasets[0].data.length = 0;
-							chart.data.datasets[1].data.length = 0;
-							chart.update();
-							// for (let i = 0; i < contadorglobal; i++) {
-							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
-							// }
-							CleanResponse = false;
-							chart.update();
-						}
-						chart.data.datasets[0].data.push({ y: Seno[contadorglobal] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
 						chart.update();
 						break;
 				}
@@ -1481,10 +1413,10 @@
 				t1 = t1 + dt;
 				//console.log(Vtiempo);
 				//console.log(Mesa1.position.y);
-				renderer.render(scene, camera); //Carga la escena
-				if (Math.abs(Desp_Data[contador1]) >= 1.5) {
+				if (Math.abs(Desp_Data[contador1]) >= 2) {
 					Alerta();
 				}
+				renderer.render(scene, camera); //Carga la escena
 				if (contador1 == TimeLength - 1) {
 					clearInterval(tiempo1);
 				}
@@ -1587,25 +1519,6 @@
 							chart.update();
 						}
 						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
-						chart.update();
-						break;
-					case 4:
-						if (CleanResponse == true) {
-							chart.data.datasets[0].data.length = 0;
-							chart.data.datasets[1].data.length = 0;
-							chart.update();
-							// for (let i = 0; i < contadorglobal; i++) {
-							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
-							// }
-							CleanResponse = false;
-							chart.update();
-						}
-						if (validador2 == 2) {
-							chart.data.datasets[0].data.push({ y: Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
-						} else {
-							chart.data.datasets[0].data.push({ y: Ac_Data[contadorglobal].Datos + Ruido_Gaus(0, 1), x: t })
-						}
-						chart.data.datasets[1].data.push({ y: u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
@@ -1907,11 +1820,11 @@
 
 		}
 		// initGUI()
-		function Alerta() {
+		function Alerta() { //Le indica al usuario el momento en el que el experimento falló
 			let timerInterval
 			Swal.fire({
 				title: 'El montaje  experimental falló, los desplazamientos totales excedieron los limítes de la mesa, por favor verifique los parámetros de entrada',
-				text: 'El desplazamiento totalexcedio los limítes de la mesa, el montaje falló',
+				text: 'El desplazamiento total excedio los limítes de la mesa, el montaje falló',
 				html: '<b></b>',
 				timer: 8000,
 				timerProgressBar: true,
@@ -1933,66 +1846,13 @@
 			})
 			StopInterval();
 		}
-		// Alerta Sismos
-		function Alerta_Sismo() {
+		function AlertaSismos() { //Le indica al usuario que el sismo ha sido seleccionado
 			let timerInterval
 			Swal.fire({
-				title: 'El sismo fue seleccionado correctamente',
-				text: 'Sismos',
+				title: 'Sismo seleccionado correctamente',
+				text: 'Sismo',
 				html: '<b></b>',
 				timer: 1500,
-				timerProgressBar: true,
-				didOpen: () => {
-					Swal.showLoading()
-					const b = Swal.getHtmlContainer().querySelector('b')
-					timerInterval = setInterval(() => {
-						b.textContent = Swal.getTimerLeft()
-					}, 100)
-				},
-				willClose: () => {
-					clearInterval(timerInterval)
-				}
-			}).then((result) => {
-				/* Read more about handling dismissals below */
-				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
-				}
-			})
-			StopInterval();
-		}
-		// Alerta Ruido, Agregarlo
-		function Alerta_RuidoA() {
-			let timerInterval
-			Swal.fire({
-				title: 'Ruido agregado',
-				text: 'Ruido',
-				html: '<b></b>',
-				timer: 800,
-				timerProgressBar: true,
-				didOpen: () => {
-					Swal.showLoading()
-					const b = Swal.getHtmlContainer().querySelector('b')
-					timerInterval = setInterval(() => {
-						b.textContent = Swal.getTimerLeft()
-					}, 100)
-				},
-				willClose: () => {
-					clearInterval(timerInterval)
-				}
-			}).then((result) => {
-				/* Read more about handling dismissals below */
-				if (result.dismiss === Swal.DismissReason.timer) {
-					console.log('I was closed by the timer')
-				}
-			})
-		}
-		function Alerta_RuidoR() {
-			let timerInterval
-			Swal.fire({
-				title: 'Ruido removido',
-				text: 'Ruido',
-				html: '<b></b>',
-				timer: 800,
 				timerProgressBar: true,
 				didOpen: () => {
 					Swal.showLoading()
@@ -2395,6 +2255,38 @@
 			console.log('Datos Organizados')
 			return data1
 		}
+		var LoadCharDataVer = true;
+		function LoadCharDataOnChange() {
+			console.log('Cambio de gráfica')
+			if (LoadCharDataVer == false) {
+				LoadCharData();
+			}
+		}
+		function LoadCharData() {
+			console.log('Cargar toda la gráfica')
+			chart.data.datasets[0].data.length = 0;
+			chart.data.datasets[1].data.length = 0;
+			LoadCharDataVer = false;
+			switch (EditResponse) {
+				case 1:
+					for (let i = 0; i < u2.length; i++) {
+						chart.data.datasets[0].data.push({ y: suma_w[i], x: Vtiempo2[i] })
+						chart.data.datasets[1].data.push({ y: u2[i], x: Vtiempo2[i] })
+					}
+					break;
+				case 2:
+					for (let i = 0; i < u2.length; i++) {
+						chart.data.datasets[1].data.push({ y: up2[i], x: Vtiempo2[i] })
+					}
+					break;
+				case 3:
+					for (let i = 0; i < u2.length; i++) {
+						chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+					}
+					break;
+			}
+			chart.update();
+		}
 		function recargar() {
 			window.location.href = window.location.href;
 			console.log('Reload')
@@ -2415,7 +2307,6 @@
 		let Ac_Data;
 		let Desp_Data;
 		function CargarExcel() {
-			validador2 = 1;
 			document.getElementById('Cargar').addEventListener("change", (event) => {
 				if (selectfile) {
 					let fileReader = new FileReader
@@ -2434,7 +2325,6 @@
 			})
 		}
 		function CargarExcel1() {
-			validador2 = 1;
 			document.getElementById('Cargar1').addEventListener("change", (event) => {
 				if (selectfile1) {
 					let fileReader = new FileReader
