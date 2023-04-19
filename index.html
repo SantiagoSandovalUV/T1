@@ -1558,8 +1558,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+						chart.data.datasets[0].data.push({ y: suma_w[contador1]+ Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: u2[contador1]+ Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1572,7 +1572,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
+						chart.data.datasets[1].data.push({ y: up2[contadorglobal]+ Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 3:
@@ -1586,7 +1586,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
+						chart.data.datasets[0].data.push({ y: upp2[contadorglobal]+ Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 4:
