@@ -832,10 +832,10 @@
 			upp2[0] = 0;
 			Vtiempo2[0] = 0;
 			console.log("Método númerico limpio")
-			if (CheckAc==false){
+			if (CheckAc == false) {
 				SensorMultpA = 5;
 			}
-			if (CheckLv==false){
+			if (CheckLv == false) {
 				SensorMultp = 5;
 			}
 		}
@@ -1128,42 +1128,42 @@
 		var SensorMultp = 5; var CheckLv = false; // Para desplazamiento
 		var SensorMultpA = 5; var CheckAc = false; // Para aceleración
 		function SensorCheckerA() {
-			if (CheckAc==false){
-			setTimeout(function () {
-				SensorMultpA = 0;
-			}, 250); // 2000 milisegundos = 2 segundos
-		}
+			if (CheckAc == false) {
+				setTimeout(function () {
+					SensorMultpA = 0;
+				}, 250); // 2000 milisegundos = 2 segundos
+			}
 		}
 		function SensorCheckerL() {
-			if (CheckLv==false){
-			setTimeout(function () {
-				SensorMultp = 0;
-			}, 250); // 2000 milisegundos = 2 segundos
-		}
+			if (CheckLv == false) {
+				setTimeout(function () {
+					SensorMultp = 0;
+				}, 250); // 2000 milisegundos = 2 segundos
+			}
 		}
 		//Cargar y remover sensores
 		function LoadLVDT() {
 			Mostrar(Pared11); //Pared lvdt
 			Mostrar(Cilindro1); //Láser
 			SensorMultp = 1;
-			CheckLv=true;
+			CheckLv = true;
 		}
 		function RemoveLVDT() {
 			Remover(Pared11);
 			Remover(Cilindro1)
-			CheckLv=false;
+			CheckLv = false;
 		}
 		function LoadSensor() {
 			Mostrar(SensorB); //Sensor en la Base
 			Mostrar(Barra11); //Sensor en el GDL
 			SensorMultpA = 1;
-			CheckAc=true;
+			CheckAc = true;
 
 		}
 		function RemoveSensor() {
 			Remover(SensorB);
 			Remover(Barra11);
-			CheckAc=false;
+			CheckAc = false;
 		}
 		//Cambia las vista de la cámara
 		function ChangeCameraP() {
@@ -1272,11 +1272,11 @@
 			if (LoadCharDataVer == false) {
 				LoadCharData();
 			}
-			if (CheckAc==false){
+			if (CheckAc == false) {
 				SensorMultpA = 5;
 				SensorCheckerA()
 			}
-			if (CheckLv==false){
+			if (CheckLv == false) {
 				SensorMultp = 5;
 				SensorCheckerL()
 			}
@@ -1289,50 +1289,50 @@
 			switch (EditResponse) {
 				case 1:
 					for (let i = 0; i < u2.length; i++) {
-						if ( CheckLv==false){
-						if(i<=5){
-							SensorMultp=5;
-						}else{
-							SensorMultp=0;
+						if (CheckLv == false) {
+							if (i <= 4) {
+								SensorMultp = 5;
+							} else {
+								SensorMultp = 0;
+							}
 						}
-					}
 						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 2:
 					for (let i = 0; i < u2.length; i++) {
-						if ( CheckAc==false){
-						if(i<=5){
-							SensorMultpA=5;
-						}else{
-							SensorMultpA=0;
+						if (CheckAc == false) {
+							if (i <= 4) {
+								SensorMultpA = 7;
+							} else {
+								SensorMultpA = 0;
+							}
 						}
-					}
 						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[i] + 5 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 3:
 					for (let i = 0; i < u2.length; i++) {
-						if ( CheckAc==false){
-						if(i<=5){
-							SensorMultpA=5;
-						}else{
-							SensorMultpA=0;
+						if (CheckAc == false) {
+							if (i <= 4) {
+								SensorMultpA = 9;
+							} else {
+								SensorMultpA = 0;
+							}
 						}
-					}
 						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[i] + 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 4:
 					for (let i = 0; i < u2.length; i++) {
-						if ( CheckAc==false){
-						if(i<=5){
-							SensorMultpA=5;
-						}else{
-							SensorMultpA=0;
+						if (CheckAc == false) {
+							if (i <= 4) {
+								SensorMultpA = 5;
+							} else {
+								SensorMultpA = 0;
+							}
 						}
-					}
 						if (validador5 == true) {
 							chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 						} else {
@@ -1347,6 +1347,14 @@
 					break;
 			}
 			chart.update();
+			if (CheckAc == false) {
+				SensorMultp = 5;
+				SensorMultpA = 5;
+			} else {
+				SensorMultp = 1;
+				SensorMultpA = 1;
+			}
+
 		}
 		//Detener la iteración
 		function StopInterval() {
