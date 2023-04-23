@@ -832,6 +832,32 @@
 			upp2[0] = 0;
 			Vtiempo2[0] = 0;
 			console.log("Método númerico limpio")
+			if (CheckAc==false){
+				SensorMultpA = 5;
+			}
+			if (CheckLv==false){
+				SensorMultp = 5;
+			}
+		}
+		//Función para vibración libre
+		function VibracionLibre_SM() {
+			validador5 = true;
+			if (validador == 0) {
+				//Modelo MCK
+				Po = 0;
+				Wn = 0;
+				Masa_box(); c_box(); Dt_box();
+				u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
+			} else {
+				//MOdelo Zeta y Wn
+				Po = 0;
+				Wn = 0;
+				Zeta_boxF(); Dt2_boxF();
+				u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
+			}
+
 		}
 		//Función call para Sinusoidal
 		function CallFunction() {
@@ -930,8 +956,10 @@
 				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
 				CleanerMS(); //Limpiar método númerico
 			}
-			LoadLVDT();
-			LoadSensor();
+			// LoadLVDT();
+			// LoadSensor();
+			SensorCheckerA();
+			SensorCheckerL();
 		}
 		//Obtención de variables de las cajas, modelo Wn y Zeta
 		function Zeta_boxF() {
@@ -963,8 +991,10 @@
 				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
 				CleanerMS(); //Limpiar método númerico
 			}
-			LoadLVDT();
-			LoadSensor();
+			// LoadLVDT();
+			// LoadSensor();
+			SensorCheckerA();
+			SensorCheckerL();
 		}
 		//Función para cambiar la duración del ensayo
 		function Duracion_SM() {
@@ -1049,26 +1079,7 @@
 				organizador();
 			}
 		}
-		//Función para vibración libre
-		function VibracionLibre_SM() {
-			validador5 = true;
-			if (validador == 0) {
-				//Modelo MCK
-				Po = 0;
-				Wn = 0;
-				Masa_box(); c_box(); Dt_box();
-				u2[0] = parseFloat(document.getElementById('DespInicial').value);
-				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
-			} else {
-				//MOdelo Zeta y Wn
-				Po = 0;
-				Wn = 0;
-				Zeta_boxF(); Dt2_boxF();
-				u2[0] = parseFloat(document.getElementById('DespInicial').value);
-				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
-			}
 
-		}
 		//Función para exportar datos en cualquier momento de la simulación
 		function ExportarAnyTiempo() {
 			if (exporC == 1) {
@@ -1113,22 +1124,46 @@
 			Perspective = 4;
 			ChangeCameraP();
 		}
+		// Sensor Multip
+		var SensorMultp = 5; var CheckLv = false; // Para desplazamiento
+		var SensorMultpA = 5; var CheckAc = false; // Para aceleración
+		function SensorCheckerA() {
+			if (CheckAc==false){
+			setTimeout(function () {
+				SensorMultpA = 0;
+			}, 250); // 2000 milisegundos = 2 segundos
+		}
+		}
+		function SensorCheckerL() {
+			if (CheckLv==false){
+			setTimeout(function () {
+				SensorMultp = 0;
+			}, 250); // 2000 milisegundos = 2 segundos
+		}
+		}
 		//Cargar y remover sensores
 		function LoadLVDT() {
 			Mostrar(Pared11); //Pared lvdt
 			Mostrar(Cilindro1); //Láser
+			SensorMultp = 1;
+			CheckLv=true;
 		}
 		function RemoveLVDT() {
 			Remover(Pared11);
 			Remover(Cilindro1)
+			CheckLv=false;
 		}
 		function LoadSensor() {
 			Mostrar(SensorB); //Sensor en la Base
 			Mostrar(Barra11); //Sensor en el GDL
+			SensorMultpA = 1;
+			CheckAc=true;
+
 		}
 		function RemoveSensor() {
 			Remover(SensorB);
 			Remover(Barra11);
+			CheckAc=false;
 		}
 		//Cambia las vista de la cámara
 		function ChangeCameraP() {
@@ -1237,6 +1272,14 @@
 			if (LoadCharDataVer == false) {
 				LoadCharData();
 			}
+			if (CheckAc==false){
+				SensorMultpA = 5;
+				SensorCheckerA()
+			}
+			if (CheckLv==false){
+				SensorMultp = 5;
+				SensorCheckerL()
+			}
 		}
 		function LoadCharData() { //Función para cambiar la respuesta que se gráfica
 			console.log('Cargar toda la gráfica')
@@ -1246,32 +1289,60 @@
 			switch (EditResponse) {
 				case 1:
 					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-						chart.data.datasets[1].data.push({ y: u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						if ( CheckLv==false){
+						if(i<=5){
+							SensorMultp=5;
+						}else{
+							SensorMultp=0;
+						}
+					}
+						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 2:
 					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[1].data.push({ y: up2[i] + 5 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						if ( CheckAc==false){
+						if(i<=5){
+							SensorMultpA=5;
+						}else{
+							SensorMultpA=0;
+						}
+					}
+						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[i] + 5 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 3:
 					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: upp2[i] + 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						if ( CheckAc==false){
+						if(i<=5){
+							SensorMultpA=5;
+						}else{
+							SensorMultpA=0;
+						}
+					}
+						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[i] + 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 4:
 					for (let i = 0; i < u2.length; i++) {
+						if ( CheckAc==false){
+						if(i<=5){
+							SensorMultpA=5;
+						}else{
+							SensorMultpA=0;
+						}
+					}
 						if (validador5 == true) {
-							chart.data.datasets[0].data.push({ y: Seno[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 						} else {
 							if (validador2 == 2) {
-								chart.data.datasets[0].data.push({ y: Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							} else {
-								chart.data.datasets[0].data.push({ y: Ac_Data[i].Datos + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i].Datos + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							}
 						}
-						chart.data.datasets[1].data.push({ y: u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 			}
@@ -1405,8 +1476,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: u2[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1419,7 +1490,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[1].data.push({ y: up2[contadorglobal] + 5 * Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[contadorglobal] + 5 * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 3:
@@ -1433,7 +1504,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: upp2[contadorglobal] + 50 * Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[contadorglobal] + 50 * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 4:
@@ -1447,8 +1518,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: Seno[contadorglobal] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
@@ -1634,8 +1705,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: u2[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1648,7 +1719,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[1].data.push({ y: up2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 3:
@@ -1662,7 +1733,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: upp2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultp * upp2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 4:
@@ -1677,11 +1748,11 @@
 							chart.update();
 						}
 						if (validador2 == 2) {
-							chart.data.datasets[0].data.push({ y: Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						} else {
-							chart.data.datasets[0].data.push({ y: Ac_Data[contadorglobal].Datos + Ruido_Gaus(0, 1), x: t })
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal].Datos + Ruido_Gaus(0, 1), x: t })
 						}
-						chart.data.datasets[1].data.push({ y: u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
