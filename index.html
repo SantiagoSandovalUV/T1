@@ -1156,6 +1156,7 @@
 			Remover(Pared11);
 			Remover(Cilindro1)
 			CheckLv = false;
+			SensorCheckerL();
 		}
 		function LoadSensor() {
 			Mostrar(SensorB); //Sensor en la Base
@@ -1168,6 +1169,8 @@
 			Remover(SensorB);
 			Remover(Barra11);
 			CheckAc = false;
+			SensorCheckerA();
+
 		}
 		//Cambia las vista de la cámara
 		function ChangeCameraP() {
