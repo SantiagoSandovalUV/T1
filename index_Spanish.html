@@ -2,7 +2,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>STRUCTURAL DYNAMICS LABORATORY</title>
+	<title>LABORATORIO DE DINÁMICA ESTRUCTURAL</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -67,19 +67,20 @@
 				<a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/index.html"
 					class="d-flex align-items-center text-dark text-decoration-none">
 					<img src="logo.png" style="height: 30px;">
-					<span class="fs-8">VIRTUAL LABORATORIES</span>
+					<span class="fs-8">LABORATORIOS VIRTUALES</span>
 				</a>
 			</div>
 			<div class="col-md-6" style="text-align: center;">
-				<h4>STRUCTURAL DYNAMICS LABORATORY</h4>
+				<h4>LABORATORIO DE DINÁMICA ESTRUCTURAL</h4>
 			</div>
 			<div class="col-md-1" style="text-align: left;">
 				<a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/manual-dinamica.pdf"
-					class="btn btn-sm btn-outline-secondary">Dynamics Manual</a>
+					class="btn btn-sm btn-outline-secondary">Manual dinámica</a>
 			</div>
 			<div class="col-md-2" style="text-align: right;">
 				<a class="btn btn-sm btn-outline-secondary"
-					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental Dynamics</a>
+					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Dinámica
+					Experimental</a>
 			</div>
 		</div>
 	</div>
@@ -94,16 +95,16 @@
 		<div class="card mb-2" style="width: 100%;">
 			<select id="select_barra" class="form-select" aria-label="Default select example"
 				onchange="ResponseEditor(),LoadCharDataOnChange()">
-				<option value="Despl" selected>Displacement [m]</option>
-				<option value="Vel">Velocity [m/s]</option>
-				<option value="Acel">Acceleration [m/s^2]</option>
-				<option value="RespEx">Acceleration</option>
+				<option value="Despl" selected>Desplazamiento [m]</option>
+				<option value="Vel">Velocidad [m/s]</option>
+				<option value="Acel">Aceleración [m/s^2]</option>
+				<option value="RespEx">Excitación y Respuesta</option>
 			</select>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-				Sensor Configuration
+				Configurar sensores
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample3">
@@ -113,15 +114,15 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Accelerometers
+								Acelerometros
 							</button>
 						</div>
 					</h2>
 					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
-							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remove</button>
+							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
+							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
 						</div>
 					</div>
 				</div>
@@ -130,15 +131,15 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Relative Displacement Sensor
+								Sensor de desplazamiento relativo
 							</button>
 						</div>
 					</h2>
 					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
-							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
+							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
 						</div>
 					</div>
 				</div>
@@ -147,7 +148,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Add Noise to the Signal and Amplitude
+								Agregar ruido a la señal y amplitud
 							</button>
 						</div>
 					</h2>
@@ -155,9 +156,9 @@
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
 							<button type="button" onclick="Escalar_GA(),Alerta_RuidoA()"
-								class="btn btn-primary">Assign</button>
+								class="btn btn-primary">Agregar</button>
 							<button type="button" onclick="Escalar_GR(),Alerta_RuidoR()"
-								class="btn btn-primary">Remove</button>
+								class="btn btn-primary">Remover</button>
 						</div>
 					</div>
 				</div>
@@ -166,7 +167,7 @@
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				Assign Physical or Dynamic Properties to the System
+				Asignar propiedades físicas o dinámicas al sistema
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample">
@@ -177,7 +178,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne1" aria-expanded="false"
 								aria-controls="flush-collapseOne1" id="modelock">
-								 MCK Model
+								Modelo MCK
 							</button>
 						</h2>
 						<div id="flush-collapseOne1" class="accordion-collapse collapse"
@@ -209,22 +210,23 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="When this element is locked, it is not possible to access the Wn and ζ models. If you want to deactivate it, you must clear all the text boxes."
+													<i data-tippy-content="Cuando este elemento se encuentra activo 
+														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
 										</form>
 										<form class="row g-10">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Mass [kg] <i
-														data-tippy-content="System Mass"
+												<label class="form-label" style="font-size: 14px">Masa [kg] <i
+														data-tippy-content="Masa del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Masa_box1"
 													id="Masa_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Damping. C [N*s/m]<i
-														data-tippy-content="Sytem Damping"
+												<label class="form-label" style="font-size: 14px">Amort. C [N*s/m]<i
+														data-tippy-content="Amortiguamiento del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="c_box1"
 													id="c_box1" placeholder="">
@@ -232,8 +234,8 @@
 										</form>
 										<form class="row g-1">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Stiffness K [N/m] <i
-														data-tippy-content="System Stiffness"
+												<label class="form-label" style="font-size: 14px">Rigidez K [N/m] <i
+														data-tippy-content="Rigidez a la flexión del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="k_box1"
 													id="k_box1" placeholder="">
@@ -255,8 +257,8 @@
 						<h2 class="accordion-header" id="flush-headingTwo1">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
-								aria-controls="flush-collapseTwo1" id="ZetaWn">	
-Wn and ζ Model
+								aria-controls="flush-collapseTwo1" id="ZetaWn">
+								Modelo Wn y ζ
 							</button>
 						</h2>
 						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
@@ -289,21 +291,24 @@ Wn and ζ Model
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="When this element is locked, it is not possible to access the MCK model. If you want to deactivate it, you must clear all the text boxes."
+													<i data-tippy-content="Cuando este elemento se encuentra activo 
+														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Dimensionless damping ratio ζ [ ]<i
-														data-tippy-content="System's Dimensionless Damping Ratio"
+												<label class="form-label" style="font-size: 14px"> Razón de
+													amortiguamiento ζ [ ]<i
+														data-tippy-content="Razón de amortiguamiento adimensional"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="zeta_box"
 													id="zeta_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Natural Frequency Wn[rad/s]<i data-tippy-content="Frecuencia natural del sistema"
+												<label class="form-label" style="font-size: 14px"> Frecuencia natural
+													Wn [rad/s]<i data-tippy-content="Frecuencia natural del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wna_box"
 													id="Wna_box" placeholder="">
@@ -329,7 +334,7 @@ Wn and ζ Model
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-				Select Type of Displacement
+				Seleccionar tipo de desplazamiento
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample2">
@@ -340,7 +345,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwoVl" aria-expanded="false"
 								aria-controls="flush-collapseTwoVl">
-								Free Vibration
+								Vibración Libre
 							</button>
 						</h2>
 						<div id="flush-collapseTwoVl" class="accordion-collapse collapse"
@@ -349,15 +354,15 @@ Wn and ζ Model
 								<div class="card-body">
 									<form class="row g-2">
 										<div class="col" style="width:180px">
-											<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
-													data-tippy-content="Initial Displacement"
+											<label class="form-label" style="font-size:14px">Amplitud uo [m]<i
+													data-tippy-content="Amplitud dinámica del desplazamiento sinusoidal"
 													class="ti ti-question-mark text-primary"></i></label>
 											<input type="text" class="form-control form-control-sm" name="DespInicial"
 												id="DespInicial" placeholder="">
 										</div>
 										<div class="col-1" style="width:180px">
-											<label class="form-label" style="font-size: 14px">Duration[s] <i
-													data-tippy-content="Duration"
+											<label class="form-label" style="font-size: 14px">Duración[s] <i
+													data-tippy-content="Duración"
 													class="ti ti-question-mark text-primary"></i></label>
 											<input type="text" class="form-control form-control-sm"
 												name="DuracionSMVL_box" id="DuracionSMVL_box" placeholder="">
@@ -374,9 +379,9 @@ Wn and ζ Model
 									<div class="card mt-3" style="width: 100%;">
 										<div class="card-body" style="text-align: center;">
 											<button type="button" onclick="VibracionLibre_SM(),Duracion_SMVL()"
-												class="btn btn-primary">Start</button>
+												class="btn btn-primary">Iniciar</button>
 											<button type="button" onclick="StopInterval(),LoadCharData()"
-												class="btn btn-primary">Stop</button>
+												class="btn btn-primary">Detener</button>
 										</div>
 									</div>
 								</div>
@@ -388,7 +393,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne" aria-expanded="false"
 								aria-controls="flush-collapseOne">
-								Sinusoidal Displacement
+								Desplazamiento sinusoildal
 							</button>
 						</h2>
 						<div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -398,15 +403,15 @@ Wn and ζ Model
 									<div class="card-body">
 										<form class="row g-2">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
-														data-tippy-content="Dynamic Amplitude of Sinusoidal Displacement"
+												<label class="form-label" style="font-size:14px">Amplitud uo [m]<i
+														data-tippy-content="Amplitud dinámica del desplazamiento sinusoidal"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Po_box1"
 													id="Po_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Angular Freq. [rad/s]
-													<i data-tippy-content="Angular Frequency of Sinusoidal Displacement W"
+												<label class="form-label" style="font-size: 14px">Frecuencia W [rad/s]
+													<i data-tippy-content="Frecuencia angular del desplazamiento sinusoidal W"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wn_box1"
 													id="Wn_box1" placeholder="">
@@ -414,8 +419,8 @@ Wn and ζ Model
 										</form>
 										<form class="row g-4">
 											<div class="col-1" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Duration [s] <i
-														data-tippy-content="Duration"
+												<label class="form-label" style="font-size: 14px">Duración [s] <i
+														data-tippy-content="Duración"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm"
 													name="DuracionSM_box" id="DuracionSM_box" placeholder="">
@@ -427,10 +432,11 @@ Wn and ζ Model
 								<div class="card mt-3" style="width: 100%;">
 									<div class="card-body" style="text-align: center;">
 										<button type="button" onclick="CallFunction(),Duracion_SM()"
-											class="btn btn-primary">Start</button>
-										<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop Table</button>
+											class="btn btn-primary">Iniciar</button>
+										<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener
+											mesa</button>
 										<button type="button" onclick="StopInterval(),LoadCharData()"
-											class="btn btn-primary">Stop</button>
+											class="btn btn-primary">Detener</button>
 									</div>
 								</div>
 							</div>
@@ -441,7 +447,8 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo55" aria-expanded="false"
 								aria-controls="flush-collapseTwo55" id="Barrido">
-								Frequency Sweep	</button>
+								Barrido de frecuencias
+							</button>
 						</h2>
 						<div id="flush-collapseTwo55" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
@@ -451,14 +458,14 @@ Wn and ζ Model
 										<form class="row g-3">
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f1 [Hz]<i
-														data-tippy-content="Initial Frequency"
+														data-tippy-content="Frecuencia incial"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W1_box"
 													id="W1_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f2 [Hz]<i
-														data-tippy-content="Final Frequency
+														data-tippy-content="Frecuencia final"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W2_box"
 													id="W2_box" placeholder="">
@@ -466,15 +473,15 @@ Wn and ζ Model
 										</form>
 										<form class="row g-4">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Duration [s] <i
-														data-tippy-content="Duration
+												<label class="form-label" style="font-size: 14px">Duración [s] <i
+														data-tippy-content="Duración"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Inter_box"
 													id="Inter_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> uo [m]<i
-														data-tippy-content="Maximum Displacement at the Base"
+														data-tippy-content="Máximo desplazamiento en la base"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="PoB_box"
 													id="PoB_box" placeholder="">
@@ -483,10 +490,9 @@ Wn and ζ Model
 										<div class="card mt-3" style="width: 100%;">
 											<div class="card-body" style="text-align: center;">
 												<button type="button" onclick="CallFunction3(),BarridoVar()"
-													class="btn btn-primary">Start Sweep
-												</button>
+													class="btn btn-primary">Iniciar barrido</button>
 												<button type="button" onclick="StopInterval()"
-													class="btn btn-primary">Stop</button>
+													class="btn btn-primary">Detener</button>
 											</div>
 										</div>
 									</div>
@@ -499,14 +505,15 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseThree" aria-expanded="false"
 								aria-controls="flush-collapseThree">
-								Predefined Earthquakes</button>
+								Sismos predefindos
+							</button>
 						</h2>
 						<div id="flush-collapseThree" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
 								<form class="row g-3">
 									<div class="col" style="width:90px">
-										<label class="form-label" style="font-size: 14px">Scalar <i
+										<label class="form-label" style="font-size: 14px">Escalar <i
 												data-tippy-content="Permite cambiar la escala del sismo"
 												class="ti ti-question-mark text-primary"></i></label>
 										<input type="text" class="form-control form-control-sm" name="Escalar_box1"
@@ -516,7 +523,7 @@ Wn and ζ Model
 								<div class="card mt-2" class="btn-group">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false">
-										Earthquakes</button>
+										Sismos</button>
 									<ul class="dropdown-menu">
 										<li><a class="dropdown-item" href="#" onclick="Elcentro(),Alerta_Sismo()">El
 												centro</a></li>
@@ -542,13 +549,14 @@ Wn and ζ Model
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
-										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Start Earthquake</button>
+										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Iniciar
+											sismo</button>
 									</div>
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
 										<button type="button" onclick="StopInterval(),LoadCharData()"
-											class="btn btn-primary">Stop</button>
+											class="btn btn-primary">Detener</button>
 									</div>
 								</div>
 							</div>
@@ -559,7 +567,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo" aria-expanded="false"
 								aria-controls="flush-collapseTwo">
-								Load Displacement and Acceleration
+								Cargar desplazamiento y aceleración
 							</button>
 						</h2>
 						<div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -567,28 +575,28 @@ Wn and ζ Model
 							<div class="accordion-body">
 								<div class="card-body">
 									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Displacement Data
-										</span>
+										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
+												desplazamiento</span>
 										</h4>
 										<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
 											class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
 									</div>
 									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Acceleration Data
-										</span></h4>
+										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
+												aceleración</span></h4>
 										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
 											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
 									</div>
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
 											<button type="button" onclick="CallFunction4()"
-												class="btn btn-primary">Start</button>
+												class="btn btn-primary">Iniciar</button>
 										</div>
 									</div>
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
 											<button type="button" onclick="StopInterval(),LoadCharData()"
-												class="btn btn-primary">Stop</button>
+												class="btn btn-primary">Detener</button>
 										</div>
 									</div>
 								</div>
@@ -602,10 +610,10 @@ Wn and ζ Model
 			<div class="card-body">
 				<div style="text-align: center;">
 					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
-						class="btn btn-primary">Export Data
-					</button>
-					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear Fields
-					</button>
+						class="btn btn-primary">Exportar
+						datos</button>
+					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Limpiar
+						campos</button>
 					<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
 					accept=".xls,xlsx">Cargar</button> -->
 				</div>
@@ -2068,8 +2076,8 @@ Wn and ζ Model
 		function Alerta() {
 			let timerInterval
 			Swal.fire({
-				title: 'The experimental setup failed, the total displacements exceeded the limits of the table. Please verify the input parameters.',
-				text: 'The total displacement exceeded the limits of the table, the setup failed.',
+				title: 'El montaje  experimental falló, los desplazamientos totales excedieron los limítes de la mesa, por favor verifique los parámetros de entrada',
+				text: 'El desplazamiento totalexcedio los limítes de la mesa, el montaje falló',
 				html: '<b></b>',
 				timer: 8000,
 				timerProgressBar: true,
@@ -2095,8 +2103,8 @@ Wn and ζ Model
 		function Alerta_Sismo() {
 			let timerInterval
 			Swal.fire({
-				title: 'The earthquake was selected correctly.',
-				text: 'Earthquake',
+				title: 'El sismo fue seleccionado correctamente',
+				text: 'Sismos',
 				html: '<b></b>',
 				timer: 1500,
 				timerProgressBar: true,
@@ -2122,8 +2130,8 @@ Wn and ζ Model
 		function Alerta_RuidoA() {
 			let timerInterval
 			Swal.fire({
-				title: 'Noise Added',
-				text: 'Noise',
+				title: 'Ruido agregado',
+				text: 'Ruido',
 				html: '<b></b>',
 				timer: 800,
 				timerProgressBar: true,
@@ -2147,8 +2155,8 @@ Wn and ζ Model
 		function Alerta_RuidoR() {
 			let timerInterval
 			Swal.fire({
-				title: 'Noise removed',
-				text: 'Noise',
+				title: 'Ruido removido',
+				text: 'Ruido',
 				html: '<b></b>',
 				timer: 800,
 				timerProgressBar: true,
@@ -2177,13 +2185,13 @@ Wn and ζ Model
 			type: 'line',
 			data: {
 				datasets: [{
-					label: 'Total response',
+					label: 'Respueta total',
 					borderColor: 'rgb(222,42,22)',
 					borderWidth: 2,
 					pointRadius: 0,
 				},
 				{
-					label: 'Relative response',
+					label: 'Respueta relativa',
 					borderColor: 'rgb(30,144,255)',
 					borderWidth: 2,
 					pointRadius: 0,
@@ -2283,7 +2291,7 @@ Wn and ζ Model
 		const loader1 = new THREE.GLTFLoader();
 		// Load a glTF resource, Lab loading
 		loader1.load(
-			'lab.gltf',//'scene.gltf'
+			'lab2.gltf',//'scene.gltf'
 			function (gltf) {
 				lab = gltf.scene;
 				scene.add(lab);
