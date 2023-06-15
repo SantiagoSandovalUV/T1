@@ -1,9 +1,8 @@
-<html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
-	<title>LABORATORIO DE DINÁMICA ESTRUCTURAL</title>
+	<title>STRUCTURAL DYNAMICS LABORATORY</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -68,69 +67,25 @@
 				<a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/index.html"
 					class="d-flex align-items-center text-dark text-decoration-none">
 					<img src="logo.png" style="height: 30px;">
-					<span class="fs-8">LABORATORIOS VIRTUALES</span>
+					<span class="fs-8">VIRTUAL LABORATORIES</span>
 				</a>
 			</div>
 			<div class="col-md-6" style="text-align: center;">
-				<h4>LABORATORIO DE DINÁMICA ESTRUCTURAL</h4>
+				<h4>STRUCTURAL DYNAMICS LABORATORY</h4>
 			</div>
 			<div class="col-md-1" style="text-align: left;">
 				<a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/manual-dinamica.pdf"
-					class="btn btn-sm btn-outline-secondary">Manual dinámica</a>
+					class="btn btn-sm btn-outline-secondary">Dynamics Manual</a>
 			</div>
 			<div class="col-md-2" style="text-align: right;">
 				<a class="btn btn-sm btn-outline-secondary"
-					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Dinámica
-					Experimental</a>
+					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental
+					Dynamics</a>
 			</div>
 		</div>
 	</div>
 	<div class="position-fixed"
 		style="width: 450px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
-		<div class="card mt-1" style="width: 100%;">
-				<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="collapse"
-					data-bs-target="#collapseExample4_D" aria-expanded="false" aria-controls="collapseExample">
-					Opciones Avanzadas
-				</button>
-			<div class="collapse" id="collapseExample4_D">
-				<div class="accordion" id="accordionExample4_D">
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingOne4D">
-							<div style="text-align: center;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#collapseOne4D" aria-expanded="false" aria-controls="collapseOne4D">
-									Gráficar la excitación de la mesa [m/s^2]
-								</button>
-							</div>
-						</h2>
-						<div id="collapseOne4D" class="accordion-collapse collapse" aria-labelledby="headingOne"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body" style="text-align: center;">
-								<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
-								<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
-							</div>
-						</div>
-					</div>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingTwo4D">
-							<div style="text-align: center;">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-									data-bs-target="#collapseTwo4D" aria-expanded="true" aria-controls="collapseTwo4D">
-									Agregar ruido a la señal y amplitud
-								</button>
-							</div>
-						</h2>
-						<div id="collapseTwo4D" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body" style="text-align: center;">
-								<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
-								<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
 			<div class="card-body">
@@ -140,15 +95,16 @@
 		<div class="card mb-2" style="width: 100%;">
 			<select id="select_barra" class="form-select" aria-label="Default select example"
 				onchange="ResponseEditor(),LoadCharDataOnChange()">
-				<option value="Despl" selected>Desplazamiento [m]</option>
-				<option value="Vel">Velocidad [m/s]</option>
-				<option value="Acel">Aceleración [m/s^2]</option>
+				<option value="Despl" selected>Displacement [m]</option>
+				<option value="Vel">Velocity [m/s]</option>
+				<option value="Acel">Acceleration [m/s^2]</option>
+				<option value="RespEx">Acceleration</option>
 			</select>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-				Asignar sensores
+				Sensor configuration
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample3">
@@ -158,15 +114,15 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Ac
+								Accelerometers
 							</button>
 						</div>
 					</h2>
 					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Asignar</button>
-							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remover</button>
+							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
+							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remove</button>
 						</div>
 					</div>
 				</div>
@@ -175,15 +131,58 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								LVDT1
+								Displacement sensor
 							</button>
 						</div>
 					</h2>
 					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Asignar</button>
-							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remover</button>
+							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
+							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingThree">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+								Add Noise to the Signal and Amplitude
+							</button>
+						</div>
+					</h2>
+					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<button type="button" onclick="Escalar_GA(),Alerta_RuidoA()"
+								class="btn btn-primary">Assign</button>
+							<button type="button" onclick="Escalar_GR(),Alerta_RuidoR()"
+								class="btn btn-primary">Remove</button>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingFour">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+								Signal Resampling
+							</button>
+						</div>
+					</h2>
+					<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: left;">
+							<form class="row g-3">
+								<div class="col" style="width: 90px;">
+									<label class="form-label" style="font-size: 14px">Target Frequency [Hz]<i
+											data-tippy-content="Target Frequency, less than 50 Hz"
+											class="ti ti-question-mark text-primary"></i></label>
+									<input type="text" class="form-control form-control-sm" name="targetFrequency"
+										id="targetFrequency" placeholder="">
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -192,7 +191,7 @@
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				Asignar propiedades físicas o dinámicas al sistema
+				Dynamic properties to the system
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample">
@@ -203,7 +202,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne1" aria-expanded="false"
 								aria-controls="flush-collapseOne1" id="modelock">
-								Modelo MCK
+								MCK Model
 							</button>
 						</h2>
 						<div id="flush-collapseOne1" class="accordion-collapse collapse"
@@ -235,23 +234,22 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
-														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
+													<i data-tippy-content="When this element is locked, it is not possible to access the Wn and ζ models. If you want to deactivate it, you must clear all the text boxes."
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
 										</form>
 										<form class="row g-10">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Masa [kg] <i
-														data-tippy-content="Masa del sistema"
+												<label class="form-label" style="font-size: 14px">Mass [kg] <i
+														data-tippy-content="System Mass"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Masa_box1"
 													id="Masa_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Amort. C [N*s/m]<i
-														data-tippy-content="Amortiguamiento del sistema"
+												<label class="form-label" style="font-size: 14px">Damping C [N*s/m]<i
+														data-tippy-content="Sytem Damping"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="c_box1"
 													id="c_box1" placeholder="">
@@ -259,8 +257,8 @@
 										</form>
 										<form class="row g-1">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Rigidez K [N/m] <i
-														data-tippy-content="Rigidez a la flexión del sistema"
+												<label class="form-label" style="font-size: 14px">Stiffness K [N/m] <i
+														data-tippy-content="System Stiffness"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="k_box1"
 													id="k_box1" placeholder="">
@@ -283,7 +281,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
 								aria-controls="flush-collapseTwo1" id="ZetaWn">
-								Modelo Wn y ζ
+								Wn and ζ Model
 							</button>
 						</h2>
 						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
@@ -316,24 +314,23 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="Cuando este elemento se encuentra activo 
-														no es posible acceder al modelo MCK, si desea desactivarlo debe vaciar todas las cajas de texto"
+													<i data-tippy-content="When this element is locked, it is not possible to access the MCK model. If you want to deactivate it, you must clear all the text boxes."
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Razón de
-													amortiguamiento ζ<i
-														data-tippy-content="Razón de amortiguamiento adimensional"
+												<label class="form-label" style="font-size: 14px"> Dimensionless damping
+													ratio ζ [ ]<i
+														data-tippy-content="System's Dimensionless Damping Ratio"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="zeta_box"
 													id="zeta_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Frecuencia natural
-													Wn [rad/s]<i data-tippy-content="Frecuencia natural del sistema"
+												<label class="form-label" style="font-size: 14px"> Natural Frequency Wn
+													[rad/s]<i data-tippy-content="Frecuencia natural del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wna_box"
 													id="Wna_box" placeholder="">
@@ -359,18 +356,75 @@
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-				Seleccionar tipo de desplazamiento
+				Base motion
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample2">
 			<div class="card text-bg-primary mt-2" style="width: 100%;">
 				<div class="accordion accordion-flush" id="accordionFlushExample2">
 					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingTwoVl">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#flush-collapseTwoVl" aria-expanded="false"
+								aria-controls="flush-collapseTwoVl">
+								Ug(t)=0 (Free Vibration)
+							</button>
+						</h2>
+						<div id="flush-collapseTwoVl" class="accordion-collapse collapse"
+							aria-labelledby="flush-headingTwoVl" data-bs-parent="#accordionFlushExample2">
+							<div class="accordion-body">
+								<div class="card-body">
+									<form class="row g-2">
+										<div class="col" style="width:180px">
+											<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
+													data-tippy-content="Initial Displacement"
+													class="ti ti-question-mark text-primary"></i></label>
+											<input type="text" class="form-control form-control-sm" name="DespInicial"
+												id="DespInicial" placeholder="">
+										</div>
+										<div class="col" style="width:180px">
+											<label class="form-label" style="font-size:14px">Velocity upo [m/s]<i
+													data-tippy-content="Initial Velocity"
+													class="ti ti-question-mark text-primary"></i></label>
+											<input type="text" class="form-control form-control-sm" name="VelInicial"
+												id="VelInicial" placeholder="">
+										</div>
+										<!-- <div class="col" style="width:180px">
+											<label class="form-label" style="font-size: 14px">Frecuencia W [rad/s]
+												<i data-tippy-content="Frecuencia angular del desplazamiento sinusoidal W"
+													class="ti ti-question-mark text-primary"></i></label>
+											<input type="text" class="form-control form-control-sm" name="Wn_box1"
+												id="Wn_box1" placeholder="">
+										</div> -->
+									</form>
+									<form class="row g-2">
+										<div class="col-1" style="width:180px">
+											<label class="form-label" style="font-size: 14px">Duration[s] <i
+													data-tippy-content="Duration"
+													class="ti ti-question-mark text-primary"></i></label>
+											<input type="text" class="form-control form-control-sm"
+												name="DuracionSMVL_box" id="DuracionSMVL_box" placeholder="">
+
+										</div>
+									</form>
+									<div class="card mt-3" style="width: 100%;">
+										<div class="card-body" style="text-align: center;">
+											<button type="button" onclick="VibracionLibre_SM(),Duracion_SMVL()"
+												class="btn btn-primary">Start</button>
+											<button type="button" onclick="StopInterval(),LoadCharData()"
+												class="btn btn-primary">Stop</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
 						<h2 class="accordion-header" id="flush-headingOne">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne" aria-expanded="false"
 								aria-controls="flush-collapseOne">
-								Desplazamiento sinusoildal
+								Sinusoidal displacement
 							</button>
 						</h2>
 						<div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -380,15 +434,15 @@
 									<div class="card-body">
 										<form class="row g-2">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size:14px">Amplitud uo [m]<i
-														data-tippy-content="Amplitud dinámica del desplazamiento sinusoidal"
+												<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
+														data-tippy-content="Dynamic Amplitude of Sinusoidal Displacement"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Po_box1"
 													id="Po_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Frecuencia W [rad/s]
-													<i data-tippy-content="Frecuencia angular del desplazamiento sinusoidal W"
+												<label class="form-label" style="font-size: 14px">Angular Freq. [rad/s]
+													<i data-tippy-content="Angular Frequency of Sinusoidal Displacement W"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wn_box1"
 													id="Wn_box1" placeholder="">
@@ -396,12 +450,12 @@
 										</form>
 										<form class="row g-4">
 											<div class="col-1" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Duración [s] <i
-														data-tippy-content="Duración"
+												<label class="form-label" style="font-size: 14px">Duration [s] <i
+														data-tippy-content="Duration"
 														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm" name="DuracionSM_box"
-													id="DuracionSM_box" placeholder="">
-													
+												<input type="text" class="form-control form-control-sm"
+													name="DuracionSM_box" id="DuracionSM_box" placeholder="">
+
 											</div>
 										</form>
 									</div>
@@ -409,11 +463,11 @@
 								<div class="card mt-3" style="width: 100%;">
 									<div class="card-body" style="text-align: center;">
 										<button type="button" onclick="CallFunction(),Duracion_SM()"
-											class="btn btn-primary">Iniciar</button>
-										<button type="button" onclick="StopMotion()" class="btn btn-primary">Detener
-											mesa</button>
+											class="btn btn-primary">Start</button>
+										<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop
+											Table</button>
 										<button type="button" onclick="StopInterval(),LoadCharData()"
-											class="btn btn-primary">Detener</button>
+											class="btn btn-primary">Stop</button>
 									</div>
 								</div>
 							</div>
@@ -424,8 +478,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo55" aria-expanded="false"
 								aria-controls="flush-collapseTwo55" id="Barrido">
-								Barrido de frecuencias
-							</button>
+								Frequency sweep </button>
 						</h2>
 						<div id="flush-collapseTwo55" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
@@ -435,14 +488,14 @@
 										<form class="row g-3">
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f1 [Hz]<i
-														data-tippy-content="Frecuencia incial"
+														data-tippy-content="Initial Frequency"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W1_box"
 													id="W1_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f2 [Hz]<i
-														data-tippy-content="Frecuencia final"
+														data-tippy-content="Final Frequency"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W2_box"
 													id="W2_box" placeholder="">
@@ -450,15 +503,15 @@
 										</form>
 										<form class="row g-4">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Duración [s] <i
-														data-tippy-content="Duración"
+												<label class="form-label" style="font-size: 14px">Duration [s] <i
+														data-tippy-content="Duration"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Inter_box"
 													id="Inter_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> uo [m]<i
-														data-tippy-content="Máximo desplazamiento en la base"
+														data-tippy-content="Maximum Displacement at the Base"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="PoB_box"
 													id="PoB_box" placeholder="">
@@ -467,9 +520,10 @@
 										<div class="card mt-3" style="width: 100%;">
 											<div class="card-body" style="text-align: center;">
 												<button type="button" onclick="CallFunction3(),BarridoVar()"
-													class="btn btn-primary">Iniciar barrido</button>
+													class="btn btn-primary">Start sweep
+												</button>
 												<button type="button" onclick="StopInterval()"
-													class="btn btn-primary">Detener</button>
+													class="btn btn-primary">Stop</button>
 											</div>
 										</div>
 									</div>
@@ -482,16 +536,15 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseThree" aria-expanded="false"
 								aria-controls="flush-collapseThree">
-								Sismos predefindos
-							</button>
+								Predefined earthquakes</button>
 						</h2>
 						<div id="flush-collapseThree" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
 								<form class="row g-3">
 									<div class="col" style="width:90px">
-										<label class="form-label" style="font-size: 14px">Escalar <i
-												data-tippy-content="Permite cambiar la escala del sismo"
+										<label class="form-label" style="font-size: 14px">Scalar <i
+												data-tippy-content="Allows changing the earthquake scale"
 												class="ti ti-question-mark text-primary"></i></label>
 										<input type="text" class="form-control form-control-sm" name="Escalar_box1"
 											id="Escalar_box1" placeholder="">
@@ -500,20 +553,20 @@
 								<div class="card mt-2" class="btn-group">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false">
-										Sismos</button>
+										Earthquakes</button>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#" onclick="Elcentro(),AlertaSismos() ">El
+										<li><a class="dropdown-item" href="#" onclick="Elcentro(),Alerta_Sismo()">El
 												centro</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LaVega(),AlertaSismos()">La
+										<li><a class="dropdown-item" href="#" onclick="LaVega(),Alerta_Sismo()">La
 												Vega</a></li>
 										<!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
 										<li><a class="dropdown-item" href="#"
-												onclick="Armenia(),AlertaSismos()">Armenia</a></li>
-										<li><a class="dropdown-item" href="#" onclick="LomaPrieta(),AlertaSismos()">Loma
+												onclick="Armenia(),Alerta_Sismo()">Armenia</a></li>
+										<li><a class="dropdown-item" href="#" onclick="LomaPrieta(),Alerta_Sismo()">Loma
 												Prieta</a>
 										</li>
 										<li><a class="dropdown-item" href="#"
-												onclick="Gilroy(),AlertaSismos()">Gilroy</a></li>
+												onclick="Gilroy(),Alerta_Sismo()">Gilroy</a></li>
 									</ul>
 									<!-- <select>
 										<option value="1" onclick="Elcentro()">El Centro</option>
@@ -526,14 +579,14 @@
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
-										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Iniciar
-											sismo</button>
+										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Start
+											Earthquake</button>
 									</div>
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
-										<button type="button" onclick="StopInterval()"
-											class="btn btn-primary">Detener</button>
+										<button type="button" onclick="StopInterval(),LoadCharData()"
+											class="btn btn-primary">Stop</button>
 									</div>
 								</div>
 							</div>
@@ -544,7 +597,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo" aria-expanded="false"
 								aria-controls="flush-collapseTwo">
-								Cargar desplazamiento y aceleración
+								Load displacement and acceleration
 							</button>
 						</h2>
 						<div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -552,28 +605,28 @@
 							<div class="accordion-body">
 								<div class="card-body">
 									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
-												desplazamiento</span>
+										<h4 style="text-align: center;"><span class="badge bg-primary">Displacement Data
+											</span>
 										</h4>
 										<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
 											class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
 									</div>
 									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Datos de
-												aceleración</span></h4>
+										<h4 style="text-align: center;"><span class="badge bg-primary">Acceleration Data
+											</span></h4>
 										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
 											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
 									</div>
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
 											<button type="button" onclick="CallFunction4()"
-												class="btn btn-primary">Iniciar</button>
+												class="btn btn-primary">Start</button>
 										</div>
 									</div>
 									<div class="card mt-2" style="width: 100%;">
 										<div class="btn-group">
-											<button type="button" onclick="StopInterval()"
-												class="btn btn-primary">Detener</button>
+											<button type="button" onclick="StopInterval(),LoadCharData()"
+												class="btn btn-primary">Stop</button>
 										</div>
 									</div>
 								</div>
@@ -587,15 +640,23 @@
 			<div class="card-body">
 				<div style="text-align: center;">
 					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
-						class="btn btn-primary">Exportar
-						datos</button>
-					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Limpiar
-						campos</button>
+						class="btn btn-primary">Export Data
+					</button>
+					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear Fields
+					</button>
 					<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
 					accept=".xls,xlsx">Cargar</button> -->
 				</div>
 			</div>
 		</div>
+		<!-- <div class="card mt-2" style="width: 100%;">
+			<div class="card-body">
+				<div style="text-align: center;">
+					<button type="button" id="Limpiar" onclick="ChangeCameraP()"
+						class="btn btn-primary">Perspectiva</button>
+				</div>
+			</div>
+		</div> -->
 		<div class="card mt-1" style="width: 100%;">
 			<form class="row g-6">
 				<div class="col-3" style="text-align: center;">
@@ -628,6 +689,7 @@
 				</div>
 		</div>
 		</form>
+	</div>
 	</div>
 	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
@@ -680,7 +742,7 @@
 		var Po = 0;
 		var Wn = 0;
 		var StopVar = 1;
-		var Segundos = 10;
+		var Segundos = 20;
 		var validador = 0; //Validar modelo MCK
 		var validador2 = 1; //Validar Sismos
 		//Modelo MCK
@@ -695,13 +757,14 @@
 		var Escalar = 2;
 		//Barrido
 		var Wv = [];
-		var validador3 = 1; //Determina si se encuentra en barrido o en sismos
+		var validador3 = 1; //Determina si se va a trabajar con barrido de frecuencias o movim sinusoidal
 		//Sismos
 		var Po1 = 0;
 		var gm = 9.81; //Valor de g
 		var TimeLength = 0; //Tamaño del vector de sismos
 		// Inciar y Detener simulación
-		var validador4 = 0;
+		var validador4 = 0; //Limpia el método númerico y las gráficas para que se puede iniciar y detener la simulación varias veces
+		var validador5 = true; //Determina si se usará Newmkar o Newmark Sismos
 		//Variables método númerico
 		var p = []; var p1 = [];
 		var u = []; var up = []; var upp = []; var P = []; var u2 = []; var up2 = []; var upp2 = [];
@@ -799,9 +862,58 @@
 			upp2[0] = 0;
 			Vtiempo2[0] = 0;
 			console.log("Método númerico limpio")
+			if (CheckAc == false) {
+				SensorMultpA = 5;
+			} else {
+				SensorMultpA = 1;
+			}
+			if (CheckLv == false) {
+				SensorMultp = 5;
+			} else {
+				SensorMultp = 1;
+			}
+		}
+		//Función para vibración libre
+		function VibracionLibre_SM() {
+			validador5 = true;
+			if (validador == 0) {
+				//Modelo MCK
+				Po = 0;
+				Wn = 0;
+				Masa_box(); c_box(); Dt_box();
+				if (DespInicial.value.length > 0) {
+					u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				} else {
+					u2[0] = 0;
+				}
+				if (VelInicial.value.length > 0) {
+					up2[0] = parseFloat(document.getElementById('VelInicial').value);
+				} else {
+					up2[0] = 0;
+				}
+				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
+			} else {
+				//MOdelo Zeta y Wn
+				Po = 0;
+				Wn = 0;
+				Zeta_boxF(); Dt2_boxF();
+				if (DespInicial.value.length > 0) {
+					u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				} else {
+					u2[0] = 0;
+				}
+				if (VelInicial.value.length > 0) {
+					up2[0] = parseFloat(document.getElementById('VelInicial').value);
+				} else {
+					up2[0] = 0;
+				}
+				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
+			}
+
 		}
 		//Función call para Sinusoidal
 		function CallFunction() {
+			validador5 = true;
 			validador3 = 1;
 			if (validador == 0) {
 				//Modelo MCK
@@ -816,6 +928,7 @@
 		}
 		//Función call Para Sismos
 		function CallFunction2() {
+			validador5 = false;
 			if (validador == 0) {
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
@@ -831,6 +944,7 @@
 		}
 		//Función call Para Sismos
 		function CallFunction4() {
+			validador5 = false;
 			if (validador == 0) {
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
@@ -844,6 +958,7 @@
 		}
 		//Función call para Barrido
 		function CallFunction3() {
+			validador5 = true;
 			if (validador == 0) {
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
@@ -893,8 +1008,10 @@
 				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
 				CleanerMS(); //Limpiar método númerico
 			}
-			LoadLVDT();
-			LoadSensor();
+			// LoadLVDT();
+			// LoadSensor();
+			SensorCheckerA();
+			SensorCheckerL();
 		}
 		//Obtención de variables de las cajas, modelo Wn y Zeta
 		function Zeta_boxF() {
@@ -926,19 +1043,28 @@
 				t1 = 0; //Limpiar el tiempo acumulado, barrido de Frec
 				CleanerMS(); //Limpiar método númerico
 			}
-			LoadLVDT();
-			LoadSensor();
+			// LoadLVDT();
+			// LoadSensor();
+			SensorCheckerA();
+			SensorCheckerL();
 		}
 		//Función para cambiar la duración del ensayo
 		function Duracion_SM() {
-				if (DuracionSM_box.value.length > 0) {
-					Segundos = (10/24)*parseFloat(document.getElementById('DuracionSM_box').value);
-				} else{
-					Segundos=20;
-				}
+			if (DuracionSM_box.value.length > 0) {
+				Segundos = (10 / 24) * parseFloat(document.getElementById('DuracionSM_box').value);
+			} else {
+				Segundos = 20;
+			}
 		}
-		//Función para multiplicar los sismos de diseño por un escalar
-		var ContadorEntry = false; //Controla la asignación y el cambio de los escalares
+		//Función para cambiar la duración del ensayo, Vibración Libre
+		function Duracion_SMVL() {
+			if (DuracionSMVL_box.value.length > 0) {
+				Segundos = (10 / 24) * parseFloat(document.getElementById('DuracionSMVL_box').value);
+			} else {
+				Segundos = 20;
+			}
+		}
+		var ContadorEntry = false;
 		function Escalar_box() {
 			if (ContadorEntry === false) {
 				if (Escalar_box1.value.length > 0) {
@@ -965,7 +1091,40 @@
 			}
 			ContadorEntry = true;
 		}
-		// Crea las variables necesarias para realizar el barrido de frecuencias
+		//Funciones para controlar el Ruido Gauseano
+		var Escalar_Gauseano = 0.05; // Puede cambiar para desactivar/activar el ruido
+		function Escalar_GA() {
+			Escalar_Gauseano = 0.05;
+		}
+		function Escalar_GR() {
+			Escalar_Gauseano = 0;
+		}
+		function Ruido_Gaus(media, desviS) {
+			var r1 = Math.random();
+			var r2 = Math.random();
+			var z0 = Escalar_Gauseano * Math.sqrt(-2.0 * Math.log(r1)) * Math.cos(2 * Math.PI * r2);
+			return z0 * desviS + media;
+		}
+		// Función para remuestrear la señal 
+		function resampleSignal(signal, targetFrequency) {
+			const sourceFrequency = 50; // Frecuencia de la señal de origen (50 Hz en este caso)
+			const factor = sourceFrequency / targetFrequency; // Factor de re muestreo
+			const resampledSignal = [];
+
+			for (let i = 0; i < signal.length; i += factor) {
+				const startIndex = Math.floor(i); // Índice inferior de la interpolación
+				const endIndex = Math.ceil(i); // Índice superior de la interpolación
+				const startValue = signal[startIndex]; // Valor de la señal en el índice inferior
+				const endValue = signal[endIndex]; // Valor de la señal en el índice superior
+				const fractionalIndex = i - startIndex; // Fracción entre los índices
+				const interpolatedValue = startValue + (endValue - startValue) * fractionalIndex; // Valor interpolado
+				resampledSignal.push(interpolatedValue); // Agregar el valor interpolado al arreglo de la señal remuestreada
+			}
+
+			return resampledSignal; // Devolver la señal remuestreada
+		}
+
+		// Función que crea las variables necesarias para realizar el barrido de frecuencias
 		function BarridoVar() {
 			W1 = 2 * Math.PI * parseFloat(document.getElementById('W1_box').value);
 			W2 = 2 * Math.PI * parseFloat(document.getElementById('W2_box').value);
@@ -991,6 +1150,7 @@
 				organizador();
 			}
 		}
+
 		//Función para exportar datos en cualquier momento de la simulación
 		function ExportarAnyTiempo() {
 			if (exporC == 1) {
@@ -1035,22 +1195,49 @@
 			Perspective = 4;
 			ChangeCameraP();
 		}
+		// Sensor Multip
+		var SensorMultp = 5; var CheckLv = false; // Para desplazamiento
+		var SensorMultpA = 10; var CheckAc = false; // Para aceleración
+		function SensorCheckerA() {
+			if (CheckAc == false) {
+				setTimeout(function () {
+					SensorMultpA = 0;
+				}, 250); // 2000 milisegundos = 2 segundos
+			}
+		}
+		function SensorCheckerL() {
+			if (CheckLv == false) {
+				setTimeout(function () {
+					SensorMultp = 0;
+				}, 250); // 2000 milisegundos = 2 segundos
+			}
+		}
 		//Cargar y remover sensores
 		function LoadLVDT() {
 			Mostrar(Pared11); //Pared lvdt
 			Mostrar(Cilindro1); //Láser
+			SensorMultp = 1;
+			CheckLv = true;
 		}
 		function RemoveLVDT() {
 			Remover(Pared11);
 			Remover(Cilindro1)
+			CheckLv = false;
+			SensorCheckerL();
 		}
 		function LoadSensor() {
 			Mostrar(SensorB); //Sensor en la Base
 			Mostrar(Barra11); //Sensor en el GDL
+			SensorMultpA = 1;
+			CheckAc = true;
+
 		}
 		function RemoveSensor() {
 			Remover(SensorB);
 			Remover(Barra11);
+			CheckAc = false;
+			SensorCheckerA();
+
 		}
 		//Cambia las vista de la cámara
 		function ChangeCameraP() {
@@ -1146,8 +1333,106 @@
 					sl = 3;
 					CleanResponse = true;
 					break;
+				case 'RespEx':
+					sl = 4;
+					CleanResponse = true;
+					break;
 			}
 			EditResponse = sl;
+		}
+		var LoadCharDataVer = true;
+		function LoadCharDataOnChange() { //Función para cambiar la respuesta que se gráfica
+			console.log('Cambio de gráfica')
+			if (LoadCharDataVer == false) {
+				LoadCharData();
+			}
+			if (CheckAc == false) {
+				SensorMultpA = 10;
+				SensorCheckerA()
+			} else {
+				SensorMultpA = 1;
+			}
+			if (CheckLv == false) {
+				SensorMultp = 10;
+				SensorCheckerL()
+			} else {
+				SensorMultp = 1;
+			}
+		}
+		function LoadCharData() { //Función para cambiar la respuesta que se gráfica
+			console.log('Cargar toda la gráfica')
+			chart.data.datasets[0].data.length = 0;
+			chart.data.datasets[1].data.length = 0;
+			LoadCharDataVer = false;
+			switch (EditResponse) {
+				case 1:
+					for (let i = 0; i < u2.length; i++) {
+						if (CheckLv == false) {
+							if (i <= 4) {
+								SensorMultp = 5;
+							} else {
+								SensorMultp = 0;
+							}
+						}
+						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+					}
+					break;
+				case 2:
+					for (let i = 0; i < u2.length; i++) {
+						if (CheckAc == false) {
+							if (i <= 4) {
+								SensorMultpA = 10;
+							} else {
+								SensorMultpA = 0;
+							}
+						}
+						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[i] + 5 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+					}
+					break;
+				case 3:
+					for (let i = 0; i < u2.length; i++) {
+						if (CheckAc == false) {
+							if (i <= 4) {
+								SensorMultpA = 10;
+							} else {
+								SensorMultpA = 0;
+							}
+						}
+						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[i] + 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+					}
+					break;
+				case 4:
+					for (let i = 0; i < u2.length; i++) {
+						if (CheckAc == false) {
+							if (i <= 4) {
+								SensorMultpA = 10;
+							} else {
+								SensorMultpA = 0;
+							}
+						}
+						if (validador5 == true) {
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						} else {
+							if (validador2 == 2) {
+								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+							} else {
+								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i].Datos + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+							}
+						}
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+					}
+					break;
+			}
+			chart.update();
+			if (CheckAc == false) {
+				SensorMultp = 5;
+				SensorMultpA = 10;
+			} else {
+				SensorMultp = 1;
+				SensorMultpA = 1;
+			}
+
 		}
 		//Detener la iteración
 		function StopInterval() {
@@ -1277,8 +1562,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1291,7 +1576,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[contadorglobal] + 5 * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 3:
@@ -1305,7 +1590,22 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[contadorglobal] + 50 * Ruido_Gaus(0, 1), x: t })
+						chart.update();
+						break;
+					case 4:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+							// }
+							CleanResponse = false;
+							chart.update();
+						}
+						chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
@@ -1414,10 +1714,10 @@
 				t1 = t1 + dt;
 				//console.log(Vtiempo);
 				//console.log(Mesa1.position.y);
-				if (Math.abs(Desp_Data[contador1]) >= 2) {
+				renderer.render(scene, camera); //Carga la escena
+				if (Math.abs(Desp_Data[contador1]) >= 1.5) {
 					Alerta();
 				}
-				renderer.render(scene, camera); //Carga la escena
 				if (contador1 == TimeLength - 1) {
 					clearInterval(tiempo1);
 				}
@@ -1491,8 +1791,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: suma_w[contador1], x: t })
-						chart.data.datasets[1].data.push({ y: u2[contador1], x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1505,7 +1805,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[1].data.push({ y: up2[contadorglobal], x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultpA * up2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 3:
@@ -1519,7 +1819,26 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: upp2[contadorglobal], x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultp * upp2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.update();
+						break;
+					case 4:
+						if (CleanResponse == true) {
+							chart.data.datasets[0].data.length = 0;
+							chart.data.datasets[1].data.length = 0;
+							chart.update();
+							// for (let i = 0; i < contadorglobal; i++) {
+							// 	chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
+							// }
+							CleanResponse = false;
+							chart.update();
+						}
+						if (validador2 == 2) {
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						} else {
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal].Datos + Ruido_Gaus(0, 1), x: t })
+						}
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
@@ -1821,11 +2140,11 @@
 
 		}
 		// initGUI()
-		function Alerta() { //Le indica al usuario el momento en el que el experimento falló
+		function Alerta() {
 			let timerInterval
 			Swal.fire({
-				title: 'El montaje  experimental falló, los desplazamientos totales excedieron los limítes de la mesa, por favor verifique los parámetros de entrada',
-				text: 'El desplazamiento total excedio los limítes de la mesa, el montaje falló',
+				title: 'The experimental setup failed, the total displacements exceeded the limits of the table. Please verify the input parameters.',
+				text: 'The total displacement exceeded the limits of the table, the setup failed.',
 				html: '<b></b>',
 				timer: 8000,
 				timerProgressBar: true,
@@ -1847,13 +2166,66 @@
 			})
 			StopInterval();
 		}
-		function AlertaSismos() { //Le indica al usuario que el sismo ha sido seleccionado
+		// Alerta Sismos
+		function Alerta_Sismo() {
 			let timerInterval
 			Swal.fire({
-				title: 'Sismo seleccionado correctamente',
-				text: 'Sismo',
+				title: 'The earthquake was selected correctly.',
+				text: 'Earthquake',
 				html: '<b></b>',
 				timer: 1500,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('b')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			}).then((result) => {
+				/* Read more about handling dismissals below */
+				if (result.dismiss === Swal.DismissReason.timer) {
+					console.log('I was closed by the timer')
+				}
+			})
+			StopInterval();
+		}
+		// Alerta Ruido, Agregarlo
+		function Alerta_RuidoA() {
+			let timerInterval
+			Swal.fire({
+				title: 'Noise Added',
+				text: 'Noise',
+				html: '<b></b>',
+				timer: 800,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('b')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			}).then((result) => {
+				/* Read more about handling dismissals below */
+				if (result.dismiss === Swal.DismissReason.timer) {
+					console.log('I was closed by the timer')
+				}
+			})
+		}
+		function Alerta_RuidoR() {
+			let timerInterval
+			Swal.fire({
+				title: 'Noise removed',
+				text: 'Noise',
+				html: '<b></b>',
+				timer: 800,
 				timerProgressBar: true,
 				didOpen: () => {
 					Swal.showLoading()
@@ -1880,13 +2252,13 @@
 			type: 'line',
 			data: {
 				datasets: [{
-					label: 'Respueta total',
+					label: 'Total response',
 					borderColor: 'rgb(222,42,22)',
 					borderWidth: 2,
 					pointRadius: 0,
 				},
 				{
-					label: 'Respueta relativa',
+					label: 'Relative response',
 					borderColor: 'rgb(30,144,255)',
 					borderWidth: 2,
 					pointRadius: 0,
@@ -1986,7 +2358,7 @@
 		const loader1 = new THREE.GLTFLoader();
 		// Load a glTF resource, Lab loading
 		loader1.load(
-			'lab2.gltf',//'scene.gltf'
+			'lab.gltf',//'scene.gltf'
 			function (gltf) {
 				lab = gltf.scene;
 				scene.add(lab);
@@ -2256,38 +2628,6 @@
 			console.log('Datos Organizados')
 			return data1
 		}
-		var LoadCharDataVer = true;
-		function LoadCharDataOnChange() {
-			console.log('Cambio de gráfica')
-			if (LoadCharDataVer == false) {
-				LoadCharData();
-			}
-		}
-		function LoadCharData() {
-			console.log('Cargar toda la gráfica')
-			chart.data.datasets[0].data.length = 0;
-			chart.data.datasets[1].data.length = 0;
-			LoadCharDataVer = false;
-			switch (EditResponse) {
-				case 1:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: suma_w[i], x: Vtiempo2[i] })
-						chart.data.datasets[1].data.push({ y: u2[i], x: Vtiempo2[i] })
-					}
-					break;
-				case 2:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[1].data.push({ y: up2[i], x: Vtiempo2[i] })
-					}
-					break;
-				case 3:
-					for (let i = 0; i < u2.length; i++) {
-						chart.data.datasets[0].data.push({ y: upp2[i], x: Vtiempo2[i] })
-					}
-					break;
-			}
-			chart.update();
-		}
 		function recargar() {
 			window.location.href = window.location.href;
 			console.log('Reload')
@@ -2308,6 +2648,7 @@
 		let Ac_Data;
 		let Desp_Data;
 		function CargarExcel() {
+			validador2 = 1;
 			document.getElementById('Cargar').addEventListener("change", (event) => {
 				if (selectfile) {
 					let fileReader = new FileReader
@@ -2326,6 +2667,7 @@
 			})
 		}
 		function CargarExcel1() {
+			validador2 = 1;
 			document.getElementById('Cargar1').addEventListener("change", (event) => {
 				if (selectfile1) {
 					let fileReader = new FileReader

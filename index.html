@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
@@ -79,7 +79,8 @@
 			</div>
 			<div class="col-md-2" style="text-align: right;">
 				<a class="btn btn-sm btn-outline-secondary"
-					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental Dynamics</a>
+					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental
+					Dynamics</a>
 			</div>
 		</div>
 	</div>
@@ -94,16 +95,17 @@
 		<div class="card mb-2" style="width: 100%;">
 			<select id="select_barra" class="form-select" aria-label="Default select example"
 				onchange="ResponseEditor(),LoadCharDataOnChange()">
-				<option value="Despl" selected>Displacement [m]</option>
-				<option value="Vel">Velocity [m/s]</option>
-				<option value="Acel">Acceleration [m/s^2]</option>
-				<option value="RespEx">Acceleration</option>
+				<option value="Despl" style="display: none" selected>Select Response</option>
+				<option value="Despl" style="display: none">Displacement [m]</option>
+				<option value="Vel" style="display: none">Velocity [m/s]</option>
+				<option value="Acel" style="display: none">Acceleration [m/s^2]</option>
+				<option value="RespEx" style="display: none">Acceleration</option>
 			</select>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-				Sensor Configuration
+				Sensor configuration
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample3">
@@ -130,7 +132,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Relative Displacement Sensor
+								Displacement sensor
 							</button>
 						</div>
 					</h2>
@@ -161,12 +163,36 @@
 						</div>
 					</div>
 				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingFour">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+								Signal Resampling
+							</button>
+						</div>
+					</h2>
+					<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: left;">
+							<form class="row g-3">
+								<div class="col" style="width: 90px;">
+									<label class="form-label" style="font-size: 14px">Target Frequency [Hz]<i
+											data-tippy-content="Target Frequency, less than 50 Hz"
+											class="ti ti-question-mark text-primary"></i></label>
+									<input type="text" class="form-control form-control-sm" name="targetFrequency"
+										id="targetFrequency" placeholder="">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				Assign Physical or Dynamic Properties to the System
+				Dynamic properties to the system
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample">
@@ -177,7 +203,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne1" aria-expanded="false"
 								aria-controls="flush-collapseOne1" id="modelock">
-								 MCK Model
+								MCK Model
 							</button>
 						</h2>
 						<div id="flush-collapseOne1" class="accordion-collapse collapse"
@@ -223,7 +249,7 @@
 													id="Masa_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Damping. C [N*s/m]<i
+												<label class="form-label" style="font-size: 14px">Damping C [N*s/m]<i
 														data-tippy-content="Sytem Damping"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="c_box1"
@@ -255,8 +281,8 @@
 						<h2 class="accordion-header" id="flush-headingTwo1">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
-								aria-controls="flush-collapseTwo1" id="ZetaWn">	
-Wn and ζ Model
+								aria-controls="flush-collapseTwo1" id="ZetaWn">
+								Wn and ζ Model
 							</button>
 						</h2>
 						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
@@ -296,14 +322,16 @@ Wn and ζ Model
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Dimensionless damping ratio ζ [ ]<i
+												<label class="form-label" style="font-size: 14px"> Dimensionless damping
+													ratio ζ [ ]<i
 														data-tippy-content="System's Dimensionless Damping Ratio"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="zeta_box"
 													id="zeta_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Natural Frequency Wn[rad/s]<i data-tippy-content="Frecuencia natural del sistema"
+												<label class="form-label" style="font-size: 14px"> Natural Frequency Wn
+													[rad/s]<i data-tippy-content="Frecuencia natural del sistema"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wna_box"
 													id="Wna_box" placeholder="">
@@ -329,7 +357,7 @@ Wn and ζ Model
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-				Select Type of Displacement
+				Base motion
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample2">
@@ -340,7 +368,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwoVl" aria-expanded="false"
 								aria-controls="flush-collapseTwoVl">
-								Free Vibration
+								Ug(t)=0 (Free Vibration)
 							</button>
 						</h2>
 						<div id="flush-collapseTwoVl" class="accordion-collapse collapse"
@@ -355,13 +383,12 @@ Wn and ζ Model
 											<input type="text" class="form-control form-control-sm" name="DespInicial"
 												id="DespInicial" placeholder="">
 										</div>
-										<div class="col-1" style="width:180px">
-											<label class="form-label" style="font-size: 14px">Duration[s] <i
-													data-tippy-content="Duration"
+										<div class="col" style="width:180px">
+											<label class="form-label" style="font-size:14px">Velocity upo [m/s]<i
+													data-tippy-content="Initial Velocity"
 													class="ti ti-question-mark text-primary"></i></label>
-											<input type="text" class="form-control form-control-sm"
-												name="DuracionSMVL_box" id="DuracionSMVL_box" placeholder="">
-
+											<input type="text" class="form-control form-control-sm" name="VelInicial"
+												id="VelInicial" placeholder="">
 										</div>
 										<!-- <div class="col" style="width:180px">
 											<label class="form-label" style="font-size: 14px">Frecuencia W [rad/s]
@@ -370,6 +397,16 @@ Wn and ζ Model
 											<input type="text" class="form-control form-control-sm" name="Wn_box1"
 												id="Wn_box1" placeholder="">
 										</div> -->
+									</form>
+									<form class="row g-2">
+										<div class="col-1" style="width:180px">
+											<label class="form-label" style="font-size: 14px">Duration[s] <i
+													data-tippy-content="Duration"
+													class="ti ti-question-mark text-primary"></i></label>
+											<input type="text" class="form-control form-control-sm"
+												name="DuracionSMVL_box" id="DuracionSMVL_box" placeholder="">
+
+										</div>
 									</form>
 									<div class="card mt-3" style="width: 100%;">
 										<div class="card-body" style="text-align: center;">
@@ -388,7 +425,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne" aria-expanded="false"
 								aria-controls="flush-collapseOne">
-								Sinusoidal Displacement
+								Sinusoidal displacement
 							</button>
 						</h2>
 						<div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -428,7 +465,8 @@ Wn and ζ Model
 									<div class="card-body" style="text-align: center;">
 										<button type="button" onclick="CallFunction(),Duracion_SM()"
 											class="btn btn-primary">Start</button>
-										<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop Table</button>
+										<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop
+											Table</button>
 										<button type="button" onclick="StopInterval(),LoadCharData()"
 											class="btn btn-primary">Stop</button>
 									</div>
@@ -441,7 +479,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo55" aria-expanded="false"
 								aria-controls="flush-collapseTwo55" id="Barrido">
-								Frequency Sweep	</button>
+								Frequency sweep </button>
 						</h2>
 						<div id="flush-collapseTwo55" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
@@ -458,7 +496,7 @@ Wn and ζ Model
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px"> f2 [Hz]<i
-														data-tippy-content="Final Frequency
+														data-tippy-content="Final Frequency"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="W2_box"
 													id="W2_box" placeholder="">
@@ -467,7 +505,7 @@ Wn and ζ Model
 										<form class="row g-4">
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px">Duration [s] <i
-														data-tippy-content="Duration
+														data-tippy-content="Duration"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Inter_box"
 													id="Inter_box" placeholder="">
@@ -483,7 +521,7 @@ Wn and ζ Model
 										<div class="card mt-3" style="width: 100%;">
 											<div class="card-body" style="text-align: center;">
 												<button type="button" onclick="CallFunction3(),BarridoVar()"
-													class="btn btn-primary">Start Sweep
+													class="btn btn-primary">Start sweep
 												</button>
 												<button type="button" onclick="StopInterval()"
 													class="btn btn-primary">Stop</button>
@@ -499,7 +537,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseThree" aria-expanded="false"
 								aria-controls="flush-collapseThree">
-								Predefined Earthquakes</button>
+								Predefined earthquakes</button>
 						</h2>
 						<div id="flush-collapseThree" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample2">
@@ -507,7 +545,7 @@ Wn and ζ Model
 								<form class="row g-3">
 									<div class="col" style="width:90px">
 										<label class="form-label" style="font-size: 14px">Scalar <i
-												data-tippy-content="Permite cambiar la escala del sismo"
+												data-tippy-content="Allows changing the earthquake scale"
 												class="ti ti-question-mark text-primary"></i></label>
 										<input type="text" class="form-control form-control-sm" name="Escalar_box1"
 											id="Escalar_box1" placeholder="">
@@ -542,7 +580,8 @@ Wn and ζ Model
 								</div>
 								<div class="card mt-2" style="width: 100%;">
 									<div class="btn-group">
-										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Start Earthquake</button>
+										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Start
+											Earthquake</button>
 									</div>
 								</div>
 								<div class="card mt-2" style="width: 100%;">
@@ -559,7 +598,7 @@ Wn and ζ Model
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo" aria-expanded="false"
 								aria-controls="flush-collapseTwo">
-								Load Displacement and Acceleration
+								Load displacement and acceleration
 							</button>
 						</h2>
 						<div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -568,14 +607,14 @@ Wn and ζ Model
 								<div class="card-body">
 									<div class="card mt-2" class="btn-group">
 										<h4 style="text-align: center;"><span class="badge bg-primary">Displacement Data
-										</span>
+											</span>
 										</h4>
 										<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
 											class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
 									</div>
 									<div class="card mt-2" class="btn-group">
 										<h4 style="text-align: center;"><span class="badge bg-primary">Acceleration Data
-										</span></h4>
+											</span></h4>
 										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
 											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
 									</div>
@@ -826,12 +865,12 @@ Wn and ζ Model
 			console.log("Método númerico limpio")
 			if (CheckAc == false) {
 				SensorMultpA = 5;
-			}else{
+			} else {
 				SensorMultpA = 1;
 			}
 			if (CheckLv == false) {
 				SensorMultp = 5;
-			}else{
+			} else {
 				SensorMultp = 1;
 			}
 		}
@@ -843,14 +882,32 @@ Wn and ζ Model
 				Po = 0;
 				Wn = 0;
 				Masa_box(); c_box(); Dt_box();
-				u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				if (DespInicial.value.length > 0) {
+					u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				} else {
+					u2[0] = 0;
+				}
+				if (VelInicial.value.length > 0) {
+					up2[0] = parseFloat(document.getElementById('VelInicial').value);
+				} else {
+					up2[0] = 0;
+				}
 				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			} else {
 				//MOdelo Zeta y Wn
 				Po = 0;
 				Wn = 0;
 				Zeta_boxF(); Dt2_boxF();
-				u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				if (DespInicial.value.length > 0) {
+					u2[0] = parseFloat(document.getElementById('DespInicial').value);
+				} else {
+					u2[0] = 0;
+				}
+				if (VelInicial.value.length > 0) {
+					up2[0] = parseFloat(document.getElementById('VelInicial').value);
+				} else {
+					up2[0] = 0;
+				}
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			}
 
@@ -1036,7 +1093,7 @@ Wn and ζ Model
 			ContadorEntry = true;
 		}
 		//Funciones para controlar el Ruido Gauseano
-		var Escalar_Gauseano = 0.05; // Puede cambiar para desactivar/activar el ruido
+		var Escalar_Gauseano = 0; // Puede cambiar para desactivar/activar el ruido
 		function Escalar_GA() {
 			Escalar_Gauseano = 0.05;
 		}
@@ -1048,6 +1105,46 @@ Wn and ζ Model
 			var r2 = Math.random();
 			var z0 = Escalar_Gauseano * Math.sqrt(-2.0 * Math.log(r1)) * Math.cos(2 * Math.PI * r2);
 			return z0 * desviS + media;
+		}
+		// Función para remuestrear la señal 
+		function resampleSignal(signal, targetFrequency) {
+			const sourceFrequency = 50; // Frecuencia de la señal de origen (50 Hz en este caso)
+			const factor = sourceFrequency / targetFrequency; // Factor de re muestreo
+			const resampledSignal = [];
+
+			for (let i = 0; i < signal.length; i += factor) {
+				const startIndex = Math.floor(i); // Índice inferior de la interpolación
+				const endIndex = Math.ceil(i); // Índice superior de la interpolación
+				const startValue = signal[startIndex]; // Valor de la señal en el índice inferior
+				const endValue = signal[endIndex]; // Valor de la señal en el índice superior
+				const fractionalIndex = i - startIndex; // Fracción entre los índices
+				const interpolatedValue = startValue + (endValue - startValue) * fractionalIndex; // Valor interpolado
+				resampledSignal.push(interpolatedValue); // Agregar el valor interpolado al arreglo de la señal remuestreada
+			}
+
+			return resampledSignal; // Devolver la señal remuestreada
+		}
+		//Función para mostrar y esconder los items del select 
+		function toggleOptions(index, show) {
+			var select = document.getElementById("select_barra");
+			var options = select.options;
+			if (show) {
+				options[index].style.display = "block"; // Mostrar opción
+				select.selectedIndex = index; // Seleccionar opción
+			} else {
+				options[index].style.display = "none"; // Ocultar opción
+			}
+			// Identificar
+			if(CheckAc==false && CheckLv ==false){
+				options[0].style.display = "block"; // Mostrar opción
+				select.selectedIndex = 0; // Seleccionar opción
+			} else if(CheckAc==true && CheckLv ==false){
+				options[3].style.display = "block"; // Mostrar opción
+				select.selectedIndex = 3; // Seleccionar opción
+			}else if(CheckAc==false && CheckLv ==true){
+				options[1].style.display = "block"; // Mostrar opción
+				select.selectedIndex = 1; // Seleccionar opción
+			}
 		}
 		// Función que crea las variables necesarias para realizar el barrido de frecuencias
 		function BarridoVar() {
@@ -1143,11 +1240,16 @@ Wn and ζ Model
 			Mostrar(Cilindro1); //Láser
 			SensorMultp = 1;
 			CheckLv = true;
+			toggleOptions(1,CheckLv)
+			// toggleOptions(0,true)
+
 		}
 		function RemoveLVDT() {
 			Remover(Pared11);
 			Remover(Cilindro1)
 			CheckLv = false;
+			toggleOptions(1,CheckLv)
+			// toggleOptions(0,true)
 			SensorCheckerL();
 		}
 		function LoadSensor() {
@@ -1155,12 +1257,16 @@ Wn and ζ Model
 			Mostrar(Barra11); //Sensor en el GDL
 			SensorMultpA = 1;
 			CheckAc = true;
+			toggleOptions(3,CheckAc)
+			// toggleOptions(0,true)
 
 		}
 		function RemoveSensor() {
 			Remover(SensorB);
 			Remover(Barra11);
 			CheckAc = false;
+			toggleOptions(3,CheckAc)
+			// toggleOptions(0,true)
 			SensorCheckerA();
 
 		}
@@ -1274,13 +1380,13 @@ Wn and ζ Model
 			if (CheckAc == false) {
 				SensorMultpA = 10;
 				SensorCheckerA()
-			}else{
+			} else {
 				SensorMultpA = 1;
 			}
 			if (CheckLv == false) {
 				SensorMultp = 10;
 				SensorCheckerL()
-			}else{
+			} else {
 				SensorMultp = 1;
 			}
 		}
@@ -1953,7 +2059,8 @@ Wn and ζ Model
 			const geometryF = new THREE.BoxGeometry(0.15, 0.15, 0.15, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
-				color: 0x252850,
+				// color: 0x252850, Blu
+				color: 0x02BC46,
 				flatShading: true
 			});
 			let pos = { x: 5.4, y: 1.55, z: 0 };
@@ -1965,7 +2072,8 @@ Wn and ζ Model
 			const geometryF = new THREE.BoxGeometry(0.15, 2.2, 4, 1, 1, 1);
 			const materialF = new THREE.MeshPhongMaterial({
 				// color: 0xFFFFFF, White
-				color: 0x252850,
+				// color: 0x252850, blu
+				color: 0x02BC46,
 				flatShading: true
 			});
 			let pos = { x: 5, y: 0.5, z: -1.92 };
