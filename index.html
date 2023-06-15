@@ -1145,6 +1145,8 @@
 				options[1].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 1; // Seleccionar opción
 			}
+			ResponseEditor()
+			LoadCharDataOnChange()
 		}
 		// Función que crea las variables necesarias para realizar el barrido de frecuencias
 		function BarridoVar() {
@@ -2315,7 +2317,7 @@
 						type: 'linear',
 						title: {
 							display: true,
-							text: 'tiempo [s]'
+							text: 'time [s]'
 
 						}
 					},
