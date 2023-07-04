@@ -1135,13 +1135,13 @@
 				options[index].style.display = "none"; // Ocultar opción
 			}
 			// Identificar
-			if(CheckAc==false && CheckLv ==false){
+			if (CheckAc == false && CheckLv == false) {
 				options[0].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 0; // Seleccionar opción
-			} else if(CheckAc==true && CheckLv ==false){
+			} else if (CheckAc == true && CheckLv == false) {
 				options[3].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 3; // Seleccionar opción
-			}else if(CheckAc==false && CheckLv ==true){
+			} else if (CheckAc == false && CheckLv == true) {
 				options[1].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 1; // Seleccionar opción
 			}
@@ -1242,7 +1242,7 @@
 			Mostrar(Cilindro1); //Láser
 			SensorMultp = 1;
 			CheckLv = true;
-			toggleOptions(1,CheckLv)
+			toggleOptions(1, CheckLv)
 			// toggleOptions(0,true)
 
 		}
@@ -1250,7 +1250,7 @@
 			Remover(Pared11);
 			Remover(Cilindro1)
 			CheckLv = false;
-			toggleOptions(1,CheckLv)
+			toggleOptions(1, CheckLv)
 			// toggleOptions(0,true)
 			SensorCheckerL();
 		}
@@ -1259,7 +1259,7 @@
 			Mostrar(Barra11); //Sensor en el GDL
 			SensorMultpA = 1;
 			CheckAc = true;
-			toggleOptions(3,CheckAc)
+			toggleOptions(3, CheckAc)
 			// toggleOptions(0,true)
 
 		}
@@ -1267,7 +1267,7 @@
 			Remover(SensorB);
 			Remover(Barra11);
 			CheckAc = false;
-			toggleOptions(3,CheckAc)
+			toggleOptions(3, CheckAc)
 			// toggleOptions(0,true)
 			SensorCheckerA();
 
@@ -2640,25 +2640,34 @@
 		const headers = {
 			id: 'Tiempo',
 			nombre: ' Resp. Relativa',
-			nombre2: 'Resp. Total'
+			nombre2: 'Resp. Aceleración'
 		};
-		// function organizador() {
-		// 	data = [{ id: 'Relativa' },
-		// 	{ Relativa },
-		// 	{ id: 'Total' },
-		// 	{ Total }
-		// 	];
-		// 	return data
-		// }
 		//Organiza los datos que se van a exportar en columnas
 		var data1 = new Array();
 		function organizador() {
-			for (let i = 0; i < u2.length; i++) {
+			TF = parseFloat(document.getElementById('targetFrequency').value);
+			console.log(TF)
+			if (TF>=0 && TF<50) {
+				var VTR = resampleSignal(Vtiempo2, TF);
+				var U2R = resampleSignal(u2, TF);
+				var Upp2R = resampleSignal(upp2, TF);
+				for (let i = 0; i < u2.length; i++) {
+				data1[i] = new Array();
+				data1[i][1] = VTR[i];
+				data1[i][2] = U2R[i] + Ruido_Gaus(0, 1);
+				data1[i][3] = Upp2R[i] + Ruido_Gaus(0, 1);
+			}
+			} else {
+				for (let i = 0; i < u2.length; i++) {
 				data1[i] = new Array();
 				data1[i][1] = Vtiempo2[i];
-				data1[i][2] = u2[i];
-				data1[i][3] = suma_w[i];
+				data1[i][2] = u2[i] + Ruido_Gaus(0, 1);
+				data1[i][3] = upp2[i] + Ruido_Gaus(0, 1);
 			}
+			}
+
+			
+
 			chart.update();
 			console.log('Datos Organizados')
 			return data1
