@@ -606,7 +606,14 @@
 							<div class="accordion-body">
 								<div class="card-body">
 									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Load Data
+										<h4 style="text-align: center;"><span class="badge bg-primary">Displacement Data
+											</span>
+										</h4>
+										<input type="file" onclick="  SeleccionarDatos1(),CargarExcel1()"
+											class="btn btn-primary" id="Cargar1" accept=".xls,.xlsx">
+									</div>
+									<div class="card mt-2" class="btn-group">
+										<h4 style="text-align: center;"><span class="badge bg-primary">Acceleration Data
 											</span></h4>
 										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
 											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
@@ -1443,7 +1450,7 @@
 							if (validador2 == 2) {
 								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							} else {
-								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i].Datos + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							}
 						}
 						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
@@ -1700,15 +1707,15 @@
 				switch (validador2) {
 					case 1:
 						if (validador == 0) {
-							p[contador1] = -1 * m * parseFloat(Ac_Data[contador1]); //Aceleración en el grado de libertad debido al desplazamiento
-							p1[contador1] = -1 * m * parseFloat(Ac_Data[contador1 + 1]); //P+1
+							p[contador1] = -1 * m * parseFloat(Ac_Data[contador1].Datos); //Aceleración en el grado de libertad debido al desplazamiento
+							p1[contador1] = -1 * m * parseFloat(Ac_Data[contador1 + 1].Datos); //P+1
 							Po1 = p[contador1];
 						} else {
-							p[contador1] = -1 * parseFloat(Ac_Data[contador1]); //Aceleración en el grado de libertad debido al desplazamiento
-							p1[contador1] = -1 * parseFloat(Ac_Data[contador1 + 1]); //P+1
+							p[contador1] = -1 * parseFloat(Ac_Data[contador1].Datos); //Aceleración en el grado de libertad debido al desplazamiento
+							p1[contador1] = -1 * parseFloat(Ac_Data[contador1 + 1].Datos); //P+1
 							Po1 = p[contador1];
 						}
-						Mesa1.position.x = Desp_Data[contador1] + 5; //Posición x de la mesa
+						Mesa1.position.x = Desp_Data[contador1].Datos + 5; //Posición x de la mesa
 						TimeLength = (Ac_Data.length); //Pendiente a optimizar
 						break;
 					case 2:
@@ -1773,17 +1780,17 @@
 				// esfera2.position.x = u2[contador1] + parseFloat(Ac_Data[contador1].Datos) + 5; ////Arreglar
 				switch (validador2) {
 					case 1:
-						esfera2.position.x = u2[contador1] + 5 + Desp_Data[contador1];
+						esfera2.position.x = u2[contador1] + 5 + Desp_Data[contador1].Datos;
 						//Mover la caja
 						var pos = { x: 5, y: 0.2, z: 0 };
-						cube.position.x = pos.x + Desp_Data[contador1];//Arreglar
+						cube.position.x = pos.x + Desp_Data[contador1].Datos;//Arreglar
 						cube.position.y = -0.35 * 4 / 3;
 						cube.position.z = 0;
 						//Mover Láser
-						Cilindro1.position.x = 5 + Desp_Data[contador1] + u2[contador1];
+						Cilindro1.position.x = 5 + Desp_Data[contador1].Datos + u2[contador1];
 						Cilindro1.position.y = 1.5;
 						Cilindro1.position.z = -1;
-						suma_w[contadorglobal] = (u2[contadorglobal] + parseFloat(Desp_Data[contador1]));
+						suma_w[contadorglobal] = (u2[contadorglobal] + parseFloat(Desp_Data[contador1].Datos));
 						break;
 					// CambiarAltura();
 					case 2:
@@ -1862,7 +1869,7 @@
 						if (validador2 == 2) {
 							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						} else {
-							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal].Datos + Ruido_Gaus(0, 1), x: t })
 						}
 						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
@@ -2676,57 +2683,51 @@
 				selectfile = event.target.files[0];
 			})
 		}
+		let selectfile1;
+		function SeleccionarDatos1() {
+			document.getElementById('Cargar1').addEventListener("change", (event) => {
+				selectfile1 = event.target.files[0];
+			})
+		}
 		let Ac_Data;
 		let Desp_Data;
 		function CargarExcel() {
-    validador2 = 1;
-    document.getElementById('Cargar').addEventListener("change", (event) => {
-        if (selectfile) {
-            let fileReader = new FileReader();
-            fileReader.readAsBinaryString(selectfile);
-            fileReader.onload = (event) => {
-                let Excel_data = event.target.result;
-                let woorkBook = XLSX.read(Excel_data, { type: "binary" });
+			document.getElementById('Cargar').addEventListener("change", (event) => {
+				if (selectfile) {
+					let fileReader = new FileReader
+					fileReader.readAsBinaryString(selectfile)
+					fileReader.onload = (event) => {
+						let Excel_data = event.target.result;
+						let woorkBook = XLSX.read(Excel_data, { type: "binary" });
+						woorkBook.SheetNames.forEach(sheet => {
+							Ac_Data = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet]);
+							console.log(Ac_Data)
+							cambio = 1;
+						})
+					}
 
-                // Leer la primera hoja del archivo Excel
-                let sheet = woorkBook.SheetNames[0];
+				}
+			})
+		}
+		function CargarExcel1() {
+			validador2 = 1;
+			document.getElementById('Cargar1').addEventListener("change", (event) => {
+				if (selectfile1) {
+					let fileReader = new FileReader
+					fileReader.readAsBinaryString(selectfile1)
+					fileReader.onload = (event) => {
+						let Excel_data = event.target.result;
+						let woorkBook = XLSX.read(Excel_data, { type: "binary" });
+						woorkBook.SheetNames.forEach(sheet => {
+							Desp_Data = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet]);
+							console.log(Desp_Data)
+							cambio = 1;
+						})
+					}
 
-                // Obtener solo las columnas deseadas (por ejemplo, columnas "A" y "B")
-                let columnA = "A";
-                let columnB = "B";
-
-                // Crear el rango de celdas que cubre ambas columnas
-                let range = XLSX.utils.decode_range(woorkBook.Sheets[sheet]['!ref']);
-                let columnRangeA = columnA + (range.s.r + 1) + ":" + columnA + (range.e.r + 1);
-                let columnRangeB = columnB + (range.s.r + 1) + ":" + columnB + (range.e.r + 1);
-
-                // Obtener los datos de ambas columnas como arreglos
-                let columnDataA = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
-                    header: 1,
-                    range: columnRangeA,
-                    defval: "" // Tratar celdas vacías como cadenas vacías
-                });
-
-                let columnDataB = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
-                    header: 1,
-                    range: columnRangeB,
-                    defval: "" // Tratar celdas vacías como cadenas vacías
-                });
-
-                // Eliminar el primer elemento de cada array (encabezado)
-                columnDataA.shift();
-                columnDataB.shift();
-
-                // Convertir los datos de las columnas a vectores numéricos
-				Desp_Data = columnDataA.map(row => parseFloat(row[0]));
-                Ac_Data= columnDataB.map(row => parseFloat(row[0]));
-
-                console.log("Vector numérico de la Columna A:", Ac_Data);
-                console.log("Vector numérico de la Columna B:", Desp_Data);
-            }
-        }
-    });
-}
+				}
+			})
+		}
 	</script>
 </body>
 
