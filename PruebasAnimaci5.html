@@ -52,6 +52,7 @@
 
 <body>
 	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -93,97 +94,7 @@
 		camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
 		controls.update();
 		renderer.render(scene, camera);
-		const geometry1 = new THREE.PlaneGeometry(1, 1);
-		const material1 = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
-		// geometry1.attributes.position.setY(0,1);
-		// geometry1.attributes.position.setY(1,1);
-		// geometry1.attributes.position.setY(2,1);
-		const geometry = new THREE.BoxGeometry(0.2, 2, 0.2, 1, 30, 1); //Geomtria del cubo, en el espacio
-		const y = new Float32Array([[0], [1], [0], [1], [1], [0], [0], [0], [0], [1], [0], [0]]);
-		for (let j = 0; j < geometry.attributes.position.count ; j++) {
-			const equis = geometry.attributes.position.getX(j)
-			const ye = geometry.attributes.position.getY(j)
-			const zta = geometry.attributes.position.getZ(j)
-			geometry.attributes.position.setXYZ(j, equis , ye+1/30 , zta)
-		}
-		// geometry1.attributes.position.setXYZ(0,0,1,0)
-		// geometry1.attributes.position.setXYZ(1,1,1,0)
-		// geometry1.attributes.position.setXYZ(2,0,0,0)
-		// geometry1.attributes.position.setXYZ(3,1,0,0)
-
-		// geometry1.attributes.position=y;
-		const geometry2 = new THREE.BoxGeometry(0.2, 4, 0.5, 1, 20, 1); //Geomtria del cubo, en el espaci
-		const plane = new THREE.Mesh(geometry1, material1);
-		scene.add(plane);
-		var zeta = []
-		const material = new THREE.MeshBasicMaterial({
-			// color: 0xf29a48, //Color del cubo
-			wireframe: true, //Mostrar los segmentos con hilos
-
-		});
-		const cube = new THREE.Mesh(geometry, material); //Crea el cubo apartir de la geomtría y la textura
-		cube.rotation.y = - Math.PI / 2;
-		cube.rotation.x = - Math.PI;
-		let pos = { x: 0, y: 1, z: 0 }
-		cube.position.set(pos.x, pos.y, pos.z)
-		scene.add(cube);
-		renderer.render(scene, camera);
-		function DATOSZ() {
-			for (let i = 0; i < geometry.attributes.position.count; i++) {
-				// geometry.attributes.position.setY(i,Math.abs(geometry.attributes.position.getY(i)));
-				const x = geometry.attributes.position.getY(i)
-				// console.log((x * x) / 120 - (x * x * x) / 6);
-				// console.log(geometry.attributes.position.getZ(i))
-				zeta[i] = geometry.attributes.position.getZ(i);
-			}
-		}
-		DATOSZ()
-		var contador6 = 0;
-		function Movimiento_Sen() {
-			const now = Date.now() / 300;
-			contador6++;
-			renderer.render(scene, camera);
-			var t = 0;
-			var s = 0;
-			// Mesa2.position.x //Posición x de la mesa
-			for (let i = 0; i < geometry.attributes.position.count; i++) {
-				var x = Math.abs(geometry.attributes.position.getY(s));
-				if (x == 0) {
-					s = 0;
-				}
-				s = s + 1;
-				// const x = s/30;
-				const xsin = Math.sin(2 * x / 3 + 1 / 2 * now);
-				const xflex2 = (x * x) / 60 - (x * x * x) / 3;
-				// geometry.attributes.position.setZ(i, zeta[i] + xflex2 * Math.sin(now));//SuperBien
-				const equis = geometry.attributes.position.getX(i)
-			const ye = geometry.attributes.position.getY(i)
-			const zta = geometry.attributes.position.getZ(i)
-			geometry.attributes.position.setXYZ(i, equis, ye , zeta[i]+xflex2 * Math.sin(now))
-				geometry.attributes.position.needsUpdate = true; //Aplica los cambios
-
-			}
-			// // geometry.computeVertexNormals();
-			// geometry.attributes.position.needsUpdate = true; //Aplica los cambios
-			renderer.render(scene, camera) //Rendizar
-			requestAnimationFrame(Movimiento_Sen)
-		}
-		Movimiento_Sen();
-		function contador() {
-			var contador1 = 0;
-			const now = Date.now() / 300;
-			function Senoiterativo() {
-				Mesa1.position.x = Math.sin(now * contador1); //Mover la Mesa 
-				cube.position.x = Math.sin(now * contador1); //Mover la barra
-				contador1 += 0.00000000001;
-				renderer.render(scene, camera);
-				if (contador1 == (Segundos * 120 + 1)) {
-					clearInterval(tiempo1);
-				}
-			}
-			tiempo1 = setInterval(Senoiterativo, 50)
-		}
-		contador()
+		
 		const loader2 = new THREE.GLTFLoader();
 		// Load a glTF resource, Mesa1 Loading
 		loader2.load(
@@ -211,7 +122,43 @@
 				console.log('An error happened');
 			}
 		);
+// Crear el BoxGeometry (barra)
+const geometry = new THREE.BoxGeometry(0.1, 1, 0.1);
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const bar = new THREE.Mesh(geometry, material);
+scene.add(bar);
 
+// Crear el mundo de física
+const world = new CANNON.World();
+world.gravity.set(0, -9.81, 0); // Establecer la gravedad
+
+// Crear el cuerpo de la barra
+const barShape = new CANNON.Box(new CANNON.Vec3(0.05, 0.5, 0.05)); // Mitad del tamaño de la barra
+const barBody = new CANNON.Body({ mass: 1, shape: barShape });
+world.addBody(barBody);
+
+// Variables para la animación
+let loadForce = 1000; // Cambiar la carga puntual según sea necesario
+
+// Función de actualización (para la animación)
+const animate = () => {
+  requestAnimationFrame(animate);
+
+  // Aplicar una fuerza al cuerpo de la barra basada en la carga puntual
+  barBody.applyForce(new CANNON.Vec3(0, 0, loadForce), new CANNON.Vec3(0, 0.5, 0));
+
+  // Actualizar la simulación de física
+  world.step(1 / 60);
+
+  // Actualizar la posición y rotación de la barra basada en la simulación
+  bar.position.copy(barBody.position);
+  bar.quaternion.copy(barBody.quaternion);
+
+  // Renderizar la escena
+  renderer.render(scene, camera);
+};
+
+animate();
 
 
 	</script>
