@@ -93,7 +93,7 @@
 			</div>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
-			<select id="select_barra" class="form-select" aria-label="Default select example"
+			<select id="select_barra" class="form-select" aria-label="Default select example" style="display: none;"
 				onchange="ResponseEditor(),LoadCharDataOnChange()">
 				<option value="Despl" style="display: none" selected>Select Response</option>
 				<option value="Despl" style="display: none">Displacement [m]</option>
@@ -837,6 +837,7 @@
 			}
 		}
 		function StarBaseMotion(PanelID) {
+			document.getElementById("select_barra").style.display="block";
 			switch (PanelID) {
 				case "flush-collapseTwoVl": // Libre Vibration
 					VibracionLibre_SM(), Duracion_SMVL()
