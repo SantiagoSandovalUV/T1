@@ -79,7 +79,8 @@
 			</div>
 			<div class="col-md-2" style="text-align: right;">
 				<a class="btn btn-sm btn-outline-secondary"
-					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Virtual laboratories</a>
+					href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Virtual
+					laboratories</a>
 			</div>
 		</div>
 	</div>
@@ -242,7 +243,7 @@
 													id="zeta_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Natural Frequency  ωn
+												<label class="form-label" style="font-size: 14px"> Natural Frequency ωn
 													[rad/s]<i data-tippy-content="System natural frequency"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wna_box"
@@ -355,7 +356,7 @@
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
-				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" id="BMT">
 				Base motion
 			</button>
 		</div>
@@ -373,7 +374,7 @@
 						<div id="flush-collapseTwoVl" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwoVl" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
-								<div class="card-body">
+								<div class="card-body" id="FreeVib">
 									<form class="row g-2">
 										<div class="col" style="width:180px">
 											<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
@@ -407,14 +408,6 @@
 
 										</div>
 									</form>
-									<div class="card mt-3" style="width: 100%;">
-										<div class="card-body" style="text-align: center;">
-											<button type="button" onclick="VibracionLibre_SM(),Duracion_SMVL()"
-												class="btn btn-primary">Start</button>
-											<button type="button" onclick="StopInterval(),LoadCharData()"
-												class="btn btn-primary">Stop</button>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -430,7 +423,7 @@
 						<div id="flush-collapseOne" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
-								<div class="card mt-2" style="width: 100%;">
+								<div class="card mt-2" style="width: 100%;" id="SND">
 									<div class="card-body">
 										<form class="row g-2">
 											<div class="col" style="width:180px">
@@ -460,16 +453,6 @@
 										</form>
 									</div>
 								</div>
-								<div class="card mt-3" style="width: 100%;">
-									<div class="card-body" style="text-align: center;">
-										<button type="button" onclick="CallFunction(),Duracion_SM()"
-											class="btn btn-primary">Start</button>
-										<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop
-											Table</button>
-										<button type="button" onclick="StopInterval(),LoadCharData()"
-											class="btn btn-primary">Stop</button>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -483,7 +466,7 @@
 						<div id="flush-collapseTwo55" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
-								<div class="card mt-2" style="width: 100%;" id="BarridoFrec">
+								<div class="card mt-2" style="width: 100%;" id="BrFr">
 									<div class="card-body">
 										<form class="row g-3">
 											<div class="col" style="width:180px">
@@ -517,15 +500,6 @@
 													id="PoB_box" placeholder="">
 											</div>
 										</form>
-										<div class="card mt-3" style="width: 100%;">
-											<div class="card-body" style="text-align: center;">
-												<button type="button" onclick="CallFunction3(),BarridoVar()"
-													class="btn btn-primary">Start sweep
-												</button>
-												<button type="button" onclick="StopInterval()"
-													class="btn btn-primary">Stop</button>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -577,18 +551,6 @@
 
 									</select> -->
 								</div>
-								<div class="card mt-2" style="width: 100%;">
-									<div class="btn-group">
-										<button type="button" onclick="CallFunction2()" class="btn btn-primary">Start
-											Earthquake</button>
-									</div>
-								</div>
-								<div class="card mt-2" style="width: 100%;">
-									<div class="btn-group">
-										<button type="button" onclick="StopInterval(),LoadCharData()"
-											class="btn btn-primary">Stop</button>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -610,18 +572,6 @@
 										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
 											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
 									</div>
-									<div class="card mt-2" style="width: 100%;">
-										<div class="btn-group">
-											<button type="button" onclick="CallFunction4()"
-												class="btn btn-primary">Start</button>
-										</div>
-									</div>
-									<div class="card mt-2" style="width: 100%;">
-										<div class="btn-group">
-											<button type="button" onclick="StopInterval(),LoadCharData()"
-												class="btn btn-primary">Stop</button>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -632,15 +582,27 @@
 		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
 				<div style="text-align: center;">
+					<button type="button" id="StartSimulation" onclick="StarBaseMotion(BM_Identificator)" class="btn btn-primary">Start 
+					</button>
+					<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop
+						motion</button>	
+					<button type="button" id="StopSimulation" onclick="	StopInterval(),LoadCharData()
+					" class="btn btn-primary">Stop 
+					</button>		
+				</div>
+			</div>	
+		</div>
+		<div class="card mt-2" style="width: 100%;">
+			<div class="card-body">
+				<div style="text-align: center;">
 					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
 						class="btn btn-primary">Export data
 					</button>
 					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear fields
-					</button>
-					<!-- <input type="file"/><button onclick=" CargarExcel()" class="btn btn-primary" id="Cargar"
-					accept=".xls,xlsx">Cargar</button> -->
+					</button>				
 				</div>
 			</div>
+			
 		</div>
 		<!-- <div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
@@ -790,6 +752,7 @@
 			JSON.stringify(suma_w)
 		);
 		var data = [];
+		//Modelado de los sistemas dinámicos
 		mck.addEventListener('input', () => { //Identifica cómo se esta modelando el sistema 
 			if (Masa_box1.value.length > 0 || c_box1.value.length > 0 || k_box1.value.length > 0) {
 				// document.getElementById('flexSwitchCheckChecked').setAttribute('checked', 'checked')
@@ -845,6 +808,56 @@
 
 			}
 		})
+		//Indentificar qué Base motion será usado
+		var lastClosedPanelId = "";
+		var activePanels = [];
+		var accordion = document.getElementById("collapseExample2");
+		var panels = accordion.getElementsByClassName("collapse");
+		var BM_Identificator = "";
+
+		accordion.addEventListener("show.bs.collapse", function (event) {
+			activePanel = event.target.id;
+			checkPanelsStatus();
+		});
+
+		accordion.addEventListener("hide.bs.collapse", function (event) {
+			lastClosedPanelId = event.target.id;
+			activePanel = null;
+			checkPanelsStatus();
+		});
+		function checkPanelsStatus() {
+			if (activePanel !== null) {
+				console.log("El usuario está en el panel con ID: " + activePanel);
+				BM_Identificator = activePanel;
+				// } else if (lastClosedPanelId !== "" && activePanel==null) {
+				// 	console.log("Todos los paneles están cerrados. Último panel cerrado: " + lastClosedPanelId);
+				// 	BM_Identificator = lastClosedPanelId;
+			} else {
+				console.log("No hay paneles abiertos ni cerrados.");
+			}
+		}
+		function StarBaseMotion(PanelID) {
+			switch (PanelID) {
+				case "flush-collapseTwoVl": // Libre Vibration
+					VibracionLibre_SM(), Duracion_SMVL()
+					break;
+				case "flush-collapseOne": //Sinusoidal desplazamiento
+					CallFunction(), Duracion_SM()
+					break;
+				case "flush-collapseTwo55": //Barrido de Frec
+					CallFunction3(), BarridoVar()
+					break;
+				case "flush-collapseThree": // Sismos Pred
+					CallFunction2()
+					break;
+				case "flush-collapseTwo": //Load desplz
+					CallFunction4()
+					break;
+				// Agrega más casos según la cantidad de paneles que tengas
+				default:
+					alert("Panel desconocido.");
+			}
+		}
 		//Función para limpiar el método númerico
 		function CleanerMS() {
 			p = []; p1 = [];
@@ -1043,14 +1056,14 @@
 		}
 		// Función para realizar operaciones dentro de las cajas de texto
 		function calcularResultado(expresion) {
-      var resultado;
-      try {
-        resultado = eval(expresion);
-      } catch (error) {
-        console.log('Error calculando resultado')
-      }
-	  return resultado;
-    }
+			var resultado;
+			try {
+				resultado = eval(expresion);
+			} catch (error) {
+				console.log('Error calculando resultado')
+			}
+			return resultado;
+		}
 		//Función para cambiar la duración del ensayo
 		function Duracion_SM() {
 			if (DuracionSM_box.value.length > 0) {
@@ -1067,6 +1080,7 @@
 				Segundos = 20;
 			}
 		}
+		//Función para multiplicar los sismos por un escalar
 		var ContadorEntry = false;
 		function Escalar_box() {
 			if (ContadorEntry === false) {
@@ -2649,26 +2663,26 @@
 		function organizador() {
 			TF = parseFloat(calcularResultado(document.getElementById('targetFrequency').value));
 			console.log(TF)
-			if (TF>=0 && TF<50) {
+			if (TF >= 0 && TF < 50) {
 				var VTR = resampleSignal(Vtiempo2, TF);
 				var U2R = resampleSignal(u2, TF);
 				var Upp2R = resampleSignal(upp2, TF);
 				for (let i = 0; i < u2.length; i++) {
-				data1[i] = new Array();
-				data1[i][1] = VTR[i];
-				data1[i][2] = U2R[i] + Ruido_Gaus(0, 1);
-				data1[i][3] = Upp2R[i] + Ruido_Gaus(0, 1);
-			}
+					data1[i] = new Array();
+					data1[i][1] = VTR[i];
+					data1[i][2] = U2R[i] + Ruido_Gaus(0, 1);
+					data1[i][3] = Upp2R[i] + Ruido_Gaus(0, 1);
+				}
 			} else {
 				for (let i = 0; i < u2.length; i++) {
-				data1[i] = new Array();
-				data1[i][1] = Vtiempo2[i];
-				data1[i][2] = u2[i] + Ruido_Gaus(0, 1);
-				data1[i][3] = upp2[i] + Ruido_Gaus(0, 1);
-			}
+					data1[i] = new Array();
+					data1[i][1] = Vtiempo2[i];
+					data1[i][2] = u2[i] + Ruido_Gaus(0, 1);
+					data1[i][3] = upp2[i] + Ruido_Gaus(0, 1);
+				}
 			}
 
-			
+
 
 			chart.update();
 			console.log('Datos Organizados')
@@ -2688,54 +2702,54 @@
 		let Ac_Data;
 		let Desp_Data;
 		function CargarExcel() {
-    validador2 = 1;
-    document.getElementById('Cargar').addEventListener("change", (event) => {
-        if (selectfile) {
-            let fileReader = new FileReader();
-            fileReader.readAsBinaryString(selectfile);
-            fileReader.onload = (event) => {
-                let Excel_data = event.target.result;
-                let woorkBook = XLSX.read(Excel_data, { type: "binary" });
+			validador2 = 1;
+			document.getElementById('Cargar').addEventListener("change", (event) => {
+				if (selectfile) {
+					let fileReader = new FileReader();
+					fileReader.readAsBinaryString(selectfile);
+					fileReader.onload = (event) => {
+						let Excel_data = event.target.result;
+						let woorkBook = XLSX.read(Excel_data, { type: "binary" });
 
-                // Leer la primera hoja del archivo Excel
-                let sheet = woorkBook.SheetNames[0];
+						// Leer la primera hoja del archivo Excel
+						let sheet = woorkBook.SheetNames[0];
 
-                // Obtener solo las columnas deseadas (por ejemplo, columnas "A" y "B")
-                let columnA = "A";
-                let columnB = "B";
+						// Obtener solo las columnas deseadas (por ejemplo, columnas "A" y "B")
+						let columnA = "A";
+						let columnB = "B";
 
-                // Crear el rango de celdas que cubre ambas columnas
-                let range = XLSX.utils.decode_range(woorkBook.Sheets[sheet]['!ref']);
-                let columnRangeA = columnA + (range.s.r + 1) + ":" + columnA + (range.e.r + 1);
-                let columnRangeB = columnB + (range.s.r + 1) + ":" + columnB + (range.e.r + 1);
+						// Crear el rango de celdas que cubre ambas columnas
+						let range = XLSX.utils.decode_range(woorkBook.Sheets[sheet]['!ref']);
+						let columnRangeA = columnA + (range.s.r + 1) + ":" + columnA + (range.e.r + 1);
+						let columnRangeB = columnB + (range.s.r + 1) + ":" + columnB + (range.e.r + 1);
 
-                // Obtener los datos de ambas columnas como arreglos
-                let columnDataA = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
-                    header: 1,
-                    range: columnRangeA,
-                    defval: "" // Tratar celdas vacías como cadenas vacías
-                });
+						// Obtener los datos de ambas columnas como arreglos
+						let columnDataA = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
+							header: 1,
+							range: columnRangeA,
+							defval: "" // Tratar celdas vacías como cadenas vacías
+						});
 
-                let columnDataB = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
-                    header: 1,
-                    range: columnRangeB,
-                    defval: "" // Tratar celdas vacías como cadenas vacías
-                });
+						let columnDataB = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
+							header: 1,
+							range: columnRangeB,
+							defval: "" // Tratar celdas vacías como cadenas vacías
+						});
 
-                // Eliminar el primer elemento de cada array (encabezado)
-                columnDataA.shift();
-                columnDataB.shift();
+						// Eliminar el primer elemento de cada array (encabezado)
+						columnDataA.shift();
+						columnDataB.shift();
 
-                // Convertir los datos de las columnas a vectores numéricos
-				Desp_Data = columnDataA.map(row => parseFloat(row[0]));
-                Ac_Data= columnDataB.map(row => parseFloat(row[0]));
+						// Convertir los datos de las columnas a vectores numéricos
+						Desp_Data = columnDataA.map(row => parseFloat(row[0]));
+						Ac_Data = columnDataB.map(row => parseFloat(row[0]));
 
-                console.log("Vector numérico de la Columna A:", Ac_Data);
-                console.log("Vector numérico de la Columna B:", Desp_Data);
-            }
-        }
-    });
-}
+						console.log("Vector numérico de la Columna A:", Ac_Data);
+						console.log("Vector numérico de la Columna B:", Desp_Data);
+					}
+				}
+			});
+		}
 	</script>
 </body>
 
