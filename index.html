@@ -1709,8 +1709,6 @@
 				JSON.stringify(suma_w)
 			);
 			organizador();
-			LinearSweep.disabled = false;
-            LogarithmicSweep.disabled = false;
 		}
 		//Movimiento Sinusoildal MCK
 		function contador() {
@@ -2906,9 +2904,8 @@
 					data1[i][3] = upp2[i] + Ruido_Gaus(0, 1);
 				}
 			}
-
-
-
+			LinearSweep.disabled = false;
+            LogarithmicSweep.disabled = false;
 			chart.update();
 			console.log('Datos Organizados')
 			return data1
