@@ -98,8 +98,8 @@
 				<option value="Despl" style="display: none" selected>Select Response</option>
 				<option value="Despl" style="display: none">Displacement [m]</option>
 				<option value="Vel" style="display: none">Velocity [m/s]</option>
-				<option value="Acel" style="display: none">Acceleration [m/s^2]</option>
-				<option value="RespEx" style="display: none">Acceleration</option>
+				<option value="Acel" style="display: none">Mass Acceleration [m/s^2]</option>
+				<option value="RespEx" style="display: none">Ground acceleration [m/s^2]</option>
 			</select>
 		</div>
 		<div class="card mb-2" style="width: 100%;">
@@ -148,7 +148,7 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="When this element is locked, it is not possible to access the Wn and ζ models. If you want to deactivate it, you must clear all the text boxes."
+													<i data-tippy-content="When this element is locked, it is not possible to access the ωn and ζ models. If you want to deactivate it, you must clear all the text boxes."
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
@@ -195,7 +195,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
 								aria-controls="flush-collapseTwo1" id="ZetaWn">
-								Wn and ζ Model
+								ωn and ζ Model
 							</button>
 						</h2>
 						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
@@ -280,15 +280,40 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Accelerometers
+								Mass accelerometer
 							</button>
 						</div>
 					</h2>
 					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
-							<button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remove</button>
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveSensor()"
+										class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="MassCheck">
+												<label class="form-check-label" for="MassCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAM"
+												id="NoiseAM" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -304,8 +329,32 @@
 					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
 						data-bs-parent="#accordionExample">
 						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
-							<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="RelativeCheck">
+												<label class="form-check-label" for="RelativeCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAR"
+												id="NoiseAR" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -314,18 +363,43 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Add noise to the signal and amplitude
+								Ground accelerometer
 							</button>
 						</div>
 					</h2>
 					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
 						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: center;">
-							<button type="button" onclick="Escalar_GA(),Alerta_RuidoA()"
-								class="btn btn-primary">Assign</button>
-							<button type="button" onclick="Escalar_GR(),Alerta_RuidoR()"
-								class="btn btn-primary">Remove</button>
+						<div class="accordion-body" style="text-align: left;">
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadSensorG()"
+										class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveSensorG()"
+										class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="GroundCheck">
+												<label class="form-check-label" for="GroundCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAG"
+												id="NoiseAG" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
+
 					</div>
 				</div>
 				<div class="accordion-item">
@@ -374,40 +448,42 @@
 						<div id="flush-collapseTwoVl" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwoVl" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
-								<div class="card-body" id="FreeVib">
-									<form class="row g-2">
-										<div class="col" style="width:180px">
-											<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
-													data-tippy-content="Initial displacement"
-													class="ti ti-question-mark text-primary"></i></label>
-											<input type="text" class="form-control form-control-sm" name="DespInicial"
-												id="DespInicial" placeholder="">
-										</div>
-										<div class="col" style="width:180px">
-											<label class="form-label" style="font-size:14px">Velocity upo [m/s]<i
-													data-tippy-content="Initial velocity"
-													class="ti ti-question-mark text-primary"></i></label>
-											<input type="text" class="form-control form-control-sm" name="VelInicial"
-												id="VelInicial" placeholder="">
-										</div>
-										<!-- <div class="col" style="width:180px">
+								<div class="card mt-2" style="width: 100%;" id="SND">
+									<div class="card-body" id="FreeVib">
+										<form class="row g-2">
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size:14px">Amplitude uo [m]<i
+														data-tippy-content="Initial displacement"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm"
+													name="DespInicial" id="DespInicial" placeholder="">
+											</div>
+											<div class="col" style="width:180px">
+												<label class="form-label" style="font-size:14px">Velocity upo [m/s]<i
+														data-tippy-content="Initial velocity"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm"
+													name="VelInicial" id="VelInicial" placeholder="">
+											</div>
+											<!-- <div class="col" style="width:180px">
 											<label class="form-label" style="font-size: 14px">Frecuencia W [rad/s]
 												<i data-tippy-content="Frecuencia angular del desplazamiento sinusoidal W"
 													class="ti ti-question-mark text-primary"></i></label>
 											<input type="text" class="form-control form-control-sm" name="Wn_box1"
 												id="Wn_box1" placeholder="">
 										</div> -->
-									</form>
-									<form class="row g-2">
-										<div class="col-1" style="width:180px">
-											<label class="form-label" style="font-size: 14px">Duration [s] <i
-													data-tippy-content="Duration"
-													class="ti ti-question-mark text-primary"></i></label>
-											<input type="text" class="form-control form-control-sm"
-												name="DuracionSMVL_box" id="DuracionSMVL_box" placeholder="">
+										</form>
+										<form class="row g-2">
+											<div class="col-1" style="width:180px">
+												<label class="form-label" style="font-size: 14px">Duration [s] <i
+														data-tippy-content="Duration"
+														class="ti ti-question-mark text-primary"></i></label>
+												<input type="text" class="form-control form-control-sm"
+													name="DuracionSMVL_box" id="DuracionSMVL_box" placeholder="">
 
-										</div>
-									</form>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -434,7 +510,8 @@
 													id="Po_box1" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px">Angular Freq. [rad/s]
+												<label class="form-label" style="font-size: 14px">Angular Freq. ω
+													[rad/s]
 													<i data-tippy-content="Angular frequency of sinusoidal displacement ω"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wn_box1"
@@ -466,6 +543,23 @@
 						<div id="flush-collapseTwo55" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwo55" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
+								<form class="row g-3">
+									<div class="col-md-6">
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch"
+												id="LinearSweep" checked>
+											<label class="form-check-label" for="LinearSweep">Linear Sweep</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch"
+												id="LogarithmicSweep">
+											<label class="form-check-label text-nowrap"
+												for="LogarithmicSweep">Logarithmic Sweep</label>
+										</div>
+									</div>
+								</form>
 								<div class="card mt-2" style="width: 100%;" id="BrFr">
 									<div class="card-body">
 										<form class="row g-3">
@@ -582,15 +676,16 @@
 		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
 				<div style="text-align: center;">
-					<button type="button" id="StartSimulation" onclick="StarBaseMotion(BM_Identificator)" class="btn btn-primary">Start 
+					<button type="button" id="StartSimulation" onclick="StarBaseMotion(BM_Identificator)"
+						class="btn btn-primary">Start
 					</button>
 					<button type="button" onclick="StopMotion()" class="btn btn-primary">Stop
-						motion</button>	
+						motion</button>
 					<button type="button" id="StopSimulation" onclick="	StopInterval(),LoadCharData()
-					" class="btn btn-primary">Stop 
-					</button>		
+					" class="btn btn-primary">Stop
+					</button>
 				</div>
-			</div>	
+			</div>
 		</div>
 		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
@@ -599,10 +694,10 @@
 						class="btn btn-primary">Export data
 					</button>
 					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear fields
-					</button>				
+					</button>
 				</div>
 			</div>
-			
+
 		</div>
 		<!-- <div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
@@ -664,7 +759,7 @@
 		var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 75);
 		var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11; var LVDt1;
 		var Pared11; var sensorB;
-		const renderer = new THREE.WebGLRenderer();
+		const renderer = new THREE.WebGLRenderer({ antialias: true });
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 		clock = new THREE.Clock();
@@ -686,7 +781,9 @@
 		scene.add(dirLight);
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
 		// camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
-		camera.position.set(15, 4.5, 10); // posicion de la camara (0, 5, 5)
+		// camera.position.set(15, 4.5, 10); // posicion de la camara (0, 5, 5)
+		camera.position.set(12.54451758946055, 3.6812984923616456, 5.489177432739621)
+		controls.target.set(1.912527945274909, 0.12088040016366239, -0.041046303339514735);
 		controls.update();
 		renderer.render(scene, camera);
 		//Varibles necesaria para generar el desplazamiento en la base
@@ -713,6 +810,7 @@
 		//Barrido
 		var Wv = [];
 		var validador3 = 1; //Determina si se va a trabajar con barrido de frecuencias o movim sinusoidal
+		var factorCrecimiento = 0;//Sirve para simular el crecimiento logaritmico en caso de ser necesario
 		//Sismos
 		var Po1 = 0;
 		var gm = 9.81; //Valor de g
@@ -837,7 +935,7 @@
 			}
 		}
 		function StarBaseMotion(PanelID) {
-			document.getElementById("select_barra").style.display="block";
+			document.getElementById("select_barra").style.display = "block";
 			switch (PanelID) {
 				case "flush-collapseTwoVl": // Libre Vibration
 					VibracionLibre_SM(), Duracion_SMVL()
@@ -856,8 +954,19 @@
 					break;
 				// Agrega más casos según la cantidad de paneles que tengas
 				default:
-					alert("Panel desconocido.");
+					alert("You have not selected any movement in the base");
 			}
+			if (NoiseAR.value.length > 0) {
+				RuidoDR = parseFloat(document.getElementById('NoiseAR').value);
+			}
+			if (NoiseAM.value.length > 0) {
+				RuidoMs = parseFloat(document.getElementById('NoiseAM').value);
+			}
+			if (NoiseAG.value.length > 0) {
+				RuidoGr = parseFloat(document.getElementById('NoiseAG').value);
+			}
+			LinearSweep.disabled = true;
+            LogarithmicSweep.disabled = true;
 		}
 		//Función para limpiar el método númerico
 		function CleanerMS() {
@@ -873,6 +982,11 @@
 				SensorMultpA = 5;
 			} else {
 				SensorMultpA = 1;
+			}
+			if (CheckAcG == false) {
+				SensorMultpAG = 5;
+			} else {
+				SensorMultpAG = 1;
 			}
 			if (CheckLv == false) {
 				SensorMultp = 5;
@@ -1110,13 +1224,55 @@
 			ContadorEntry = true;
 		}
 		//Funciones para controlar el Ruido Gauseano
-		var Escalar_Gauseano = 0; // Puede cambiar para desactivar/activar el ruido
-		function Escalar_GA() {
-			Escalar_Gauseano = 0.05;
-		}
-		function Escalar_GR() {
-			Escalar_Gauseano = 0;
-		}
+		var RuidoMs = 0;
+		var RuidoGr = 0;
+		var RuidoDR = 0;
+		//Ruido en el suelo
+		const switchElement1 = document.getElementById("GroundCheck");
+		switchElement1.addEventListener("change", function () {
+			if (switchElement1.checked) {
+				NoiseAG.removeAttribute("disabled");
+				Alerta_RuidoA();
+				RuidoGr = 1;
+			} else {
+				NoiseAG.setAttribute("disabled", "true");
+				Alerta_RuidoR();
+				RuidoGr = 0;
+			}
+		});
+		//Ruido en la masa
+		const switchElement2 = document.getElementById("MassCheck");
+		switchElement2.addEventListener("change", function () {
+			if (switchElement2.checked) {
+				NoiseAM.removeAttribute("disabled");
+				Alerta_RuidoA();
+				RuidoMs = 1;
+			} else {
+				NoiseAM.setAttribute("disabled", "true");
+				Alerta_RuidoR();
+				RuidoMs = 0;
+			}
+		});
+		//Ruido en la masa, desplazamiento relativo
+		const switchElement3 = document.getElementById("RelativeCheck");
+		switchElement3.addEventListener("change", function () {
+			if (switchElement3.checked) {
+				NoiseAR.removeAttribute("disabled");
+				Alerta_RuidoA();
+				RuidoDR = 1;
+			} else {
+				NoiseAR.setAttribute("disabled", "true");
+				Alerta_RuidoR();
+				RuidoDR = 0;
+			}
+		});
+		var Escalar_Gauseano = 0.05; // Puede cambiar para desactivar/activar el ruido
+		// function Escalar_GA() {
+		// 	Escalar_Gauseano = 0.05;
+		// }
+		// function Escalar_GR() {
+		// 	Escalar_Gauseano = 0;
+		// }
 		function Ruido_Gaus(media, desviS) {
 			var r1 = Math.random();
 			var r2 = Math.random();
@@ -1152,15 +1308,18 @@
 				options[index].style.display = "none"; // Ocultar opción
 			}
 			// Identificar
-			if (CheckAc == false && CheckLv == false) {
+			if (CheckAc == false && CheckLv == false && CheckAcG == false) {
 				options[0].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 0; // Seleccionar opción
-			} else if (CheckAc == true && CheckLv == false) {
+			} else if (CheckAc == true && CheckLv == false && CheckAcG == false) {
 				options[3].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 3; // Seleccionar opción
-			} else if (CheckAc == false && CheckLv == true) {
+			} else if (CheckAc == false && CheckLv == true && CheckAcG == false) {
 				options[1].style.display = "block"; // Mostrar opción
 				select.selectedIndex = 1; // Seleccionar opción
+			} else if (CheckAc == false && CheckLv == true && CheckAcG == true) {
+				options[4].style.display = "block"; // Mostrar opción
+				select.selectedIndex = 4; // Seleccionar opción
 			}
 			ResponseEditor()
 			LoadCharDataOnChange()
@@ -1172,6 +1331,8 @@
 			IntervaloB = parseFloat(calcularResultado(document.getElementById('Inter_box').value));
 			Po = parseFloat(calcularResultado(document.getElementById('PoB_box').value));
 			Vel = (W2 - W1) / (50 * IntervaloB);
+			const totalIterations = IntervaloB * 1000 / 20; // 10 segundos en milisegundos dividido por el intervalo 
+            factorCrecimiento = Math.pow(W2 / W1, 1 / (totalIterations - 1));
 			Wv[0] = W1;
 			validador3 = 2;
 			validador4 = validador4 + 1;
@@ -1191,7 +1352,32 @@
 				organizador();
 			}
 		}
+		//Permite seleccionar de qué manera crecera la frecuencia del barrido
+		var LineaChk = true;
+		var LogaritChk = false;
+		const LinearSweep = document.getElementById('LinearSweep');
+		const LogarithmicSweep = document.getElementById('LogarithmicSweep');
+		LinearSweep.addEventListener('change', function () {
+			if (LinearSweep.checked) {
+				LogarithmicSweep.checked = false;
+				LineaChk = true;
+				LogaritChk = false;
+				console.log(LineaChk);
 
+			} else if (!LogarithmicSweep.checked) {
+				LinearSweep.checked = true;
+			}
+		});
+		LogarithmicSweep.addEventListener('change', function () {
+			if (LogarithmicSweep.checked) {
+				LinearSweep.checked = false;
+				LineaChk = false;
+				LogaritChk = true;
+				console.log(LogaritChk);
+			} else if (!LinearSweep.checked) {
+				LogarithmicSweep.checked = true;
+			}
+		});
 		//Función para exportar datos en cualquier momento de la simulación
 		function ExportarAnyTiempo() {
 			if (exporC == 1) {
@@ -1239,10 +1425,18 @@
 		// Sensor Multip
 		var SensorMultp = 5; var CheckLv = false; // Para desplazamiento
 		var SensorMultpA = 10; var CheckAc = false; // Para aceleración
+		var SensorMultpAG = 10; var CheckAcG = false; // Para aceleración ground
 		function SensorCheckerA() {
 			if (CheckAc == false) {
 				setTimeout(function () {
 					SensorMultpA = 0;
+				}, 250); // 2000 milisegundos = 2 segundos
+			}
+		}
+		function SensorCheckerAG() {
+			if (CheckAcG == false) {
+				setTimeout(function () {
+					SensorMultpAG = 0;
 				}, 250); // 2000 milisegundos = 2 segundos
 			}
 		}
@@ -1272,7 +1466,6 @@
 			SensorCheckerL();
 		}
 		function LoadSensor() {
-			Mostrar(SensorB); //Sensor en la Base
 			Mostrar(Barra11); //Sensor en el GDL
 			SensorMultpA = 1;
 			CheckAc = true;
@@ -1281,7 +1474,6 @@
 
 		}
 		function RemoveSensor() {
-			Remover(SensorB);
 			Remover(Barra11);
 			CheckAc = false;
 			toggleOptions(3, CheckAc)
@@ -1289,11 +1481,29 @@
 			SensorCheckerA();
 
 		}
+		function LoadSensorG() {
+			Mostrar(SensorB); //Sensor en el GDL
+			SensorMultpAG = 1;
+			CheckAcG = true;
+			toggleOptions(4, CheckAcG)
+			// toggleOptions(0,true)
+
+		}
+		function RemoveSensorG() {
+			Remover(SensorB);
+			CheckAcG = false;
+			toggleOptions(4, CheckAcG)
+			// toggleOptions(0,true)
+			SensorCheckerAG();
+
+		}
 		//Cambia las vista de la cámara
 		function ChangeCameraP() {
 			if (Perspective == 2) {
-				camera.position.set(15, 4.5, 10); // 3D Izquierdo
-				controls.target.set(1, 1, 1);
+				// camera.position.set(15, 4.5, 10); // 3D Izquierdo
+				// controls.target.set(1, 1, 1);
+				camera.position.set(12.54451758946055, 3.6812984923616456, 5.489177432739621)
+				controls.target.set(1.912527945274909, 0.12088040016366239, -0.041046303339514735);
 				controls.update();
 				renderer.render(scene, camera);
 			} else if ((Perspective == 1)) {
@@ -1402,6 +1612,12 @@
 			} else {
 				SensorMultpA = 1;
 			}
+			if (CheckAcG == false) {
+				SensorMultpA = 10;
+				SensorCheckerAG()
+			} else {
+				SensorMultpAG = 1;
+			}
 			if (CheckLv == false) {
 				SensorMultp = 10;
 				SensorCheckerL()
@@ -1424,8 +1640,8 @@
 								SensorMultp = 0;
 							}
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
-						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						// chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + RuidoDR * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 2:
@@ -1449,38 +1665,35 @@
 								SensorMultpA = 0;
 							}
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[i] + 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Seno[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 				case 4:
 					for (let i = 0; i < u2.length; i++) {
-						if (CheckAc == false) {
+						if (CheckAcG == false) {
 							if (i <= 4) {
-								SensorMultpA = 10;
+								SensorMultpAG = 10;
 							} else {
-								SensorMultpA = 0;
+								SensorMultpAG = 0;
 							}
 						}
 						if (validador5 == true) {
-							chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+							chart.data.datasets[0].data.push({ y: SensorMultpAG * Seno[i] + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 						} else {
 							if (validador2 == 2) {
-								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i] + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							} else {
-								chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i] + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							}
 						}
-						chart.data.datasets[1].data.push({ y: SensorMultp * u2[i] + Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 					}
 					break;
 			}
 			chart.update();
-			if (CheckAc == false) {
-				SensorMultp = 5;
-				SensorMultpA = 10;
+			if (CheckAcG == false) {
+				SensorMultpAG = 10;
 			} else {
-				SensorMultp = 1;
-				SensorMultpA = 1;
+				SensorMultpAG = 1;
 			}
 
 		}
@@ -1496,12 +1709,15 @@
 				JSON.stringify(suma_w)
 			);
 			organizador();
+			LinearSweep.disabled = false;
+            LogarithmicSweep.disabled = false;
 		}
 		//Movimiento Sinusoildal MCK
 		function contador() {
 			var contador1 = 0;
 			var t = 0;
 			contadorglobal = 0;
+			var frecuenciaActual = 2 * Math.PI * parseFloat(calcularResultado(document.getElementById('W1_box').value)); // Inicializa con la frecuencia inicial
 			p1[0] = 0;
 			function Senoiterativo() {
 				Vtiempo[contador1] = contador1;
@@ -1517,7 +1733,14 @@
 						}
 						break;
 					case 2:
-						Wv[contador1 + 1] = Wv[contador1] + Vel;
+						if (LineaChk == true) {
+							Wv[contador1 + 1] = Wv[contador1] + Vel;
+						} else {
+							if (frecuenciaActual < W2) {
+								frecuenciaActual *= factorCrecimiento; // Aplica el factor de crecimiento logarítmico (limitado a W2)
+							}
+							Wv[contador1 + 1] = frecuenciaActual; // Utiliza la frecuencia actualizada
+						}
 						Seno[contador1] = Po * Math.sin(Wv[contador1] * t); //Desplazamiento en la base
 						if (validador == 0) {
 							p[contador1] = (Wv[contador1] * Wv[contador1]) * m * Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
@@ -1612,8 +1835,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + Ruido_Gaus(0, 1), x: t })
+						// chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + RuidoDR * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1640,7 +1863,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[contadorglobal] + 50 * Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[contadorglobal] + Seno[contadorglobal]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 4:
@@ -1654,8 +1877,7 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultpA * Seno[contadorglobal] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[0].data.push({ y: SensorMultpAG * Seno[contadorglobal] + RuidoGr * 50 * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
@@ -1841,8 +2063,8 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
-						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + Ruido_Gaus(0, 1), x: t })
+						// chart.data.datasets[0].data.push({ y: SensorMultp * suma_w[contador1] + Ruido_Gaus(0, 1), x: t })
+						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contador1] + RuidoDR * Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 					case 2:
@@ -1869,7 +2091,11 @@
 							CleanResponse = false;
 							chart.update();
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultpA * upp2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+						if (validador2 == 2) {
+							chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[contadorglobal] + Ac_Data[contadorglobal]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: t })
+						} else {
+							chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[contadorglobal] + Ac_Data[contadorglobal]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: t })
+						}
 						chart.update();
 						break;
 					case 4:
@@ -1884,11 +2110,10 @@
 							chart.update();
 						}
 						if (validador2 == 2) {
-							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+							chart.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + RuidoGr * 50 * Ruido_Gaus(0, 1), x: t })
 						} else {
-							chart.data.datasets[0].data.push({ y: SensorMultpA * Ac_Data[contadorglobal] + Ruido_Gaus(0, 1), x: t })
+							chart.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + RuidoGr * 50 * Ruido_Gaus(0, 1), x: t })
 						}
-						chart.data.datasets[1].data.push({ y: SensorMultp * u2[contadorglobal] + Ruido_Gaus(0, 1), x: t })
 						chart.update();
 						break;
 				}
@@ -2663,7 +2888,6 @@
 		var data1 = new Array();
 		function organizador() {
 			TF = parseFloat(calcularResultado(document.getElementById('targetFrequency').value));
-			console.log(TF)
 			if (TF >= 0 && TF < 50) {
 				var VTR = resampleSignal(Vtiempo2, TF);
 				var U2R = resampleSignal(u2, TF);
