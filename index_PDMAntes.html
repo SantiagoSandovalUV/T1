@@ -239,7 +239,7 @@
 						<h2 class="accordion-header" id="flush-headingTwoPM">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwoPM" aria-expanded="false"
-								aria-controls="flush-collapseTwoPM" id="PredefinedMaterials">
+								aria-controls="flush-collapseTwoPM" id="PredinedMaterials">
 								Predefined materials
 							</button>
 						</h2>
@@ -253,13 +253,13 @@
 												<div>
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
-														style="display: none;" id="Locke1P">
+														style="display: none;" id="Locke1">
 														<path
 															d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
 													</svg>
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-unlock-fill"
-														viewBox="0 0 20 20" id="UnLocke1P">
+														viewBox="0 0 20 20" id="UnLocke1">
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
@@ -270,39 +270,23 @@
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Mass M [Kg ]<i
-														data-tippy-content="System mass"
+												<label class="form-label" style="font-size: 14px"> Dimensionless damping
+													ratio ζ [ ]<i
+														data-tippy-content="System dimensionless damping ratio"
 														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm"
-													name="Mass_boxPD" id="Mass_boxPD" placeholder="" disabled>
+												<input type="text" class="form-control form-control-sm" name="zeta_box"
+													id="zeta_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px; white-space: nowrap">
-													Elastic modulus E [GPa] <i
-														data-tippy-content="System elastic modulus"
+												<label class="form-label" style="font-size: 14px"> Natural Frequency ωn
+													[rad/s]<i data-tippy-content="System natural frequency"
 														class="ti ti-question-mark text-primary"></i></label>
-												<input type="text" class="form-control form-control-sm"
-													name="Elastic_box" id="Elastic_box" placeholder="" disabled>
+												<input type="text" class="form-control form-control-sm" name="Wna_box"
+													id="Wna_box" placeholder="">
 											</div>
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<select id="Materiales" class="form-select"
-													aria-label="Default select example"
-													onchange="MasaNAmor_Aleatorios()">
-													<option id="SelectMa" value="PDMaterial" style="display: none"
-														selected>Select
-														material
-													</option>
-													<option value="Steel">Steel
-													</option>
-													<option value="Wood">Wood</option>
-													<option value="RwinC">Reinforced Concrete
-													</option>
-													<option id="DeSelectOption1" value="DeSelectOption"
-														style="display: none">Deselect material
-													</option>
-												</select>
 											</div>
 										</form>
 									</div>
@@ -901,7 +885,6 @@
 			if (Masa_box1.value.length > 0 || c_box1.value.length > 0 || k_box1.value.length > 0) {
 				// document.getElementById('flexSwitchCheckChecked').setAttribute('checked', 'checked')
 				document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
-				document.getElementById('PredefinedMaterials').setAttribute('disabled', 'disabled')
 				document.getElementById('Locke').style.display = 'block';
 				document.getElementById('UnLocke').style.display = 'none';
 				if (Masa_box1.value.length > 0 && c_box1.value.length > 0 && k_box1.value.length > 0) {
@@ -922,8 +905,7 @@
 				validador = 0;
 			} else {
 				// document.getElementById('flexSwitchCheckChecked').removeAttribute('checked')
-				document.getElementById('ZetaWn').removeAttribute('disabled');
-				document.getElementById('PredefinedMaterials').removeAttribute('disabled');
+				document.getElementById('ZetaWn').removeAttribute('disabled')
 				document.getElementById('UnLocke').style.display = 'block';
 				document.getElementById('Locke').style.display = 'none';
 			}
@@ -933,8 +915,7 @@
 				// document.getElementById('flexSwitchCheckChecked2').setAttribute('checked', 'checked')
 				document.getElementById('Locke1').style.display = 'block';
 				document.getElementById('UnLocke1').style.display = 'none';
-				document.getElementById('modelock').setAttribute('disabled', 'disabled');
-				document.getElementById('PredefinedMaterials').setAttribute('disabled', 'disabled');
+				document.getElementById('modelock').setAttribute('disabled', 'disabled')
 				if (zeta_box.value.length > 0 && Wna_box.value.length > 0) {
 					zeta = parseFloat(calcularResultado(document.getElementById('zeta_box').value));
 					Wna = parseFloat(calcularResultado(document.getElementById('Wna_box').value));
@@ -949,8 +930,7 @@
 				validador = 1;
 			} else {
 				// document.getElementById('flexSwitchCheckChecked2').removeAttribute('checked')
-				document.getElementById('modelock').removeAttribute('disabled');
-				document.getElementById('PredefinedMaterials').removeAttribute('disabled');
+				document.getElementById('modelock').removeAttribute('disabled')
 				document.getElementById('UnLocke1').style.display = 'block';
 				document.getElementById('Locke1').style.display = 'none';
 
@@ -1016,7 +996,7 @@
 				RuidoGr = parseFloat(document.getElementById('NoiseAG').value);
 			}
 			LinearSweep.disabled = true;
-			LogarithmicSweep.disabled = true;
+            LogarithmicSweep.disabled = true;
 		}
 		//Función para limpiar el método númerico
 		function CleanerMS() {
@@ -1063,7 +1043,7 @@
 					up2[0] = 0;
 				}
 				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
-			} else if (validador==1){
+			} else {
 				//MOdelo Zeta y Wn
 				Po = 0;
 				Wn = 0;
@@ -1079,23 +1059,6 @@
 					up2[0] = 0;
 				}
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
-			} else {
-				console.log('Mama')
-				//Modelo MCK
-				Po = 0;
-				Wn = 0;
-				Dt_box();
-				if (DespInicial.value.length > 0) {
-					u2[0] = parseFloat(calcularResultado(document.getElementById('DespInicial').value));
-				} else {
-					u2[0] = 0;
-				}
-				if (VelInicial.value.length > 0) {
-					up2[0] = parseFloat(calcularResultado(document.getElementById('VelInicial').value));
-				} else {
-					up2[0] = 0;
-				}
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
 		}
@@ -1107,13 +1070,10 @@
 				//Modelo MCK
 				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
-			} else if (validador == 1) {
+			} else {
 				//MOdelo Zeta y Wn
 				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
-			} else {
-				Po_box(); Dt_box();
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
 		}
@@ -1122,17 +1082,14 @@
 			validador5 = false;
 			if (validador == 0) {
 				//Modelo MCK
-				Masa_box(); Wn_box(); c_box(); Dt_box();
+				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 				Escalar_box();
-			} else if (validador == 1) {
+			} else {
 				//MOdelo Zeta y Wn
-				Wn_box(); Zeta_boxF(); Dt2_boxF();
+				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 				Escalar_box();
-			} else {
-				Dt_box();
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
 		}
@@ -1141,15 +1098,12 @@
 			validador5 = false;
 			if (validador == 0) {
 				//Modelo MCK
-				Masa_box(); Wn_box(); c_box(); Dt_box();
+				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
-			} else if (validador == 1){
+			} else {
 				//MOdelo Zeta y Wn
-				Wn_box(); Zeta_boxF(); Dt2_boxF();
+				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
-			}else {
-				Dt_box();
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
 		}
@@ -1158,15 +1112,12 @@
 			validador5 = true;
 			if (validador == 0) {
 				//Modelo MCK
-				Masa_box(); Wn_box(); c_box(); Dt_box();
+				Po_box(); Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
-			} else if (validador == 1) {
+			} else {
 				//MOdelo Zeta y Wn
-				Wn_box(); Zeta_boxF(); Dt2_boxF();
+				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
-			} else{
-				Dt_box();
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 		}
 		//Obtención de Variables desde las cajas, modelo MCK
@@ -1410,8 +1361,8 @@
 			IntervaloB = parseFloat(calcularResultado(document.getElementById('Inter_box').value));
 			Po = parseFloat(calcularResultado(document.getElementById('PoB_box').value));
 			Vel = (W2 - W1) / (50 * IntervaloB);
-			const totalIterations = IntervaloB * 1000 / 20; // 10 segundos en milisegundos dividido por el intervalo, Santiago Was Here
-			factorCrecimiento = Math.pow(W2 / W1, 1 / (totalIterations - 1));
+			const totalIterations = IntervaloB * 1000 / 20; // 10 segundos en milisegundos dividido por el intervalo 
+            factorCrecimiento = Math.pow(W2 / W1, 1 / (totalIterations - 1));
 			Wv[0] = W1;
 			validador3 = 2;
 			validador4 = validador4 + 1;
@@ -1457,7 +1408,6 @@
 				LogarithmicSweep.checked = true;
 			}
 		});
-		//Santiago was here
 		//Función para exportar datos en cualquier momento de la simulación
 		function ExportarAnyTiempo() {
 			if (exporC == 1) {
@@ -1478,60 +1428,6 @@
 			a3 = m;
 			kj = k + a1;
 		}
-		// Masa y Amortiguamiento aleatorios 
-		function MasaNAmor_Aleatorios() {
-			// Genera un número aleatorio entre 0 y 1 (incluyendo 0 pero excluyendo 1)
-			var numeroAleatorio = Math.random();
-			// Ajusta el número aleatorio al rango deseado (5 a 20)
-			var MasaA = numeroAleatorio * (20 - 5) + 5;
-			// Ajusta el número aleatorio al rango deseado (0.01 a 0.15)
-			var ZetaA = numeroAleatorio * (0.15 - 0.01) + 0.01;
-			m = MasaA;
-			document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
-			document.getElementById('modelock').setAttribute('disabled', 'disabled');
-			document.getElementById('Locke1P').style.display = 'block';
-			document.getElementById('UnLocke1P').style.display = 'none';
-			validador=3;
-			switch (document.getElementById('Materiales').value) {
-				case 'Steel':
-					E = 200000000;
-					document.getElementById("DeSelectOption1").style.display = "block";
-					document.getElementById("SelectMa").style.display = "none";
-					break;
-				case 'Wood':
-					E = 10000000;
-					document.getElementById("DeSelectOption1").style.display = "block";
-					document.getElementById("SelectMa").style.display = "none";
-					break;
-				case 'RwinC':
-					E = 20000000;
-					document.getElementById("DeSelectOption1").style.display = "block";
-					document.getElementById("SelectMa").style.display = "none";
-					break;
-				case 'DeSelectOption':
-					E = 0;
-					m = 0;
-					//Seleción
-					document.getElementById("DeSelectOption1").style.display = "none";
-					document.getElementById('SelectMa').selected = true;
-					//Candados
-					document.getElementById('Locke1P').style.display = 'none';
-					document.getElementById('UnLocke1P').style.display = 'block';
-					//Desbloquear
-					document.getElementById('ZetaWn').removeAttribute('disabled');
-				    document.getElementById('modelock').removeAttribute('disabled');
-					break;
-
-			}
-			k = 3 * E * Math.pow(0.2, 4) / 12;
-			c = 2 * ZetaA * Math.sqrt(k / MasaA) * MasaA;
-			document.getElementById('Mass_boxPD').value = parseFloat(m).toFixed(2);
-			document.getElementById('Elastic_box').value = parseFloat(E) / 1000000;
-			console.log(k, c, ZetaA)
-
-		}
-
-		// Ejemplo de uso:
 		//Constantes para el modelo Zeta Wn
 		function ConsWnZe() {
 			a1 = (4 / (dt * dt)) + (2 * 2 * zeta * Wna / (dt));
@@ -2345,19 +2241,15 @@
 					case 1:
 						if (validador == 0) {
 							geometry.attributes.position.setZ(s, zetaxd[s] + -xflex3 * u2[contadorglobal] * k);//SuperBien
-						} else if(validador == 1) {
+						} else {
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
-						}else{
-							geometry.attributes.position.setZ(s, zetaxd[s] + -xflex3 * u2[contadorglobal] * k*0.7);//SuperBien
 						}
 						break;
 					case 2:
 						if (validador == 0) {
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / k)) * -1);//SuperBien
-						} else if (validador == 1) {
+						} else {
 							geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
-						}else{
-							geometry.attributes.position.setZ(s, zetaxd[s] + -xflex3 * u2[contadorglobal] * k*0.7);//SuperBien
 						}
 						break;
 				}
@@ -2381,10 +2273,8 @@
 				s = i;
 				if (validador == 0) {
 					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1);//SuperBien
-				} else if (validador == 1) {
+				} else {
 					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / (4 / 3 * Wna))) * -1);//SuperBien
-				} else{
-					geometry.attributes.position.setZ(s, zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1)*0.7;//SuperBien
 				}
 			}
 			// // geometry.computeVertexNormals();
@@ -3045,7 +2935,7 @@
 				}
 			}
 			LinearSweep.disabled = false;
-			LogarithmicSweep.disabled = false;
+            LogarithmicSweep.disabled = false;
 			chart.update();
 			console.log('Datos Organizados')
 			return data1

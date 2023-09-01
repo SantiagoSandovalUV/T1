@@ -698,7 +698,7 @@
       var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 75);
       var Mesa1; var esfera2; var Cilindros; var lab; var Mesa2; var Barra; var Barra11; var LVDt1;
       var Pared11; var sensorB;
-      const renderer = new THREE.WebGLRenderer();
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
       clock = new THREE.Clock();
@@ -1311,26 +1311,26 @@
       // // var C3 = Rec_Es(0.3, 2, 0.3, 6.5, 2, 1.5);
       // // var C4 = Rec_Es(0.3, 2, 0.3, 6.5, 0, 1.5);
       // //Columnas
-      var C5 = Rec_Es(0.3, 2, 0.3, 3.5, 0, -1.5);
-      var C6 = Rec_Es(0.3, 2, 0.3, 3.5, 2, -1.5);
-      var zetaxd = new Array();
-      // var C7 = Rec_Es(0.3, 2, 0.3, 6.5, 2, -1.5);
-      // var C8 = Rec_Es(0.3, 2, 0.3, 6.5, 0, -1.5);
-      //
-      // var L1=CopiaDeDataZ(L1);
-      // var L2=CopiaDeDataZ(L2);
-      // zesaas(C1);
-      // var C1 = CopiaDeDataZ(C1);
-      // var C2 = CopiaDeDataZ(C2);
-      // var C3 = CopiaDeDataZ(C3);
-      // var C4 = CopiaDeDataZ(C4);
-      // var C5 = CopiaDeDataZ(C5);
-      // var C6 = CopiaDeDataZ(C6);
-      // var C7 = CopiaDeDataZ(C7);
-      // var C8 = CopiaDeDataZ(C8);
-      // Circulos
-      var Esf1 = Esf_Es(0.35, 2, 2, 2.9, 1.05, -1.5)
-      var Esf2 = Esf_Es(0.35, 2, 2, 2.9, 3.15, -1.5)
+      // var C5 = Rec_Es(0.3, 2, 0.3, 3.5, 0, -1.5);
+      // var C6 = Rec_Es(0.3, 2, 0.3, 3.5, 2, -1.5);
+      // var zetaxd = new Array();
+      // // var C7 = Rec_Es(0.3, 2, 0.3, 6.5, 2, -1.5);
+      // // var C8 = Rec_Es(0.3, 2, 0.3, 6.5, 0, -1.5);
+      // //
+      // // var L1=CopiaDeDataZ(L1);
+      // // var L2=CopiaDeDataZ(L2);
+      // // zesaas(C1);
+      // // var C1 = CopiaDeDataZ(C1);
+      // // var C2 = CopiaDeDataZ(C2);
+      // // var C3 = CopiaDeDataZ(C3);
+      // // var C4 = CopiaDeDataZ(C4);
+      // // var C5 = CopiaDeDataZ(C5);
+      // // var C6 = CopiaDeDataZ(C6);
+      // // var C7 = CopiaDeDataZ(C7);
+      // // var C8 = CopiaDeDataZ(C8);
+      // // Circulos
+      // var Esf1 = Esf_Es(0.35, 2, 2, 2.9, 1.05, -1.5)
+      // var Esf2 = Esf_Es(0.35, 2, 2, 2.9, 3.15, -1.5)
       var contadorglobal = 0;
       //Geometría Portico 3D
       function Portico3D() {
