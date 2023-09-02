@@ -1063,7 +1063,7 @@
 					up2[0] = 0;
 				}
 				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
-			} else if (validador==1){
+			} else if (validador == 1) {
 				//MOdelo Zeta y Wn
 				Po = 0;
 				Wn = 0;
@@ -1112,7 +1112,7 @@
 				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
-				Po_box(); Dt_box();  Wn_box();
+				Po_box(); Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1143,11 +1143,11 @@
 				//Modelo MCK
 				Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
-			} else if (validador == 1){
+			} else if (validador == 1) {
 				//MOdelo Zeta y Wn
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
-			}else {
+			} else {
 				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
@@ -1164,7 +1164,7 @@
 				//MOdelo Zeta y Wn
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
-			} else{
+			} else {
 				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
@@ -1491,7 +1491,7 @@
 			document.getElementById('modelock').setAttribute('disabled', 'disabled');
 			document.getElementById('Locke1P').style.display = 'block';
 			document.getElementById('UnLocke1P').style.display = 'none';
-			validador=3;
+			validador = 3;
 			switch (document.getElementById('Materiales').value) {
 				case 'Steel':
 					E = 200000000;
@@ -1519,7 +1519,7 @@
 					document.getElementById('UnLocke1P').style.display = 'block';
 					//Desbloquear
 					document.getElementById('ZetaWn').removeAttribute('disabled');
-				    document.getElementById('modelock').removeAttribute('disabled');
+					document.getElementById('modelock').removeAttribute('disabled');
 					break;
 
 			}
@@ -2408,7 +2408,7 @@
 					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1*0.7;
 				}
 			}
-			// geometry.computeVertexNormals();
+			// // geometry.computeVertexNormals();
 			geometry.attributes.position.setZ(s,nuevaPosicionZ);//SuperBien
 			geometry.attributes.position.needsUpdate = true;
 			renderer.render(scene, camera)
