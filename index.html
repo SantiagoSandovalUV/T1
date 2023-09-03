@@ -3073,17 +3073,17 @@
 				for (let i = 0; i < u2.length-1; i++) {
 					data1[i] = new Array();
 					data1[i][1] = VTR[i];
-					data1[i][2] = U2R[i] + Ruido_Gaus(0, 1);
-					data1[i][3] = Upp2R[i]+Seno2R[i] + Ruido_Gaus(0, 1);
-					data1[i][4] = Seno2R[i] + Ruido_Gaus(0, 1);
+					data1[i][2] = U2R[i] + RuidoDR*Ruido_Gaus(0, 1);
+					data1[i][3] = SensorMultpA*(Upp2R[i]+Seno2R[i]) + 50*RuidoMs*Ruido_Gaus(0, 1);
+					data1[i][4] = Seno2R[i] + 50*RuidoGr*Ruido_Gaus(0, 1);
 				}
 			} else {
 				for (let i = 0; i < u2.length-1; i++) {
 					data1[i] = new Array();
 					data1[i][1] = Vtiempo2[i];
-					data1[i][2] = u2[i] + Ruido_Gaus(0, 1);
-					data1[i][3] = (upp2[i]+Seno[i]) + Ruido_Gaus(0, 1);
-					data1[i][4] = Seno[i] + Ruido_Gaus(0, 1);
+					data1[i][2] = SensorMulltp*u2[i] + RuidoDR*Ruido_Gaus(0, 1);
+					data1[i][3] = SensorMultpA*(upp2[i]+Seno[i]) + 50*RuidoMs*Ruido_Gaus(0, 1);
+					data1[i][4] = SensorMultpAG*Seno[i] + 50*RuidoGr*Ruido_Gaus(0, 1);
 
 				}
 			}
