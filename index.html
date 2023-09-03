@@ -1519,28 +1519,33 @@
 					E = 200000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
+					// Aplicar el nuevo material al objeto
+					cube.material.color.set(0xB1B1D2)
+					renderer.render(scene, camera);
 					break;
 				case 'Wood':
 					E = 10000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
-					//Texturas
-					// Cargar la nueva textura
-					const textureLoader = new THREE.TextureLoader();
-					const newTexture = textureLoader.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEq4TqAAJOutO-nC2IQOQ66WIdsMnVWvJb5tFlj3lJ8eraRAacv3fjBMFnCSBX7lp9HU&usqp=CAU');
-					// Crear un nuevo material con la nueva textura
-					const newMaterial = new THREE.MeshBasicMaterial({ map: newTexture });
 					// Aplicar el nuevo material al objeto
-					geometry.material = newMaterial;
+					cube.material.color.set(0xFFA721)
+					renderer.render(scene, camera);
 					break;
 				case 'RwinC':
 					E = 20000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
+					// Aplicar el nuevo material al objeto
+					cube.material.color.set(0x9CBAC0)
+					renderer.render(scene, camera);
 					break;
 				case 'DeSelectOption':
 					E = 0;
 					m = 0;
+					// Aplicar el nuevo material al objeto
+					cube.material.color.set(0xCACACA)
+					renderer.render(scene, camera);
+					break;
 					//Seleción
 					document.getElementById("DeSelectOption1").style.display = "none";
 					document.getElementById('SelectMa').selected = true;
@@ -2318,7 +2323,7 @@
 		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
 		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
 		// const texture = loader8.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEq4TqAAJOutO-nC2IQOQ66WIdsMnVWvJb5tFlj3lJ8eraRAacv3fjBMFnCSBX7lp9HU&usqp=CAU')
-		// const material = new THREE.MeshPhongMaterial({ color, map: texture }); //Crea el material, apartir del color y la textura
+		// // const material = new THREE.MeshPhongMaterial({ color, map: texture }); //Crea el material, apartir del color y la textura
 		// geometry.morphAttributes.position = []
 		const material = new THREE.MeshBasicMaterial({
 			color: 0xCACACA, //Color del cubo
