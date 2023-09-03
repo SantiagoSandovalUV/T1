@@ -57,6 +57,13 @@
 		html {
 			scrollbar-width: normal;
 		}
+
+		.icon-container {
+			max-height: 35px;
+			/* Establece una altura máxima */
+			display: flex;
+			align-items: center;
+		}
 	</style>
 </head>
 
@@ -98,7 +105,7 @@
 				<option value="Despl" style="display: none" selected>Select Response</option>
 				<option value="Despl" style="display: none">Displacement [m]</option>
 				<option value="Vel" style="display: none">Velocity [m/s]</option>
-				<option value="Acel" style="display: none">Mass Acceleration [m/s^2]</option>
+				<option value="Acel" style="display: none">Mass acceleration [m/s^2]</option>
 				<option value="RespEx" style="display: none">Ground acceleration [m/s^2]</option>
 			</select>
 		</div>
@@ -126,7 +133,7 @@
 									<div class="card-body">
 										<form class="row g-2">
 											<form class="col-2">
-												<div>
+												<div class="icon-container">
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
 														style="display: none;" id="Locke">
@@ -139,7 +146,7 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="When this element is locked, it is not possible to access the ωn and ζ models. If you want to deactivate it, you must clear all the text boxes."
+													<i data-tippy-content="When this element is locked, it is not possible to access the ωn and ζ Model and Predefined materials. If you want to deactivate it, you must clear all the text boxes."
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
@@ -191,7 +198,7 @@
 									<div class="card-body">
 										<form class="row">
 											<form class="col-auto">
-												<div>
+												<div class="icon-container">
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
 														style="display: none;" id="Locke1">
@@ -204,7 +211,7 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="When this element is locked, it is not possible to access the MCK model. If you want to deactivate it, you must clear all the text boxes."
+													<i data-tippy-content="When this element is locked, it is not possible to access the MCK model and the Predefined materials. If you want to deactivate it, you must clear all the text boxes."
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
@@ -250,7 +257,7 @@
 									<div class="card-body">
 										<form class="row">
 											<form class="col-auto">
-												<div>
+												<div class="icon-container">
 													<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
 														fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 20 20"
 														style="display: none;" id="Locke1P">
@@ -263,7 +270,7 @@
 														<path
 															d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
 													</svg>
-													<i data-tippy-content="When this element is locked, it is not possible to access the MCK model. If you want to deactivate it, you must clear all the text boxes."
+													<i data-tippy-content="When this element is locked, it is not possible to access the MCK and  ωn and ζ models. If you want to deactivate it, you must deselect the material."
 														class="ti ti-question-mark text-primary"></i>
 												</div>
 											</form>
@@ -326,7 +333,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Mass accelerometer
+								Top accelerometer
 							</button>
 						</div>
 					</h2>
@@ -368,7 +375,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Relative displacement sensor
+								Displacement sensor
 							</button>
 						</div>
 					</h2>
@@ -409,7 +416,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Ground accelerometer
+								Bottom accelerometer
 							</button>
 						</div>
 					</h2>
@@ -736,7 +743,7 @@
 		<div class="card mt-2" style="width: 100%;">
 			<div class="card-body">
 				<div style="text-align: center;">
-					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
+					<button type="button" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Data')"
 						class="btn btn-primary">Export data
 					</button>
 					<button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear fields
@@ -753,38 +760,52 @@
 				</div>
 			</div>
 		</div> -->
-		<div class="card mt-1" style="width: 100%;">
-			<form class="row g-6">
-				<div class="col-3" style="text-align: center;">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD1()" class="col">
-						<path fill-rule="evenodd"
-							d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-					</svg>
+		<div class="card mt-1" style="width: 100%; margin-bottom: 0;">
+			<form class="row g-2">
+				<div class="col-3">
+					<div class="text-center my-auto">
+						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+							class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16" onclick="PerspectiveD2()">
+							<path fill-rule="evenodd"
+								d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z" />
+							<path fill-rule="evenodd"
+								d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z" />
+						</svg>
+					</div>
 				</div>
 				<div class="col-3">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-angle-expand" viewBox="0 0 20 20" onclick="PerspectiveD2()">
-						<path fill-rule="evenodd"
-							d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
-					</svg>
+					<div class="text-center my-auto">
+						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+							class="bi bi-bounding-box-circles" viewBox="0 0 16 16" onclick="PerspectiveD4()">
+							<path
+								d="M2 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM0 2a2 2 0 0 1 3.937-.5h8.126A2 2 0 1 1 14.5 3.937v8.126a2 2 0 1 1-2.437 2.437H3.937A2 2 0 1 1 1.5 12.063V3.937A2 2 0 0 1 0 2zm2.5 1.937v8.126c.703.18 1.256.734 1.437 1.437h8.126a2.004 2.004 0 0 1 1.437-1.437V3.937A2.004 2.004 0 0 1 12.063 2.5H3.937A2.004 2.004 0 0 1 2.5 3.937zM14 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM2 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+						</svg>
+					</div>
 				</div>
 				<div class="col-3">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD3 ()">
-						<path fill-rule="evenodd"
-							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
-					</svg>
+					<div class="text-center my-auto">
+						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+							class="bi bi-box-arrow-up" viewBox="0 0 16 16" onclick="PerspectiveD3()">
+							<path fill-rule="evenodd"
+								d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z" />
+							<path fill-rule="evenodd"
+								d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z" />
+						</svg>
+					</div>
 				</div>
 				<div class="col-3">
-					<svg class="btn" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
-						class="bi bi-arrows-move" viewBox="0 0 20 20" onclick="PerspectiveD4 ()">
-						<path fill-rule="evenodd"
-							d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10zM.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8z" />
-					</svg>
+					<div class="text-center my-auto">
+						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+							class="bi bi-box-arrow-in-up-left" viewBox="0 0 16 16" onclick="PerspectiveD1()">
+							<path fill-rule="evenodd"
+								d="M9.636 13.5a.5.5 0 0 1-.5.5H2.5A1.5 1.5 0 0 1 1 12.5v-10A1.5 1.5 0 0 1 2.5 1h10A1.5 1.5 0 0 1 14 2.5v6.636a.5.5 0 0 1-1 0V2.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5z" />
+							<path fill-rule="evenodd"
+								d="M5 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H6.707l8.147 8.146a.5.5 0 0 1-.708.708L6 6.707V10.5a.5.5 0 0 1-1 0v-5z" />
+						</svg>
+					</div>
 				</div>
+			</form>
 		</div>
-		</form>
 	</div>
 	</div>
 	<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
@@ -852,7 +873,8 @@
 		var zeta = 0;
 		var dt2 = 0;
 		//Escalar sismos
-		var Escalar = 2;
+		var Escalar = 1;
+		document.getElementById('Escalar_box1').value = parseFloat(1);
 		//Barrido
 		var Wv = [];
 		var validador3 = 1; //Determina si se va a trabajar con barrido de frecuencias o movim sinusoidal
@@ -1063,7 +1085,7 @@
 					up2[0] = 0;
 				}
 				k_box(); contador(); contador2(); ConsMDI(); Movimiento_Sen();
-			} else if (validador==1){
+			} else if (validador == 1) {
 				//MOdelo Zeta y Wn
 				Po = 0;
 				Wn = 0;
@@ -1112,7 +1134,7 @@
 				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
-				Po_box(); Dt_box();  Wn_box();
+				Po_box(); Dt_box(); Wn_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1143,11 +1165,11 @@
 				//Modelo MCK
 				Masa_box(); Wn_box(); c_box(); Dt_box();
 				k_box(); ConsMDI(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
-			} else if (validador == 1){
+			} else if (validador == 1) {
 				//MOdelo Zeta y Wn
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
-			}else {
+			} else {
 				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
@@ -1164,7 +1186,7 @@
 				//MOdelo Zeta y Wn
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
-			} else{
+			} else {
 				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
@@ -1491,7 +1513,7 @@
 			document.getElementById('modelock').setAttribute('disabled', 'disabled');
 			document.getElementById('Locke1P').style.display = 'block';
 			document.getElementById('UnLocke1P').style.display = 'none';
-			validador=3;
+			validador = 3;
 			switch (document.getElementById('Materiales').value) {
 				case 'Steel':
 					E = 200000000;
@@ -1519,7 +1541,7 @@
 					document.getElementById('UnLocke1P').style.display = 'block';
 					//Desbloquear
 					document.getElementById('ZetaWn').removeAttribute('disabled');
-				    document.getElementById('modelock').removeAttribute('disabled');
+					document.getElementById('modelock').removeAttribute('disabled');
 					break;
 
 			}
@@ -1530,7 +1552,6 @@
 			console.log(k, c, ZetaA)
 
 		}
-
 		// Ejemplo de uso:
 		//Constantes para el modelo Zeta Wn
 		function ConsWnZe() {
@@ -2343,6 +2364,7 @@
 				s = i;
 				let nuevaPosicionZ;
 				const radioEsfera = 0.685; // Ajusta según el radio de la esfera
+				var amplitude = Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]);
 				switch (validador3) {
 					case 1:
 						if (validador == 0) {
@@ -2350,16 +2372,12 @@
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1;
 						} else {
-							nuevaPosicionZ = zetaxd[s] + -xflex3 * u2[contadorglobal] * k * 0.8;
+							nuevaPosicionZ = zetaxd[s] + -xflex3 * u2[contadorglobal] * k;
 						}
-						// Limita la posición de la barra al radio de la esfera
-						// if (Math.abs(nuevaPosicionZ)+Math.abs(u2[contadorglobal]) > radioEsfera) {
-						// 	if (nuevaPosicionZ < 0) {
-						// 		nuevaPosicionZ = -radioEsfera-Math.abs(u2[contadorglobal]);
-						// 	} else {
-						// 		nuevaPosicionZ = radioEsfera+Math.abs(u2[contadorglobal]);
-						// 	}
-						// }
+						//Limita la posición de la barra al radio de la esfera
+						if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
+							nuevaPosicionZ = nuevaPosicionZ * 0.85;
+						}
 						geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
 						break;
 					case 2:
@@ -2368,16 +2386,12 @@
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / (4 / 3 * Wna))) * -1;
 						} else {
-							nuevaPosicionZ = (zetaxd[s] + -xflex3 * u2[contadorglobal] * k )* 0.7;
+							nuevaPosicionZ = (zetaxd[s] + -xflex3 * u2[contadorglobal] * k);
 						}
-						// Limita la posición de la barra al radio de la esfera
-						// if (Math.abs(nuevaPosicionZ)+Math.abs(u2[contadorglobal]) > radioEsfera) {
-						// 	if (nuevaPosicionZ < 0) {
-						// 		nuevaPosicionZ = -radioEsfera-Math.abs(u2[contadorglobal]);
-						// 	} else {
-						// 		nuevaPosicionZ = radioEsfera+Math.abs(u2[contadorglobal]);
-						// 	}
-						// }
+						//Limita la posición de la barra al radio de la esfera
+						if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
+							nuevaPosicionZ = nuevaPosicionZ * 0.85;
+						}
 						geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
 						break;
 				}
@@ -2403,13 +2417,13 @@
 				if (validador == 0) {
 					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1;
 				} else if (validador == 1) {
-					nuevaPosicionZ =  zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / (4 / 3 * Wna))) * -1;
+					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / (4 / 3 * Wna))) * -1;
 				} else {
-					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1*0.7;
+					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1 * 0.7;
 				}
 			}
 			// geometry.computeVertexNormals();
-			geometry.attributes.position.setZ(s,nuevaPosicionZ);//SuperBien
+			geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
 			geometry.attributes.position.needsUpdate = true;
 			renderer.render(scene, camera)
 			requestAnimationFrame(Movimiento_SenSismo)
@@ -3040,9 +3054,11 @@
 		}
 		//Titulos de los datos
 		const headers = {
-			id: 'Tiempo',
-			nombre: ' Resp. Relativa',
-			nombre2: 'Resp. Aceleración'
+			id: 'Time',
+			nombre: 'Displacement',
+			nombre2: 'Top_acceleration',
+			nombre3: 'Bottom_acceleration'
+
 		};
 		//Organiza los datos que se van a exportar en columnas
 		var data1 = new Array();
@@ -3052,18 +3068,23 @@
 				var VTR = resampleSignal(Vtiempo2, TF);
 				var U2R = resampleSignal(u2, TF);
 				var Upp2R = resampleSignal(upp2, TF);
-				for (let i = 0; i < u2.length; i++) {
+				var Seno2R = resampleSignal(Seno, TF);
+
+				for (let i = 0; i < u2.length-1; i++) {
 					data1[i] = new Array();
 					data1[i][1] = VTR[i];
 					data1[i][2] = U2R[i] + Ruido_Gaus(0, 1);
-					data1[i][3] = Upp2R[i] + Ruido_Gaus(0, 1);
+					data1[i][3] = Upp2R[i]+Seno2R[i] + Ruido_Gaus(0, 1);
+					data1[i][4] = Seno2R[i] + Ruido_Gaus(0, 1);
 				}
 			} else {
-				for (let i = 0; i < u2.length; i++) {
+				for (let i = 0; i < u2.length-1; i++) {
 					data1[i] = new Array();
 					data1[i][1] = Vtiempo2[i];
 					data1[i][2] = u2[i] + Ruido_Gaus(0, 1);
-					data1[i][3] = upp2[i] + Ruido_Gaus(0, 1);
+					data1[i][3] = (upp2[i]+Seno[i]) + Ruido_Gaus(0, 1);
+					data1[i][4] = Seno[i] + Ruido_Gaus(0, 1);
+
 				}
 			}
 			LinearSweep.disabled = false;
