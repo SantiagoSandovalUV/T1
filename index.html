@@ -1524,6 +1524,14 @@
 					E = 10000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
+					//Texturas
+					// Cargar la nueva textura
+					const textureLoader = new THREE.TextureLoader();
+					const newTexture = textureLoader.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEq4TqAAJOutO-nC2IQOQ66WIdsMnVWvJb5tFlj3lJ8eraRAacv3fjBMFnCSBX7lp9HU&usqp=CAU');
+					// Crear un nuevo material con la nueva textura
+					const newMaterial = new THREE.MeshBasicMaterial({ map: newTexture });
+					// Aplicar el nuevo material al objeto
+					geometry.material = newMaterial;
 					break;
 				case 'RwinC':
 					E = 20000000;
@@ -2372,7 +2380,7 @@
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1;
 						} else {
-							nuevaPosicionZ = (zetaxd[s] + -xflex3 * u2[contadorglobal] * k)*0.7;
+							nuevaPosicionZ = (zetaxd[s] + -xflex3 * u2[contadorglobal] * k) * 0.7;
 						}
 						//Limita la posición de la barra al radio de la esfera
 						// if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
@@ -2386,7 +2394,7 @@
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / (4 / 3 * Wna))) * -1;
 						} else {
-							nuevaPosicionZ = (zetaxd[s] + -xflex3 * u2[contadorglobal] * k)*0.7;
+							nuevaPosicionZ = (zetaxd[s] + -xflex3 * u2[contadorglobal] * k) * 0.7;
 						}
 						//Limita la posición de la barra al radio de la esfera
 						// if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
@@ -3070,20 +3078,20 @@
 				var Upp2R = resampleSignal(upp2, TF);
 				var Seno2R = resampleSignal(Seno, TF);
 
-				for (let i = 0; i < u2.length-1; i++) {
+				for (let i = 0; i < u2.length - 1; i++) {
 					data1[i] = new Array();
 					data1[i][1] = VTR[i];
-					data1[i][2] = SensorMultp*U2R[i] + RuidoDR*Ruido_Gaus(0, 1);
-					data1[i][3] = SensorMultpA*(Upp2R[i]+Seno2R[i]) + 50*RuidoMs*Ruido_Gaus(0, 1);
-					data1[i][4] = Seno2R[i] + 50*RuidoGr*Ruido_Gaus(0, 1);
+					data1[i][2] = SensorMultp * U2R[i] + RuidoDR * Ruido_Gaus(0, 1);
+					data1[i][3] = SensorMultpA * (Upp2R[i] + Seno2R[i]) + 50 * RuidoMs * Ruido_Gaus(0, 1);
+					data1[i][4] = Seno2R[i] + 50 * RuidoGr * Ruido_Gaus(0, 1);
 				}
 			} else {
-				for (let i = 0; i < u2.length-1; i++) {
+				for (let i = 0; i < u2.length - 1; i++) {
 					data1[i] = new Array();
 					data1[i][1] = Vtiempo2[i];
-					data1[i][2] = SensorMultp*u2[i] + RuidoDR*Ruido_Gaus(0, 1);
-					data1[i][3] = SensorMultpA*(upp2[i]+Seno[i]) + 50*RuidoMs*Ruido_Gaus(0, 1);
-					data1[i][4] = SensorMultpAG*Seno[i] + 50*RuidoGr*Ruido_Gaus(0, 1);
+					data1[i][2] = SensorMultp * u2[i] + RuidoDR * Ruido_Gaus(0, 1);
+					data1[i][3] = SensorMultpA * (upp2[i] + Seno[i]) + 50 * RuidoMs * Ruido_Gaus(0, 1);
+					data1[i][4] = SensorMultpAG * Seno[i] + 50 * RuidoGr * Ruido_Gaus(0, 1);
 
 				}
 			}
