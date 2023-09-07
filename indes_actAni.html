@@ -281,7 +281,7 @@
 														data-tippy-content="System mass"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm"
-													name="Mass_boxPD" id="Mass_boxPD" placeholder="">
+													name="Mass_boxPD" id="Mass_boxPD" placeholder="" disabled>
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px; white-space: nowrap">
@@ -1007,7 +1007,6 @@
 			}
 		}
 		function StarBaseMotion(PanelID) {
-			console.log('Santiago Sandoval was here')
 			document.getElementById("select_barra").style.display = "block";
 			switch (PanelID) {
 				case "flush-collapseTwoVl": // Libre Vibration
@@ -1103,11 +1102,11 @@
 				}
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
+				console.log('Mama')
 				//Modelo MCK
 				Po = 0;
 				Wn = 0;
 				Dt_box();
-				Masa_boxPD();
 				if (DespInicial.value.length > 0) {
 					u2[0] = parseFloat(calcularResultado(document.getElementById('DespInicial').value));
 				} else {
@@ -1135,7 +1134,7 @@
 				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
-				Po_box(); Dt_box(); Wn_box();Masa_boxPD();
+				Po_box(); Dt_box(); Wn_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1154,7 +1153,7 @@
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 				Escalar_box();
 			} else {
-				Dt_box();Masa_boxPD();
+				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1171,7 +1170,7 @@
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			} else {
-				Dt_box();Masa_boxPD();
+				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1188,7 +1187,7 @@
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
-				Dt_box();Masa_boxPD();
+				Dt_box();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 		}
@@ -1270,10 +1269,6 @@
 			// LoadSensor();
 			SensorCheckerA();
 			SensorCheckerL();
-		}
-		//Obtención de masa PD
-		function Masa_boxPD(){
-			m = parseFloat(document.getElementById('Mass_boxPD').value) ;
 		}
 		// Función para realizar operaciones dentro de las cajas de texto
 		function calcularResultado(expresion) {
@@ -1513,6 +1508,7 @@
 			var MasaA = numeroAleatorio * (20 - 5) + 5;
 			// Ajusta el número aleatorio al rango deseado (0.01 a 0.15)
 			var ZetaA = numeroAleatorio * (0.15 - 0.01) + 0.01;
+			m = MasaA;
 			document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
 			document.getElementById('modelock').setAttribute('disabled', 'disabled');
 			document.getElementById('Locke1P').style.display = 'block';
@@ -1549,6 +1545,7 @@
 					// Aplicar el nuevo material al objeto
 					cube.material.color.set(0xCACACA)
 					renderer.render(scene, camera);
+					break;
 					//Seleción
 					document.getElementById("DeSelectOption1").style.display = "none";
 					document.getElementById('SelectMa').selected = true;
@@ -1561,12 +1558,11 @@
 					break;
 
 			}
-			k = 3 * E * (Math.pow(0.2, 4)-Math.pow(0.195, 4) )/ 12;
+			k = 3 * E * Math.pow(0.2, 4) / 12;
 			c = 2 * ZetaA * Math.sqrt(k / MasaA) * MasaA;
-			// document.getElementById('Mass_boxPD').value = parseFloat(m).toFixed(2);
+			document.getElementById('Mass_boxPD').value = parseFloat(m).toFixed(2);
 			document.getElementById('Elastic_box').value = parseFloat(E) / 1000000;
-			// console.log(k, c, ZetaA)
-			
+			console.log(k, c, ZetaA)
 
 		}
 		// Ejemplo de uso:
@@ -2321,8 +2317,8 @@
 		// Cargar Cubo
 		const color = 0xFFFFFF;
 		// let pos = { x: 5, y: 0.35, z: 0 }
-		let pos = { x: 5, y: -0.35 * 4 / 3, z: 0 }
-		const geometry = new THREE.BoxGeometry(0.2, 4, 0.2, 1, 25, 1); //Geomtria del cubo, en el espacio
+		let pos = { x: 5, y: 0.7, z: 0 }
+		const geometry = new THREE.BoxGeometry(0.2, 2, 0.2, 1, 25, 1); //Geomtria del cubo, en el espacio
 		const loader8 = new THREE.TextureLoader(); //Texture loader, cargador de textura sonaba paila,
 		// const texture = loader8.load('https://threejs.org/manual/examples/resources/images/star.png');
 		const texture = loader8.load('https://threejs.org/manual/examples/resources/images/wall.jpg')
@@ -2371,45 +2367,57 @@
 			contador6++;
 			var t = 0;
 			var Kef = k * 8 / 3;
+			var Pl = 0;
+			var kef = 0;
+			var xd = 0
+			var Ld = 0;
+			var Id = 0;
+			var Ed = 0;
+			var deformation = (Pl * xd ** 2 * (3 * Ld - xd)) / (6 * Ed * Id);
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
-				const x = geometry.attributes.position.getY(i);
-				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
-				const xflex2 = (x * x) / 59 - (x * x * x) / 5;
-				const xflex3 = (x * x) / (2.5 * Kef) - (x * x * x) / (6.5 * Kef);
-				const xcos = -1 * Math.cos(now * 3 / 8);
-				const xsint = Po * Math.sin(Wn * t);
-				s = i;
-				let nuevaPosicionZ;
-				const radioEsfera = 0.685; // Ajusta según el radio de la esfera
-				var amplitude = Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]);
+				const vertex = new THREE.Vector3();
+				vertex.fromBufferAttribute(geometry.attributes.position, i);
 				switch (validador3) {
 					case 1:
 						if (validador == 0) {
-							nuevaPosicionZ = zetaxd[s] + -xflex3 * u2[contadorglobal] * k;
+							Pl = -m*upp2[contadorglobal]; // Reemplaza con la fuerza aplicada en el extremo
+							kef = Pl / u2[contadorglobal];
 						} else if (validador == 1) {
-							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1;
+							Pl = -upp2[contadorglobal]; // Reemplaza con la fuerza aplicada en el extremo
+							kef = Pl / u2[contadorglobal];
 						} else {
-							nuevaPosicionZ = zetaxd[s] + (-xflex3 * u2[contadorglobal] * k) *1.15;
+							Pl =  -m*upp2[contadorglobal]; // Reemplaza con la fuerza aplicada en el extremo
+							kef = Pl / u2[contadorglobal];
 						}
-						//Limita la posición de la barra al radio de la esfera
-						// if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
-						// 	nuevaPosicionZ = nuevaPosicionZ * 0.85;
-						// }
-						geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
+						// Calcula la deformación usando la ecuación de la elástica
+						xd = vertex.x; // Posición x del vértice
+						Ld = 2; // Reemplaza con la longitud real de la viga
+						Id = Math.pow(0.2, 4) / 12; // Reemplaza con el valor del momento de inercia
+						Ed = kef * Math.pow(Ld, 3) / (3 * Id); // Reemplaza con el valor del módulo de elasticidad
+						deformation = (Pl * xd ** 2 * (3 * Ld - xd)) / (6 * Ed * Id);
+						vertex.y += deformation;
+						console.log(deformation,Id,Ed,Pl,kef)
+						geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
 						break;
 					case 2:
 						if (validador == 0) {
-							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / k)) * -1;
+							Pl = -m * upp2[contadorglobal]; // Reemplaza con la fuerza aplicada en el extremo
+							kef = Pl / u2[contadorglobal];
 						} else if (validador == 1) {
-							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / (4 / 3 * Wna))) * -1;
+							Pl = -upp2[contadorglobal]; // Reemplaza con la fuerza aplicada en el extremo
+							kef = Pl / u2[contadorglobal];
 						} else {
-							nuevaPosicionZ = zetaxd[s] +( -xflex3 * u2[contadorglobal] * k) *1.15;
+							Pl = -m*upp2[contadorglobal]; // Reemplaza con la fuerza aplicada en el extremo
+							kef = Pl / u2[contadorglobal];
 						}
-						//Limita la posición de la barra al radio de la esfera
-						// if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
-						// 	nuevaPosicionZ = nuevaPosicionZ * 0.85;
-						// }
-						geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
+						// Calcula la deformación usando la ecuación de la elástica
+						xd = vertex.x; // Posición x del vértice
+						Ld = 2; // Reemplaza con la longitud real de la viga
+						Id = Math.pow(0.2, 4) / 12; // Reemplaza con el valor del momento de inercia
+						Ed = kef * Math.pow(Ld, 3) / (3 * Id); // Reemplaza con el valor del módulo de elasticidad
+						deformation = (Pl * xd ** 2 * (3 * Ld - xd)) / (6 * Ed * Id);
+						vertex.y += deformation;
+						geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
 						break;
 				}
 			}
@@ -2436,7 +2444,7 @@
 				} else if (validador == 1) {
 					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / (4 / 3 * Wna))) * -1;
 				} else {
-					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1 * 0.8;
+					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1 * 0.7;
 				}
 			}
 			// geometry.computeVertexNormals();
