@@ -303,8 +303,8 @@
 													</option>
 													<option value="Steel">Steel
 													</option>
-													<option value="Wood">Wood</option>
-													<option value="RwinC">Reinforced concrete
+													<option value="Wood">Guadua</option>
+													<option value="RwinC">Aluminium
 													</option>
 													<option id="DeSelectOption1" value="DeSelectOption"
 														style="display: none">Deselect material
@@ -1040,6 +1040,7 @@
 			}
 			LinearSweep.disabled = true;
 			LogarithmicSweep.disabled = true;
+			document.getElementById('Materiales').setAttribute('disabled', 'disabled')
 		}
 		//Función para limpiar el método númerico
 		function CleanerMS() {
@@ -1512,7 +1513,7 @@
 			// Ajusta el número aleatorio al rango deseado (5 a 20)
 			var MasaA = numeroAleatorio * (20 - 5) + 5;
 			// Ajusta el número aleatorio al rango deseado (0.05 a 0.10)
-			var ZetaA = numeroAleatorio * (0.10 - 0.05) + 0.05;
+			var ZetaA = numeroAleatorio * (0.08 - 0.05) + 0.05;
 			document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
 			document.getElementById('modelock').setAttribute('disabled', 'disabled');
 			document.getElementById('Locke1P').style.display = 'block';
@@ -1528,7 +1529,7 @@
 					renderer.render(scene, camera);
 					break;
 				case 'Wood':
-					E = 10000000;
+					E = 15000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
@@ -1536,7 +1537,7 @@
 					renderer.render(scene, camera);
 					break;
 				case 'RwinC':
-					E = 20000000;
+					E = 74000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
@@ -1627,6 +1628,7 @@
 			CheckLv = true;
 			toggleOptions(1, CheckLv)
 			// toggleOptions(0,true)
+			renderer.render(scene, camera);
 
 		}
 		function RemoveLVDT() {
@@ -1636,6 +1638,8 @@
 			toggleOptions(1, CheckLv)
 			// toggleOptions(0,true)
 			SensorCheckerL();
+			renderer.render(scene, camera);
+
 		}
 		function LoadSensor() {
 			Mostrar(Barra11); //Sensor en el GDL
@@ -1643,6 +1647,7 @@
 			CheckAc = true;
 			toggleOptions(3, CheckAc)
 			// toggleOptions(0,true)
+			renderer.render(scene, camera);
 
 		}
 		function RemoveSensor() {
@@ -1651,6 +1656,7 @@
 			toggleOptions(3, CheckAc)
 			// toggleOptions(0,true)
 			SensorCheckerA();
+			renderer.render(scene, camera);
 
 		}
 		function LoadSensorG() {
@@ -1659,6 +1665,7 @@
 			CheckAcG = true;
 			toggleOptions(4, CheckAcG)
 			// toggleOptions(0,true)
+			renderer.render(scene, camera);
 
 		}
 		function RemoveSensorG() {
@@ -1667,6 +1674,7 @@
 			toggleOptions(4, CheckAcG)
 			// toggleOptions(0,true)
 			SensorCheckerAG();
+			renderer.render(scene, camera);
 
 		}
 		//Cambia las vista de la cámara
@@ -2779,7 +2787,7 @@
 		}
 		// Arrastrar objetos con el mause
 		function animate() {
-			dragObject();
+			// dragObject();
 			renderer.render(scene, camera);
 			requestAnimationFrame(animate);
 		}
@@ -2822,7 +2830,7 @@
 				}
 			}
 		}
-		animate()
+		// animate()
 		const loader1 = new THREE.GLTFLoader();
 		// Load a glTF resource, Lab loading
 		loader1.load(
@@ -3106,6 +3114,7 @@
 			}
 			LinearSweep.disabled = false;
 			LogarithmicSweep.disabled = false;
+			document.getElementById('Materiales').removeAttribute('disabled')
 			chart.update();
 			console.log('Datos Organizados')
 			return data1
