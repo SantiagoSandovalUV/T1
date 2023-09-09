@@ -868,6 +868,9 @@
 		var m = 0;
 		var k = 0; var c = 0;// Masa, Rigidez, Amortiguamiento
 		var dt = 0;
+		//Pre Materials
+		var E = 0;
+		var ZetaA=0.05;
 		//Modelo Zeta Wn
 		var Wna = 0;
 		var zeta = 0;
@@ -1275,6 +1278,10 @@
 		//Obtención de masa PD
 		function Masa_boxPD(){
 			m = parseFloat(document.getElementById('Mass_boxPD').value) ;
+			k = 3 * E * (Math.pow(0.2, 4)-Math.pow(0.195, 4) )/ 12;
+			c = 2 * ZetaA * Math.sqrt(k / m) * m;
+			console.log(k, c, ZetaA,m)
+
 		}
 		// Función para realizar operaciones dentro de las cajas de texto
 		function calcularResultado(expresion) {
@@ -1511,9 +1518,9 @@
 			// Genera un número aleatorio entre 0 y 1 (incluyendo 0 pero excluyendo 1)
 			var numeroAleatorio = Math.random();
 			// Ajusta el número aleatorio al rango deseado (5 a 20)
-			var MasaA = numeroAleatorio * (20 - 5) + 5;
+			// var MasaA = numeroAleatorio * (20 - 5) + 5;
 			// Ajusta el número aleatorio al rango deseado (0.05 a 0.10)
-			var ZetaA = numeroAleatorio * (0.08 - 0.05) + 0.05;
+			ZetaA = numeroAleatorio * (0.08 - 0.05) + 0.05;
 			document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
 			document.getElementById('modelock').setAttribute('disabled', 'disabled');
 			document.getElementById('Locke1P').style.display = 'block';
@@ -1533,7 +1540,7 @@
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
-					cube.material.color.set(0xFFA721)
+					cube.material.color.set(0x01CA51)
 					renderer.render(scene, camera);
 					break;
 				case 'RwinC':
@@ -1562,13 +1569,9 @@
 					break;
 
 			}
-			k = 3 * E * (Math.pow(0.2, 4)-Math.pow(0.195, 4) )/ 12;
-			c = 2 * ZetaA * Math.sqrt(k / MasaA) * MasaA;
 			// document.getElementById('Mass_boxPD').value = parseFloat(m).toFixed(2);
 			document.getElementById('Elastic_box').value = parseFloat(E) / 1000000;
-			// console.log(k, c, ZetaA)
-			
-
+			// console.log(ZetaA)
 		}
 		// Ejemplo de uso:
 		//Constantes para el modelo Zeta Wn
@@ -1902,7 +1905,7 @@
 				switch (validador3) {
 					case 1:
 						Seno[contador1] = Po * Math.sin(Wn * t); //Desplazamiento en la base
-						if (validador == 0) {
+						if (validador == 0 || validador == 3) {
 							p[contador1] = (Wn * Wn) * m * Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
 							p1[contador1] = (Wn * Wn) * m * Po * Math.sin(Wn * (t + dt)); //P+1
 						} else {
@@ -1920,7 +1923,7 @@
 							Wv[contador1 + 1] = frecuenciaActual; // Utiliza la frecuencia actualizada
 						}
 						Seno[contador1] = Po * Math.sin(Wv[contador1] * t); //Desplazamiento en la base
-						if (validador == 0) {
+						if (validador == 0 || validador == 3) {
 							p[contador1] = (Wv[contador1] * Wv[contador1]) * m * Seno[contador1]; //Aceleración en el grado de libertad debido al desplazamiento
 							p1[contador1] = ((Wv[contador1] * Wv[contador1])) * m * Po * Math.sin(Wv[contador1] * (t + dt)); //P+1
 						} else {
@@ -2123,7 +2126,7 @@
 				Vtiempo[contador1] = contador1;
 				switch (validador2) {
 					case 1:
-						if (validador == 0) {
+						if (validador == 0 || validador == 3) {
 							p[contador1] = -1 * m * parseFloat(Ac_Data[contador1]); //Aceleración en el grado de libertad debido al desplazamiento
 							p1[contador1] = -1 * m * parseFloat(Ac_Data[contador1 + 1]); //P+1
 							Po1 = p[contador1];
@@ -2136,11 +2139,11 @@
 						TimeLength = (Ac_Data.length); //Pendiente a optimizar
 						break;
 					case 2:
-						if (validador == 0) {
+						if (validador == 0 || validador == 3) {
 							p[contador1] = -1 * m * gm * parseFloat(Ac_Data[contador1]); //Aceleración en el grado de libertad debido al desplazamiento
 							p1[contador1] = -1 * m * gm * parseFloat(Ac_Data[contador1 + 1]); //P+1
 							Po1 = p[contador1];
-						} else {
+						} else if (validador == 1) {
 							p[contador1] = -gm * parseFloat(Ac_Data[contador1]); //Aceleración en el grado de libertad debido al desplazamiento
 							p1[contador1] = -gm * parseFloat(Ac_Data[contador1 + 1]); //P+1
 							Po1 = p[contador1];
@@ -2392,7 +2395,7 @@
 				var amplitude = Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]);
 				switch (validador3) {
 					case 1:
-						if (validador == 0) {
+						if (validador == 0 ) {
 							nuevaPosicionZ = zetaxd[s] + -xflex3 * u2[contadorglobal] * k;
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1;
