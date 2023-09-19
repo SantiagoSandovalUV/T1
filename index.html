@@ -285,7 +285,7 @@
 											</div>
 											<div class="col" style="width:180px">
 												<label class="form-label" style="font-size: 14px; white-space: nowrap">
-													Elastic modulus E [GPa] <i
+													Elastic modulus E [MPa] <i
 														data-tippy-content="System elastic modulus"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm"
@@ -301,10 +301,10 @@
 														selected>Select
 														material
 													</option>
-													<option value="Steel">Steel
+													<option value="Steel">Material 1
 													</option>
-													<option value="Wood">Guadua</option>
-													<option value="RwinC">Aluminium
+													<option value="Wood">Material 2</option>
+													<option value="RwinC">Material 3
 													</option>
 													<option id="DeSelectOption1" value="DeSelectOption"
 														style="display: none">Deselect material
@@ -1530,7 +1530,7 @@
 			validador = 3;
 			switch (document.getElementById('Materiales').value) {
 				case 'Steel':
-					E = 200000000000;
+					E = 200000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
@@ -1538,7 +1538,7 @@
 					renderer.render(scene, camera);
 					break;
 				case 'Wood':
-					E = 15000000000;
+					E = 15000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
@@ -1546,7 +1546,7 @@
 					renderer.render(scene, camera);
 					break;
 				case 'RwinC':
-					E = 74000000000;
+					E = 74000000;
 					document.getElementById("DeSelectOption1").style.display = "block";
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
@@ -1572,7 +1572,7 @@
 
 			}
 			// document.getElementById('Mass_boxPD').value = parseFloat(m).toFixed(2);
-			document.getElementById('Elastic_box').value = parseFloat(E) / 1000000000;
+			document.getElementById('Elastic_box').value = parseFloat(E) / 1000000;
 			// console.log(ZetaA)
 		}
 		// Ejemplo de uso:
