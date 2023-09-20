@@ -81,8 +81,7 @@
 				<h4>STRUCTURAL DYNAMICS LABORATORY</h4>
 			</div>
 			<div class="col-md-1" style="text-align: left;white-space: nowrap">
-				<a href="ManualDN.pdf"
-					class="btn btn-sm btn-outline-secondary">Laboratory manual</a>
+				<a href="ManualDN.pdf" class="btn btn-sm btn-outline-secondary">Laboratory manual</a>
 			</div>
 			<div class="col-md-2" style="text-align: right;white-space: nowrap">
 				<a class="btn btn-sm btn-outline-secondary"
@@ -870,7 +869,7 @@
 		var dt = 0;
 		//Pre Materials
 		var E = 0;
-		var ZetaA=0.05;
+		var ZetaA = 0.05;
 		//Modelo Zeta Wn
 		var Wna = 0;
 		var zeta = 0;
@@ -1139,7 +1138,7 @@
 				Po_box(); Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
-				Po_box(); Dt_box(); Wn_box();Masa_boxPD();
+				Po_box(); Dt_box(); Wn_box(); Masa_boxPD();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1158,7 +1157,7 @@
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 				Escalar_box();
 			} else {
-				Dt_box();Masa_boxPD();
+				Dt_box(); Masa_boxPD();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1175,7 +1174,7 @@
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			} else {
-				Dt_box();Masa_boxPD();
+				Dt_box(); Masa_boxPD();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 
@@ -1192,7 +1191,7 @@
 				Wn_box(); Zeta_boxF(); Dt2_boxF();
 				Wna_boxF(); contador(); contador2(); ConsWnZe(); Movimiento_Sen();
 			} else {
-				Dt_box();Masa_boxPD();
+				Dt_box(); Masa_boxPD();
 				contador(); contador2(); ConsMDI(); Movimiento_Sen();
 			}
 		}
@@ -1278,11 +1277,11 @@
 			SensorCheckerL();
 		}
 		//Obtención de masa PD
-		function Masa_boxPD(){
-			m = parseFloat(document.getElementById('Mass_boxPD').value) ;
-			k = 3 * E * (Math.pow(0.02, 4) )/ 12;
+		function Masa_boxPD() {
+			m = parseFloat(document.getElementById('Mass_boxPD').value);
+			k = 3 * E * (Math.pow(0.03, 4)-Math.pow(0.027, 4)) / 12;
 			c = 2 * ZetaA * Math.sqrt(k / m) * m;
-			console.log(k, c, ZetaA,m)
+			console.log(k, c, ZetaA, m)
 
 		}
 		// Función para realizar operaciones dentro de las cajas de texto
@@ -1535,6 +1534,7 @@
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
 					cube.material.color.set(0xB1B1D2)
+					// actualizarGeometriaDeCaja(0.1, 4, 0.1, 1, 25, 1); // Cambia el ancho de la caja a 2 unidades
 					renderer.render(scene, camera);
 					break;
 				case 'Wood':
@@ -1543,6 +1543,7 @@
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
 					cube.material.color.set(0x01CA51)
+					// actualizarGeometriaDeCaja(0.1, 4, 0.1, 1, 25, 1); // Cambia el ancho de la caja a 2 unidades
 					renderer.render(scene, camera);
 					break;
 				case 'RwinC':
@@ -1551,6 +1552,7 @@
 					document.getElementById("SelectMa").style.display = "none";
 					// Aplicar el nuevo material al objeto
 					cube.material.color.set(0x9CBAC0)
+					// actualizarGeometriaDeCaja(0.1, 4, 0.1, 1, 25, 1); // Cambia el ancho de la caja a 2 unidades
 					renderer.render(scene, camera);
 					break;
 				case 'DeSelectOption':
@@ -1558,6 +1560,7 @@
 					m = 1;
 					// Aplicar el nuevo material al objeto
 					cube.material.color.set(0xCACACA)
+					// actualizarGeometriaDeCaja(0.2, 4, 0.2, 1, 25, 1); // Cambia el ancho de la caja a 2 unidades
 					renderer.render(scene, camera);
 					//Seleción
 					document.getElementById("DeSelectOption1").style.display = "none";
@@ -2397,12 +2400,12 @@
 				var amplitude = Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]);
 				switch (validador3) {
 					case 1:
-						if (validador == 0 ) {
+						if (validador == 0) {
 							nuevaPosicionZ = zetaxd[s] + -xflex3 * u2[contadorglobal] * k;
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wn * t1) * (0.005 / (4 / 3 * Wna))) * -1;
 						} else {
-							nuevaPosicionZ = zetaxd[s] + (-xflex3 * u2[contadorglobal] * k) *1.15;
+							nuevaPosicionZ = zetaxd[s] + (-xflex3 * u2[contadorglobal] * k) * 0.9;
 						}
 						//Limita la posición de la barra al radio de la esfera
 						// if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
@@ -2416,7 +2419,7 @@
 						} else if (validador == 1) {
 							nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po * Math.sin(Wv[contadorglobal] * t1) * (0.005 / (4 / 3 * Wna))) * -1;
 						} else {
-							nuevaPosicionZ = zetaxd[s] +( -xflex3 * u2[contadorglobal] * k) *1.15;
+							nuevaPosicionZ = zetaxd[s] + (-xflex3 * u2[contadorglobal] * k) * 0.9;
 						}
 						//Limita la posición de la barra al radio de la esfera
 						// if (Math.abs(nuevaPosicionZ) + Math.abs(u2[contadorglobal]) > radioEsfera) {
@@ -2724,6 +2727,11 @@
 					console.log('I was closed by the timer')
 				}
 			})
+		}
+		function actualizarGeometriaDeCaja(ancho, alto, profundidad,v1,v2,v3) {
+			const nuevaGeometria = new THREE.BoxGeometry(ancho, alto, profundidad,v1,v2,v3);
+			cube.geometry.dispose(); // Libera la geometría anterior
+			cube.geometry = nuevaGeometria;
 		}
 		tippy('[data-tippy-content]'); //Cargar datos a la gráfica
 		var ejex = parseFloat(0)
