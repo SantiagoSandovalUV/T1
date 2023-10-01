@@ -705,18 +705,25 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo" aria-expanded="false"
 								aria-controls="flush-collapseTwo">
-								Load displacement and acceleration
+								Load displacement
 							</button>
 						</h2>
 						<div id="flush-collapseTwo" class="accordion-collapse collapse"
 							aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2">
 							<div class="accordion-body">
 								<div class="card-body">
+									<div class="col" style="width:auto">
+										<label class="form-label" style="font-size: 14px">Sampling frequency [Hz] <i
+												data-tippy-content="To activate the upload button, you must assign a sampling frequency "
+												class="ti ti-question-mark text-primary"></i></label>
+										<input type="text" class="form-control form-control-sm" name="SamplingF"
+											id="SamplingF" placeholder="">
+									</div>
 									<div class="card mt-2" class="btn-group">
 										<h4 style="text-align: center;"><span class="badge bg-primary">Load Data
 											</span></h4>
-										<input type="file" onclick="  SeleccionarDatos(),CargarExcel()"
-											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx">
+										<input type="file" onclick="SeleccionarDatos(),CargarExcel()"
+											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx" disabled>
 									</div>
 								</div>
 							</div>
@@ -1013,19 +1020,19 @@
 			document.getElementById("select_barra").style.display = "block";
 			switch (PanelID) {
 				case "flush-collapseTwoVl": // Libre Vibration
-					VibracionLibre_SM(), Duracion_SMVL()
+					VibracionLibre_SM(), Duracion_SMVL();
 					break;
 				case "flush-collapseOne": //Sinusoidal desplazamiento
-					CallFunction(), Duracion_SM()
+					CallFunction(), Duracion_SM();
 					break;
 				case "flush-collapseTwo55": //Barrido de Frec
-					CallFunction3(), BarridoVar()
+					CallFunction3(), BarridoVar();
 					break;
 				case "flush-collapseThree": // Sismos Pred
-					CallFunction2()
+					CallFunction2();
 					break;
 				case "flush-collapseTwo": //Load desplz
-					CallFunction4()
+					CallFunction4();
 					break;
 				// Agrega más casos según la cantidad de paneles que tengas
 				default:
@@ -1143,7 +1150,7 @@
 			}
 
 		}
-		//Función call Para Sismos
+		//Función call Para Sismos predefinidos
 		function CallFunction2() {
 			validador5 = false;
 			if (validador == 0) {
@@ -1158,11 +1165,11 @@
 				Escalar_box();
 			} else {
 				Dt_box(); Masa_boxPD();
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
+				ConsMDI(); Aceleracion_sismos();Newmark_sismos(), Movimiento_SenSismo();
 			}
 
 		}
-		//Función call Para Sismos
+		//Función call Para datos cargados
 		function CallFunction4() {
 			validador5 = false;
 			if (validador == 0) {
@@ -1175,7 +1182,7 @@
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			} else {
 				Dt_box(); Masa_boxPD();
-				contador(); contador2(); ConsMDI(); Movimiento_Sen();
+				ConsMDI();Aceleracion_sismos(); Newmark_sismos(), Movimiento_SenSismo();;
 			}
 
 		}
@@ -1279,7 +1286,7 @@
 		//Obtención de masa PD
 		function Masa_boxPD() {
 			m = parseFloat(document.getElementById('Mass_boxPD').value);
-			k = 3 * E * (Math.pow(0.03, 4)-Math.pow(0.027, 4)) / 12;
+			k = 3 * E * (Math.pow(0.03, 4) - Math.pow(0.027, 4)) / 12;
 			c = 2 * ZetaA * Math.sqrt(k / m) * m;
 			console.log(k, c, ZetaA, m)
 
@@ -2440,13 +2447,13 @@
 			contador6++;
 			var t = 0;
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
+				let nuevaPosicionZ;
 				const x = geometry.attributes.position.getY(i);
 				const xsin = 0.6 * Math.sin(2 * x / 3 + 1 / 2 * now);
 				const xflex = (x * x) / 1.5 - (x * x * x) / 3;
 				const xflex2 = (x * x) / 60 - (x * x * x) / 6;
 				const xcos = -1 * Math.cos(now * 3 / 8);
 				s = i;
-				let nuevaPosicionZ;
 				if (validador == 0) {
 					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1;
 				} else if (validador == 1) {
@@ -2454,9 +2461,9 @@
 				} else {
 					nuevaPosicionZ = zetaxd[s] + xflex2 * (u2[contadorglobal] * 2.16 / 3 + Po1 * (0.005 / k)) * -1 * 0.8;
 				}
+				geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
 			}
 			// geometry.computeVertexNormals();
-			geometry.attributes.position.setZ(s, nuevaPosicionZ);//SuperBien
 			geometry.attributes.position.needsUpdate = true;
 			renderer.render(scene, camera)
 			requestAnimationFrame(Movimiento_SenSismo)
@@ -2728,8 +2735,8 @@
 				}
 			})
 		}
-		function actualizarGeometriaDeCaja(ancho, alto, profundidad,v1,v2,v3) {
-			const nuevaGeometria = new THREE.BoxGeometry(ancho, alto, profundidad,v1,v2,v3);
+		function actualizarGeometriaDeCaja(ancho, alto, profundidad, v1, v2, v3) {
+			const nuevaGeometria = new THREE.BoxGeometry(ancho, alto, profundidad, v1, v2, v3);
 			cube.geometry.dispose(); // Libera la geometría anterior
 			cube.geometry = nuevaGeometria;
 		}
@@ -3138,6 +3145,17 @@
 		}
 		//cargar datos de excel
 		let selectfile;
+		let h; //Frecuencia de muestreo
+		//Activa-Desactiva el botón de carga 
+		document.getElementById('SamplingF').addEventListener('input', function () {
+			var CargarBtn = document.getElementById('Cargar');
+			if (this.value.length > 0) {
+				CargarBtn.disabled = false;
+				h = 1 / parseFloat(calcularResultado(document.getElementById('SamplingF').value));
+			} else {
+				CargarBtn.disabled = true;
+			}
+		});
 		function SeleccionarDatos() {
 			document.getElementById('Cargar').addEventListener("change", (event) => {
 				selectfile = event.target.files[0];
@@ -3145,8 +3163,46 @@
 		}
 		let Ac_Data;
 		let Desp_Data;
+		// Función para calcular la derivada numérica de un vector de datos
+		function calcularDerivadaNumerica(vector, h) {
+			const n = vector.length;
+			const derivada = [];
+
+			for (let i = 0; i < n; i++) {
+				if (i === 0) {
+					// Usamos una diferencia hacia adelante para el primer elemento
+					derivada.push((vector[i + 1] - vector[i]) / h);
+				} else if (i === n - 1) {
+					// Usamos una diferencia hacia atrás para el último elemento
+					derivada.push((vector[i] - vector[i - 1]) / h);
+				} else {
+					// Usamos una diferencia centrada para los elementos intermedios
+					derivada.push((vector[i + 1] - vector[i - 1]) / (2 * h));
+				}
+			}
+
+			return derivada;
+		}
+		// Función para calcular la segunda derivada numérica de un vector de datos
+		function calcularSegundaDerivadaNumerica(vector, h) {
+			const n = vector.length;
+			const segundaDerivada = [];
+
+			for (let i = 0; i < n; i++) {
+				if (i === 0) {
+				} else if (i === n - 1) {
+				} else {
+					// Usamos una diferencia centrada para los elementos intermedios
+					segundaDerivada.push((vector[i + 1] - 2 * vector[i] + vector[i - 1]) / (h * h));
+				}
+			}
+			// segundaDerivada.shift();
+			// segundaDerivada.pop();
+			return segundaDerivada;
+		}
 		function CargarExcel() {
 			validador2 = 1;
+			console.log("CargaE")
 			document.getElementById('Cargar').addEventListener("change", (event) => {
 				if (selectfile) {
 					let fileReader = new FileReader();
@@ -3160,12 +3216,12 @@
 
 						// Obtener solo las columnas deseadas (por ejemplo, columnas "A" y "B")
 						let columnA = "A";
-						let columnB = "B";
+						// let columnB = "B";
 
 						// Crear el rango de celdas que cubre ambas columnas
 						let range = XLSX.utils.decode_range(woorkBook.Sheets[sheet]['!ref']);
 						let columnRangeA = columnA + (range.s.r + 1) + ":" + columnA + (range.e.r + 1);
-						let columnRangeB = columnB + (range.s.r + 1) + ":" + columnB + (range.e.r + 1);
+						// let columnRangeB = columnB + (range.s.r + 1) + ":" + columnB + (range.e.r + 1);
 
 						// Obtener los datos de ambas columnas como arreglos
 						let columnDataA = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
@@ -3174,22 +3230,24 @@
 							defval: "" // Tratar celdas vacías como cadenas vacías
 						});
 
-						let columnDataB = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
-							header: 1,
-							range: columnRangeB,
-							defval: "" // Tratar celdas vacías como cadenas vacías
-						});
+						// let columnDataB = XLSX.utils.sheet_to_json(woorkBook.Sheets[sheet], {
+						// 	header: 1,
+						// 	range: columnRangeB,
+						// 	defval: "" // Tratar celdas vacías como cadenas vacías
+						// });
 
 						// Eliminar el primer elemento de cada array (encabezado)
 						columnDataA.shift();
-						columnDataB.shift();
+						// columnDataB.shift();
 
 						// Convertir los datos de las columnas a vectores numéricos
 						Desp_Data = columnDataA.map(row => parseFloat(row[0]));
-						Ac_Data = columnDataB.map(row => parseFloat(row[0]));
-
-						console.log("Vector numérico de la Columna A:", Ac_Data);
-						console.log("Vector numérico de la Columna B:", Desp_Data);
+						// Ac_Data = columnDataB.map(row => parseFloat(row[0]));
+						Ac_Data = calcularSegundaDerivadaNumerica(Desp_Data, h);
+						Desp_Data.shift();
+						Desp_Data.pop();
+						console.log("Vector numérico de desplazamiento CA:", Desp_Data);
+						console.log("Vector numérico de aceleración CB:", Ac_Data);
 					}
 				}
 			});
