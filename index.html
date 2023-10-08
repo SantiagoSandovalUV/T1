@@ -1865,10 +1865,10 @@
 							chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Seno[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 						} else {
 							if (validador2 == 2) {
-								chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 
 							} else {
-								chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+								chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
 							}
 						}
 					}
@@ -3142,10 +3142,10 @@
 						data1[i][4] = SensorMultpAG * Seno[i] + 50 * RuidoGr * Ruido_Gaus(0, 1);
 					} else {
 						if (validador2 == 2) {
-							data1[i][3] =  SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1);
+							data1[i][3] =  SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1);
 							data1[i][4] = SensorMultpAG * Ac_Data[i] + RuidoGr * 50 * Ruido_Gaus(0, 1)
 						} else {
-							data1[i][3] =  SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1);
+							data1[i][3] =  SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1);
 							data1[i][4] = SensorMultpAG * Ac_Data[i] + RuidoGr * 50 * Ruido_Gaus(0, 1)
 						}
 					}
