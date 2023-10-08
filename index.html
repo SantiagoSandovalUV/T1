@@ -1165,7 +1165,7 @@
 				Escalar_box();
 			} else {
 				Dt_box(); Masa_boxPD();
-				ConsMDI(); Aceleracion_sismos();Newmark_sismos(), Movimiento_SenSismo();
+				ConsMDI(); Aceleracion_sismos(); Newmark_sismos(), Movimiento_SenSismo();
 			}
 
 		}
@@ -1182,7 +1182,7 @@
 				Wna_boxF(); ConsWnZe(); Aceleracion_sismos(), Newmark_sismos(), Movimiento_SenSismo();
 			} else {
 				Dt_box(); Masa_boxPD();
-				ConsMDI();Aceleracion_sismos(); Newmark_sismos(), Movimiento_SenSismo();;
+				ConsMDI(); Aceleracion_sismos(); Newmark_sismos(), Movimiento_SenSismo();;
 			}
 
 		}
@@ -1852,6 +1852,7 @@
 					}
 					break;
 				case 3:
+					console.log('hola')
 					for (let i = 0; i < u2.length; i++) {
 						if (CheckAc == false) {
 							if (i <= 4) {
@@ -1860,7 +1861,16 @@
 								SensorMultpA = 0;
 							}
 						}
-						chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Seno[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						if (validador5 == true) {
+							chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Seno[i]) + RuidoMs * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+						} else {
+							if (validador2 == 2) {
+								chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+
+							} else {
+								chart.data.datasets[0].data.push({ y: SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1), x: Vtiempo2[i] })
+							}
+						}
 					}
 					break;
 				case 4:
@@ -3127,9 +3137,18 @@
 					data1[i] = new Array();
 					data1[i][1] = Vtiempo2[i];
 					data1[i][2] = SensorMultp * u2[i] + RuidoDR * Ruido_Gaus(0, 1);
-					data1[i][3] = SensorMultpA * (upp2[i] + Seno[i]) + 50 * RuidoMs * Ruido_Gaus(0, 1);
-					data1[i][4] = SensorMultpAG * Seno[i] + 50 * RuidoGr * Ruido_Gaus(0, 1);
-
+					if (validador5 == true) {
+						data1[i][3] = SensorMultpA * (upp2[i] + Seno[i]) + 50 * RuidoMs * Ruido_Gaus(0, 1);
+						data1[i][4] = SensorMultpAG * Seno[i] + 50 * RuidoGr * Ruido_Gaus(0, 1);
+					} else {
+						if (validador2 == 2) {
+							data1[i][3] =  SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1);
+							data1[i][4] = SensorMultpAG * Ac_Data[i] + RuidoGr * 50 * Ruido_Gaus(0, 1)
+						} else {
+							data1[i][3] =  SensorMultpA * (upp2[i] + Ac_Data[i]) + RuidoGr * 50 * Ruido_Gaus(0, 1);
+							data1[i][4] = SensorMultpAG * Ac_Data[i] + RuidoGr * 50 * Ruido_Gaus(0, 1)
+						}
+					}
 				}
 			}
 			LinearSweep.disabled = false;

@@ -89,7 +89,7 @@
 			requestAnimationFrame(animate);
 
 			const now = Date.now() / 300;
-			const deformAmount = 0.5 * Math.sin(now); // Ajusta la deformación según necesites
+			const deformAmount = 0.5*3 * Math.sin(now)/35; // Ajusta la deformación según necesites
 
 			for (let i = 0; i < geometry.attributes.position.count; i++) {
 				const vertex = new THREE.Vector3();
@@ -97,8 +97,9 @@
 
 				// Aplicar deformación asimétrica solo en el extremo superior
 				if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
-					const deformation = deformAmount * Math.pow(vertex.y - 1, 2) / 35; // Deformación asimétrica
+					const deformation = deformAmount * Math.pow(vertex.y - 1, 2); // Deformación asimétrica
 					vertex.z += deformation;
+					console.log(vertex.y)
 				}
 
 				geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
