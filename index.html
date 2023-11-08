@@ -111,7 +111,7 @@
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				Dynamic properties to the system
+				Dynamic properties of the system
 			</button>
 		</div>
 		<div class="collapse" id="collapseExample">
@@ -122,7 +122,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseOne1" aria-expanded="false"
 								aria-controls="flush-collapseOne1" id="modelock">
-								MCK Model
+								MCK model
 							</button>
 						</h2>
 						<div id="flush-collapseOne1" class="accordion-collapse collapse"
@@ -187,7 +187,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo1" aria-expanded="false"
 								aria-controls="flush-collapseTwo1" id="ZetaWn">
-								ωn and ζ Model
+								ωn and ζ model
 							</button>
 						</h2>
 						<div id="flush-collapseTwo1" class="accordion-collapse collapse"
@@ -225,7 +225,7 @@
 													id="zeta_box" placeholder="">
 											</div>
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Natural Frequency ωn
+												<label class="form-label" style="font-size: 14px"> Natural frequency ωn
 													[rad/s]<i data-tippy-content="System natural frequency"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm" name="Wna_box"
@@ -276,7 +276,7 @@
 										</form>
 										<form class="row g-3">
 											<div class="col" style="width:180px">
-												<label class="form-label" style="font-size: 14px"> Mass M [Kg ]<i
+												<label class="form-label" style="font-size: 14px"> Mass M [kg]<i
 														data-tippy-content="System mass"
 														class="ti ti-question-mark text-primary"></i></label>
 												<input type="text" class="form-control form-control-sm"
@@ -332,7 +332,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Top accelerometer
+								Accelerometer (Top)
 							</button>
 						</div>
 					</h2>
@@ -374,7 +374,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Displacement sensor
+								Displacement sensor (Top)
 							</button>
 						</div>
 					</h2>
@@ -415,7 +415,7 @@
 						<div style="text-align: center;">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Bottom accelerometer
+								Accelerometer (Bottom)
 							</button>
 						</div>
 					</h2>
@@ -494,7 +494,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwoVl" aria-expanded="false"
 								aria-controls="flush-collapseTwoVl">
-								Ug(t)=0 (Free Vibration)
+								Ug(t)=0 (Free vibration)
 							</button>
 						</h2>
 						<div id="flush-collapseTwoVl" class="accordion-collapse collapse"
@@ -600,7 +600,7 @@
 										<div class="form-check form-switch">
 											<input class="form-check-input" type="checkbox" role="switch"
 												id="LinearSweep" checked>
-											<label class="form-check-label" for="LinearSweep">Linear Sweep</label>
+											<label class="form-check-label" for="LinearSweep">Linear sweep</label>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -608,7 +608,7 @@
 											<input class="form-check-input" type="checkbox" role="switch"
 												id="LogarithmicSweep">
 											<label class="form-check-label text-nowrap"
-												for="LogarithmicSweep">Logarithmic Sweep</label>
+												for="LogarithmicSweep">Logarithmic sweep</label>
 										</div>
 									</div>
 								</form>
@@ -705,7 +705,7 @@
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 								data-bs-target="#flush-collapseTwo" aria-expanded="false"
 								aria-controls="flush-collapseTwo">
-								Load displacement
+								Upload base displacement
 							</button>
 						</h2>
 						<div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -720,7 +720,7 @@
 											id="SamplingF" placeholder="">
 									</div>
 									<div class="card mt-2" class="btn-group">
-										<h4 style="text-align: center;"><span class="badge bg-primary">Load Data
+										<h4 style="text-align: center;"><span class="badge bg-primary">Upload Data
 											</span></h4>
 										<input type="file" onclick="SeleccionarDatos(),CargarExcel()"
 											class="btn btn-primary" id="Cargar" accept=".xls,.xlsx" disabled>
@@ -1528,7 +1528,8 @@
 			// Ajusta el número aleatorio al rango deseado (5 a 20)
 			// var MasaA = numeroAleatorio * (20 - 5) + 5;
 			// Ajusta el número aleatorio al rango deseado (0.05 a 0.10)
-			ZetaA = numeroAleatorio * (0.08 - 0.05) + 0.05;
+			// ZetaA = numeroAleatorio * (0.08 - 0.05) + 0.05;
+			ZetaA = 0.05;
 			document.getElementById('ZetaWn').setAttribute('disabled', 'disabled')
 			document.getElementById('modelock').setAttribute('disabled', 'disabled');
 			document.getElementById('Locke1P').style.display = 'block';
@@ -2781,6 +2782,7 @@
 				plugins: {
 					legend: {
 						position: 'top',
+						display: false,
 					},
 				},
 				scales: {
