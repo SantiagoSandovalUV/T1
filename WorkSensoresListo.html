@@ -135,97 +135,173 @@
       <select id="select_barra" class="form-select" aria-label="Default select example" style="display: none;"
         onchange="ResponseEditor(),LoadCharDataOnChange()">
         <option value="Despl" style="display: none" selected>Select Response</option>
-        <option value="Despl" style="display: none">Displacement [m]</option>
-        <option value="Vel" style="display: none">Velocity [m/s]</option>
-        <option value="Acel" style="display: none">Acceleration [m/s^2]</option>
-        <option value="RespEx" style="display: none">Acceleration</option>
+				<option value="Despl" style="display: none">Displacement [m]</option>
+				<option value="Vel" style="display: none">Velocity [m/s]</option>
+				<option value="Acel" style="display: none">Mass acceleration [m/s^2]</option>
+				<option value="RespEx" style="display: none">Ground acceleration [m/s^2]</option>
       </select>
     </div>
     <div class="card mb-2" style="width: 100%;">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-        Sensor configuration
-      </button>
-    </div>
-    <div class="collapse" id="collapseExample3">
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                Accelerometers
-              </button>
-            </div>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: center;">
-              <button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
-              <button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remove</button>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                Displacement sensor
-              </button>
-            </div>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: center;">
-              <button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
-              <button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                Add Noise to the Signal and Amplitude
-              </button>
-            </div>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: center;">
-              <button type="button" onclick="Escalar_GA(),Alerta_RuidoA()" class="btn btn-primary">Assign</button>
-              <button type="button" onclick="Escalar_GR(),Alerta_RuidoR()" class="btn btn-primary">Remove</button>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingFour">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                Signal Resampling
-              </button>
-            </div>
-          </h2>
-          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: left;">
-              <form class="row g-3">
-                <div class="col" style="width: 90px;">
-                  <label class="form-label" style="font-size: 14px">Target Frequency [Hz]<i
-                      data-tippy-content="Target Frequency, less than 50 Hz"
-                      class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="targetFrequency" id="targetFrequency"
-                    placeholder="">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+				Sensor configuration
+			</button>
+		</div>
+		<div class="collapse" id="collapseExample3">
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+								Accelerometer (Top)
+							</button>
+						</div>
+					</h2>
+					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveSensor()"
+										class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="MassCheck">
+												<label class="form-check-label" for="MassCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAM"
+												id="NoiseAM" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingTwo">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+								Displacement sensor (Top)
+							</button>
+						</div>
+					</h2>
+					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="RelativeCheck">
+												<label class="form-check-label" for="RelativeCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAR"
+												id="NoiseAR" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingThree">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+								Accelerometer (Bottom)
+							</button>
+						</div>
+					</h2>
+					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: left;">
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadSensorG()"
+										class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveSensorG()"
+										class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="GroundCheck">
+												<label class="form-check-label" for="GroundCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAG"
+												id="NoiseAG" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingFour">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+								Signal Resampling
+							</button>
+						</div>
+					</h2>
+					<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: left;">
+							<form class="row g-3">
+								<div class="col" style="width: 90px;">
+									<label class="form-label" style="font-size: 14px">Resampling Frequency [Hz]<i
+											data-tippy-content="ResamplingFrequency, should be less than 50 Hz "
+											class="ti ti-question-mark text-primary"></i></label>
+									<input type="text" class="form-control form-control-sm" name="targetFrequency"
+										id="targetFrequency" placeholder="">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     <div class="card mb-2" style="width: 100%;">
       <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -2020,6 +2096,7 @@
           if (xx == false) {
             let Santiago2 = U1.mat[0][contador1] + Desp_Data[contador1];
             //Sensores
+            AcelerometroG.position.z = Desp_Data[contador1];
             Laser1.position.z = Santiago2;
             Laser2.position.z = U1.mat[1][contador1] + Santiago2;
             Acelerometro1.position.z = 0 + Santiago2;
@@ -2043,8 +2120,9 @@
             contador1++;
             contadorglobal++;
           } else {
-            //Sensores
             let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
+            //Sensores
+            AcelerometroG.position.x = 5 + Desp_Data[contador1];
             Laser1.position.x = 5 + Santiago2;
             Laser2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
             Acelerometro1.position.x = 5 + Santiago2;
@@ -2069,13 +2147,6 @@
             // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
             // chart.update(); chart2.update();
             contadorglobal++;
-          }
-          if (contador1 == U1.mat[0].length - 1) {
-            clearInterval(DeforTim);
-            contador1 = 0;
-            contadorglobal = 0;
-            LinearSweep.disabled = false;
-            LogarithmicSweep.disabled = false;
           }
           //Donde sucede la magia, es decir donde grafico 
           switch (EditResponse) {
@@ -2119,14 +2190,23 @@
                 chart.update();
                 chart2.update();
               }
-              chart.data.datasets[0].data.push({ y: SensorMultpAG * U1.mat[0][contadorglobal], x: t[contadorglobal] })
-              chart2.data.datasets[0].data.push({ y: SensorMultpAG * U1.mat[1][contadorglobal], x: t[contadorglobal] })
+              chart.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal], x: t[contadorglobal] })
+              chart2.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal], x: t[contadorglobal] })
               break;
           }
           chart.update();
-              chart2.update();
+          chart2.update();
+          if (contador1 == U1.mat[0].length - 2) {
+            clearInterval(DeforTim);
+            contador1 = 0;
+            contadorglobal = 0;
+            LinearSweep.disabled = false;
+            LogarithmicSweep.disabled = false;
+            clearInterval(DeforTim)
+            LoadCharData();
+          }
         }
-        DeforTim = setInterval(Deformar_1, 50)
+        DeforTim = setInterval(Deformar_1, 50);
       }
       // Deformar(); animate2();
       var hola;
@@ -2350,7 +2430,7 @@
         scene.remove(Obj);
       }
       //Sensores
-      var SensorB = Barra1(); // Acelerometro en la base
+      var AcelerometroG = Barra1(5,-0.8, 0); // Acelerometro en la base
       var Laser1 = Cilindro(5, 1.18, -1, - Math.PI / 2, - Math.PI); //Laser1
       var Laser2 = Cilindro(5, 3.18, -1, - Math.PI / 2, - Math.PI); //Laser2
       var Acelerometro1 = Barra1(5, 1.18, 0); //Acelerometro en en GDL
@@ -2460,7 +2540,7 @@
 
       }
       function LoadSensorG() {
-        Mostrar(SensorB); //Sensor en el GDL
+        Mostrar(AcelerometroG); //Sensor en el GDL
         SensorMultpAG = 1;
         CheckAcG = true;
         toggleOptions(4, CheckAcG)
@@ -2469,7 +2549,7 @@
 
       }
       function RemoveSensorG() {
-        Remover(SensorB);
+        Remover(AcelerometroG);
         CheckAcG = false;
         toggleOptions(4, CheckAcG)
         // toggleOptions(0,true)
@@ -2530,11 +2610,11 @@
       function LoadCharData() { //Función para cambiar la respuesta que se gráfica
         console.log('Cargar toda la gráfica')
         chart.data.datasets[0].data.length = 0;
-        chart.data.datasets[1].data.length = 0;
+        chart2.data.datasets[0].data.length = 0;
         LoadCharDataVer = false;
         switch (EditResponse) {
           case 1:
-            for (let i = 0; i < u2.length; i++) {
+            for (let i = 0; i < U1.mat[0].length; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -2562,7 +2642,7 @@
             break;
           case 3:
             console.log('hola')
-            for (let i = 0; i < u2.length; i++) {
+            for (let i = 0; i < U1.mat[0].length; i++) {
               if (CheckAc == false) {
                 if (i <= 4) {
                   SensorMultpA = 10;
@@ -2575,7 +2655,7 @@
             }
             break;
           case 4:
-            for (let i = 0; i < u2.length; i++) {
+            for (let i = 0; i < U1.mat[0].length; i++) {
               if (CheckAcG == false) {
                 if (i <= 4) {
                   SensorMultpAG = 10;
@@ -2583,8 +2663,8 @@
                   SensorMultpAG = 0;
                 }
               }
-              chart.data.datasets[0].data.push({ y: SensorMultpAG * U1.mat[0][i], x: t[i] })
-              chart2.data.datasets[0].data.push({ y: SensorMultpAG * U1.mat[1][i], x: t[i] })
+              chart.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i], x: t[i] })
+              chart2.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i], x: t[i] })
             }
             break;
         }
