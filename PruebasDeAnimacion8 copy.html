@@ -98,7 +98,7 @@
 		scene.add(floor);
 		group.add(cube);
 		floor.add(group);
-		cube.position.set(0.5,1,0)
+		cube.position.set(0.5, 1, 0)
 
 
 
@@ -116,17 +116,18 @@
 				const vertex = new THREE.Vector3();
 				vertex.fromBufferAttribute(geometry.attributes.position, i);
 
-				// Aplicar deformación asimétrica solo en el extremo superior
+				// Aplicar deformación diagonal
 				if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
-					const deformation = deformAmount * Math.pow(vertex.y - 1, 2); // Deformación asimétrica
-					vertex.z += deformation;
+					const deformationX = deformAmount * Math.pow(vertex.y - 1, 2); // Deformación en el eje x
+					const deformationZ = deformAmount * Math.pow(vertex.y - 1, 2); // Deformación en el eje z
+
+					vertex.x += deformationX;
+					vertex.z += deformationZ;
 				}
 
-				floor.rotation.y = deformAmount*Math.PI/2;
-				floor.position.x = deformAmount*5;
-				// cube.rotation.z = Math.PI;
-				var difeP = floor.position.x-cube.position.x;
-				// console.log(difeP)
+				floor.rotation.y = deformAmount * Math.PI / 2;
+				floor.position.x = deformAmount * 5;
+
 				geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
 			}
 

@@ -65,80 +65,75 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@yr/catmull-rom-spline@1.0.3/index.js"></script>
 	<script>
-		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		const renderer = new THREE.WebGLRenderer();
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.appendChild(renderer.domElement);
-
-		const geometry = new THREE.BoxGeometry(0.2, 2, 0.2, 1, 30, 1);
-		const material = new THREE.MeshBasicMaterial({
-			color: 0x00ff00, // Color verde
-		});
-		const cube = new THREE.Mesh(geometry, material);
-		cube.rotation.y = -Math.PI / 2;
-		cube.rotation.x = -Math.PI;
-		scene.add(cube);
-
-		camera.position.set(0, 0, 3);
-
-		// Crear geometría de suelo
-		const floorGeometry = new THREE.BoxGeometry(2, 0.1, 2); // Ancho, alto, profundidad
-
-		// Crear material para el suelo (puedes ajustar el color según tus preferencias)
-		const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x888888 });
-
-		// Crear malla para el suelo
-		const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-
-		// Posicionar el suelo debajo de la barra
-		floor.position.set(0, -1.1, 0); // Ajusta la posición en el eje Y según la ubicación deseada
-		// Añadir el suelo a la escena
-		const group = new THREE.Group();
-		scene.add(floor);
-		group.add(cube);
-		floor.add(group);
-		cube.position.set(0.5,1,0)
+		// Crear una escena, una cámara y un renderizador
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+// Crear controles de órbita
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // Suavizar el movimiento de los controles
+controls.dampingFactor = 0.25;
+controls.enableZoom = true; // Permitir el zoom
 
 
+// Crear una esfera exterior grande
+const geometryExterior = new THREE.SphereGeometry(5, 32, 32);
+const materialExterior = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.5 }); // Esfera roja semitransparente para la esfera exterior
+const esferaExterior = new THREE.Mesh(geometryExterior, materialExterior);
+esferaExterior.userData.id = 'esferaExterior'; // Asignar un identificador único a la esfera exterior
+scene.add(esferaExterior);
+
+// Crear una esfera interior pequeña
+const geometryInterior = new THREE.SphereGeometry(2, 32, 32);
+const materialInterior = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Esfera verde para la esfera interior
+const esferaInterior = new THREE.Mesh(geometryInterior, materialInterior);
+esferaInterior.userData.id = 'esferaInterior'; // Asignar un identificador único a la esfera interior
+esferaInterior.position.set(0, 0, -1); // Colocar la esfera interior dentro de la esfera exterior
+scene.add(esferaInterior);
+
+// Posicionar y orientar la cámara
+camera.position.z = 10;
+
+// Función de renderizado
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Realizar raycasting para la selección
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// Supongamos que tienes una función que maneja los eventos del mouse y actualiza las coordenadas del mouse
+function onMouseMove(event) {
+    // Actualizar las coordenadas del mouse
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Actualizar el rayo con las coordenadas del mouse
+    raycaster.setFromCamera(mouse, camera);
+
+    // Realizar la intersección con los objetos en la escena
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    // Verificar si el rayo intersecta con la esfera interior
+    const objetoSeleccionado = intersects.find(intersect => intersect.object.userData.id === 'esferaInterior');
+
+    if (objetoSeleccionado) {
+        // Aquí puedes realizar acciones con la esfera interior seleccionada
+        console.log('Has seleccionado la esfera interior');
+    }
+}
+
+// Agregar un event listener para el evento de movimiento del mouse
+document.addEventListener('mousemove', onMouseMove, false);
 
 
-		const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		controls.update();
-
-		function animate() {
-			requestAnimationFrame(animate);
-
-			const now = Date.now() / 300;
-			const deformAmount = 0.5 * 3 * Math.sin(now) / 35; // Ajusta la deformación según necesites
-
-			for (let i = 0; i < geometry.attributes.position.count; i++) {
-				const vertex = new THREE.Vector3();
-				vertex.fromBufferAttribute(geometry.attributes.position, i);
-
-				// Aplicar deformación asimétrica solo en el extremo superior
-				if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
-					const deformation = deformAmount * Math.pow(vertex.y - 1, 2); // Deformación asimétrica
-					vertex.z += deformation;
-				}
-
-				floor.rotation.y = deformAmount*Math.PI/2;
-				floor.position.x = deformAmount*5;
-				// cube.rotation.z = Math.PI;
-				var difeP = floor.position.x-cube.position.x;
-				// console.log(difeP)
-				geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-			}
-
-			geometry.attributes.position.needsUpdate = true;
-			floor.geometry.attributes.position.needsUpdate = true;
-
-
-			renderer.render(scene, camera);
-		}
-
-		animate();
-
+		
 	</script>
 </body>
 

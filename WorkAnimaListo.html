@@ -122,13 +122,13 @@
     <div class="card mb-2" style="width: 100%;">
       <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
       <div class="card-body">
-        <canvas id="myChart" style="width: 200px;height: 68px;"></canvas>
+        <canvas id="myChart2" style="width: 200px;height: 68px;"></canvas>
       </div>
     </div>
     <div class="card mb-2" style="width: 100%;">
       <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
       <div class="card-body">
-        <canvas id="myChart2" style="width: 200px;height: 68px;"></canvas>
+        <canvas id="myChart" style="width: 200px;height: 68px;"></canvas>
       </div>
     </div>
     <div class="card mb-2" style="width: 100%;">
@@ -334,7 +334,7 @@
 												</div> -->
                         <div>
                           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                            class="bi bi-lock-fill" viewBox="0 0 20 20" style="display: none;" id="Locke">
+                            class="bi bi-lock-fill" viewBox="0 0 20 20" style="visibility: hidden;" id="Locke">
                             <path
                               d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
                           </svg>
@@ -956,6 +956,12 @@
       });
       //Función para inciar
       function StarBaseMotion(PanelID) {
+        clearInterval(DeforTim);
+        cancelAnimationFrame(Animar);
+        chart.data.datasets[0].data.length = 0;
+        chart2.data.datasets[0].data.length = 0;
+        chart.update();
+        chart2.update();
         document.getElementById("select_barra").style.display = "block";
         switch (PanelID) {
           case "flush-collapseTwoVl": // Libre Vibration
@@ -979,6 +985,7 @@
             alert("You have not selected any movement in the base");
             break;
         }
+        DetenerAnimacion = false;
         SensorCheckerA();
         SensorCheckerAG();
         SensorCheckerL();
@@ -1476,6 +1483,7 @@
         var gamma = 1 / 2;
         var betta = 1 / 6;
         const [PHI, w, C] = modos(K, M, zeta);
+        console.log(C)
         with (Matrix) {
           //Crear condiciones inciales de velocidad y desplazamiento
           var qno = Zero(PHI.mat.length, 1);
@@ -1825,7 +1833,7 @@
         const materialF = new THREE.MeshPhongMaterial({
           // color: 0xF08080,
           // color: 0xB56618,
-          color: 0xB55018,
+          color: 0x166A8F,
           flatShading: true
           // wireframe: true, //Mostrar los segmentos con hilos
 
@@ -1901,8 +1909,8 @@
       //Geometría Portico 3D
       function Portico3D() {
         //Losas
-        var L1 = Rec_EsL(3.5, 0.2, 3.5, 5, 3, 0);
-        var L2 = Rec_EsL(3.5, 0.2, 3.5, 5, 1, 0);
+        var L1 = Rec_EsL(4, 0.2, 4, 5, 3, 0);
+        var L2 = Rec_EsL(4, 0.2, 4, 5, 1, 0);
         //Columnas
         var C1 = Rec_Es(0.3, 2, 0.3, 3.5, 0, 1.5);
         var C2 = Rec_Es(0.3, 2, 0.3, 3.5, 2, 1.5);
@@ -2109,6 +2117,10 @@
             PrG[i][0].rotation.y = Math.PI;
           }
 
+        }else{
+          for (let i = 0; i < PrG.length; i++) {
+            PrG[i][0].rotation.y = -Math.PI/2;
+          }
         }
         function Deformar_1() {
           if (xx == false) {
@@ -2135,8 +2147,6 @@
             PrG[5][0].position.z = 1.5 + Desp_Data[contador1];
             PrG[6][0].position.z = -1.5 + Desp_Data[contador1];
             PrG[9][0].position.z = -1.5 + Desp_Data[contador1];
-            contador1++;
-            contadorglobal++;
           } else {
             let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
             //Sensores
@@ -2160,11 +2170,9 @@
             PrG[5][0].position.x = 6.5 + Desp_Data[contador1];
             PrG[6][0].position.x = 3.5 + Desp_Data[contador1];
             PrG[9][0].position.x = 6.5 + Desp_Data[contador1];
-            contador1++;
             // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
             // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
             // chart.update(); chart2.update();
-            contadorglobal++;
           }
           //Donde sucede la magia, es decir donde grafico 
           switch (EditResponse) {
@@ -2214,13 +2222,14 @@
           }
           chart.update();
           chart2.update();
+          contador1++;
+          contadorglobal++;
           if (contador1 == U1.mat[0].length - 2) {
             clearInterval(DeforTim);
             contador1 = 0;
             contadorglobal = 0;
             LinearSweep.disabled = false;
             LogarithmicSweep.disabled = false;
-            clearInterval(DeforTim)
             LoadCharData();
           }
           if (contador1 == U1.mat[0].length - 10) {
@@ -2233,13 +2242,15 @@
       }
       // Deformar(); animate2();
       var hola;
-      var tamal = 0;
+      const vertexS = new Array();
+      var Animar;
+      var xflex1;
+      var xflex2;
+      for (let i = 0; i < PrG[2][0].geometry.attributes.position.count; i++) {
+        vertexS[i] = PrG[5][0].geometry.attributes.position.getZ(i);
+      }
+      const Kr = 0.5; //Constante de rigidez
       function animate2() {
-        tamal = tamal + 1;
-        const vertexS = new Array();
-        for (let i = 0; i < PrG[2][0].geometry.attributes.position.count; i++) {
-          vertexS[i] = PrG[5][0].geometry.attributes.position.getZ(i);
-        }
         for (let i = 0; i < PrG[2][0].geometry.attributes.position.count; i++) {
           const vertex = new THREE.Vector3();
           const vertex2 = new THREE.Vector3();
@@ -2253,9 +2264,20 @@
           // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
           // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1])
           // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
-          const xflex1 = (5000 * x * x) / (2 * Kani.mat[1][1]) //Rigidez arriba
-          const xflex2 = (5 * x1 * x1) / (2 * Kani.mat[0][0]);
 
+          //Lo mejor
+          // const xflex1 = (4100 * x * x) / (2 * Kani.mat[1][1]) //Rigidez arriba
+          // const xflex2 = (300 * x1 * x1) / (2 * Kani.mat[0][0]);
+
+          //Intento 
+          if (xx == false) {
+             xflex1 = (-Kr * x * x);
+             xflex2 = (-Kr * x1 * x1);
+
+          } else {
+             xflex1 = (Kr * x * x);
+             xflex2 = (Kr * x1 * x1);
+          }
           // Aplicar deformación asimétrica solo en el extremo superior
           if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
             // const deformation1 = xflex1 * U1.mat[1][contadorglobal] * 45; // Deformación asimétrica, arriba
@@ -2276,7 +2298,7 @@
           }
 
 
-          //
+          //Arriba
           PrG[7][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
           PrG[3][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
           PrG[4][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
@@ -2292,7 +2314,7 @@
           PrG[j][0].geometry.attributes.position.needsUpdate = true;
         }
         renderer.render(scene, camera);
-        var Animar = requestAnimationFrame(animate2);
+        Animar = requestAnimationFrame(animate2);
         if (DetenerAnimacion == true) {
           console.log('Hola')
           cancelAnimationFrame(Animar);
@@ -2350,7 +2372,7 @@
               // min: -2,
               title: {
                 display: true,
-                text: 'y'
+                text: 'U1'
 
               }
             }
@@ -2381,7 +2403,7 @@
         },
         options: {
           animation: {
-            duration: 0
+            duration: 10
           },
           interaction: {
             intersect: false
@@ -2409,7 +2431,7 @@
               // min: -2,
               title: {
                 display: true,
-                text: 'y'
+                text: 'U2'
 
               }
             }

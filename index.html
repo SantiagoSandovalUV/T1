@@ -1023,12 +1023,15 @@
 			document.getElementById("select_barra").style.display = "block";
 			switch (PanelID) {
 				case "flush-collapseTwoVl": // Libre Vibration
+				validador2=1;
 					VibracionLibre_SM(), Duracion_SMVL();
 					break;
 				case "flush-collapseOne": //Sinusoidal desplazamiento
+				validador2=1;
 					CallFunction(), Duracion_SM();
 					break;
 				case "flush-collapseTwo55": //Barrido de Frec
+				validador2=1;
 					CallFunction3(), BarridoVar();
 					break;
 				case "flush-collapseThree": // Sismos Pred
@@ -1223,7 +1226,9 @@
 		}
 		function Dt_box() {
 			// dt = parseFloat(document.getElementById('Dt_box1').value);
-			dt = 0.02;
+			if (validador2!==2){
+				dt = 0.02;
+			}			
 			iniciar2 = 1;
 			validador4 = 1;
 			if (validador4 > 0) {
@@ -1259,6 +1264,9 @@
 		}
 		function Dt2_boxF() {
 			// dt = parseFloat(document.getElementById('dt_box2').value);
+			if (validador2!==2){
+				dt = 0.02;
+			}
 			dt = 0.02;
 			iniciar2 = 1;
 			validador4 = 1;

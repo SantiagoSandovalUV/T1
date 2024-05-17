@@ -122,13 +122,13 @@
     <div class="card mb-2" style="width: 100%;">
       <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
       <div class="card-body">
-        <canvas id="myChart" style="width: 200px;height: 68px;"></canvas>
+        <canvas id="myChart2" style="width: 200px;height: 68px;"></canvas>
       </div>
     </div>
     <div class="card mb-2" style="width: 100%;">
       <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
       <div class="card-body">
-        <canvas id="myChart2" style="width: 200px;height: 68px;"></canvas>
+        <canvas id="myChart" style="width: 200px;height: 68px;"></canvas>
       </div>
     </div>
     <div class="card mb-2" style="width: 100%;">
@@ -321,74 +321,96 @@
               <div class="accordion-body">
                 <div class="card mt-2" style="width: 100%;" id="mck">
                   <div class="card-body">
-                    <form class="row g-2">
-                      <form class="col-2">
-                        <!-- <div class="form-check form-switch">
-													<input class="form-check-input" type="checkbox"
-														id="flexSwitchCheckChecked" unchecked="unchecked"
-														disabled="disabled">
-													<label class="form-check-label"
-														for="flexSwitchCheckChecked"></label><i data-tippy-content="Cuando este elemento se encuentra activo 
-														no es posible acceder al modelo Wn y ζ, si desea desactivarlo debe vaciar todas las cajas de texto"
-														class="ti ti-question-mark text-primary"></i>
-												</div> -->
-                        <div>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                            class="bi bi-lock-fill" viewBox="0 0 20 20" style="display: none;" id="Locke">
-                            <path
-                              d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                          </svg>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                            class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLocke">
-                            <path
-                              d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
-                          </svg>
-                          <i data-tippy-content="When this element is locked, it is not possible to access the Wn and ζ models. If you want to deactivate it, you must clear all the text boxes."
-                            class="ti ti-question-mark text-primary"></i>
+                    <div class="card mt-2" style="width: 100%;" id="Losas">
+                      <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
+                        <h3 style="margin-right: 10px;">Slab</h3>
+                        <form class="row g-2">
+                          <form class="col-2">
+                            <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                class="bi bi-lock-fill" viewBox="0 0 20 20" style="visibility: hidden;" id="Locke">
+                                <path
+                                  d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                              </svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLocke">
+                                <path
+                                  d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+                              </svg>
+                              <i data-tippy-content="When this element is locked, it is not possible to access the Wn and ζ models. If you want to deactivate it, you must clear all the text boxes."
+                                class="ti ti-question-mark text-primary"></i>
+                            </div>
+                          </form>
+                        </form>
+                      </div>
+                      <form class="row g-1">
+                        <div class="col" style="width:10px; margin: 10px 20px">
+                          <label class="form-label" style="font-size: 14px">Masa M [Kg] <i
+                              data-tippy-content="Sytem's Mass" class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="Mass_box1" id="Mass_box1"
+                            placeholder="">
                         </div>
                       </form>
-                    </form>
-                    <form class="row g-10">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px; white-space:nowrap">Modulus of elasticity E
-                          [MPa] <i data-tippy-content="System's modulus of elasticity"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="ME_box1" id="ME_box1"
-                          placeholder="">
+                      <form class="row g-1">
+                        <div class="col" style="width:180px; margin: 10px 20px">
+                          <label class="form-label" style="font-size: 14px; white-space:nowrap"> Dimensionless damping
+                            ratio ζ [ ]<i data-tippy-content="System's Dimensionless Damping Ratio"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="Damping_box" id="Damping_box"
+                            placeholder="">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card mt-2" style="width: 100%;">
+                      <form class="row g-10">
+                        <div class="col" style="width:180px; margin: 10px 20px">
+                          <label class="form-label" style="font-size: 14px; white-space:nowrap">Modulus of elasticity E
+                            [MPa] <i data-tippy-content="System's modulus of elasticity"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="ME_box1" id="ME_box1"
+                            placeholder="">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card mt-2" style="width: 100%;" id="Columnas">
+                      <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
+                        <h3 style="margin-right: 10px;">Columns</h3>
+                        <form class="row g-2">
+                          <form class="col-2">
+                            <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                class="bi bi-lock-fill" viewBox="0 0 20 20"
+                                style="visibility: hidden;; width: 35px; height: 35px;" id="LockeCo">
+                                <path
+                                  d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                              </svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLockeCo">
+                                <path
+                                  d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+                              </svg>
+                              <i data-tippy-content="When this element is locked, it is not possible to access the Wn and ζ models. If you want to deactivate it, you must clear all the text boxes."
+                                class="ti ti-question-mark text-primary"></i>
+                            </div>
+                          </form>
+                        </form>
                       </div>
-                    </form>
-                    <form class="row g-1">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px">Masa M [Kg] <i
-                            data-tippy-content="Sytem's Mass" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="Mass_box1" id="Mass_box1"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-1">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px; white-space:nowrap"> Cross section base
-                          b [m] <i data-tippy-content="System Stiffness"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="b_box1" id="b_box1"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px; white-space:nowrap">Cross section height h
-                          [m]<i data-tippy-content="Sytem's I" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="h_box1" id="h_box1"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-1">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px; white-space:nowrap"> Dimensionless damping
-                          ratio ζ [ ]<i data-tippy-content="System's Dimensionless Damping Ratio"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="Damping_box" id="Damping_box"
-                          placeholder="">
-                      </div>
-                    </form>
+                      <form class="row g-1">
+                        <div class="col" style="width:180px; margin: 10px 20px">
+                          <label class="form-label" style="font-size: 14px; white-space:nowrap"> Cross section base
+                            b [m] <i data-tippy-content="System Stiffness"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="b_box1" id="b_box1"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px; margin: 10px 20px">
+                          <label class="form-label" style="font-size: 14px; white-space:nowrap">Cross section height h
+                            [m]<i data-tippy-content="Sytem's I" class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="h_box1" id="h_box1"
+                            placeholder="">
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -447,6 +469,21 @@
                         <label class="form-label" style="font-size:14px">Velocity upo (2) [m/s]<i
                             data-tippy-content="Initial velocity" class="ti ti-question-mark text-primary"></i></label>
                         <input type="text" class="form-control form-control-sm" name="VelInicial2" id="VelInicial2"
+                          placeholder="">
+                      </div>
+                    </form>
+                    <form class="row g-2">
+                      <div class="col" style="width:180px; display: none;" id="AmplUp3">
+                        <label class="form-label" style="font-size:14px">Amplitude uo (3) [m]<i
+                            data-tippy-content="Initial displacement"
+                            class="ti ti-question-mark text-primary"></i></label>
+                        <input type="text" class="form-control form-control-sm" name="DespInicial3" id="DespInicial3"
+                          placeholder="">
+                      </div>
+                      <div class="col" style="width:180px; display: none;" id="VelUp3">
+                        <label class="form-label" style="font-size:14px">Velocity upo (3) [m/s]<i
+                            data-tippy-content="Initial velocity" class="ti ti-question-mark text-primary"></i></label>
+                        <input type="text" class="form-control form-control-sm" name="VelInicial3" id="VelInicial3"
                           placeholder="">
                       </div>
                     </form>
@@ -871,7 +908,8 @@
       var Kani = new Array();
 
       DatosInciales();
-      var [PrG] = Portico3D(); // Cargar el pórtico
+      var [PrG] = Portico3D(); // Cargar el pórtico 2 pisos
+      var [PrG3P] = Portico3D3P(); // Cargar el pórtico 3 pisos
       //  
 
       //Indentificar qué Base motion será usado
@@ -956,6 +994,12 @@
       });
       //Función para inciar
       function StarBaseMotion(PanelID) {
+        clearInterval(DeforTim);
+        cancelAnimationFrame(Animar);
+        chart.data.datasets[0].data.length = 0;
+        chart2.data.datasets[0].data.length = 0;
+        chart.update();
+        chart2.update();
         document.getElementById("select_barra").style.display = "block";
         switch (PanelID) {
           case "flush-collapseTwoVl": // Libre Vibration
@@ -979,18 +1023,29 @@
             alert("You have not selected any movement in the base");
             break;
         }
+        DetenerAnimacion = false;
         SensorCheckerA();
         SensorCheckerAG();
         SensorCheckerL();
         with (Matrix) { //Código
           // var K_c = scale(create([[2, -1, 0, 0, 0], [-1, 2, -1, 0, 0], [0, -1, 2, -1, 0], [0, 0, -1, 2, -1], [0, 0, 0, -1, 1]]), 100);
           // var M = scale(create([[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, 0, 0, 0, 1]]), 0.259);
-          var [M, K_c] = MasaMatriz();
+          if (Porti2P == true) {
+            var [M, K_c] = MasaMatriz(PrG);
+            var zeta = transpose(scale(create([[1], [1]]), 5 / 100));
+            pa = create([[0], [0]]);
+            po = create([[1], [1]]);
+          } else {
+            var [M, K_c] = MasaMatriz(PrG3P);
+            var zeta = transpose(scale(create([[1], [1], [1]]), 5 / 100));
+            pa = create([[0], [0], [0]]);
+            po = create([[1], [1], [1]]);
+          }
+          console.log(uo,upo)
           // var po = create([[1], [1]]);
           // var pa = create([[0], [0]]);
           // var uo = create([[0], [0]]);
           // var upo = create([[0], [0]]);
-          var zeta = transpose(scale(create([[1], [1]]), 5 / 100))
           var dt = 0.02;
         }
         const [q1, qp1, Mne, Cne, Kne, PHI, w, h] = Newmark_Multiples(M, K_c, po, uo, upo, dt2, pa, zeta);
@@ -999,7 +1054,7 @@
         for (let i = 1; i < U1.mat[0].length - 1; i++) {
           t[i] = t[i - 1] + 0.02;
         }
-        Deformar(); animate2();
+        animate2();Deformar();
         // if (NoiseAR.value.length > 0) {
         //   RuidoDR = parseFloat(document.getElementById('NoiseAR').value);
         // }
@@ -1011,9 +1066,16 @@
         // }
         LinearSweep.disabled = true;
         LogarithmicSweep.disabled = true;
+        SX.disabled = true;
+        SY.disabled = true;
         // document.getElementById('Materiales').setAttribute('disabled', 'disabled')
-        uo = Matrix.create([[0], [0]]);
-        upo = Matrix.create([[0], [0]]);
+        if (Porti2P == true) {
+          uo = Matrix.create([[0], [0]]);
+          upo = Matrix.create([[0], [0]]);
+        } else {
+          uo = Matrix.create([[0], [0], [0]]);
+          upo = Matrix.create([[0], [0], [0]]);
+        }
 
       }
       // Función para realizar operaciones dentro de las cajas de texto
@@ -1103,12 +1165,29 @@
       //Vibración libre
 
       function VibracionLibre_SM() {
-        //Desplazamientos
-        uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
-        uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
-        //Velocidades
-        upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
-        upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
+
+        if (Porti2P == true) {
+          uo = Matrix.create([[0], [0]]);
+          upo = Matrix.create([[0], [0]]);
+          //Desplazamientos
+          uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
+          uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
+          //Velocidades
+          upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
+          upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
+        } else {
+          uo = Matrix.create([[0], [0], [0]]);
+          upo = Matrix.create([[0], [0], [0]]);
+          //Desplazamientos
+          uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
+          uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
+          uo.mat[2] = [parseFloat(calcularResultado(document.getElementById('DespInicial3').value))];
+          //Velocidades
+          upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
+          upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
+          upo.mat[2] = [parseFloat(calcularResultado(document.getElementById('VelInicial3').value))];
+        }
+
         //Tiempo 
         if (DuracionSMVL_box.value.length > 0) {
           Segundos = parseFloat(calcularResultado(document.getElementById('DuracionSMVL_box').value));
@@ -1238,8 +1317,13 @@
       //Matrix Beta de transformación
       function Beta() { //Matriz beta de la transformación
         with (Matrix) {
-          var Nodos = create([[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [1, 2]]);
-          var Conectividad = create([[0, 1], [1, 2], [3, 2], [1, 4], [4, 5], [2, 5]]);
+          if (Porti2P == true) {
+            var Nodos = create([[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [1, 2]]);
+            var Conectividad = create([[0, 1], [1, 2], [3, 2], [1, 4], [4, 5], [2, 5]]);
+          } else {
+            var Nodos = create([[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [1, 2], [0, 3], [1, 3]]);
+            var Conectividad = create([[0, 1], [1, 2], [3, 2], [1, 4], [4, 5], [2, 5], [4, 6], [6, 7], [5, 7]]);
+          }
           // var Conectividad = create([[1, 2], [2, 3], [4, 3], [2, 5], [5, 6], [3, 6]]);
           // var C = Zero(Nodos.mat.length,0);
           // var S = Zero(Nodos.mat.length,0);
@@ -1261,7 +1345,13 @@
       //Matrix K_locales
       function K_local(PrG) { //Matrices de rigidez total
         with (Matrix) {
-          let VecOrden = [2, 1, 5, 3, 0, 4]; //Según la matriz de conectividad
+          ;
+          let VecOrden
+          if (Porti2P == true) {
+            VecOrden = [2, 0, 5, 3, 1, 4]; //Según la matriz de conectividad
+          } else {
+            VecOrden = [3, 0, 6, 4, 1, 5, 11, 3, 14]; //Según la matriz de conectividad
+          }
           const KIND3 = Array(VecOrden.length).fill(0); //Array que contiene las matrices de transformación
           for (let i = 0; i < VecOrden.length; i++) { //Construcción de matrices
             var PpE = PrG[VecOrden[i]][1].Propiedades; //Guarda las propiedades del elemento
@@ -1285,7 +1375,7 @@
         }
       }
       //Matrix de K_Globales
-      function K_Globales() {
+      function K_Globales(PrG) {
         Betas = Beta();
         KIND3 = K_local(PrG);
         with (Matrix) {
@@ -1297,12 +1387,22 @@
         }
       }
       //Función para ensamblar 
-      function KAsambler() {
+      function KAsambler(PrG) {
         with (Matrix) {
-          var Nodos = create([[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [1, 2]]);
-          var Conectividad = create([[0, 1], [1, 2], [3, 2], [1, 4], [4, 5], [2, 5]]);
-          KGlobales = K_Globales();
-          let KK1elemt = Array.from({ length: 18 }, () => Array(18).fill(0));
+          if (Porti2P == true) {
+            var Nodos = create([[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [1, 2]]);
+            var Conectividad = create([[0, 1], [1, 2], [3, 2], [1, 4], [4, 5], [2, 5]]);
+          } else {
+            var Nodos = create([[0, 0], [0, 1], [1, 1], [1, 0], [0, 2], [1, 2], [0, 3], [1, 3]]);
+            var Conectividad = create([[0, 1], [1, 2], [3, 2], [1, 4], [4, 5], [2, 5], [4, 6], [6, 7], [5, 7]]);
+          }
+          KGlobales = K_Globales(PrG);
+          let KK1elemt;
+          if (Porti2P == true) {
+            KK1elemt = Array.from({ length: 18 }, () => Array(18).fill(0));
+          } else {
+            KK1elemt = Array.from({ length: 24 }, () => Array(24).fill(0));
+          }
           for (let santiago = 0; santiago < KGlobales.length; santiago++) {
             ps = ((Conectividad.mat[santiago][0] + 1) * 3) - 3;
             us = ((Conectividad.mat[santiago][1] + 1) * 3) - 3;
@@ -1326,10 +1426,15 @@
         }
       }
       //Función para reducir y aplicar constraint
-      function Red_Constr() {
+      function Red_Constr(PrG) {
         // VectRestr = [3, 5, 6, 8, 12, 14, 15, 17]; //Vector de restricciones
-        let VectRestr = [3, 12, 5, 8, 14, 17, 6, 15]; //Vector de restricciones, pórtico doblemente empotrado
-        let KK1elemt = KAsambler();
+        let VectRestr;
+        if (Porti2P == true) {
+          VectRestr = [3, 12, 5, 8, 14, 17, 6, 15]; //Vector de restricciones, pórtico doblemente empotrado
+        } else {
+          VectRestr = [3, 12, 18, 5, 8, 14, 17, 20, 23, 6, 15, 21]; //Vector de restricciones, pórtico doblemente empotrado
+        }
+        let KK1elemt = KAsambler(PrG);
         let KGlobalReducida = Array.from({ length: VectRestr.length }, () => Array(VectRestr.length).fill(0));
         for (let i = 0; i < VectRestr.length; i++) { //Reduce la matriz acorde al vector de restricciones
           for (let j = 0; j < VectRestr.length; j++) {
@@ -1338,42 +1443,71 @@
         }
         with (Matrix) {
           KGlobalReducida = create(KGlobalReducida);
-          let A = Zero(2, VectRestr.length);
-          //Constraint para doblemente empotrado
-          A.mat[0][0] = 1;
-          A.mat[0][6] = -1;
-          A.mat[1][1] = 1;
-          A.mat[1][7] = -1;
-          let Ai = create(A.mat.slice(0, 2).map(row => row.slice(0, 6)));
-          let Ad = create(A.mat.slice(0, 2).map(row => row.slice(6, 8)));
-          let Ro = scale(mult(inverse(Ad), Ai), -1);
-          let id = identity(Ro.mat[0].length, Ro.mat[0].length);
-          let R = create(id.mat.concat(Ro.mat));
-          Ki = mult(mult(transpose(R), KGlobalReducida), R);
-          return [Ki]
+          if (Porti2P == true) {
+            let A = Zero(2, VectRestr.length);
+            //Constraint para doblemente empotrado
+            A.mat[0][0] = 1;
+            A.mat[0][6] = -1;
+            A.mat[1][1] = 1;
+            A.mat[1][7] = -1;
+            let Ai = create(A.mat.slice(0, 2).map(row => row.slice(0, 6)));
+            let Ad = create(A.mat.slice(0, 2).map(row => row.slice(6, 8)));
+            let Ro = scale(mult(inverse(Ad), Ai), -1);
+            let id = identity(Ro.mat[0].length, Ro.mat[0].length);
+            let R = create(id.mat.concat(Ro.mat));
+            Ki = mult(mult(transpose(R), KGlobalReducida), R);
+          } else {
+            let A = Zero(3, VectRestr.length);
+            //Constraint para doblemente empotrado
+            A.mat[0][0] = 1;
+            A.mat[0][9] = -1;
+            A.mat[1][1] = 1;
+            A.mat[1][10] = -1;
+            A.mat[2][2] = 1;
+            A.mat[2][11] = -1;
+            let Ai = create(A.mat.slice(0, 3).map(row => row.slice(0, 9)));
+            let Ad = create(A.mat.slice(0, 3).map(row => row.slice(9, 12)));
+            let Ro = scale(mult(inverse(Ad), Ai), -1);
+            let id = identity(Ro.mat[0].length, Ro.mat[0].length);
+            let R = create(id.mat.concat(Ro.mat));
+            Ki = mult(mult(transpose(R), KGlobalReducida), R);
+          }
         }
+        return [Ki]
       }
       //Función para condensar
-      function condensar() {
+      function condensar(PrG) {
+        let K_Con;
         with (Matrix) {
-          let Ki = Red_Constr();
-          let end = Ki[0].mat.length + 1;
-          let Kpp = create(Ki[0].mat.slice(0, 2).map(row => row.slice(0, 2)));
-          let Kpo = create(Ki[0].mat.slice(0, 2).map(row => row.slice(2, end)));
-          let Kop = transpose(Kpo);
-          let Koo = create(Ki[0].mat.slice(2, 7).map(row => row.slice(2, end)));
-          let K_Con = sub(Kpp, mult(Kpo, mult(inverse(Koo), Kop)));
-          // return [Kpp,Kop,Kpo,Koo];
+          let Ki = Red_Constr(PrG);
+          if (Porti2P == true) {
+            let end = Ki[0].mat.length + 1;
+            let Kpp = create(Ki[0].mat.slice(0, 2).map(row => row.slice(0, 2)));
+            let Kpo = create(Ki[0].mat.slice(0, 2).map(row => row.slice(2, end)));
+            let Kop = transpose(Kpo);
+            let Koo = create(Ki[0].mat.slice(2, 7).map(row => row.slice(2, end)));
+            K_Con = sub(Kpp, mult(Kpo, mult(inverse(Koo), Kop)));
+            // return [Kpp,Kop,Kpo,Koo];
+          } else {
+            let end = Ki[0].mat.length + 1;
+            let Kpp = create(Ki[0].mat.slice(0, 3).map(row => row.slice(0, 3)));
+            let Kpo = create(Ki[0].mat.slice(0, 3).map(row => row.slice(3, end)));
+            let Kop = transpose(Kpo);
+            let Koo = create(Ki[0].mat.slice(3, 10).map(row => row.slice(3, end)));
+            K_Con = sub(Kpp, mult(Kpo, mult(inverse(Koo), Kop)));
+          }
           return K_Con
         }
       }
       //Función para crear matriz de Masa
-      function MasaMatriz() {
+      function MasaMatriz(PrG) {
         with (Matrix) {
-          K_Con = condensar();
+          let K_Con = condensar(PrG);
           let Masa = Zero(K_Con.mat.length, K_Con.mat.length);
           for (let i = 0; i < Masa.mat.length; i++) { //Construcción matriz de masa
             Masa.mat[i][i] = PrG[i][1].Propiedades.M;
+            console.log(Masa.mat[i][i])
+
           }
           return [Masa, K_Con]
         }
@@ -1472,7 +1606,7 @@
       }
       // const [U1, q1, qp1, Mne, Cne, Kne] = Newmark_Multiples(M, K_c, po, uo, upo, dt, pa);
       // Newmark_Multiples(M, K_c, C, po, uo, upo);
-      function Newmark_Multiples(M, K, po, uo, upo, dt, pa, zeta) { //Calcula la respuesta en el tiempo
+      function Newmark_Multiples(M, K, po, uo, upo, dt, pa, zeta) { //Calcula la respuesta en el tiemp
         var gamma = 1 / 2;
         var betta = 1 / 6;
         const [PHI, w, C] = modos(K, M, zeta);
@@ -1480,26 +1614,7 @@
           //Crear condiciones inciales de velocidad y desplazamiento
           var qno = Zero(PHI.mat.length, 1);
           var qnpo = Zero(PHI.mat.length, 1);
-          for (let i = 0; i < PHI.mat.length; i++) {
-            var num1 = new Array();
-            var dem1 = new Array();
-            var num2 = new Array();
-            var dem2 = new Array();
-            var PHIT = new Array();
-            var PHITN = new Array();
-            var PHIN = new Array();
             PHIT = transpose(PHI);
-            PHITN[0] = PHI.mat[i];
-            PHITN = create(PHITN); //PHIT n-ésimo
-            PHIN[0] = PHIT.mat[i];
-            PHIN = transpose(create(PHIN)); // PHI  n-ésimo
-            num1 = mult(mult(PHITN, M), uo);
-            dem1 = mult(mult(PHITN, M), PHIN);
-            num2 = mult(mult(PHITN, M), upo);
-            dem2 = mult(mult(PHITN, M), PHIN);
-            qno.mat[i][0] = mult(num1, inverse(dem1)).mat[0][0]; //Condiciones inciales [Desplazamiento]
-            qnpo.mat[i][0] = mult(num2, inverse(dem2)).mat[0][0]; //Condiciones inciales [Velocidad]
-          }
           //1.2
           var Po = new Array();
           Po = mult(PHIT, pa);
@@ -1511,6 +1626,8 @@
           Mne = mult(mult(PHIT, M), PHI);
           Cne = mult(mult(PHIT, C), PHI);
           Kne = mult(mult(PHIT, K), PHI);
+          qno = mult(mult(mult(PHIT,M),inverse(Mne)),uo);
+          qnpo = mult(mult(mult(PHIT,M),inverse(Mne)),upo);
           qppo = solve(M, sub(sub(Po, mult(Cne, qnpo)), mult(Kne, qno)));
           //1.5
           var a1 = new Array();
@@ -1825,7 +1942,7 @@
         const materialF = new THREE.MeshPhongMaterial({
           // color: 0xF08080,
           // color: 0xB56618,
-          color: 0xB55018,
+          color: 0x166A8F,
           flatShading: true
           // wireframe: true, //Mostrar los segmentos con hilos
 
@@ -1901,8 +2018,8 @@
       //Geometría Portico 3D
       function Portico3D() {
         //Losas
-        var L1 = Rec_EsL(3.5, 0.2, 3.5, 5, 3, 0);
-        var L2 = Rec_EsL(3.5, 0.2, 3.5, 5, 1, 0);
+        var L1 = Rec_EsL(4, 0.3, 4, 5, 0.9, 0);
+        var L2 = Rec_EsL(4, 0.3, 4, 5, 2.9, 0);
         //Columnas
         var C1 = Rec_Es(0.3, 2, 0.3, 3.5, 0, 1.5);
         var C2 = Rec_Es(0.3, 2, 0.3, 3.5, 2, 1.5);
@@ -1941,13 +2058,150 @@
 
         //Lista de Propiedades 
         const PrG = [L1, L2, C1, C2, C3, C4, C5, C6, C7, C8];
-
-
-
-
         return [PrG]
 
       }
+      function Portico3D3P() {
+        //Losas
+        var L1 = Rec_EsL(4, 0.2, 4, 5, 0.35, 0);
+        var L2 = Rec_EsL(4, 0.2, 4, 5, 1.68, 0);
+        var L3 = Rec_EsL(4, 0.2, 4, 5, 3, 0);
+        //Columnas
+        var C1 = Rec_Es(0.3, 1.32, 0.3, 3.5, -0.22, 1.5);
+        var C2 = Rec_Es(0.3, 1.32, 0.3, 3.5, 1.10, 1.5);
+        var C3 = Rec_Es(0.3, 1.32, 0.3, 6.5, 1.10, 1.5);
+        var C4 = Rec_Es(0.3, 1.32, 0.3, 6.5, -0.22, 1.5);
+        //Columnas
+        var C5 = Rec_Es(0.3, 1.32, 0.3, 3.5, -0.22, -1.5);
+        var C6 = Rec_Es(0.3, 1.32, 0.3, 3.5, 1.10, -1.5);
+        var C7 = Rec_Es(0.3, 1.32, 0.3, 6.5, 1.10, -1.5);
+        var C8 = Rec_Es(0.3, 1.32, 0.3, 6.5, -0.22, -1.5);
+        //Columnas
+        var C9 = Rec_Es(0.3, 1.32, 0.3, 3.5, 2.42, 1.5); //adelante
+        var C10 = Rec_Es(0.3, 1.32, 0.3, 3.5, 2.42, -1.5);
+        var C11 = Rec_Es(0.3, 1.32, 0.3, 6.5, 2.42, -1.5);
+        var C12 = Rec_Es(0.3, 1.32, 0.3, 6.5, 2.42, 1.5); //adelante
+
+
+        //Losas
+        L1[0].userData.draggable = true;
+        L1[0].userData.name = 'L1-3D-3P';
+        L2[0].userData.draggable = true;
+        L2[0].userData.name = 'L2-3D-3P';
+        L3[0].userData.draggable = true;
+        L3[0].userData.name = 'L3-3D-3P';
+        //Columnas
+        C1[0].userData.draggable = true;
+        C1[0].userData.name = 'C1-3D-3P';
+        C2[0].userData.draggable = true;
+        C2[0].userData.name = 'C2-3D-3P';
+        C5[0].userData.draggable = true;
+        C5[0].userData.name = 'C5-3D-3P';
+        C6[0].userData.draggable = true;
+        C6[0].userData.name = 'C6-3D-3P';
+
+        //Columnas
+        C3[0].userData.draggable = true;
+        C3[0].userData.name = 'C3-3D-3P';
+        C4[0].userData.draggable = true;
+        C4[0].userData.name = 'C4-3D-3P';
+        C7[0].userData.draggable = true;
+        C7[0].userData.name = 'C7-3D-3P';
+        C8[0].userData.draggable = true;
+        C8[0].userData.name = 'C8-3D-3P';
+
+        //Columnas
+        C9[0].userData.draggable = true;
+        C9[0].userData.name = 'C9-3D-3P';
+        C10[0].userData.draggable = true;
+        C10[0].userData.name = 'C10-3D-3P';
+        C11[0].userData.draggable = true;
+        C11[0].userData.name = 'C11-3D-3P';
+        C12[0].userData.draggable = true;
+        C12[0].userData.name = 'C12-3D-3P';
+
+
+        //Lista de Propiedades 
+        const PrG = [L1, L2, L3, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12];
+        return [PrG]
+
+      }
+      function BotonP2P() {
+        //Botones [Portico 2 pisos]
+        var PT1 = Rec_Es(0.1, 0.8, 0.1, -2.5, -0.15, 3.2);
+        var PT2 = Rec_Es(0.1, 0.8, 0.1, -2.5, -0.15, 2.75);
+        var PT3 = Rec_Es(0.1, 0.8, 0.1, -2.75, -0.15, 2.75);
+        var PT4 = Rec_Es(0.1, 0.8, 0.1, -2.75, -0.15, 3.2);
+        var LO1 = Rec_EsL(0.7, 0.07, 0.7, -2.70, 0.22, 2.97);
+        var LO2 = Rec_EsL(0.7, 0.07, 0.7, -2.70, -0.2, 2.97);
+        //Botones [Portico 2 pisos] 
+        //Columnas
+        PT1[0].userData.draggable = true;
+        PT1[0].userData.name = 'PT1-3D';
+        PT2[0].userData.draggable = true;
+        PT2[0].userData.name = 'PT2-3D';
+        PT3[0].userData.draggable = true;
+        PT3[0].userData.name = 'PT3-3D';
+        PT4[0].userData.draggable = true;
+        PT4[0].userData.name = 'PT4-3D';
+        //Losas
+        LO1[0].userData.draggable = true;
+        LO1[0].userData.name = 'LO1-3D';
+        LO2[0].userData.draggable = true;
+        LO2[0].userData.name = 'LO2-3D';
+        //Lista de Propiedades 
+        const PrB2P = [LO1, LO2, PT1, PT2, PT3, PT4];
+        var nombres = new Array();
+        for (let i = 0; i < PrB2P.length; i++) {
+          nombres[i] = PrB2P[i][0].userData.name
+        }
+        PrB2P[0][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+          color: 0xED0505,
+          flatShading: true
+        });
+        PrB2P[1][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+          color: 0xED0505,
+          flatShading: true
+        });
+        return [PrB2P, nombres]
+      }
+      var [PrB2P, NB2P] = BotonP2P();
+      function BotonP3P() {
+        //Botones [Portico 3 Pisos]
+        var PT1P = Rec_Es(0.1, 1.2, 0.12, -2.5, 0, 2.3);
+        var PT2P = Rec_Es(0.1, 1.2, 0.12, -2.5, 0, 1.85);
+        var PT3P = Rec_Es(0.1, 1.2, 0.12, -2.75, 0, 1.85);
+        var PT4P = Rec_Es(0.1, 1.2, 0.12, -2.75, 0, 2.3);
+        var LO1P = Rec_EsL(0.7, 0.07, 0.7, -2.70, 0.22, 2.07);
+        var LO2P = Rec_EsL(0.7, 0.07, 0.7, -2.70, -0.2, 2.07);
+        var LO3P = Rec_EsL(0.7, 0.07, 0.7, -2.70, 0.6, 2.07);
+        //Botones [Portico 3 pisos] Dragable
+        //Columnas
+        PT1P[0].userData.draggable = true;
+        PT1P[0].userData.name = 'PT1P-3D';
+        PT2P[0].userData.draggable = true;
+        PT2P[0].userData.name = 'PT2P-3D';
+        PT3P[0].userData.draggable = true;
+        PT3P[0].userData.name = 'PT3P-3D';
+        PT4P[0].userData.draggable = true;
+        PT4P[0].userData.name = 'PT4P-3D';
+        //Losas
+        LO1P[0].userData.draggable = true;
+        LO1P[0].userData.name = 'LO1P-3D';
+        LO2P[0].userData.draggable = true;
+        LO2P[0].userData.name = 'LO2P-3D';
+        LO3P[0].userData.draggable = true;
+        LO3P[0].userData.name = 'LO3P-3D';
+        //Lista de Propiedades 
+        const PrB3P = [LO1P, LO2P, LO3P, PT1P, PT2P, PT3P, PT4P];
+        var nombres = new Array();
+        for (let i = 0; i < PrB3P.length; i++) {
+          nombres[i] = PrB3P[i][0].userData.name
+        }
+        return [PrB3P, nombres]
+      }
+      const [PrB3P, NB3P] = BotonP3P();
+
       //Geometría Portico 2D
       function Portico2D() {
         //Losas
@@ -1986,8 +2240,34 @@
 
         return [PrG]
       }
+      function OcultarGeo(PRGO) {
+        for (let i = 0; i < PRGO.length; i++) {
+          scene.remove(PRGO[i][0]);
+        }
+        renderer.render(scene, camera);
+      }
+      function MostrarGeo(PRGO) {
+        for (let i = 0; i < PRGO.length; i++) {
+          scene.add(PRGO[i][0]);
+        }
+        renderer.render(scene, camera);
+      }
+      OcultarGeo(PrG3P);
       //Crear una lista de objetos con todas las propiedades
       // const ListObj2D = Object.assign(L1D, L2D, C1D, C2D, C3D, C4D);
+      //Cambiar pisos del pórtico
+      var Porti2P = true;
+      var Porti3P = false;
+      //Cambiar el tipo de análisis 
+      var Ana2D = true;
+      var Ana3D = false;
+      //3Piso
+      var Ana2DP3 = true;
+      var Ana3DP3 = false;
+      const MaterialB23D = new THREE.MeshPhongMaterial({
+        color: 0x166A8F,
+        flatShading: true
+      });;
       // Seleccionar geometrías 
       const raycaster = new THREE.Raycaster();
       const moveMouse = new THREE.Vector3();
@@ -2020,7 +2300,11 @@
           console.log('Droping draggable');
           draggable.material = materialB;
           Checker = false;
-          MatchMaking(draggable, PrG); //Cambia las propiedades geometricas
+          if (Porti2P == true) {
+            MatchMaking(draggable, PrG); //Cambia las propiedades geometricas
+          } else {
+            MatchMaking(draggable, PrG3P); //Cambia las propiedades geometricas
+          }
           draggable = null;
           renderer.render(scene, camera);
           return;
@@ -2033,6 +2317,120 @@
           //DeterminaR qué geometría esta seleccionada
           draggable = found[0].object
           console.log('Found draggable')
+          //Segundo piso
+          if (NB2P.some(elemento => draggable.userData.name.includes(elemento))) {
+            if (Porti3P == true) {
+              Porti2P = true;
+              Porti3P = false;
+              MostrarGeo(PrG)
+              OcultarGeo(PrG3P)
+              Ana3DP3 = false;
+              Ana2DP3 = true;
+              document.getElementById("AmplUp3").style.display = "none";
+              document.getElementById("VelUp3").style.display = "none";
+              for (let i = 0; i < 3; i++) {
+                //Cambiar el color del pórtico sobre la mesa
+                PrG3P[i][0].material = MaterialB23D;
+                //Cambiar el color del pórtico sobre el estante
+                PrB3P[i][0].material = MaterialB23D;
+              }
+              for (let i = 0; i < 2; i++) {
+                //Cambiar el color en el pórico sobre el estante
+                PrB2P[i][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+                  color: 0xED0505,
+                  flatShading: true
+                });;
+              }
+              renderer.render(scene, camera);
+              return
+            }
+            console.log("2Pisos")
+            if (Ana2D == true) {
+              Ana3D = true;
+              Ana2D = false;
+              for (let i = 0; i < 2; i++) {
+                //Cambiar el color en el pórtico sobre la mesa
+                PrG[i][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+                  color: 0xED0505,
+                  flatShading: true
+                });
+                //Cambiar el color en el pórico sobre el estante
+                PrB2P[i][0].material = MaterialB23D;
+              }
+            } else {
+              Ana3D = false;
+              Ana2D = true;
+              for (let i = 0; i < 2; i++) {
+                //Cambiar el color en el pórtico sobre la mesa
+                PrG[i][0].material = MaterialB23D;
+                //Cambiar el color en el pórico sobre el estante
+                PrB2P[i][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+                  color: 0xED0505,
+                  flatShading: true
+                });
+              }
+            }
+            console.log("Al menos un elemento del vector está contenido en la variable.");
+            renderer.render(scene, camera);
+            return;
+          }
+          //Tercer piso
+          if (NB3P.some(elemento => draggable.userData.name.includes(elemento))) {
+            if (Porti2P == true) {
+              Porti2P = false;
+              Porti3P = true;
+              MostrarGeo(PrG3P);
+              OcultarGeo(PrG);
+              Ana3D = false;
+              Ana2D = true;
+              document.getElementById("AmplUp3").style.display = "block";
+              document.getElementById("VelUp3").style.display = "block";
+              for (let i = 0; i < 2; i++) {
+                //Cambiar el color en el pórtico sobre la mesa
+                PrG[i][0].material = MaterialB23D;
+                //Cambiar el color en el pórico sobre el estante
+                PrB2P[i][0].material = MaterialB23D;
+              }
+              for (let i = 0; i < 3; i++) {
+                //Cambiar el color del pórtico sobre el estante
+                PrB3P[i][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+                  color: 0xED0505,
+                  flatShading: true
+                });
+              }
+              renderer.render(scene, camera);
+              return
+            }
+            console.log("3Pisos")
+            if (Ana2DP3 == true) {
+              Ana3DP3 = true;
+              Ana2DP3 = false;
+              for (let i = 0; i < 3; i++) {
+                //Cambiar el color en el pórtico sobre la mesa
+                PrG3P[i][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+                  color: 0xED0505,
+                  flatShading: true
+                });
+                //Cambiar el color en el pórico sobre el estante
+                PrB3P[i][0].material = MaterialB23D;
+              }
+            } else {
+              Ana3DP3 = false;
+              Ana2DP3 = true;
+              for (let i = 0; i < 3; i++) {
+                //Cambiar el color del pórtico sobre la mesa
+                PrG3P[i][0].material = MaterialB23D;
+                //Cambiar el color del pórtico sobre el estante
+                PrB3P[i][0].material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
+                  color: 0xED0505,
+                  flatShading: true
+                });
+              }
+            }
+            console.log("Al menos un elemento del vector está contenido en la variable.");
+            renderer.render(scene, camera);
+            return;
+          }
           materialB = draggable.material;
           draggable.material = new THREE.MeshPhongMaterial({ //Cambiar el color de la geometría
             color: 0xAED6F1,
@@ -2040,13 +2438,30 @@
           });
           renderer.render(scene, camera);
           Checker = true;
-          PropFiAct(draggable, PrG); // Actualiza las propiedades
+          if (Porti2P == true) {
+            PropFiAct(draggable, PrG); // Actualiza las propiedades
+          } else {
+            PropFiAct(draggable, PrG3P); // Actualiza las propiedades
+          }
         }
       })
       // Identifica la geometría y la relaciona con su respectivas propiedades físicas
       function MatchMaking(Drag, PrG) {
+        var elementos = document.querySelectorAll("#Losas *");
+        elementos.forEach(function (elemento) {
+          elemento.disabled = false;
+        });
+        var elementos = document.querySelectorAll("#Columnas *");
+        elementos.forEach(function (elemento) {
+          elemento.disabled = false;
+        });
+        document.getElementById('LockeCo').style.visibility = 'hidden';
+        document.getElementById('UnLockeCo').style.visibility = 'visible';
+        document.getElementById('Locke').style.visibility = 'hidden';
+        document.getElementById('UnLocke').style.visibility = 'visible';
         for (let i = 0; i < PrG.length; i++) {
           if (Drag.position == PrG[i][0].position) {
+            //Bloquear Slab
             console.log('Cambio')
             //Masa 
             var Masa = parseFloat(document.getElementById('Mass_box1').value);
@@ -2068,6 +2483,34 @@
         console.log('Act')
         for (let i = 0; i < PrG.length; i++) {
           if (Drag.position == PrG[i][0].position) {
+            let condicionIf = (Porti2P) ? (i == 0 || i == 1) : (i == 0 || i == 1 || i == 2);
+            if (condicionIf) {
+              var elementos = document.querySelectorAll("#Columnas *");
+              elementos.forEach(function (elemento) {
+                elemento.disabled = true;
+              });
+              var elementos = document.querySelectorAll("#Losas *");
+              elementos.forEach(function (elemento) {
+                elemento.disabled = false;
+              });
+              document.getElementById('LockeCo').style.visibility = 'visible';
+              document.getElementById('UnLockeCo').style.visibility = 'hidden';
+              document.getElementById('Locke').style.visibility = 'hidden';
+              document.getElementById('UnLocke').style.visibility = 'visible';
+            } else { //Desbloquear Slab 
+              var elementos = document.querySelectorAll("#Losas *");
+              elementos.forEach(function (elemento) {
+                elemento.disabled = true;
+              });
+              var elementos = document.querySelectorAll("#Columnas *");
+              elementos.forEach(function (elemento) {
+                elemento.disabled = false;
+              });
+              document.getElementById('LockeCo').style.visibility = 'hidden';
+              document.getElementById('UnLockeCo').style.visibility = 'visible';
+              document.getElementById('Locke').style.visibility = 'visible';
+              document.getElementById('UnLocke').style.visibility = 'hidden';
+            }
             console.log('Cambio')
             //Masa 
             document.getElementById('Mass_box1').value = parseFloat(PrG[i][1].Propiedades.M);
@@ -2103,68 +2546,147 @@
       var DeforTim = 0;
       function Deformar() {
         var contador1 = 0;
-        if (xx == false) {
-          Cilindros.rotation.y = Math.PI / 2;
-          for (let i = 0; i < PrG.length; i++) {
-            PrG[i][0].rotation.y = Math.PI;
-          }
+        if (Porti2P == true) {
+          if (xx == false) {
+            Cilindros.rotation.y = Math.PI / 2;
+            for (let i = 0; i < PrG.length; i++) {
+              PrG[i][0].rotation.y = Math.PI;
+            }
 
+          } else {
+            for (let i = 0; i < PrG.length; i++) {
+              PrG[i][0].rotation.y = -Math.PI / 2;
+            }
+          }
+        } else {
+          if (xx == false) {
+            Cilindros.rotation.y = Math.PI / 2;
+            for (let i = 0; i < PrG3P.length; i++) {
+              PrG3P[i][0].rotation.y = Math.PI;
+            }
+          } else {
+            for (let i = 0; i < PrG3P.length; i++) {
+              PrG3P[i][0].rotation.y = -Math.PI / 2;
+            }
+          }
         }
         function Deformar_1() {
-          if (xx == false) {
-            let Santiago2 = U1.mat[0][contador1] + Desp_Data[contador1];
-            //Sensores
-            AcelerometroG.position.z = Desp_Data[contador1];
-            Laser1.position.z = Santiago2;
-            Laser2.position.z = U1.mat[1][contador1] + Santiago2;
-            Acelerometro1.position.z = 0 + Santiago2;
-            Acelerometro2.position.z = 0 + U1.mat[1][contador1] + Santiago2;
-            Pared11.position.z = Desp_Data[contador1];
+          if (Porti2P == true) {
+            if (xx == false) {
+              let Santiago2 = U1.mat[0][contador1] + Desp_Data[contador1];
+              //Sensores
+              AcelerometroG.position.z = Desp_Data[contador1];
+              Laser1.position.z = Santiago2;
+              Laser2.position.z = U1.mat[1][contador1] + Santiago2;
+              Acelerometro1.position.z = 0 + Santiago2;
+              Acelerometro2.position.z = 0 + U1.mat[1][contador1] + Santiago2;
+              Pared11.position.z = Desp_Data[contador1];
 
-            //Barras y mesa
-            PrG[1][0].position.z = 0 + Santiago2; //Abajo
-            PrG[0][0].position.z = 0 + U1.mat[1][contador1] + Santiago2; // Arriba
-            Mesa1.position.z = 0 + Desp_Data[contador1];  //Posición x de la mesa
-            ///Arriba
-            PrG[7][0].position.z = -1.5 + Santiago2;
-            PrG[3][0].position.z = 1.5 + Santiago2;
-            PrG[4][0].position.z = 1.5 + +Santiago2;
-            PrG[8][0].position.z = -1.5 + Santiago2;
-            //Abajo
-            PrG[2][0].position.z = 1.5 + Desp_Data[contador1];
-            PrG[5][0].position.z = 1.5 + Desp_Data[contador1];
-            PrG[6][0].position.z = -1.5 + Desp_Data[contador1];
-            PrG[9][0].position.z = -1.5 + Desp_Data[contador1];
-            contador1++;
-            contadorglobal++;
+              //Barras y mesa
+              PrG[0][0].position.z = 0 + Santiago2; //Abajo
+              PrG[1][0].position.z = 0 + U1.mat[1][contador1] + Santiago2; // Arriba
+              Mesa1.position.z = 0 + Desp_Data[contador1];  //Posición x de la mesa
+              ///Arriba
+              PrG[7][0].position.z = -1.5 + Santiago2;
+              PrG[3][0].position.z = 1.5 + Santiago2;
+              PrG[4][0].position.z = 1.5 + +Santiago2;
+              PrG[8][0].position.z = -1.5 + Santiago2;
+              //Abajo
+              PrG[2][0].position.z = 1.5 + Desp_Data[contador1];
+              PrG[5][0].position.z = 1.5 + Desp_Data[contador1];
+              PrG[6][0].position.z = -1.5 + Desp_Data[contador1];
+              PrG[9][0].position.z = -1.5 + Desp_Data[contador1];
+            } else {
+              let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
+              //Sensores
+              AcelerometroG.position.x = 5 + Desp_Data[contador1];
+              Laser1.position.x = 5 + Santiago2;
+              Laser2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
+              Acelerometro1.position.x = 5 + Santiago2;
+              Acelerometro2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
+              Pared11.position.x = 5 + Desp_Data[contador1];
+              //Barras y mesas
+              PrG[0][0].position.x = 5 + Santiago2; //Abajo
+              PrG[1][0].position.x = 5 + U1.mat[1][contador1] + Santiago2; //Arriba
+              Mesa1.position.x = 5 + Desp_Data[contador1];  //Posición x de la mesa
+              ///Arriba
+              PrG[7][0].position.x = 3.5 + Santiago2;
+              PrG[3][0].position.x = 3.5 + Santiago2;
+              PrG[4][0].position.x = 6.5 + Santiago2;
+              PrG[8][0].position.x = 6.5 + Santiago2;
+              //Abajo
+              PrG[2][0].position.x = 3.5 + Desp_Data[contador1];
+              PrG[5][0].position.x = 6.5 + Desp_Data[contador1];
+              PrG[6][0].position.x = 3.5 + Desp_Data[contador1];
+              PrG[9][0].position.x = 6.5 + Desp_Data[contador1];
+              // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
+              // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
+              // chart.update(); chart2.update();
+            }
           } else {
-            let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
-            //Sensores
-            AcelerometroG.position.x = 5 + Desp_Data[contador1];
-            Laser1.position.x = 5 + Santiago2;
-            Laser2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
-            Acelerometro1.position.x = 5 + Santiago2;
-            Acelerometro2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
-            Pared11.position.x = 5 + Desp_Data[contador1];
-            //Barras y mesas
-            PrG[1][0].position.x = 5 + Santiago2; //Abajo
-            PrG[0][0].position.x = 5 + U1.mat[1][contador1] + Santiago2; //Arriba
-            Mesa1.position.x = 5 + Desp_Data[contador1];  //Posición x de la mesa
-            ///Arriba
-            PrG[7][0].position.x = 3.5 + Santiago2;
-            PrG[3][0].position.x = 3.5 + Santiago2;
-            PrG[4][0].position.x = 6.5 + Santiago2;
-            PrG[8][0].position.x = 6.5 + Santiago2;
-            //Abajo
-            PrG[2][0].position.x = 3.5 + Desp_Data[contador1];
-            PrG[5][0].position.x = 6.5 + Desp_Data[contador1];
-            PrG[6][0].position.x = 3.5 + Desp_Data[contador1];
-            PrG[9][0].position.x = 6.5 + Desp_Data[contador1];
-            contador1++;
-            // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
-            // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
-            // chart.update(); chart2.update();
-            contadorglobal++;
+            if (xx == false) {
+              let Santiago2 = U1.mat[0][contador1] + Desp_Data[contador1];
+              //Sensores
+              AcelerometroG.position.z = Desp_Data[contador1];
+              Laser1.position.z = Santiago2;
+              Laser2.position.z = U1.mat[1][contador1] + Santiago2;
+              Acelerometro1.position.z = 0 + Santiago2;
+              Acelerometro2.position.z = 0 + U1.mat[1][contador1] + Santiago2;
+              Pared11.position.z = Desp_Data[contador1];
+
+              //Barras y mesa
+              PrG3P[0][0].position.z = 0 + Santiago2; //Abajo
+              PrG3P[1][0].position.z = 0 + U1.mat[1][contador1] + Santiago2; // Arriba 1
+              PrG3P[2][0].position.z = 0 + U1.mat[1][contador1] + Santiago2 + U1.mat[2][contador1]; // Arriba 2
+              Mesa1.position.z = 0 + Desp_Data[contador1];  //Posición x de la mesa
+              ///Arriba 1
+              PrG3P[8][0].position.z = -1.5 + Santiago2;
+              PrG3P[4][0].position.z = 1.5 + Santiago2;
+              PrG3P[5][0].position.z = 1.5 + +Santiago2;
+              PrG3P[9][0].position.z = -1.5 + Santiago2;
+              ///Arriba 2
+              PrG3P[11][0].position.z = 1.5 + Santiago2 + U1.mat[1][contador1];
+              PrG3P[12][0].position.z = -1.5 + Santiago2 + U1.mat[1][contador1];
+              PrG3P[13][0].position.z = -1.5 + +Santiago2 + U1.mat[1][contador1];
+              PrG3P[14][0].position.z = 1.5 + Santiago2 + U1.mat[1][contador1];
+              //Abajo
+              PrG3P[3][0].position.z = 1.5 + Desp_Data[contador1];
+              PrG3P[6][0].position.z = 1.5 + Desp_Data[contador1];
+              PrG3P[7][0].position.z = -1.5 + Desp_Data[contador1];
+              PrG3P[10][0].position.z = -1.5 + Desp_Data[contador1];
+            } else {
+              let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
+              //Sensores
+              AcelerometroG.position.x = 5 + Desp_Data[contador1];
+              Laser1.position.x = 5 + Santiago2;
+              Laser2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
+              Acelerometro1.position.x = 5 + Santiago2;
+              Acelerometro2.position.x = 5 + U1.mat[1][contador1] + Santiago2;
+              Pared11.position.x = 5 + Desp_Data[contador1];
+              //Barras y mesas
+              PrG3P[0][0].position.x = 5 + Santiago2; //Abajo
+              PrG3P[1][0].position.x = 5 + U1.mat[1][contador1] + Santiago2; //Arriba
+              PrG3P[2][0].position.x = 5 + U1.mat[1][contador1] + Santiago2 + U1.mat[2][contador1]; //Arriba
+              Mesa1.position.x = 5 + Desp_Data[contador1];  //Posición x de la mesa
+              ///Arriba 1
+              PrG3P[8][0].position.x = 3.5 + Santiago2;
+              PrG3P[4][0].position.x = 3.5 + Santiago2;
+              PrG3P[5][0].position.x = 6.5 + Santiago2;
+              PrG3P[9][0].position.x = 6.5 + Santiago2;
+              ///Arriba 2
+              PrG3P[11][0].position.x = 3.5 + Santiago2 + U1.mat[1][contador1];
+              PrG3P[12][0].position.x = 3.5 + Santiago2 + U1.mat[1][contador1];
+              PrG3P[13][0].position.x = 6.5 + Santiago2 + U1.mat[1][contador1];
+              PrG3P[14][0].position.x = 6.5 + Santiago2 + U1.mat[1][contador1];
+              //Abajo
+              PrG3P[3][0].position.x = 3.5 + Desp_Data[contador1];
+              PrG3P[6][0].position.x = 6.5 + Desp_Data[contador1];
+              PrG3P[7][0].position.x = 3.5 + Desp_Data[contador1];
+              PrG3P[10][0].position.x = 6.5 + Desp_Data[contador1];
+              // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
+              // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
+              // chart.update(); chart2.update();
+            }
           }
           //Donde sucede la magia, es decir donde grafico 
           switch (EditResponse) {
@@ -2214,13 +2736,17 @@
           }
           chart.update();
           chart2.update();
+          contador1++;
+          contadorglobal++;
+          renderer.render(scene, camera);
           if (contador1 == U1.mat[0].length - 2) {
             clearInterval(DeforTim);
             contador1 = 0;
             contadorglobal = 0;
             LinearSweep.disabled = false;
             LogarithmicSweep.disabled = false;
-            clearInterval(DeforTim)
+            SX.disabled = false;
+            SY.disabled = false;
             LoadCharData();
           }
           if (contador1 == U1.mat[0].length - 10) {
@@ -2233,66 +2759,145 @@
       }
       // Deformar(); animate2();
       var hola;
-      var tamal = 0;
-      function animate2() {
-        tamal = tamal + 1;
-        const vertexS = new Array();
+      const vertexS = new Array();
+      var Animar;
+      var xflex1;
+      var xflex2;
+      var xflex3;
+      var Kr;
+      if (Porti2P == true) {
+        Kr = 0.26; //Constante de rigidez
         for (let i = 0; i < PrG[2][0].geometry.attributes.position.count; i++) {
           vertexS[i] = PrG[5][0].geometry.attributes.position.getZ(i);
         }
-        for (let i = 0; i < PrG[2][0].geometry.attributes.position.count; i++) {
-          const vertex = new THREE.Vector3();
-          const vertex2 = new THREE.Vector3();
-          vertex.fromBufferAttribute(PrG[2][0].geometry.attributes.position, i);
-          vertex2.fromBufferAttribute(PrG[7][0].geometry.attributes.position, i);
-          const x = vertex.y - 1;
-          const x1 = vertex2.y - 1;
-          // const x = U1.mat[1][contadorglobal];
-
-          // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1]) 
-          // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
-          // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1])
-          // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
-          const xflex1 = (5000 * x * x) / (2 * Kani.mat[1][1]) //Rigidez arriba
-          const xflex2 = (5 * x1 * x1) / (2 * Kani.mat[0][0]);
-
-          // Aplicar deformación asimétrica solo en el extremo superior
-          if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
-            // const deformation1 = xflex1 * U1.mat[1][contadorglobal] * 45; // Deformación asimétrica, arriba
-            // const deformation2 = xflex2 * U1.mat[0][contadorglobal] * 10; // Deformación asimétrica
-            const deformation1 = -xflex1 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
-            const deformation2 = -xflex2 * U1.mat[0][contadorglobal]; // Deformación asimétrica
-            // vertex.z += deformation2;
-            // hola = vertex.z;
-            // vertex2.z += deformation1;
-            vertex.z = vertexS[i] + deformation2 * 0.7;
-            hola = vertex.z;
-            vertex2.z = vertexS[i] + deformation1 * 0.7;
-            // // Columnas de arriba
-            // PrG[7][0].position.x = 3.35 - vertex.z;
-            // PrG[3][0].position.x = 3.35 - vertex.z;
-            // PrG[4][0].position.x = 6.35 - vertex.z;
-            // PrG[8][0].position.x = 6.35 - vertex.z;
-          }
-
-
-          //
-          PrG[7][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
-          PrG[3][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
-          PrG[4][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
-          PrG[8][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex2.z);
-          //Columnas de abajo
-          PrG[2][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-          PrG[5][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-          PrG[6][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-          PrG[9][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-
+      } else {
+        Kr = 1.5; //Constante de rigidez
+        for (let i = 0; i < PrG3P[3][0].geometry.attributes.position.count; i++) {
+          vertexS[i] = PrG3P[5][0].geometry.attributes.position.getZ(i);
         }
-        for (let j = 0; j < PrG.length; j++) {
-          PrG[j][0].geometry.attributes.position.needsUpdate = true;
+      }
+      function animate2() {
+        if (Porti2P == true) {
+          for (let i = 0; i < PrG[2][0].geometry.attributes.position.count; i++) {
+            const vertex = new THREE.Vector3();
+            const vertex2 = new THREE.Vector3();
+            vertex.fromBufferAttribute(PrG[2][0].geometry.attributes.position, i);
+            vertex2.fromBufferAttribute(PrG[7][0].geometry.attributes.position, i);
+            const x = vertex.y - 1;
+            const x1 = vertex2.y - 1;
+            // const x = U1.mat[1][contadorglobal];
+
+            // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1]) 
+            // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
+            // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1])
+            // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
+
+            //Lo mejor
+            // const xflex1 = (4100 * x * x) / (2 * Kani.mat[1][1]) //Rigidez arriba
+            // const xflex2 = (300 * x1 * x1) / (2 * Kani.mat[0][0]);
+
+            //Intento 
+            if (xx == false) {
+              xflex1 = (-Kr * x * x);
+              xflex2 = (-Kr * x1 * x1);
+
+            } else {
+              xflex1 = (Kr * x * x);
+              xflex2 = (Kr * x1 * x1);
+            }
+            // Aplicar deformación asimétrica solo en el extremo superior
+            if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
+              // const deformation1 = xflex1 * U1.mat[1][contadorglobal] * 45; // Deformación asimétrica, arriba
+              // const deformation2 = xflex2 * U1.mat[0][contadorglobal] * 10; // Deformación asimétrica
+              const deformation1 = -xflex1 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
+              const deformation2 = -xflex2 * U1.mat[0][contadorglobal]; // Deformación asimétrica
+              // vertex.z += deformation2;
+              // hola = vertex.z;
+              // vertex2.z += deformation1;
+              vertex.z = vertexS[i] + deformation2 * 0.55;
+              hola = vertex.z;
+              vertex2.z = vertexS[i] + deformation1 * 0.7;
+              // // Columnas de arriba
+              // PrG[7][0].position.x = 3.35 - vertex.z;
+              // PrG[3][0].position.x = 3.35 - vertex.z;
+              // PrG[4][0].position.x = 6.35 - vertex.z;
+              // PrG[8][0].position.x = 6.35 - vertex.z;
+            }
+
+
+            //Arriba
+            PrG[7][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            PrG[3][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            PrG[4][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            PrG[8][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            //Columnas de abajo
+            PrG[2][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+            PrG[5][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+            PrG[6][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+            PrG[9][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+
+          }
+          for (let j = 0; j < PrG.length; j++) {
+            PrG[j][0].geometry.attributes.position.needsUpdate = true;
+          }
+        } else {
+          for (let i = 0; i < PrG3P[2][0].geometry.attributes.position.count; i++) {
+            const vertex = new THREE.Vector3();
+            const vertex2 = new THREE.Vector3();
+            const vertex3 = new THREE.Vector3();
+            vertex.fromBufferAttribute(PrG3P[3][0].geometry.attributes.position, i);
+            vertex2.fromBufferAttribute(PrG3P[8][0].geometry.attributes.position, i);
+            vertex3.fromBufferAttribute(PrG3P[14][0].geometry.attributes.position, i);
+            const x = vertex.y - 1;
+            const x1 = vertex2.y - 1;
+            const x2 = vertex3.y - 1;
+            //Intento 
+            if (xx == false) {
+              xflex1 = (-Kr * x * x)*1.4;
+              xflex2 = (-Kr * x1 * x1)*1.4;
+              xflex3 = (-Kr * x2 * x2)*1.4;
+
+            } else {
+              xflex1 = (Kr * x * x);
+              xflex2 = (Kr * x1 * x1);
+              xflex3 = (Kr * x2 * x2);
+            }
+            // Aplicar deformación asimétrica solo en el extremo superior
+            if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
+              // const deformation1 = xflex1 * U1.mat[1][contadorglobal] * 45; // Deformación asimétrica, arriba
+              // const deformation2 = xflex2 * U1.mat[0][contadorglobal] * 10; // Deformación asimétrica
+              const deformation1 = -xflex1 * U1.mat[0][contadorglobal]; // Deformación asimétrica, arriba
+              const deformation2 = -xflex2 * U1.mat[1][contadorglobal]; // Deformación asimétrica
+              const deformation3 = -xflex3 * U1.mat[2][contadorglobal]; // Deformación asimétrica
+              
+              vertex.z = vertexS[i] + deformation1 * 0.7;
+              vertex2.z = vertexS[i] + deformation2 ;
+              vertex3.z = vertexS[i] + deformation3 * 1.2;
+            }
+
+
+            //Arriba 1
+            PrG3P[8][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            PrG3P[4][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            PrG3P[5][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            PrG3P[9][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
+            //Arriba 2
+            PrG3P[11][0].geometry.attributes.position.setXYZ(i, vertex2.x,  vertex2.y, vertex3.z);
+            PrG3P[12][0].geometry.attributes.position.setXYZ(i,  vertex2.x,  vertex2.y, vertex3.z);
+            PrG3P[13][0].geometry.attributes.position.setXYZ(i,  vertex2.x,  vertex2.y, vertex3.z);
+            PrG3P[14][0].geometry.attributes.position.setXYZ(i,  vertex2.x,  vertex2.y, vertex3.z);
+            //Columnas de abajo
+            PrG3P[3][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+            PrG3P[6][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+            PrG3P[7][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+            PrG3P[10][0].geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
+          }
+          for (let j = 0; j < PrG3P.length; j++) {
+            PrG3P[j][0].geometry.attributes.position.needsUpdate = true;
+          }
         }
         renderer.render(scene, camera);
-        var Animar = requestAnimationFrame(animate2);
+        Animar = requestAnimationFrame(animate2);
         if (DetenerAnimacion == true) {
           console.log('Hola')
           cancelAnimationFrame(Animar);
@@ -2350,7 +2955,7 @@
               // min: -2,
               title: {
                 display: true,
-                text: 'y'
+                text: 'U1'
 
               }
             }
@@ -2381,7 +2986,7 @@
         },
         options: {
           animation: {
-            duration: 0
+            duration: 10
           },
           interaction: {
             intersect: false
@@ -2409,7 +3014,7 @@
               // min: -2,
               title: {
                 display: true,
-                text: 'y'
+                text: 'U2'
 
               }
             }
@@ -2460,6 +3065,7 @@
       function Remover(Obj) {
         scene.remove(Obj);
       }
+
       //Sensores
       var AcelerometroG = Barra1(5, -0.8, 0); // Acelerometro en la base
       var Laser1 = Cilindro(5, 1.18, -1, - Math.PI / 2, - Math.PI); //Laser1

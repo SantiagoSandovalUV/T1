@@ -90,21 +90,30 @@
 
 		// Crear malla para el suelo
 		const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+		const floor2 = new THREE.Mesh(floorGeometry, floorMaterial);
 
 		// Posicionar el suelo debajo de la barra
 		floor.position.set(0, -1.1, 0); // Ajusta la posición en el eje Y según la ubicación deseada
+		floor2.position.set(0, 0.8, 0); // Ajusta la posición en el eje Y según la ubicación deseada
 		// Añadir el suelo a la escena
 		const group = new THREE.Group();
 		scene.add(floor);
+		scene.add(floor2);
 		group.add(cube);
 		floor.add(group);
-		cube.position.set(0.5,1,0)
+		cube.position.set(0.5, 1, 0)
 
 
 
 
 		const controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.update();
+
+		function moveObjectGlobalZ(object, distance) {
+			const globalDirection = new THREE.Vector3(distance, 0, 0 ); // Dirección Z global
+			object.position.add(globalDirection);
+		}
+
 
 		function animate() {
 			requestAnimationFrame(animate);
@@ -119,13 +128,13 @@
 				// Aplicar deformación asimétrica solo en el extremo superior
 				if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
 					const deformation = deformAmount * Math.pow(vertex.y - 1, 2); // Deformación asimétrica
-					vertex.z += deformation;
+					// vertex.z += deformation;
 				}
 
-				floor.rotation.y = deformAmount*Math.PI/2;
-				floor.position.x = deformAmount*5;
-				// cube.rotation.z = Math.PI;
-				var difeP = floor.position.x-cube.position.x;
+				// floor.rotation.y = deformAmount * Math.PI / 2;
+				floor.position.x = deformAmount * 5;
+				var difeP = floor.position.x - cube.position.x;
+				moveObjectGlobalZ(cube, deformAmount*0.0001*5); // Cambia 0.1 por la cantidad que quieras mover
 				// console.log(difeP)
 				geometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
 			}
