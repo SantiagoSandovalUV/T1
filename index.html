@@ -1412,12 +1412,9 @@
 			var z0 = Escalar_Gauseano * Math.sqrt(-2.0 * Math.log(r1)) * Math.cos(2 * Math.PI * r2);
 			return z0 * desviS + media;
 		}
-		// Función para remuestrear la señal 
-		function resampleSignal(signal, targetFrequency) {
-			const sourceFrequency = 50; // Frecuencia de la señal de origen (50 Hz en este caso)
+		function resampleSignal(signal, targetFrequency, sourceFrequency = 50) {
 			const factor = sourceFrequency / targetFrequency; // Factor de re muestreo
 			const resampledSignal = [];
-
 			for (let i = 0; i < signal.length; i += factor) {
 				const startIndex = Math.floor(i); // Índice inferior de la interpolación
 				const endIndex = Math.ceil(i); // Índice superior de la interpolación
