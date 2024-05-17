@@ -1749,6 +1749,8 @@
 			dt = 1 / 50;
 			Ac_Data = resampleSignal(Ac_Data, 50, 200);
 			Desp_Data = resampleSignal(Desp_Data, 50, 200);
+			Ac_Data.pop();
+			Desp_Data.pop();
 		}
 		// function Paez() {
 		// 	console.log("Paez")
@@ -1772,6 +1774,8 @@
 			dt = 1 / 50;
 			Ac_Data = resampleSignal(Ac_Data, 50, 256);
 			Desp_Data = resampleSignal(Desp_Data, 50, 256);
+			Ac_Data.pop();
+			Desp_Data.pop();
 		}
 		function Gilroy() {
 			console.log("Gilroy")
@@ -1782,6 +1786,8 @@
 			dt = 1 / 50;
 			Ac_Data = resampleSignal(Ac_Data, 50, 200);
 			Desp_Data = resampleSignal(Desp_Data, 50, 200);
+			Ac_Data.pop();
+			Desp_Data.pop();
 		}
 		//Deneter mesa
 		function StopMotion() {
@@ -3155,6 +3161,7 @@
 		//Organiza los datos que se van a exportar en columnas
 		var data1 = new Array();
 		function organizador() {
+			data1 = new Array();
 			TF = parseFloat(calcularResultado(document.getElementById('targetFrequency').value));
 			if (TF >= 0 && TF < 1 / dt) {
 				var VTR = resampleSignal(Vtiempo2, TF);
