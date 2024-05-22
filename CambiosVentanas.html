@@ -142,6 +142,64 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    #RespM {
+      width: 100%;
+      height: 52px;
+      overflow-y: scroll;
+      overflow: auto;
+      /* resize: none; */
+      /* Disable default resize handle */
+      position: relative;
+      overflow-y: hidden;
+      /*Desactiva la barra de desplazamiento vertical*/
+      overflow-x: hidden;
+      /*Desactiva la barra de desplazamiento horizontal*/
+
+    }
+
+    #InputsM {
+      width: 100%;
+      height: 355px;
+      overflow-y: scroll;
+      overflow: auto;
+      /* resize: none; */
+      /* Disable default resize handle */
+      position: relative;
+      overflow-y: hidden;
+      /*Desactiva la barra de desplazamiento vertical*/
+      overflow-x: hidden;
+      /*Desactiva la barra de desplazamiento horizontal*/
+
+    }
+
+    .resize-handle-R {
+      width: 100%;
+      /* Full width of the div */
+      height: 5px;
+      /* Height of the resize handle */
+      background: #fdb122;
+      /* Color of the resize handle */
+      cursor: ns-resize;
+      /* Cursor for resize handle */
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .resize-handle {
+      width: 100%;
+      /* Full width of the div */
+      height: 5px;
+      /* Height of the resize handle */
+      background: #fdb122;
+      /* Color of the resize handle */
+      cursor: ns-resize;
+      /* Cursor for resize handle */
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
   </style>
 </head>
 
@@ -151,7 +209,7 @@
       <div class="col-md-3">
         <a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/index.html"
           class="d-flex align-items-center text-dark text-decoration-none">
-          <!-- <img src="logo.png" style="height: 30px;"> -->
+          <img src="logo.png" style="height: 30px;">
           <span class="fs-8">VIRTUAL LABORATORIES</span>
         </a>
       </div>
@@ -170,621 +228,582 @@
     </div>
   </div>
   <div class="position-fixed"
-    style="width: 450px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
-    <div class="card mt-2" style="width: 100%; ">
-      <div class="card-body">
-        <form class="row g-3">
-          <div class="col-md-6">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="DisplamG" checked>
-              <label class="form-check-label" for="Displam">Displacements
-              </label>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="AceleG">
-              <label class="form-check-label" for="Acel">Accelerations
-              </label>
-            </div>
-          </div>
-        </form>
-        <div class="card mb-2" style="width: 100%;">
-          <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
-          <div class="card-body">
-            <canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
-          </div>
-        </div>
-        <div class="card mb-2" style="width: 100%;">
-          <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
-          <div class="card-body">
-            <canvas id="myChart2" style="width: 200px;height: 100px;"></canvas>
-          </div>
-        </div>
-        <div class="card mb-2" style="width: 100%;">
-          <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
-          <div class="card-body">
-            <canvas id="myChart3" style="width: 200px;height: 100px;"></canvas>
-          </div>
-        </div>
-        <div class="card mb-2" style="width: 100%;">
-          <select id="select_barra" class="form-select" aria-label="Default select example" style="display: none;"
-            onchange="ResponseEditor(),LoadCharDataOnChange()">
-            <option value="Despl" style="display: none" selected>Select Response</option>
-            <option value="Despl" style="display: none">First floor </option>
-            <option value="Vel" style="display: none"> Second floor</option>
-            <option value="Acel" style="display: none">Third floor</option>
-            <option value="RespEx" style="display: none">Ground acceleration</option>
-          </select>
-        </div>
+    style="width: 500px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
+    <!-- Antiagua Gra -->
+    <!-- <div class="card mt-2" id="InputsM"
+      style="width: 100%; height: 325px; overflow-y: scroll;overflow: auto;resize:vertical"> -->
+    <div class="card mt-2" id="InputsM">
+      <h4 style="text-align: left;"> Laboratory parameters </h4>
+      <div class="card mb-2" style="width: 100%;">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" id="SCT">
+          Sensor configuration
+        </button>
       </div>
-    </div>
-    <div class="card mb-2" style="width: 100%;">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-        Sensor configuration
-      </button>
-    </div>
-    <div class="collapse" id="collapseExample3">
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                Accelerometer (Top)
-              </button>
-            </div>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: center;">
-              <div class="card mt-3" style="width: 100%;">
-                <div class="card-body" style="text-align: center;">
-                  <button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
-                  <button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remove</button>
-                </div>
+      <div class="collapse" id="collapseExample3">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <div style="text-align: center;">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Accelerometer (Top)
+                </button>
               </div>
-              <div class="card mt-2" style="width: 100%;">
-                <div class="card-body">
-                  <form class="row g-1">
-                    <div class="col d-flex justify-content-between align-items-center">
-                      <label class="form-label" style="font-size:15px; white-space: nowrap;">
-                        Add noise
-                        <i data-tippy-content="Check for the addition of Gaussian noise"
-                          class="ti ti-question-mark text-primary"></i></label>
-                      <div class="form-check form-switch" style="margin-left: 176px;">
-                        <input class="form-check-input" type="checkbox" id="MassCheck">
-                        <label class="form-check-label" for="MassCheck"></label>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body" style="text-align: center;">
+                <div class="card mt-3" style="width: 100%;">
+                  <div class="card-body" style="text-align: center;">
+                    <button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
+                    <button type="button" onclick="RemoveSensor()" class="btn btn-primary">Remove</button>
+                  </div>
+                </div>
+                <div class="card mt-2" style="width: 100%;">
+                  <div class="card-body">
+                    <form class="row g-1">
+                      <div class="col d-flex justify-content-between align-items-center">
+                        <label class="form-label" style="font-size:15px; white-space: nowrap;">
+                          Add noise
+                          <i data-tippy-content="Check for the addition of Gaussian noise"
+                            class="ti ti-question-mark text-primary"></i></label>
+                        <div class="form-check form-switch" style="margin-left: 176px;">
+                          <input class="form-check-input" type="checkbox" id="MassCheck">
+                          <label class="form-check-label" for="MassCheck"></label>
+                        </div>
                       </div>
-                    </div>
-                    <!-- <div class="col">
+                      <!-- <div class="col">
                       <input type="text" class="form-control form-control-sm" name="NoiseAM" id="NoiseAM" placeholder=""
                         disabled>
                     </div> -->
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                Displacement sensor (Top)
-              </button>
-            </div>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: center;">
-              <div class="card mt-3" style="width: 100%;">
-                <div class="card-body" style="text-align: center;">
-                  <button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
-                  <button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
-                </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <div style="text-align: center;">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Displacement sensor (Top)
+                </button>
               </div>
-              <div class="card mt-2" style="width: 100%;">
-                <div class="card-body">
-                  <form class="row g-1">
-                    <div class="col d-flex justify-content-between align-items-center">
-                      <label class="form-label" style="font-size:15px; white-space: nowrap;">
-                        Add noise
-                        <i data-tippy-content="Check for the addition of Gaussian noise"
-                          class="ti ti-question-mark text-primary"></i></label>
-                      <div class="form-check form-switch" style="margin-left: 176px;">
-                        <input class="form-check-input" type="checkbox" id="RelativeCheck">
-                        <label class="form-check-label" for="RelativeCheck"></label>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body" style="text-align: center;">
+                <div class="card mt-3" style="width: 100%;">
+                  <div class="card-body" style="text-align: center;">
+                    <button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
+                    <button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+                  </div>
+                </div>
+                <div class="card mt-2" style="width: 100%;">
+                  <div class="card-body">
+                    <form class="row g-1">
+                      <div class="col d-flex justify-content-between align-items-center">
+                        <label class="form-label" style="font-size:15px; white-space: nowrap;">
+                          Add noise
+                          <i data-tippy-content="Check for the addition of Gaussian noise"
+                            class="ti ti-question-mark text-primary"></i></label>
+                        <div class="form-check form-switch" style="margin-left: 176px;">
+                          <input class="form-check-input" type="checkbox" id="RelativeCheck">
+                          <label class="form-check-label" for="RelativeCheck"></label>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                Accelerometer (Bottom)
-              </button>
-            </div>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: left;">
-              <div class="card mt-3" style="width: 100%;">
-                <div class="card-body" style="text-align: center;">
-                  <button type="button" onclick="LoadSensorG()" class="btn btn-primary">Assign</button>
-                  <button type="button" onclick="RemoveSensorG()" class="btn btn-primary">Remove</button>
-                </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <div style="text-align: center;">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  Accelerometer (Bottom)
+                </button>
               </div>
-              <div class="card mt-2" style="width: 100%;">
-                <div class="card-body">
-                  <form class="row g-1">
-                    <div class="col d-flex justify-content-between align-items-center">
-                      <label class="form-label" style="font-size:15px; white-space: nowrap;">
-                        Add noise
-                        <i data-tippy-content="Check for the addition of Gaussian noise"
-                          class="ti ti-question-mark text-primary"></i></label>
-                      <div class="form-check form-switch" style="margin-left: 176px;">
-                        <input class="form-check-input" type="checkbox" id="GroundCheck">
-                        <label class="form-check-label" for="GroundCheck"></label>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body" style="text-align: left;">
+                <div class="card mt-3" style="width: 100%;">
+                  <div class="card-body" style="text-align: center;">
+                    <button type="button" onclick="LoadSensorG()" class="btn btn-primary">Assign</button>
+                    <button type="button" onclick="RemoveSensorG()" class="btn btn-primary">Remove</button>
+                  </div>
+                </div>
+                <div class="card mt-2" style="width: 100%;">
+                  <div class="card-body">
+                    <form class="row g-1">
+                      <div class="col d-flex justify-content-between align-items-center">
+                        <label class="form-label" style="font-size:15px; white-space: nowrap;">
+                          Add noise
+                          <i data-tippy-content="Check for the addition of Gaussian noise"
+                            class="ti ti-question-mark text-primary"></i></label>
+                        <div class="form-check form-switch" style="margin-left: 176px;">
+                          <input class="form-check-input" type="checkbox" id="GroundCheck">
+                          <label class="form-check-label" for="GroundCheck"></label>
+                        </div>
                       </div>
-                    </div>
-                    <!-- <div class="col">
+                      <!-- <div class="col">
                       <input type="text" class="form-control form-control-sm" name="NoiseAG" id="NoiseAG" placeholder=""
                         disabled>
                     </div> -->
-                  </form>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingFour">
-            <div style="text-align: center;">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                Signal Resampling
-              </button>
-            </div>
-          </h2>
-          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body" style="text-align: left;">
-              <form class="row g-3">
-                <div class="col" style="width: 90px;">
-                  <label class="form-label" style="font-size: 14px">Resampling Frequency [Hz]<i
-                      data-tippy-content="ResamplingFrequency, should be less than 50 Hz "
-                      class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="targetFrequency" id="targetFrequency"
-                    placeholder="">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card mb-2" style="width: 100%;">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Dynamic properties
-      </button>
-    </div>
-    <div class="collapse" id="collapseExample">
-      <div class="card text-bg-primary mt-2" style="width: 100%;">
-        <div class="card mt-2" style="width: 100%;" id="mck"> <!-- <Inicio> -->
-          <div class="card-body"> <!-- <Inicio> -->
-            <div class="card mt-2" style="width: 100%;" id="Losas">
-              <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
-                <h6 style="margin-right: 15px; margin-top: 10px ">Slab</h6>
-                <form class="row g-2">
-                  <form class="col-2">
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-lock-fill" viewBox="0 0 20 20" style="visibility: hidden;" id="Locke">
-                        <path
-                          d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                      </svg>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLocke">
-                        <path
-                          d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
-                      </svg>
-                      <i data-tippy-content="[The slab does not contribute to the rigidity of frame]
-                                            
-                      When this element is locked, it is not possible to access to the frame element menu. If you want to deactivate it, you must deselect the slab."
-                        class="ti ti-question-mark text-primary"></i>
-                    </div>
-                  </form>
-                </form>
-              </div>
-              <form class="row g-1">
-                <div class="col" style="width:10px; margin: 10px 20px">
-                  <label class="form-label" style="font-size: 14px">Self-weight [Kg/m^3] <i
-                      data-tippy-content="Slab's Self-weight" class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="Mass_box1" id="Mass_box1"
-                    placeholder="">
-                </div>
-              </form>
-              <form class="row g-1">
-                <div class="col" style="width:180px; margin: 10px 20px">
-                  <label class="form-label" style="font-size: 14px; white-space:nowrap"> Slab thickness [m]<i
-                      data-tippy-content="Slab's thickness" class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="Espesor_box" id="Espesor_box"
-                    placeholder="">
-                </div>
-              </form>
-            </div>
-            <div class="card mt-2" style="width: 100%;" id="Columnas">
-              <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
-                <h6 style="margin-right: 10px;  margin-top: 10px ">Frame element</h6>
-                <form class="row g-2">
-                  <form class="col-2">
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-lock-fill" viewBox="0 0 20 20"
-                        style="visibility: hidden;; width: 35px; height: 35px;" id="LockeCo">
-                        <path
-                          d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                      </svg>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLockeCo">
-                        <path
-                          d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
-                      </svg>
-                      <i data-tippy-content="When this element is locked, it is not possible to access to the slab menu. If you want to deactivate it, you must deselect the frame element."
-                        class="ti ti-question-mark text-primary"></i>
-                    </div>
-                  </form>
-                </form>
-              </div>
-              <form class="row g-1">
-                <div class="col" style="width:180px; margin: 10px 20px">
-                  <label class="form-label" style="font-size: 14px; white-space:nowrap"> Cross section base
-                    b [m] <i data-tippy-content="Frame element's base"
-                      class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="b_box1" id="b_box1" placeholder="">
-                </div>
-                <div class="col" style="width:180px; margin: 10px 20px">
-                  <label class="form-label" style="font-size: 14px; white-space:nowrap">Cross section height h
-                    [m]<i data-tippy-content="Frame element's heigth"
-                      class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="h_box1" id="h_box1" placeholder="">
-                </div>
-                <div class="col" style="width:180px; margin: 10px 20px">
-                  <label class="form-label" style="font-size: 14px; white-space:nowrap">Modulus of elasticity E
-                    [Pa] <i data-tippy-content="Frame element's modulus of elasticity"
-                      class="ti ti-question-mark text-primary"></i></label>
-                  <input type="text" class="form-control form-control-sm" name="ME_box1" id="ME_box1" placeholder="">
-                </div>
-              </form>
-            </div>
-            <!-- <div class="card mt-2" style="width: 100%;">     
-              <button type="button" id="StartSimulation" onclick="ActProp()" class="btn btn-primary">Update all properties
-              </button>
-            </div> -->
-            <div class="card mt-2" style="width: 100%;" id="Amor">
-              <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
-                <h6 style="margin-right: 25px;  margin-top: 10px ">Damping</h6>
-
-                <!-- La info aquí queda a la derecha del titulo -->
-              </div>
-              <div
-                style="margin-left: 20px; margin-right: 20px; margin-top: 10px; margin-bottom: 10px; display: flex; align-items: center;"
-                id="Amor">
-                <select id="AmorCase" class="form-select" aria-label="Default select example"
-                  onchange="Amortiguamiento()">
-                  <option value="SelectOpti" style="display: block" selected>Select option</option>
-                  <option value="ManualAS" style="display: block">Manual assignment</option>
-                  <option value="Case1" style="display: block">Case 1</option>
-                  <option value="Case2" style="display: block">Case 2</option>
-                  <option value="Case3" style="display: block">Case 3</option>
-                  <option value="Case4" style="display: block">Case 4 (Random) </option>
-                </select>
-              </div>
-              <div style=" margin: 10px 20px">
-                <form class="row g-2">
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor1">
-                    <label class="form-label" style="font-size:14px">ζ1<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort1" id="Amort1" placeholder="">
-                  </div>
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor2">
-                    <label class="form-label" style="font-size:14px"> ζ2<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort2" id="Amort2" placeholder="">
-                  </div>
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor3">
-                    <label class="form-label" style="font-size:14px"> ζ3<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort3" id="Amort3" placeholder="">
-                  </div>
-                </form>
-              </div>
-              <div style=" margin: 10px 20px">
-                <form class="row g-2">
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor4">
-                    <label class="form-label" style="font-size:14px"> ζ4<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort4" id="Amort4" placeholder="">
-                  </div>
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor5">
-                    <label class="form-label" style="font-size:14px">ζ5<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort5" id="Amort5" placeholder="">
-                  </div>
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor6">
-                    <label class="form-label" style="font-size:14px">ζ6<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort6" id="Amort6" placeholder="">
-                  </div>
-                </form>
-              </div>
-              <div style=" margin: 10px 20px">
-                <form class="row g-2">
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor7">
-                    <label class="form-label" style="font-size:14px">ζ7<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort7" id="Amort7" placeholder="">
-                  </div>
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor8">
-                    <label class="form-label" style="font-size:14px">ζ8<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort8" id="Amort8" placeholder="">
-                  </div>
-                  <div class="col text-nowrap" style="width:180px; display: none;" id="Amor9">
-                    <label class="form-label" style="font-size:14px">ζ9<i
-                        data-tippy-content="Dimensionless damping ratio"
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Amort9" id="Amort9" placeholder="">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div><!-- <Inicio> -->
-        </div> <!-- <Inicio> -->
-      </div>
-    </div>
-    <!-- <Inicio> -->
-
-    <div class="card mb-2" style="width: 100%;">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
-        data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" id="BMT">
-        Base motion
-      </button>
-    </div>
-    <div class="collapse" id="collapseExample2">
-      <div class="card text-bg-primary mt-2" style="width: 100%;">
-        <div class="accordion accordion-flush" id="accordionFlushExample2">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwoVl">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwoVl" aria-expanded="false" aria-controls="flush-collapseTwoVl">
-                Ug(t)=0 (Free vibration)
-              </button>
-            </h2>
-            <div id="flush-collapseTwoVl" class="accordion-collapse collapse" aria-labelledby="flush-headingTwoVl"
-              data-bs-parent="#accordionFlushExample2">
-              <div class="accordion-body">
-                <div class="card mt-2" style="width: 100%;" id="SND">
-                  <div class="card-body" id="FreeVib">
-                    <form class="row g-2">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size:14px">Amplitude u₀ (1) [m]<i
-                            data-tippy-content="Initial displacement"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="DespInicial" id="DespInicial"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size:14px">Velocity up₀ (1) [m/s]<i
-                            data-tippy-content="Initial velocity" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="VelInicial" id="VelInicial"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-2">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size:14px">Amplitude u₀ (2) [m]<i
-                            data-tippy-content="Initial displacement"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="DespInicial2" id="DespInicial2"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size:14px">Velocity up₀ (2) [m/s]<i
-                            data-tippy-content="Initial velocity" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="VelInicial2" id="VelInicial2"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-2">
-                      <div class="col" style="width:180px; display: none;" id="AmplUp3">
-                        <label class="form-label" style="font-size:14px">Amplitude u₀ (3) [m]<i
-                            data-tippy-content="Initial displacement"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="DespInicial3" id="DespInicial3"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px; display: none;" id="VelUp3">
-                        <label class="form-label" style="font-size:14px">Velocity up₀ (3) [m/s]<i
-                            data-tippy-content="Initial velocity" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="VelInicial3" id="VelInicial3"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-2">
-                      <div class="col-1" style="width:350px">
-                        <label class="form-label" style="font-size: 14px">Duration [s] <i
-                            data-tippy-content="Simulation duration"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="DuracionSMVL_box"
-                          id="DuracionSMVL_box" placeholder="">
-
-                      </div>
                     </form>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
           <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Sinusoidal displacement
-              </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample2">
-              <div class="accordion-body">
-                <div class="card mt-2" style="width: 100%;" id="SND">
-                  <div class="card-body">
-                    <form class="row g-2">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size:14px">Amplitude u₀ [m]<i
-                            data-tippy-content="Dynamic amplitude of sinusoidal displacement"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="Po_box1" id="Po_box1"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px">Angular Freq. ω
-                          [rad/s]
-                          <i data-tippy-content="Angular frequency of sinusoidal displacement ω"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="Wn_box1" id="Wn_box1"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-4">
-                      <div class="col-1" style="width:350px">
-                        <label class="form-label" style="font-size: 14px">Duration [s] <i
-                            data-tippy-content="Simulation duration"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="DuracionSM_box"
-                          id="DuracionSM_box" placeholder="">
-
-                      </div>
-                    </form>
-                  </div>
-                </div>
+            <h2 class="accordion-header" id="headingFour">
+              <div style="text-align: center;">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                  Signal Resampling
+                </button>
               </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo55">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwo55" aria-expanded="false" aria-controls="flush-collapseTwo55"
-                id="Barrido">
-                Frequency sweep </button>
             </h2>
-            <div id="flush-collapseTwo55" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo55"
-              data-bs-parent="#accordionFlushExample2">
-              <div class="accordion-body">
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body" style="text-align: left;">
                 <form class="row g-3">
-                  <div class="col-md-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="LinearSweep" checked>
-                      <label class="form-check-label" for="LinearSweep">Linear sweep</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="LogarithmicSweep">
-                      <label class="form-check-label text-nowrap" for="LogarithmicSweep">Logarithmic sweep</label>
-                    </div>
-                  </div>
-                </form>
-                <div class="card mt-2" style="width: 100%;" id="BrFr">
-                  <div class="card-body">
-                    <form class="row g-3">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px"> f1 [Hz]<i
-                            data-tippy-content="Initial frequency" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="W1_box" id="W1_box"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px"> f2 [Hz]<i
-                            data-tippy-content="Final frequency" class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="W2_box" id="W2_box"
-                          placeholder="">
-                      </div>
-                    </form>
-                    <form class="row g-4">
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px">Duration [s] <i
-                            data-tippy-content="Simulation duration"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="Inter_box" id="Inter_box"
-                          placeholder="">
-                      </div>
-                      <div class="col" style="width:180px">
-                        <label class="form-label" style="font-size: 14px"> u₀ [m]<i
-                            data-tippy-content="Maximum displacement at the base"
-                            class="ti ti-question-mark text-primary"></i></label>
-                        <input type="text" class="form-control form-control-sm" name="PoB_box" id="PoB_box"
-                          placeholder="">
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                Predefined earthquakes</button>
-            </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-              data-bs-parent="#accordionFlushExample2">
-              <div class="accordion-body">
-                <form class="row g-3">
-                  <div class="col" style="width:90px">
-                    <label class="form-label" style="font-size: 14px">Gain <i
-                        data-tippy-content="Allows changing the earthquake gain"
+                  <div class="col" style="width: 90px;">
+                    <label class="form-label" style="font-size: 14px">Resampling Frequency [Hz]<i
+                        data-tippy-content="ResamplingFrequency, should be less than 50 Hz "
                         class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="Escalar_box1" id="Escalar_box1"
+                    <input type="text" class="form-control form-control-sm" name="targetFrequency" id="targetFrequency"
                       placeholder="">
                   </div>
                 </form>
-                <div class="card mt-2" class="btn-group">
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Earthquakes</button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#" onclick="Elcentro(),Alerta_Sismo()">El
-                        centro</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="LaVega(),Alerta_Sismo()">La
-                        Vega</a></li>
-                    <!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
-                    <li><a class="dropdown-item" href="#" onclick="Armenia(),Alerta_Sismo()">Armenia</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="LomaPrieta(),Alerta_Sismo()">Loma
-                        Prieta</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#" onclick="Gilroy(),Alerta_Sismo()">Gilroy</a></li>
-                  </ul>
-                  <!-- <select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-2" style="width: 100%;">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="DyP">
+          Dynamic properties
+        </button>
+      </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card text-bg-primary mt-2" style="width: 100%;">
+          <div class="card mt-2" style="width: 100%;" id="mck"> <!-- <Inicio> -->
+            <div class="card-body"> <!-- <Inicio> -->
+              <div class="card mt-2" style="width: 100%;" id="Losas">
+                <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
+                  <h6 style="margin-right: 15px; margin-top: 10px ">Slab</h6>
+                  <form class="row g-2">
+                    <form class="col-2">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-lock-fill" viewBox="0 0 20 20" style="visibility: hidden;" id="Locke">
+                          <path
+                            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLocke">
+                          <path
+                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+                        </svg>
+                        <i data-tippy-content="[The slab does not contribute to the rigidity of frame]
+                                            
+                      When this element is locked, it is not possible to access to the frame element menu. If you want to deactivate it, you must deselect the slab."
+                          class="ti ti-question-mark text-primary"></i>
+                      </div>
+                    </form>
+                  </form>
+                </div>
+                <form class="row g-1">
+                  <div class="col" style="width:10px; margin: 10px 20px">
+                    <label class="form-label" style="font-size: 14px">Self-weight [Kg/m^3] <i
+                        data-tippy-content="Slab's Self-weight" class="ti ti-question-mark text-primary"></i></label>
+                    <input type="text" class="form-control form-control-sm" name="Mass_box1" id="Mass_box1"
+                      placeholder="">
+                  </div>
+                </form>
+                <form class="row g-1">
+                  <div class="col" style="width:180px; margin: 10px 20px">
+                    <label class="form-label" style="font-size: 14px; white-space:nowrap"> Slab thickness [m]<i
+                        data-tippy-content="Slab's thickness" class="ti ti-question-mark text-primary"></i></label>
+                    <input type="text" class="form-control form-control-sm" name="Espesor_box" id="Espesor_box"
+                      placeholder="">
+                  </div>
+                </form>
+              </div>
+              <div class="card mt-2" style="width: 100%;" id="Columnas">
+                <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
+                  <h6 style="margin-right: 10px;  margin-top: 10px ">Frame element</h6>
+                  <form class="row g-2">
+                    <form class="col-2">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-lock-fill" viewBox="0 0 20 20"
+                          style="visibility: hidden;; width: 35px; height: 35px;" id="LockeCo">
+                          <path
+                            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-unlock-fill" viewBox="0 0 20 20" id="UnLockeCo">
+                          <path
+                            d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+                        </svg>
+                        <i data-tippy-content="When this element is locked, it is not possible to access to the slab menu. If you want to deactivate it, you must deselect the frame element."
+                          class="ti ti-question-mark text-primary"></i>
+                      </div>
+                    </form>
+                  </form>
+                </div>
+                <form class="row g-1">
+                  <div class="col" style="width:180px; margin: 10px 20px">
+                    <label class="form-label" style="font-size: 14px; white-space:nowrap"> Cross section base
+                      b [m] <i data-tippy-content="Frame element's base"
+                        class="ti ti-question-mark text-primary"></i></label>
+                    <input type="text" class="form-control form-control-sm" name="b_box1" id="b_box1" placeholder="">
+                  </div>
+                  <div class="col" style="width:180px; margin: 10px 20px">
+                    <label class="form-label" style="font-size: 14px; white-space:nowrap">Cross section height h
+                      [m]<i data-tippy-content="Frame element's heigth"
+                        class="ti ti-question-mark text-primary"></i></label>
+                    <input type="text" class="form-control form-control-sm" name="h_box1" id="h_box1" placeholder="">
+                  </div>
+                  <div class="col" style="width:180px; margin: 10px 20px">
+                    <label class="form-label" style="font-size: 14px; white-space:nowrap">Modulus of elasticity E
+                      [Pa] <i data-tippy-content="Frame element's modulus of elasticity"
+                        class="ti ti-question-mark text-primary"></i></label>
+                    <input type="text" class="form-control form-control-sm" name="ME_box1" id="ME_box1" placeholder="">
+                  </div>
+                </form>
+              </div>
+              <!-- <div class="card mt-2" style="width: 100%;">     
+              <button type="button" id="StartSimulation" onclick="ActProp()" class="btn btn-primary">Update all properties
+              </button>
+            </div> -->
+              <div class="card mt-2" style="width: 100%;" id="Amor">
+                <div style="margin-left: 20px; margin-right: 10px; display: flex; align-items: center;">
+                  <h6 style="margin-right: 25px;  margin-top: 10px ">Damping</h6>
+
+                  <!-- La info aquí queda a la derecha del titulo -->
+                </div>
+                <div
+                  style="margin-left: 20px; margin-right: 20px; margin-top: 10px; margin-bottom: 10px; display: flex; align-items: center;"
+                  id="Amor">
+                  <select id="AmorCase" class="form-select" aria-label="Default select example"
+                    onchange="Amortiguamiento()">
+                    <option value="SelectOpti" style="display: block" selected>Select option</option>
+                    <option value="ManualAS" style="display: block">Manual assignment</option>
+                    <option value="Case1" style="display: block">Case 1</option>
+                    <option value="Case2" style="display: block">Case 2</option>
+                    <option value="Case3" style="display: block">Case 3</option>
+                    <option value="Case4" style="display: block">Case 4 (Random) </option>
+                  </select>
+                </div>
+                <div style=" margin: 10px 20px">
+                  <form class="row g-2">
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor1">
+                      <label class="form-label" style="font-size:14px">ζ1<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort1" id="Amort1" placeholder="">
+                    </div>
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor2">
+                      <label class="form-label" style="font-size:14px"> ζ2<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort2" id="Amort2" placeholder="">
+                    </div>
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor3">
+                      <label class="form-label" style="font-size:14px"> ζ3<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort3" id="Amort3" placeholder="">
+                    </div>
+                  </form>
+                </div>
+                <div style=" margin: 10px 20px">
+                  <form class="row g-2">
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor4">
+                      <label class="form-label" style="font-size:14px"> ζ4<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort4" id="Amort4" placeholder="">
+                    </div>
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor5">
+                      <label class="form-label" style="font-size:14px">ζ5<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort5" id="Amort5" placeholder="">
+                    </div>
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor6">
+                      <label class="form-label" style="font-size:14px">ζ6<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort6" id="Amort6" placeholder="">
+                    </div>
+                  </form>
+                </div>
+                <div style=" margin: 10px 20px">
+                  <form class="row g-2">
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor7">
+                      <label class="form-label" style="font-size:14px">ζ7<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort7" id="Amort7" placeholder="">
+                    </div>
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor8">
+                      <label class="form-label" style="font-size:14px">ζ8<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort8" id="Amort8" placeholder="">
+                    </div>
+                    <div class="col text-nowrap" style="width:180px; display: none;" id="Amor9">
+                      <label class="form-label" style="font-size:14px">ζ9<i
+                          data-tippy-content="Dimensionless damping ratio"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Amort9" id="Amort9" placeholder="">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div><!-- <Inicio> -->
+          </div> <!-- <Inicio> -->
+        </div>
+      </div>
+      <!-- <Inicio> -->
+
+      <div class="card mb-2" style="width: 100%;">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" id="BMT">
+          Base motion
+        </button>
+      </div>
+      <div class="collapse" id="collapseExample2">
+        <div class="card text-bg-primary mt-2" style="width: 100%;">
+          <div class="accordion accordion-flush" id="accordionFlushExample2">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwoVl">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwoVl" aria-expanded="false" aria-controls="flush-collapseTwoVl">
+                  Ug(t)=0 (Free vibration)
+                </button>
+              </h2>
+              <div id="flush-collapseTwoVl" class="accordion-collapse collapse" aria-labelledby="flush-headingTwoVl"
+                data-bs-parent="#accordionFlushExample2">
+                <div class="accordion-body">
+                  <div class="card mt-2" style="width: 100%;" id="SND">
+                    <div class="card-body" id="FreeVib">
+                      <form class="row g-2">
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size:14px">Amplitude u₀ (1) [m]<i
+                              data-tippy-content="Initial displacement"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="DespInicial" id="DespInicial"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size:14px">Velocity up₀ (1) [m/s]<i
+                              data-tippy-content="Initial velocity"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="VelInicial" id="VelInicial"
+                            placeholder="">
+                        </div>
+                      </form>
+                      <form class="row g-2">
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size:14px">Amplitude u₀ (2) [m]<i
+                              data-tippy-content="Initial displacement"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="DespInicial2" id="DespInicial2"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size:14px">Velocity up₀ (2) [m/s]<i
+                              data-tippy-content="Initial velocity"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="VelInicial2" id="VelInicial2"
+                            placeholder="">
+                        </div>
+                      </form>
+                      <form class="row g-2">
+                        <div class="col" style="width:180px; display: none;" id="AmplUp3">
+                          <label class="form-label" style="font-size:14px">Amplitude u₀ (3) [m]<i
+                              data-tippy-content="Initial displacement"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="DespInicial3" id="DespInicial3"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px; display: none;" id="VelUp3">
+                          <label class="form-label" style="font-size:14px">Velocity up₀ (3) [m/s]<i
+                              data-tippy-content="Initial velocity"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="VelInicial3" id="VelInicial3"
+                            placeholder="">
+                        </div>
+                      </form>
+                      <form class="row g-2">
+                        <div class="col-1" style="width:350px">
+                          <label class="form-label" style="font-size: 14px">Duration [s] <i
+                              data-tippy-content="Simulation duration"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="DuracionSMVL_box"
+                            id="DuracionSMVL_box" placeholder="">
+
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Sinusoidal displacement
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample2">
+                <div class="accordion-body">
+                  <div class="card mt-2" style="width: 100%;" id="SND">
+                    <div class="card-body">
+                      <form class="row g-2">
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size:14px">Amplitude u₀ [m]<i
+                              data-tippy-content="Dynamic amplitude of sinusoidal displacement"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="Po_box1" id="Po_box1"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size: 14px">Angular Freq. ω
+                            [rad/s]
+                            <i data-tippy-content="Angular frequency of sinusoidal displacement ω"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="Wn_box1" id="Wn_box1"
+                            placeholder="">
+                        </div>
+                      </form>
+                      <form class="row g-4">
+                        <div class="col-1" style="width:350px">
+                          <label class="form-label" style="font-size: 14px">Duration [s] <i
+                              data-tippy-content="Simulation duration"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="DuracionSM_box"
+                            id="DuracionSM_box" placeholder="">
+
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo55">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo55" aria-expanded="false" aria-controls="flush-collapseTwo55"
+                  id="Barrido">
+                  Frequency sweep </button>
+              </h2>
+              <div id="flush-collapseTwo55" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo55"
+                data-bs-parent="#accordionFlushExample2">
+                <div class="accordion-body">
+                  <form class="row g-3">
+                    <div class="col-md-6">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="LinearSweep" checked>
+                        <label class="form-check-label" for="LinearSweep">Linear sweep</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="LogarithmicSweep">
+                        <label class="form-check-label text-nowrap" for="LogarithmicSweep">Logarithmic sweep</label>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="card mt-2" style="width: 100%;" id="BrFr">
+                    <div class="card-body">
+                      <form class="row g-3">
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size: 14px"> f1 [Hz]<i
+                              data-tippy-content="Initial frequency"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="W1_box" id="W1_box"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size: 14px"> f2 [Hz]<i
+                              data-tippy-content="Final frequency" class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="W2_box" id="W2_box"
+                            placeholder="">
+                        </div>
+                      </form>
+                      <form class="row g-4">
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size: 14px">Duration [s] <i
+                              data-tippy-content="Simulation duration"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="Inter_box" id="Inter_box"
+                            placeholder="">
+                        </div>
+                        <div class="col" style="width:180px">
+                          <label class="form-label" style="font-size: 14px"> u₀ [m]<i
+                              data-tippy-content="Maximum displacement at the base"
+                              class="ti ti-question-mark text-primary"></i></label>
+                          <input type="text" class="form-control form-control-sm" name="PoB_box" id="PoB_box"
+                            placeholder="">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  Predefined earthquakes</button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                data-bs-parent="#accordionFlushExample2">
+                <div class="accordion-body">
+                  <form class="row g-3">
+                    <div class="col" style="width:90px">
+                      <label class="form-label" style="font-size: 14px">Gain <i
+                          data-tippy-content="Allows changing the earthquake gain"
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="Escalar_box1" id="Escalar_box1"
+                        placeholder="">
+                    </div>
+                  </form>
+                  <div class="card mt-2" class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Earthquakes</button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#" onclick="Elcentro(),Alerta_Sismo()">El
+                          centro</a></li>
+                      <li><a class="dropdown-item" href="#" onclick="LaVega(),Alerta_Sismo()">La
+                          Vega</a></li>
+                      <!-- <li><a class="dropdown-item" href="#" onclick="Paez()">Paez</a></li> -->
+                      <li><a class="dropdown-item" href="#" onclick="Armenia(),Alerta_Sismo()">Armenia</a></li>
+                      <li><a class="dropdown-item" href="#" onclick="LomaPrieta(),Alerta_Sismo()">Loma
+                          Prieta</a>
+                      </li>
+                      <li><a class="dropdown-item" href="#" onclick="Gilroy(),Alerta_Sismo()">Gilroy</a></li>
+                    </ul>
+                    <!-- <select>
                             <option value="1" onclick="Elcentro()">El Centro</option>
                             <option value="2" onclick="LaVega()">La Vega</option>
                             <option value="3" onclick="Armenia()">Armenia</option>
@@ -792,33 +811,34 @@
                             <option value="5" onclick="Gilroy()">Gilroy</option>
         
                           </select> -->
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                Upload base displacement
-              </button>
-            </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample2">
-              <div class="accordion-body">
-                <div class="card-body">
-                  <div class="col" style="width:auto">
-                    <label class="form-label" style="font-size: 14px">Sampling frequency [Hz] <i
-                        data-tippy-content="To activate the upload button, you must assign a sampling frequency "
-                        class="ti ti-question-mark text-primary"></i></label>
-                    <input type="text" class="form-control form-control-sm" name="SamplingF" id="SamplingF"
-                      placeholder="">
-                  </div>
-                  <div class="card mt-2" class="btn-group">
-                    <h4 style="text-align: center;"><span class="badge bg-primary">Upload Data
-                      </span></h4>
-                    <input type="file" onclick="SeleccionarDatos(),CargarExcel()" class="btn btn-primary" id="Cargar"
-                      accept=".xls,.xlsx" disabled>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  Upload base displacement
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                data-bs-parent="#accordionFlushExample2">
+                <div class="accordion-body">
+                  <div class="card-body">
+                    <div class="col" style="width:auto">
+                      <label class="form-label" style="font-size: 14px">Sampling frequency [Hz] <i
+                          data-tippy-content="To activate the upload button, you must assign a sampling frequency "
+                          class="ti ti-question-mark text-primary"></i></label>
+                      <input type="text" class="form-control form-control-sm" name="SamplingF" id="SamplingF"
+                        placeholder="">
+                    </div>
+                    <div class="card mt-2" class="btn-group">
+                      <h4 style="text-align: center;"><span class="badge bg-primary">Upload Data
+                        </span></h4>
+                      <input type="file" onclick="SeleccionarDatos(),CargarExcel()" class="btn btn-primary" id="Cargar"
+                        accept=".xls,.xlsx" disabled>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -826,8 +846,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="card mt-2" style="width: 100%;">
       <div class="card-body">
         <div class="card mt-2" style="width: 100%;">
           <div style="display: flex; justify-content: space-between;">
@@ -848,6 +866,7 @@
             </div>
           </div>
         </div>
+        <!-- k -->
         <div class="card mt-2" style="width: 100%;">
           <form class="row g-2">
             <div class="col" style="width:180px; display: none" id='XSn'>
@@ -867,7 +886,7 @@
         <div class="card mt-2" style="width: 100%;">
           <div class="card-body">
             <div style="text-align: center;">
-              <button type="button" id="StartSimulation" onclick="StarBaseMotion()" class="btn btn-primary">Calculate
+              <button type="button" id="StartSimulation" onclick="StarBaseMotion(),ajustarAlturaMenuG()" class="btn btn-primary">Calculate
               </button>
               <!-- <button type="button" onclick="StopMotion()" class="btn btn-primary">Animate</button>
               <button type="button" id="StopSimulation" onclick="	StopInterval(),LoadCharData()"
@@ -876,9 +895,61 @@
             </div>
           </div>
         </div>
+        <!--  -->
       </div>
+      <div class="resize-handle" style="position: absolute; bottom: 0;"></div>
     </div>
     <!-- <Corte> -->
+    <div class="card mt-2" id='RespM'>
+      <h4 style="text-align: left;">Response</h4>
+      <div class="card-body" style="text-align: center;">
+        <form class="row g-3">
+          <div class="col-md-6">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="DisplamG" checked>
+              <label class="form-check-label" for="Displam">Displacements
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="AceleG">
+              <label class="form-check-label" for="Acel">Accelerations
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card mb-2" style="width: 100%;">
+        <select id="select_barra" class="form-select" aria-label="Default select example" style="display: none;"
+          onchange="ResponseEditor(),LoadCharDataOnChange()">
+          <option value="Despl" style="display: none" selected>Select Response</option>
+          <option value="Despl" style="display: none">First floor </option>
+          <option value="Vel" style="display: none"> Second floor</option>
+          <option value="Acel" style="display: none">Third floor</option>
+          <option value="RespEx" style="display: none">Ground acceleration</option>
+        </select>
+      </div>
+      <div class="card mb-2" style="width: 100%;">
+        <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
+        <div class="card-body">
+          <canvas id="myChart" style="width: 200px;height: 100px;"></canvas>
+        </div>
+      </div>
+      <div class="card mb-2" style="width: 100%;">
+        <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
+        <div class="card-body">
+          <canvas id="myChart2" style="width: 200px;height: 100px;"></canvas>
+        </div>
+      </div>
+      <div class="card mb-2" style="width: 100%;">
+        <!-- <h4 style="text-align: center;"><span class="badge bg-dark">Respuesta</span></h4> -->
+        <div class="card-body">
+          <canvas id="myChart3" style="width: 200px;height: 100px;"></canvas>
+        </div>
+      </div>
+      <div class="resize-handle-R" style="position: absolute; bottom: 0;"></div>
+    </div>
     <div class="card mt-2" style="width: 100%;">
       <div class="card-body">
         <div style="text-align: center;">
@@ -892,30 +963,28 @@
           <!-- <button type="button" id="mostrarPopup" class="btn btn-primary">Mostrar Popup
           </button> -->
         </div>
-
-
-        <div id="popup" class="popup">
-          <div class="popup-contenido">
-            <span class="cerrar" onclick="cerrarPopup()">&times;</span>
-            <h4>Select your options:</h4>
-            <form id="formulario">
-              <div class="card mt-2" style="width: 100%;">
-                <div class="card-body">
-                  <input type="checkbox" id="opcion1" name="opcion1" value="opcion1">
-                  <label for="opcion1">Displacements</label><br>
-                  <input type="checkbox" id="opcion2" name="opcion2" value="opcion2">
-                  <label for="opcion2">Accelerations</label><br>
-                  <input type="checkbox" id="opcion3" name="opcion3" value="opcion3">
-                  <label for="opcion3">Diagonal opposite columns displacements</label><br>
-                </div>
-              </div>
-              <!-- Agrega más checkboxes según sea necesario -->
-              <div style="margin-top: 20px;">
-                <button type="button" onclick="obtenerSeleccion()" class="btn btn-primary">Confirmar</button>
-              </div>
-            </form>
+      </div>
+    </div>
+    <div id="popup" class="popup">
+      <div class="popup-contenido">
+        <span class="cerrar" onclick="cerrarPopup()">&times;</span>
+        <h4>Select your options:</h4>
+        <form id="formulario">
+          <div class="card mt-2" style="width: 100%;">
+            <div class="card-body">
+              <input type="checkbox" id="opcion1" name="opcion1" value="opcion1">
+              <label for="opcion1">Displacements</label><br>
+              <input type="checkbox" id="opcion2" name="opcion2" value="opcion2">
+              <label for="opcion2">Accelerations</label><br>
+              <input type="checkbox" id="opcion3" name="opcion3" value="opcion3">
+              <label for="opcion3">Diagonal opposite columns displacements</label><br>
+            </div>
           </div>
-        </div>
+          <!-- Agrega más checkboxes según sea necesario -->
+          <div style="margin-top: 20px;">
+            <button type="button" onclick="obtenerSeleccion()" class="btn btn-primary">Confirmar</button>
+          </div>
+        </form>
       </div>
     </div>
     <!-- <div class="card mt-2" style="width: 100%;">
@@ -2743,6 +2812,97 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.render(scene, camera);
       }
+      let menu = document.getElementById('InputsM');
+      let toggleButton1 = document.getElementById('BMT');
+      let toggleButton2 = document.getElementById('SCT');
+      let toggleButton3 = document.getElementById('DyP');
+
+      function ajustarAlturaMenu() {
+        menu.style.height = 'auto'; // Establecer temporalmente la altura del menú en 'auto' para que se expanda completamente
+        menu.offsetHeight; // Forzar una reflow para aplicar el cambio de altura
+        setTimeout(function () {
+          console.log(menu.scrollHeight);
+          menu.style.height = menu.scrollHeight + 'px' + 10 + 'px'; // Ajustar la altura del menú para que coincida con su contenido
+        }, 500);
+      }
+
+      toggleButton1.addEventListener('click', ajustarAlturaMenu);
+
+
+      toggleButton1.addEventListener('click', ajustarAlturaMenu); // Ajustar al hacer clic en el toggle button
+      toggleButton2.addEventListener('click', ajustarAlturaMenu); // Ajustar al hacer clic en el toggle button
+      toggleButton3.addEventListener('click', ajustarAlturaMenu); // Ajustar al hacer clic en el toggle button
+
+      //Menú de entradas
+      let resizeHandle = document.querySelector('.resize-handle');
+      let isResizing = false;
+      let startY;
+      let startHeight;
+
+      resizeHandle.addEventListener('mousedown', function (e) {
+        isResizing = true;
+        startY = e.clientY;
+        startHeight = parseInt(window.getComputedStyle(menu).height, 10);
+        document.body.style.cursor = 'ns-resize'; // Change cursor during resize
+        e.preventDefault(); // Prevent text selection
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (isResizing) {
+          let newHeight = startHeight + (e.clientY - startY);
+          menu.style.height = newHeight + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', function () {
+        if (isResizing) {
+          isResizing = false;
+          document.body.style.cursor = ''; // Reset cursor
+        }
+      });
+
+      //Menú de salidas
+      let menuR = document.getElementById('RespM');
+      let resizeHandleR = document.querySelector('.resize-handle-R');
+      let isResizingR = false;
+      let startYR;
+      let startHeightR;
+
+      resizeHandleR.addEventListener('mousedown', function (e) {
+        isResizingR = true;
+        startYR = e.clientY;
+        startHeightR = parseInt(window.getComputedStyle(menuR).height, 10);
+        document.body.style.cursor = 'ns-resize'; // Change cursor during resize
+        e.preventDefault(); // Prevent text selection
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (isResizingR) {
+          let newHeight = startHeightR + (e.clientY - startYR);
+          menuR.style.height = newHeight + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', function () {
+        if (isResizingR) {
+          isResizingR = false;
+          document.body.style.cursor = ''; // Reset cursor
+        }
+      });
+      function ajustarAlturaMenuG() {
+        menuR.style.height = 'auto'; // Establecer temporalmente la altura del menú en 'auto' para que se expanda completamente
+        menuR.offsetHeight; // Forzar una reflow para aplicar el cambio de altura
+        setTimeout(function () {
+          console.log(menuR.scrollHeight);
+          menuR.style.height = menuR.scrollHeight + 'px' + 10 + 'px'; // Ajustar la altura del menú para que coincida con su contenido
+          menu.style.height = 45+'px';
+
+        }, 500);
+      }
+
+
+
+
 
       //Materiales para los pórticos
 
