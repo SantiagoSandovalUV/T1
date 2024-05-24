@@ -247,13 +247,14 @@
               <div style="text-align: center;">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                  Accelerometer (Top)
+                  Accelerometer (Top) 
                 </button>
               </div>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
               data-bs-parent="#accordionExample">
               <div class="accordion-body" style="text-align: center;">
+                <h6 style="text-align: left;"> [Fhz: 50Hz] </h6>
                 <div class="card mt-3" style="width: 100%;">
                   <div class="card-body" style="text-align: center;">
                     <button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
@@ -295,6 +296,7 @@
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
               data-bs-parent="#accordionExample">
               <div class="accordion-body" style="text-align: center;">
+                <h6 style="text-align: left;"> [Fhz: 50Hz] </h6>
                 <div class="card mt-3" style="width: 100%;">
                   <div class="card-body" style="text-align: center;">
                     <button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
@@ -332,6 +334,7 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
               data-bs-parent="#accordionExample">
               <div class="accordion-body" style="text-align: left;">
+                <h6 style="text-align: left;"> [Fhz: 50Hz] </h6>
                 <div class="card mt-3" style="width: 100%;">
                   <div class="card-body" style="text-align: center;">
                     <button type="button" onclick="LoadSensorG()" class="btn btn-primary">Assign</button>
@@ -1494,6 +1497,7 @@
         // console.log(M, K_c, po, uo, upo, dt2, pa, zeta);
         const [q1, qp1, Mne, Cne, Kne, PHI, w, h] = Newmark_Multiples(M, K_c, po, uo, upo, dt2, pa, zeta);
         console.log('Santiago Sandoval was here')
+        console.log(M)
         // console.log(Mne, Cne, Kne, U1)
         Kani = Kne;
         for (let i = 1; i < U1.mat[0].length - 1; i++) {
@@ -1522,7 +1526,7 @@
         Colm = UPP1.mat[0].length;
         FacDRuido = Array.from({ length: Fils }, () => Array(Colm).fill(0))
         FacDRuidoA = Array.from({ length: Fils }, () => Array(Colm).fill(0))
-        FacDRuidoAG = Array.from({ length: 1 }, () => Array(Colm).fill(0))
+        FacDRuidoAG = Array.from({ length: Fils }, () => Array(Colm).fill(0))
         var EsCSan3 = Math.max(...Ac_Data);
         for (let j = 0; j < U1.mat.length; j++) {
           var EsCSan1 = Math.max(...U1.mat[j]);
@@ -2288,7 +2292,6 @@
           }
           // C = mult(mult(PHI, C), transpose(PHI));
         }
-        console.log(PHIM,w)
         return [PHIM, w, C]
       }
       // const [U1, q1, qp1, Mne, Cne, Kne] = Newmark_Multiples(M, K_c, po, uo, upo, dt, pa);
@@ -2511,12 +2514,14 @@
           if (Porti2P == true) {
             n = 2;
             mm = Zero(6, 6);
+            PrGM = PrG;
           } else {
             n = 3;
             mm = Zero(9, 9);
+            PrGM = PrG3P;
           }
           for (let i = 0; i < n; i++) {
-            Carga = PrG[i][1].Propiedades.M * PrG[i][1].Propiedades.Z;
+            Carga = PrGM[i][1].Propiedades.M * PrGM[i][1].Propiedades.Z;
             mm.mat[0 + i * 3][0 + i * 3] = AreaPi * Carga; //Masa traslacional x
             mm.mat[1 + i * 3][1 + i * 3] = mm.mat[i * 3][i * 3]; //Masa traslacional y
             mm.mat[2 + i * 3][2 + i * 3] = mm.mat[i * 3][i * 3] * (Math.pow(a, 2) + Math.pow(b, 2)) / 12; //Masa rotacional z
@@ -4089,6 +4094,11 @@
       //   }
 
       // }
+
+      function recargar() {
+        window.location.href = window.location.href;
+        console.log('Reload')
+      }
       var DetenerAnimacion = false;
 
       var DeforTim = 0;
@@ -4978,14 +4988,15 @@
       }
       function Cilindro(y1) {
         const materialF = new THREE.MeshPhongMaterial({
-          color: 0x1BCFBA,
+          // color: 0x1BCFBA,
+          color: 0xFF0000,
           transparent: true,
-          opacity: 0.85
+          opacity: 0.4
         });
         const materialB = new THREE.MeshPhongMaterial({
-          color: 0x77C2B1
+          color: 0xFFCB41
         });
-        const geometryB = new THREE.BoxGeometry(0.4, 0.15, 0.15, 1, 1, 1);
+        const geometryB = new THREE.BoxGeometry(0.15, 0.15, 0.15, 1, 1, 1);
         const cubo1 = new THREE.Mesh(geometryB, materialB);
         const cubo2 = new THREE.Mesh(geometryB, materialB);
         const cubo3 = new THREE.Mesh(geometryB, materialB);
@@ -4996,7 +5007,8 @@
         // cubo3.rotation.y = 0.8;
 
 
-        var geometryF = new THREE.CylinderGeometry(0.025, 0.025, 3.05, 32);
+        // var geometryF = new THREE.CylinderGeometry(0.025, 0.025, 15, 32);
+        var geometryF = new THREE.CylinderGeometry(0.015, 0.015, 15, 32);
         const cylinder1 = new THREE.Mesh(geometryF, materialF);
         const cylinder2 = new THREE.Mesh(geometryF, materialF);
         const cylinder3 = new THREE.Mesh(geometryF, materialF);
@@ -5006,33 +5018,45 @@
         cylinder1.rotation.z = -Math.PI / 2;
         cylinder1.position.x = -1.52;
         cylinder1.rotation.y = -Math.PI / 2;
+        cylinder1.position.z = -9.15;
+
 
         cylinder2.rotation.z = Math.PI / 2;
         cylinder2.position.z = -1.52;
+        cylinder2.position.x = 9.15;
+
 
         cylinder3.rotation.z = -Math.PI / 2;
         cylinder3.position.x = 1.52;
         cylinder3.rotation.y = -Math.PI / 2;
+        cylinder3.position.z = 9.15;
+
 
         cylinder4.rotation.z = Math.PI / 2;
         cylinder4.position.z = 1.52;
+        cylinder4.position.x = -9.15;
+
 
         const CuatroSensores = new THREE.Group();
-        // CuatroSensores.add(cylinder1, cylinder2);
+        // CuatroSensores.add(cylinder1, cylinder2, cylinder3,cylinder4);
         CuatroSensores.add(cylinder1, cylinder2, cylinder3, cylinder4, cubo1, cubo2, cubo3, cubo4);
         cubo1.position.z = 0;
         cubo1.position.x = -1.5;
         cubo1.rotation.y = Math.PI / 2;
+        cubo1.position.z = -1.6;
+
 
         cubo2.position.z = -1.50;
-        cubo2.position.x = 0;
+        cubo2.position.x = 1.6;
 
         cubo3.position.z = 0;
         cubo3.position.x = 1.5;
         cubo3.rotation.y = Math.PI / 2;
+        cubo3.position.z = 1.6;
+
 
         cubo4.position.z = 1.50;
-        cubo4.position.x = 0;
+        cubo4.position.x = -1.6;
 
         CuatroSensores.position.x = 5;
         CuatroSensores.position.y = y1;
@@ -5560,7 +5584,7 @@
       // Load a glTF resource, Lab loading
       loader1.load(
         // 'Labortatorio.gltf',//'scene.gltf'
-        'SinCositasAlto.gltf',//'scene.gltf'
+        'LaboratorioGrande.gltf',//'scene.gltf'
         function (gltf) {
           lab = gltf.scene;
           scene.add(lab);
