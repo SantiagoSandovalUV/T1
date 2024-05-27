@@ -87,9 +87,9 @@
       font-family: Arial, Arial, Helvetica, sans-serif
     }
 
-    html {
+    /* html {
       scrollbar-width: normal;
-    }
+    } */
 
     .contenedor-cuadro {
       display: inline-block;
@@ -160,7 +160,7 @@
 
     #InputsM {
       width: 100%;
-      height: 355px;
+      height: 270px;
       overflow-y: scroll;
       overflow: auto;
       /* resize: none; */
@@ -178,7 +178,7 @@
       /* Full width of the div */
       height: 5px;
       /* Height of the resize handle */
-      background: #ca22fd;
+      background: #22dcfd;
       /* Color of the resize handle */
       cursor: ns-resize;
       /* Cursor for resize handle */
@@ -192,7 +192,7 @@
       /* Full width of the div */
       height: 5px;
       /* Height of the resize handle */
-      background: #ca22fd;
+      background: #22dcfd;
       /* Color of the resize handle */
       cursor: ns-resize;
       /* Cursor for resize handle */
@@ -228,7 +228,7 @@
     </div>
   </div>
   <div class="position-fixed"
-    style="width: 500px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;">
+    style="width: 500px;background-color: #ffffff;padding: 90px 10px; height: 100%; overflow: auto;" id="scrollableDiv">
     <!-- Antiagua Gra -->
     <!-- <div class="card mt-2" id="InputsM"
       style="width: 100%; height: 325px; overflow-y: scroll;overflow: auto;resize:vertical"> -->
@@ -247,7 +247,7 @@
               <div style="text-align: center;">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                  Accelerometer (Top) 
+                  Accelerometer (Top)
                 </button>
               </div>
             </h2>
@@ -394,7 +394,7 @@
       <div class="card mb-2" style="width: 100%;">
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
           data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="DyP">
-          Dynamic properties
+          Dynamics properties
         </button>
       </div>
       <div class="collapse" id="collapseExample">
@@ -585,7 +585,7 @@
       <div class="card mb-2" style="width: 100%;">
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
           data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" id="BMT">
-          Base motion
+          Excitation
         </button>
       </div>
       <div class="collapse" id="collapseExample2">
@@ -687,7 +687,7 @@
                             placeholder="">
                         </div>
                         <div class="col" style="width:180px">
-                          <label class="form-label" style="font-size: 14px">Angular Freq. ω
+                          <label class="form-label" style="font-size: 14px">Frequency ω
                             [rad/s]
                             <i data-tippy-content="Angular frequency of sinusoidal displacement ω"
                               class="ti ti-question-mark text-primary"></i></label>
@@ -738,14 +738,14 @@
                     <div class="card-body">
                       <form class="row g-3">
                         <div class="col" style="width:180px">
-                          <label class="form-label" style="font-size: 14px"> f1 [Hz]<i
+                          <label class="form-label" style="font-size: 14px"> F1 [Hz]<i
                               data-tippy-content="Initial frequency"
                               class="ti ti-question-mark text-primary"></i></label>
                           <input type="text" class="form-control form-control-sm" name="W1_box" id="W1_box"
                             placeholder="">
                         </div>
                         <div class="col" style="width:180px">
-                          <label class="form-label" style="font-size: 14px"> f2 [Hz]<i
+                          <label class="form-label" style="font-size: 14px"> F2 [Hz]<i
                               data-tippy-content="Final frequency" class="ti ti-question-mark text-primary"></i></label>
                           <input type="text" class="form-control form-control-sm" name="W2_box" id="W2_box"
                             placeholder="">
@@ -854,17 +854,17 @@
           <div style="display: flex; justify-content: space-between;">
             <div class="contenedor-cuadro" style="margin: 0 5px;">
               X-X <div class="cuadro" style="background-color: #3EACDE;"> </div><i
-                data-tippy-content="The color indicates the direction of the displacement analysis. To switch between directions, click on the frame on the table."
+                data-tippy-content="The color indicates the direction of the base displacement. To switch between directions, click on the frame on the table."
                 class="ti ti-question-mark text-primary"></i>
             </div>
             <div class="contenedor-cuadro" style="margin: 0 5px;">
               Y-Y <div class="cuadro" style="background-color: red;"></div><i
-                data-tippy-content="The color indicates the direction of the displacement analysis. To switch between directions, click on the frame on the table."
+                data-tippy-content="The color indicates the direction of the base displacement. To switch between directions, click on the frame on the table."
                 class="ti ti-question-mark text-primary"></i>
             </div>
             <div class="contenedor-cuadro" style="margin: 0 5px;">
               X-Y <div class="cuadro" style="background-color: #ba41c5;"></div><i
-                data-tippy-content="The color indicates the direction of the displacement analysis. To switch between directions, click on the frame on the table."
+                data-tippy-content="The color indicates the direction of the base displacement. To switch between directions, click on the frame on the table."
                 class="ti ti-question-mark text-primary"></i>
             </div>
           </div>
@@ -886,19 +886,19 @@
             </div>
           </form>
         </div>
-        <div class="card mt-2" style="width: 100%;">
+        <!-- <div class="card mt-2" style="width: 100%;">
           <div class="card-body">
             <div style="text-align: center;">
               <button type="button" id="StartSimulation" onclick="StarBaseMotion(),ajustarAlturaMenuG()"
                 class="btn btn-primary">Calculate
               </button>
-              <!-- <button type="button" onclick="StopMotion()" class="btn btn-primary">Animate</button>
+              <button type="button" onclick="StopMotion()" class="btn btn-primary">Animate</button>
               <button type="button" id="StopSimulation" onclick="	StopInterval(),LoadCharData()"
                 class="btn btn-primary">Stop
-              </button> -->
+              </button>
             </div>
           </div>
-        </div>
+        </div> -->
         <!--  -->
       </div>
       <div class="resize-handle" style="position: absolute; bottom: 0;"></div>
@@ -960,6 +960,9 @@
           <!-- <button type="button" id="mostrarPopup" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
             class="btn btn-primary">Export Data
           </button> -->
+          <button type="button" id="StartSimulation" onclick="StarBaseMotion(),ajustarAlturaMenuG()"
+            class="btn btn-primary">Calculate
+          </button>
           <button type="button" id="mostrarPopup" class="btn btn-primary">Export Data
           </button>
           <button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear Fields
@@ -1352,6 +1355,7 @@
       });
       //Función para inciar
       function StarBaseMotion() {
+        Alerta_Calculos();
         clearInterval(DeforTim);
         cancelAnimationFrame(Animar);
         contadorglobal = 0;
@@ -1948,14 +1952,14 @@
         let VecOrden1, VecOrden2, VecOrden3, VecOrden4;
         let matrizCombinada;
         if (Porti2P == true) {
-          VecOrden1 = [2, 14, 5, 3, 15, 4]; //Según la matriz de conectividad XX1
-          VecOrden2 = [6, 16, 9, 7, 17, 8]; //Según la matriz de conectividad XX2
+          VecOrden1 = [6, 16, 9, 7, 17, 8]; //Según la matriz de conectividad XX1
+          VecOrden2 = [2, 14, 5, 3, 15, 4]; //Según la matriz de conectividad XX2
           VecOrden3 = [2, 10, 6, 3, 11, 7];  //Según la matriz de conectividad YY1
           VecOrden4 = [5, 12, 9, 4, 13, 8];  //Según la matriz de conectividad YY2
           matrizCombinada = [VecOrden1, VecOrden2, VecOrden3, VecOrden4];
         } else {
-          VecOrden1 = [3, 21, 6, 4, 22, 5, 11, 23, 14]; //Según la matriz de conectividad XX1
-          VecOrden2 = [7, 24, 10, 8, 25, 9, 12, 26, 13]; //Según la matriz de conectividad XX2
+          VecOrden1 = [7, 24, 10, 8, 25, 9, 12, 26, 13]; //Según la matriz de conectividad XX1
+          VecOrden2 = [3, 21, 6, 4, 22, 5, 11, 23, 14]; //Según la matriz de conectividad XX2
           VecOrden3 = [3, 15, 7, 4, 16, 8, 11, 17, 12];  //Según la matriz de conectividad YY1
           VecOrden4 = [6, 18, 10, 5, 19, 9, 14, 20, 13];  //Según la matriz de conectividad YY2
           matrizCombinada = [VecOrden1, VecOrden2, VecOrden3, VecOrden4];
@@ -2081,6 +2085,8 @@
         // console.log(KReducidas)
         return [KReducidas]
       }
+      let KOP = new Array();
+      let KOO = new Array();
       //Función para condensar
       function condensar(PrG) {
         let K_Con;
@@ -2099,6 +2105,8 @@
               let Koo = create(Ki[0][j1].mat.slice(2, 7).map(row => row.slice(2, end)));
               // console.log(end, Kpp, Kpo, Kop, Koo)
               K_Con = sub(Kpp, mult(Kpo, mult(inverse(Koo), Kop)));
+              KOP[j1] = Kop;
+              KOO[j1] = Koo;
               // return [Kpp,Kop,Kpo,Koo];
             } else {
               let end = Ki[0][j1].mat.length + 1;
@@ -2107,12 +2115,54 @@
               let Kop = transpose(Kpo);
               let Koo = create(Ki[0][j1].mat.slice(3, 10).map(row => row.slice(3, end)));
               K_Con = sub(Kpp, mult(Kpo, mult(inverse(Koo), Kop)));
+              KOP[j1] = Kop;
+              KOO[j1] = Koo;
             }
             KCondensadas[j1] = K_Con;
           }
           // console.log(KCondensadas)
           return KCondensadas
         }
+      }
+      function DesplazamientosLocales() {
+        let TTT = new Array();
+        [TTT[0], TTT[1], TTT[2], TTT[3]] = MatTransCP();
+        let SDespLocal = new Array();
+        let VTx1, VTx2, VTy1, VTy2;
+        let VT = new Array();
+        with (Matrix) {
+          for (let S = 0; S < KOO.length; S++) {
+            // SDespLocal[S] = mult(mult(mult(inverse(KOO[S]), KOP[S]), transpose(TTT[S])), U1)
+            SDespLocal[S] = mult(transpose(TTT[S]), U1);
+          }
+          let Ctn = 0;
+          let V2 = 0;
+          for (let Sa = 0; Sa < SDespLocal[0].mat.length * 2; Sa++) {
+            if (Sa == SDespLocal[0].mat.length) {
+              Ctn = Ctn + 1;
+              V2 = 0;
+            }
+            if (Porti2P == true) {
+              VT[Sa] = [SDespLocal[Ctn].mat[V2],
+              SDespLocal[Ctn + 1].mat[V2]];
+            } else {
+              VT[Sa] = [SDespLocal[Ctn].mat[V2],
+              SDespLocal[Ctn + 1].mat[V2]];
+            }
+            V2 = V2 + 1;
+
+          }
+          VTx1 = transpose(create([SDespLocal[0].mat[0],
+          SDespLocal[1].mat[0]])).mat;
+          VTx2 = transpose(create([SDespLocal[0].mat[1],
+          SDespLocal[1].mat[1]])).mat;
+          VTy1 = transpose(create([SDespLocal[2].mat[0],
+          SDespLocal[3].mat[0]])).mat;
+          VTy2 = transpose(create([SDespLocal[2].mat[1],
+          SDespLocal[3].mat[1]])).mat;
+        }
+
+        return [SDespLocal, VTx1, VTx2, VTy1, VTy2, VT];
       }
       //Función para crear matriz de Masa
       function MasaMatriz(PrG) {
@@ -2298,7 +2348,7 @@
       // Newmark_Multiples(M, K_c, C, po, uo, upo);
       function Newmark_Multiples(M, K, po, uo, upo, dt, pa, zeta) { //Calcula la respuesta en el tiemp
         var gamma = 1 / 2;
-        var betta = 1 / 4;
+        var betta = 1 / 6;
         const [PHI, w, C] = modos(K, M, zeta);
         with (Matrix) {
           //Crear condiciones inciales de velocidad y desplazamiento
@@ -2688,6 +2738,32 @@
         })
         // StopInterval();
       }
+      function Alerta_Calculos() {
+        let timerInterval
+        Swal.fire({
+          title: 'Calculations are in process',
+          text: 'Calculations',
+          html: '<b></b>',
+          timer: 1500,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
+        // StopInterval();
+      }
       //Funciones para controlar el Ruido Gauseano
       var RuidoMs = 0;
       var RuidoGr = 0;
@@ -2906,11 +2982,18 @@
           menu.style.height = 45 + 'px';
 
         }, 300);
+        Alturascroll(117);
       }
 
-
-
-
+      function Alturascroll(scrollHeight = 10) {
+        let div = document.getElementById('scrollableDiv');
+        // Verificar altura
+        if (!isNaN(scrollHeight)) {
+          div.scrollTop = scrollHeight;
+        } else {
+          alert('Santiago');
+        }
+      }
 
       //Materiales para los pórticos
 
@@ -3043,6 +3126,17 @@
         TresEjesGroup.position.y = y;
         scene.add(TresEjesGroup);
         return TresEjesGroup;
+
+      }
+      function EjesGlobales() {
+        const geometryC = new THREE.BoxGeometry(0.1, 1.5, 0.1, 1, 30, 1);
+        const geometryT = new THREE.TetrahedronGeometry(1, 0);
+        Recty = new THREE.Mesh(geometryC, MaterialROJO);
+        Fley = new THREE.Mesh(geometryT, MaterialROJO);
+
+
+        scene.add(Recty, Fley);
+
 
       }
       //Grados de libertad
@@ -3646,6 +3740,7 @@
       //Crear una lista de objetos con todas las propiedades
       function XYXY() {
         if (AnaXY == true || AnaXYP3 == true) {
+          ajustarAlturaMenu();
           document.getElementById("XSn").style.display = "block";
 
           document.getElementById("YSn").style.display = "block";
@@ -3707,7 +3802,7 @@
             // toggleButton.setAttribute("aria-expanded", "false");
           }
           ajustarAlturaMenu();
-
+          Alturascroll(204);
           document.getElementById("StartSimulation").removeAttribute("disabled");
           draggable.material = materialB;
           Checker = false;
@@ -4032,6 +4127,7 @@
       function PropFiAct(Drag, PrG) {
         // console.log('Act')
         ajustarAlturaMenu();
+        Alturascroll();
         for (let i = 0; i < PrG.length; i++) {
           if (Drag.position == PrG[i][0].position) {
             let condicionIf = (Porti2P) ? (i == 0 || i == 1) : (i == 0 || i == 1 || i == 2);
@@ -5013,6 +5109,7 @@
         const cylinder2 = new THREE.Mesh(geometryF, materialF);
         const cylinder3 = new THREE.Mesh(geometryF, materialF);
         const cylinder4 = new THREE.Mesh(geometryF, materialF);
+        const cylinder5 = new THREE.Mesh(geometryF, materialF);
         // const cylinder2 = new THREE.Mesh(geometryF, materialF);
         // cylinder1.rotation.y = Math.PI/2;
         cylinder1.rotation.z = -Math.PI / 2;
@@ -5022,24 +5119,28 @@
 
 
         cylinder2.rotation.z = Math.PI / 2;
-        cylinder2.position.z = -1.52;
-        cylinder2.position.x = 9.15;
+        cylinder2.position.x = 1.52;
+        cylinder2.rotation.y = -Math.PI / 2;
+        cylinder2.position.z = -9.15;
 
 
         cylinder3.rotation.z = -Math.PI / 2;
-        cylinder3.position.x = 1.52;
-        cylinder3.rotation.y = -Math.PI / 2;
-        cylinder3.position.z = 9.15;
+        cylinder3.position.z = -1.50;
+        cylinder3.position.x = 9;
 
 
-        cylinder4.rotation.z = Math.PI / 2;
+        cylinder4.rotation.z = -Math.PI / 2;
         cylinder4.position.z = 1.52;
-        cylinder4.position.x = -9.15;
+        cylinder4.position.x = 9;
+
+        cylinder5.rotation.z = -Math.PI / 2;
+        cylinder5.position.z = 0;
+        cylinder5.position.x = 7.5;
 
 
         const CuatroSensores = new THREE.Group();
         // CuatroSensores.add(cylinder1, cylinder2, cylinder3,cylinder4);
-        CuatroSensores.add(cylinder1, cylinder2, cylinder3, cylinder4, cubo1, cubo2, cubo3, cubo4);
+        CuatroSensores.add(cylinder1, cylinder2, cylinder3, cylinder4, cubo1, cubo2, cubo3, cubo4, cylinder5);
         cubo1.position.z = 0;
         cubo1.position.x = -1.5;
         cubo1.rotation.y = Math.PI / 2;
@@ -5050,13 +5151,13 @@
         cubo2.position.x = 1.6;
 
         cubo3.position.z = 0;
-        cubo3.position.x = 1.5;
+        cubo3.position.x = 1.6;
         cubo3.rotation.y = Math.PI / 2;
-        cubo3.position.z = 1.6;
+        cubo3.position.z = 1.5;
 
 
-        cubo4.position.z = 1.50;
-        cubo4.position.x = -1.6;
+        cubo4.position.z = -0;
+        cubo4.position.x = 0;
 
         CuatroSensores.position.x = 5;
         CuatroSensores.position.y = y1;
@@ -5522,6 +5623,15 @@
             nombre8: 'Acceleration y [m/s^2]',
             nombre9: 'Base displacement [m]',
             nombre10: 'Base acceleration [m/s^2]',
+            nombre11: 'External displacement x1 [m]',
+            nombre12: 'External displacement x2 [m]',
+            nombre13: 'External displacement y1 [m]',
+            nombre14: 'External displacement y2 [m]',
+            nombre15: 'External displacement x1 [m]',
+            nombre16: 'External displacement x2 [m]',
+            nombre17: 'External displacement y1 [m]',
+            nombre18: 'External displacement y2 [m]',
+
           };
         } else {
           indicesColumnas = [3, 6, 9, 12, 15, 18]; // Índices de las columnas a eliminar
@@ -5584,7 +5694,7 @@
       // Load a glTF resource, Lab loading
       loader1.load(
         // 'Labortatorio.gltf',//'scene.gltf'
-        'LaboratorioGrande.gltf',//'scene.gltf'
+        'LaboratorioGrande2.gltf',//'scene.gltf'
         function (gltf) {
           lab = gltf.scene;
           scene.add(lab);
