@@ -204,6 +204,7 @@
 </head>
 
 <body>
+  <div class="d-flex">
   <div class="position-fixed w-100 p-3 border-bottom" style="z-index: 100000;background-color: #ffffff;">
     <div class="row">
       <div class="col-md-3">
@@ -213,18 +214,20 @@
           <span class="fs-8">VIRTUAL LABORATORIES</span>
         </a>
       </div>
-      <div class="col-md-6" style="text-align: center;">
-        <h4>STRUCTURAL DYNAMICS LABORATORY</h4>
+        <div class="col-md-6" style="text-align: center;">
+          <h4>STRUCTURAL DYNAMICS LABORATORY</h4>
+        </div>
+        <div class="col-md-3" style="text-align: left;">
+          <a href="#" onclick="window.open('ManualDN.pdf', 'Laboratory manual', 'width=500,height=500');"
+					class="btn btn-sm btn-outline-secondary">Laboratory manual</a>
+            <a href="https://santiagosandovaluv.github.io/T1/"
+            class="btn btn-sm btn-outline-secondary">SDOF module</a>
+            <a class="btn btn-sm btn-outline-secondary"
+            href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental
+            Dynamics</a>
+        </div>
       </div>
-      <div class="col-md-1" style="text-align: left;">
-        <a href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/manual-dinamica.pdf"
-          class="btn btn-sm btn-outline-secondary">Dynamics Manual</a>
-      </div>
-      <div class="col-md-2" style="text-align: right;">
-        <a class="btn btn-sm btn-outline-secondary"
-          href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental
-          Dynamics</a>
-      </div>
+
     </div>
   </div>
   <div class="position-fixed"
@@ -595,7 +598,7 @@
               <h2 class="accordion-header" id="flush-headingTwoVl">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#flush-collapseTwoVl" aria-expanded="false" aria-controls="flush-collapseTwoVl">
-                  Ug(t)=0 (Free vibration)
+                  Free vibration
                 </button>
               </h2>
               <div id="flush-collapseTwoVl" class="accordion-collapse collapse" aria-labelledby="flush-headingTwoVl"
@@ -612,7 +615,7 @@
                             placeholder="">
                         </div>
                         <div class="col" style="width:180px">
-                          <label class="form-label" style="font-size:14px">Velocity up₀ (1) [m/s]<i
+                          <label class="form-label" style="font-size:14px">Velocity  u<sub>po</sub> (1) [m/s]<i
                               data-tippy-content="Initial velocity"
                               class="ti ti-question-mark text-primary"></i></label>
                           <input type="text" class="form-control form-control-sm" name="VelInicial" id="VelInicial"
@@ -628,7 +631,7 @@
                             placeholder="">
                         </div>
                         <div class="col" style="width:180px">
-                          <label class="form-label" style="font-size:14px">Velocity up₀ (2) [m/s]<i
+                          <label class="form-label" style="font-size:14px">Velocity  u<sub>po</sub> (2) [m/s]<i
                               data-tippy-content="Initial velocity"
                               class="ti ti-question-mark text-primary"></i></label>
                           <input type="text" class="form-control form-control-sm" name="VelInicial2" id="VelInicial2"
@@ -644,7 +647,7 @@
                             placeholder="">
                         </div>
                         <div class="col" style="width:180px; display: none;" id="VelUp3">
-                          <label class="form-label" style="font-size:14px">Velocity up₀ (3) [m/s]<i
+                          <label class="form-label" style="font-size:14px">Velocity  u<sub>po</sub> (3) [m/s]<i
                               data-tippy-content="Initial velocity"
                               class="ti ti-question-mark text-primary"></i></label>
                           <input type="text" class="form-control form-control-sm" name="VelInicial3" id="VelInicial3"
