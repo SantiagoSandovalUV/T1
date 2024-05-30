@@ -223,8 +223,7 @@
             <a href="https://santiagosandovaluv.github.io/T1/"
             class="btn btn-sm btn-outline-secondary">SDOF module</a>
             <a class="btn btn-sm btn-outline-secondary"
-            href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/modulo-dinamica.html">Experimental
-            Dynamics</a>
+            href="https://laboratoriosvirtualesuv.github.io/LaboratoriosVirtualesUV/index.html">Virtual laboratories</a>
         </div>
       </div>
 
@@ -963,7 +962,7 @@
           <!-- <button type="button" id="mostrarPopup" onclick="	ExportarAnyTiempo(),exportCSVFile(headers,data1,'Desp_Data')"
             class="btn btn-primary">Export Data
           </button> -->
-          <button type="button" id="StartSimulation" onclick="StarBaseMotion(),ajustarAlturaMenuG()"
+          <button type="button" id="StartSimulation" onclick="Alerta_Calculos()"
             class="btn btn-primary">Calculate
           </button>
           <button type="button" id="mostrarPopup" class="btn btn-primary">Export Data
@@ -1358,7 +1357,6 @@
       });
       //Función para inciar
       function StarBaseMotion() {
-        Alerta_Calculos();
         clearInterval(DeforTim);
         cancelAnimationFrame(Animar);
         contadorglobal = 0;
@@ -2762,6 +2760,8 @@
         }).then((result) => {
           /* Read more about handling dismissals below */
           if (result.dismiss === Swal.DismissReason.timer) {
+            StarBaseMotion();
+            ajustarAlturaMenuG();
             console.log('I was closed by the timer')
           }
         })
@@ -2983,9 +2983,8 @@
           console.log(menuR.scrollHeight);
           menuR.style.height = menuR.scrollHeight + 'px' + 10 + 'px'; // Ajustar la altura del menú para que coincida con su contenido
           menu.style.height = 45 + 'px';
-
+          Alturascroll(127.5);
         }, 300);
-        Alturascroll(117);
       }
 
       function Alturascroll(scrollHeight = 10) {
@@ -2996,6 +2995,7 @@
         } else {
           alert('Santiago');
         }
+        console.log(div.scrollTop)
       }
 
       //Materiales para los pórticos
@@ -5113,52 +5113,64 @@
         const cylinder3 = new THREE.Mesh(geometryF, materialF);
         const cylinder4 = new THREE.Mesh(geometryF, materialF);
         const cylinder5 = new THREE.Mesh(geometryF, materialF);
+        const cylinder6 = new THREE.Mesh(geometryF, materialF);
         // const cylinder2 = new THREE.Mesh(geometryF, materialF);
         // cylinder1.rotation.y = Math.PI/2;
         cylinder1.rotation.z = -Math.PI / 2;
-        cylinder1.position.x = -1.52;
+        cylinder1.position.x = -1.3;
         cylinder1.rotation.y = -Math.PI / 2;
-        cylinder1.position.z = -9.15;
+        cylinder1.position.z = -6.2;
 
-
+        //Adelante derecha X
         cylinder2.rotation.z = Math.PI / 2;
-        cylinder2.position.x = 1.52;
+        cylinder2.position.x = 1.30;
         cylinder2.rotation.y = -Math.PI / 2;
-        cylinder2.position.z = -9.15;
+        cylinder2.position.z = -8.75;
 
 
+        //Adelante derecha Y
         cylinder3.rotation.z = -Math.PI / 2;
-        cylinder3.position.z = -1.50;
-        cylinder3.position.x = 9;
+        cylinder3.position.z = -1.30;
+        cylinder3.position.x = 8.7;
 
 
+        //Adelante izquierdo
         cylinder4.rotation.z = -Math.PI / 2;
-        cylinder4.position.z = 1.52;
-        cylinder4.position.x = 9;
+        cylinder4.position.z = 1.3;
+        cylinder4.position.x = 6.2;
 
+        //Centro Y
         cylinder5.rotation.z = -Math.PI / 2;
         cylinder5.position.z = 0;
         cylinder5.position.x = 7.5;
 
+        //Centro derecha X
+        cylinder6.rotation.z = Math.PI / 2;
+        cylinder6.position.x = 0;
+        cylinder6.rotation.y = -Math.PI / 2;
+        cylinder6.position.z = -7.45;
+
 
         const CuatroSensores = new THREE.Group();
         // CuatroSensores.add(cylinder1, cylinder2, cylinder3,cylinder4);
-        CuatroSensores.add(cylinder1, cylinder2, cylinder3, cylinder4, cubo1, cubo2, cubo3, cubo4, cylinder5);
-        cubo1.position.z = 0;
-        cubo1.position.x = -1.5;
+        CuatroSensores.add(cylinder1, cylinder2, cylinder3, cylinder4, cubo2, cubo3, cubo4, cylinder5, cylinder6);
+        
+        //Atrás derecho
+        cubo1.position.x = -5.5;
         cubo1.rotation.y = Math.PI / 2;
-        cubo1.position.z = -1.6;
+        cubo1.position.z = -1.2;
 
 
-        cubo2.position.z = -1.50;
-        cubo2.position.x = 1.6;
+        //Adelante izquierdo
+        cubo2.position.z = -1.30;
+        cubo2.position.x = 1.3;
 
-        cubo3.position.z = 0;
-        cubo3.position.x = 1.6;
+        //Izquierdo
+        cubo3.position.x = -1.28;
         cubo3.rotation.y = Math.PI / 2;
-        cubo3.position.z = 1.5;
+        cubo3.position.z = 1.3;
 
-
+        //Centro
         cubo4.position.z = -0;
         cubo4.position.x = 0;
 
