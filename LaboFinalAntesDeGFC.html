@@ -1578,8 +1578,10 @@
         if (Porti2P == true) {
           options[1].style.display = "block"; // Mostrar opción
           options[2].style.display = "block"; // Mostrar opción
+          options[3].style.display = "none"; // Mostrar opción
           options[4].style.display = "block"; // Mostrar opción
           options[5].style.display = "block"; // Mostrar opción
+          options[6].style.display = "none"; // Mostrar opción
 
 
         } else {
@@ -1618,7 +1620,6 @@
         setTimeout(function () {
           UL = DesplazamientosLocales(U1, SensorMultp); UL = UL[0];
           UPPL = DesplazamientosLocales(UPP1, SensorMultpA); UPPL = UPPL[0];
-          LoadCharData();
         }, 350); // 2000 milisegundos = 2 segundos
         animate2();
         Deformar();
@@ -4362,534 +4363,368 @@
         var contador1 = 0;
         if (Porti2P == true) {
           if (AnaYY == true) {
-            Cilindros.rotation.y = Math.PI / 2;
-            for (let i = 2; i < PrG.length - 8; i++) {
-              PrG[i][0].rotation.y = Math.PI;
-            }
+            // Cilindros.rotation.y = Math.PI / 2;
+            xxc = 0;
+            // for (let i = 2; i < PrG.length - 8; i++) {
+            //   PrG[i][0].rotation.y = Math.PI;
+            // }
 
           } else if (AnaXX == true) {
-            for (let i = 2; i < PrG.length - 8; i++) {
-              PrG[i][0].rotation.y = -Math.PI / 2;
-            }
+            yyc = 0;
+            // for (let i = 2; i < PrG.length - 8; i++) {
+            //   PrG[i][0].rotation.y = -Math.PI / 2;
+            // }
           }
         } else {
           if (AnaYYP3 == true) {
-            Cilindros.rotation.y = Math.PI / 2;
-            for (let i = 3; i < PrG3P.length - 12; i++) {
-              PrG3P[i][0].rotation.y = Math.PI;
-            }
+            xxc = 0;
+            // Cilindros.rotation.y = Math.PI / 2;
+            // for (let i = 3; i < PrG3P.length - 12; i++) {
+            //   PrG3P[i][0].rotation.y = Math.PI;
+            // }
           } else if (AnaXXP3 == true) {
-            for (let i = 3; i < PrG3P.length - 12; i++) {
-              PrG3P[i][0].rotation.y = -Math.PI / 2;
-            }
+            yyc = 0;
+            // for (let i = 3; i < PrG3P.length - 12; i++) {
+            //   PrG3P[i][0].rotation.y = -Math.PI / 2;
+            // }
           }
         }
-        // Índice para la ventana móvil
-        let currentIndex = 0;
-        const windowSize = U1.mat[0].length*0.02;
-        let DTNN  = (Math.max(...t)-2.58)/(50*Math.max(...t));
-
         function Deformar_1() {
           if (Porti2P == true) {
-            if (AnaYY == true) {
-              let Santiago2 = U1.mat[1][contador1] + Desp_Data[contador1];
-              //Barras y mesa
-              ///Desplazamiento
-              PrG[0][0].position.z = 0 + Santiago2; //Abajo
-              PrG[1][0].position.z = 0 + U1.mat[4][contador1] + Santiago2; // Arriba
-              Mesa1.position.z = 0 + Desp_Data[contador1];  //Posición x de la mesa
-              //Sensores
-              AcelerometroG.position.z = Desp_Data[contador1] * yyc;
-              Laser1.position.z = PrG[0][0].position.z;
-              Laser2.position.z = PrG[1][0].position.z;
-              Acelerometro1.position.z = PrG[0][0].position.z;
-              Acelerometro2.position.z = PrG[1][0].position.z;
-              ///Vigas
-              V1.position.z = PrG[0][0].position.z;
-              V2.position.z = PrG[1][0].position.z;
-              ///Rotación
-              // PrG[0][0].rotation.y = U1.mat[2][contador1];
-              // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1]
-              ///Arriba
-              PrG[7][0].position.z = -1.5 + Santiago2;
-              PrG[3][0].position.z = 1.5 + Santiago2;
-              PrG[4][0].position.z = 1.5 + +Santiago2;
-              PrG[8][0].position.z = -1.5 + Santiago2;
-              //Abajo
-              PrG[2][0].position.z = 1.5 + Desp_Data[contador1];
-              PrG[5][0].position.z = 1.5 + Desp_Data[contador1];
-              PrG[6][0].position.z = -1.5 + Desp_Data[contador1];
-              PrG[9][0].position.z = -1.5 + Desp_Data[contador1];
-            } else if (AnaXX == true) {
-              let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
-              //Barras y mesas
-              ///Desplazamiento
-              PrG[0][0].position.x = 5 + Santiago2; //Abajo
-              PrG[1][0].position.x = 5 + U1.mat[3][contador1] + Santiago2; //Arriba
-              Mesa1.position.x = 5 + Desp_Data[contador1];  //Posición x de la mesa
-              //Sensores
-              AcelerometroG.position.x = 5 + Desp_Data[contador1] * xxc;
-              Laser1.position.x = PrG[0][0].position.x;
-              Laser2.position.x = PrG[1][0].position.x;
-              Acelerometro1.position.x = -5 + PrG[0][0].position.x;
-              Acelerometro2.position.x = -5 + PrG[1][0].position.x;
-              ///Vigas
-              V1.position.x = -5 + PrG[0][0].position.x;
-              V2.position.x = -5 + PrG[1][0].position.x;
-              ///Rotación
-              // PrG[0][0].rotation.y = U1.mat[2][contador1];
-              // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
-              ///Arriba
-              PrG[7][0].position.x = 3.5 + Santiago2;
-              PrG[3][0].position.x = 3.5 + Santiago2;
-              PrG[4][0].position.x = 6.5 + Santiago2;
-              PrG[8][0].position.x = 6.5 + Santiago2;
-              //Abajo
-              PrG[2][0].position.x = 3.5 + Desp_Data[contador1];
-              PrG[5][0].position.x = 6.5 + Desp_Data[contador1];
-              PrG[6][0].position.x = 3.5 + Desp_Data[contador1];
-              PrG[9][0].position.x = 6.5 + Desp_Data[contador1];
-              // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
-              // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
-              // chart.update(); chart2.update();
-            } else {
-              let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1] * xxc;
-              let Santiago3 = + U1.mat[1][contador1] + Desp_Data[contador1] * yyc;
-              //Barras y mesas
-              ///Desplazamiento
-              PrG[0][0].position.x = 5 + Santiago2; //Abajo
-              PrG[1][0].position.x = 5 + U1.mat[3][contador1] + Santiago2; //Arriba
-              Mesa1.position.x = 5 + Desp_Data[contador1] * xxc;  //Posición x de la mesa
-              //Sensores
-              AcelerometroG.position.x = 5 + Desp_Data[contador1] * xxc;
-              Laser1.position.x = PrG[0][0].position.x;
-              Laser2.position.x = PrG[1][0].position.x;
-              Acelerometro1.position.x = -5 + PrG[0][0].position.x;
-              Acelerometro2.position.x = -5 + PrG[1][0].position.x;
 
-              ///Vigas
-              V1.position.x = -5 + PrG[0][0].position.x;
-              V2.position.x = -5 + PrG[1][0].position.x;
+            let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1] * xxc;
+            let Santiago3 = + U1.mat[1][contador1] + Desp_Data[contador1] * yyc;
+            //Barras y mesas
+            ///Desplazamiento
+            PrG[0][0].position.x = 5 + Santiago2; //Abajo
+            PrG[1][0].position.x = 5 + U1.mat[3][contador1] + Santiago2; //Arriba
+            Mesa1.position.x = 5 + Desp_Data[contador1] * xxc;  //Posición x de la mesa
+            //Sensores
+            AcelerometroG.position.x = 5 + Desp_Data[contador1] * xxc;
+            Laser1.position.x = PrG[0][0].position.x;
+            Laser2.position.x = PrG[1][0].position.x;
+            Acelerometro1.position.x = -5 + PrG[0][0].position.x;
+            Acelerometro2.position.x = -5 + PrG[1][0].position.x;
 
-              PrG[0][0].position.z = 0 + Santiago3; //Abajo
-              PrG[1][0].position.z = 0 + U1.mat[4][contador1] + Santiago3; // Arriba
-              Mesa1.position.z = 0 + Desp_Data[contador1] * yyc;  //Posición x de la mesa
+            ///Vigas
+            V1.position.x = -5 + PrG[0][0].position.x;
+            V2.position.x = -5 + PrG[1][0].position.x;
 
-              //Sensores
-              AcelerometroG.position.z = Desp_Data[contador1] * yyc;
-              Laser1.position.z = PrG[0][0].position.z;
-              Laser2.position.z = PrG[1][0].position.z;
-              Acelerometro1.position.z = PrG[0][0].position.z;
-              Acelerometro2.position.z = PrG[1][0].position.z;
+            PrG[0][0].position.z = 0 + Santiago3; //Abajo
+            PrG[1][0].position.z = 0 + U1.mat[4][contador1] + Santiago3; // Arriba
+            Mesa1.position.z = 0 + Desp_Data[contador1] * yyc;  //Posición x de la mesa
 
-              ///Vigas
-              V1.position.z = PrG[0][0].position.z;
-              V2.position.z = PrG[1][0].position.z;
-              ///Rotación
-              // PrG[0][0].rotation.y = U1.mat[2][contador1];
-              // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
-              // V1.rotation.y = U1.mat[2][contador1];
-              // V2.rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
+            //Sensores
+            AcelerometroG.position.z = Desp_Data[contador1] * yyc;
+            Laser1.position.z = PrG[0][0].position.z;
+            Laser2.position.z = PrG[1][0].position.z;
+            Acelerometro1.position.z = PrG[0][0].position.z;
+            Acelerometro2.position.z = PrG[1][0].position.z;
 
-              ///Arriba
-              PrG[7][0].position.x = 3.5 + Santiago2;
-              PrG[3][0].position.x = 3.5 + Santiago2;
-              PrG[4][0].position.x = 6.5 + Santiago2;
-              PrG[8][0].position.x = 6.5 + Santiago2;
-              //Abajo
-              PrG[2][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
-              PrG[5][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
-              PrG[6][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
-              PrG[9][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
+            ///Vigas
+            V1.position.z = PrG[0][0].position.z;
+            V2.position.z = PrG[1][0].position.z;
+            ///Rotación
+            // PrG[0][0].rotation.y = U1.mat[2][contador1];
+            // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
+            // V1.rotation.y = U1.mat[2][contador1];
+            // V2.rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
 
-              ///Arriba
-              PrG[7][0].position.z = -1.5 + Santiago3;
-              PrG[3][0].position.z = 1.5 + Santiago3;
-              PrG[4][0].position.z = 1.5 + +Santiago3;
-              PrG[8][0].position.z = -1.5 + Santiago3;
-              //Abajo
-              PrG[2][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
-              PrG[5][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
-              PrG[6][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
-              PrG[9][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
+            ///Arriba
+            PrG[7][0].position.x = 3.5 + Santiago2;
+            PrG[3][0].position.x = 3.5 + Santiago2;
+            PrG[4][0].position.x = 6.5 + Santiago2;
+            PrG[8][0].position.x = 6.5 + Santiago2;
+            //Abajo
+            PrG[2][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
+            PrG[5][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
+            PrG[6][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
+            PrG[9][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
 
-
-            }
+            ///Arriba
+            PrG[7][0].position.z = -1.5 + Santiago3;
+            PrG[3][0].position.z = 1.5 + Santiago3;
+            PrG[4][0].position.z = 1.5 + +Santiago3;
+            PrG[8][0].position.z = -1.5 + Santiago3;
+            //Abajo
+            PrG[2][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
+            PrG[5][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
+            PrG[6][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
+            PrG[9][0].position.z = -1.5 + Desp_Data[contador1] * yyc
           } else {
-            if (AnaYYP3 == true) {
-              let Santiago2 = U1.mat[1][contador1] + Desp_Data[contador1];
+            let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1] * xxc;
+            let Santiago3 = U1.mat[1][contador1] + Desp_Data[contador1] * yyc;
+
+            //Barras y mesas
+            ///Desplazamiento
+            PrG3P[0][0].position.x = 5 + Santiago2; //Abajo
+            PrG3P[1][0].position.x = 5 + U1.mat[3][contador1] + Santiago2; //Arriba
+            PrG3P[2][0].position.x = 5 + U1.mat[3][contador1] + Santiago2 + U1.mat[6][contador1]; //Arriba
+            //
+
+            //Sensores
+            AcelerometroG.position.x = 5 + Desp_Data[contador1] * xxc;
+            Laser1.position.x = + PrG3P[0][0].position.x;
+            Laser2.position.x = + PrG3P[1][0].position.x;
+            Laser3.position.x = + PrG3P[2][0].position.x;
+
+            Acelerometro1.position.x = -5 + PrG3P[0][0].position.x
+            Acelerometro2.position.x = -5 + PrG3P[1][0].position.x;
+            Acelerometro3.position.x = -5 + PrG3P[2][0].position.x;
 
 
-              //Barras y mesa
-              ///Desplazamiento
-              PrG3P[0][0].position.z = 0 + Santiago2; //Abajo
-              PrG3P[1][0].position.z = 0 + U1.mat[4][contador1] + Santiago2; // Arriba 1
-              PrG3P[2][0].position.z = 0 + U1.mat[4][contador1] + Santiago2 + U1.mat[7][contador1]; // Arriba 2
-
-              //Sensores
-              AcelerometroG.position.z = Desp_Data[contador1] * yyc;
-              Laser1.position.z = PrG3P[0][0].position.z
-              Laser2.position.z = PrG3P[1][0].position.z;
-              Laser3.position.z = PrG3P[2][0].position.z;
-              Acelerometro1.position.z = PrG3P[0][0].position.z;
-              Acelerometro2.position.z = PrG3P[1][0].position.z;
-              Acelerometro3.position.z = PrG3P[2][0].position.z;
-
-              //Vigas 
-              Mesa1.position.z = 0 + Desp_Data[contador1];  //Posición x de la mesa
-              V1_3P.position.z = PrG3P[0][0].position.z;
-              V2_3P.position.z = PrG3P[1][0].position.z;
-              V3_3P.position.z = PrG3P[2][0].position.z;
-              ///Rotación
-              // PrG[0][0].rotation.y = U1.mat[2][contador1];
-              // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
-              // PrG[3][0].rotation.y = U1.mat[8] + U1.mat[5][contador1] + U1.mat[2][contador1];
-              ///Arriba 1
-              PrG3P[8][0].position.z = -1.5 + Santiago2;
-              PrG3P[4][0].position.z = 1.5 + Santiago2;
-              PrG3P[5][0].position.z = 1.5 + +Santiago2;
-              PrG3P[9][0].position.z = -1.5 + Santiago2;
-              ///Arriba 2
-              PrG3P[11][0].position.z = 1.5 + Santiago2 + U1.mat[4][contador1];
-              PrG3P[12][0].position.z = -1.5 + Santiago2 + U1.mat[4][contador1];
-              PrG3P[13][0].position.z = -1.5 + +Santiago2 + U1.mat[4][contador1];
-              PrG3P[14][0].position.z = 1.5 + Santiago2 + U1.mat[4][contador1];
-              //Abajo
-              PrG3P[3][0].position.z = 1.5 + Desp_Data[contador1];
-              PrG3P[6][0].position.z = 1.5 + Desp_Data[contador1];
-              PrG3P[7][0].position.z = -1.5 + Desp_Data[contador1];
-              PrG3P[10][0].position.z = -1.5 + Desp_Data[contador1];
-            } else if (AnaXXP3 == true) {
-              let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1];
-              //Barras y mesas
-              ///Desplazamiento
-              PrG3P[0][0].position.x = 5 + Santiago2; //Abajo
-              PrG3P[1][0].position.x = 5 + U1.mat[3][contador1] + Santiago2; //Arriba
-              PrG3P[2][0].position.x = 5 + U1.mat[3][contador1] + Santiago2 + U1.mat[6][contador1]; //Arriba
-              Mesa1.position.x = 5 + Desp_Data[contador1];  //Posición x de la mesa
-
-              //Sensores
-              AcelerometroG.position.x = 5 + Desp_Data[contador1] * xxc;
-              Laser1.position.x = + PrG3P[0][0].position.x;
-              Laser2.position.x = + PrG3P[1][0].position.x;
-              Laser3.position.x = + PrG3P[2][0].position.x;
-
-              Acelerometro1.position.x = -5 + PrG3P[0][0].position.x
-              Acelerometro2.position.x = -5 + PrG3P[1][0].position.x;
-              Acelerometro3.position.x = -5 + PrG3P[2][0].position.x;
-
-              V1_3P.position.x = -5 + PrG3P[0][0].position.x;
-              V2_3P.position.x = -5 + PrG3P[1][0].position.x;
-              V3_3P.position.x = -5 + PrG3P[2][0].position.x;
-              ///Rotación
-              // PrG[0][0].rotation.y = U1.mat[2][contador1];
-              // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
-              // PrG[3][0].rotation.y = U1.mat[8] + U1.mat[5][contador1] + U1.mat[2][contador1];
-              ///Arriba 1
-              PrG3P[8][0].position.x = 3.5 + Santiago2;
-              PrG3P[4][0].position.x = 3.5 + Santiago2;
-              PrG3P[5][0].position.x = 6.5 + Santiago2;
-              PrG3P[9][0].position.x = 6.5 + Santiago2;
-              ///Arriba 2
-              PrG3P[11][0].position.x = 3.5 + Santiago2 + U1.mat[3][contador1];
-              PrG3P[12][0].position.x = 3.5 + Santiago2 + U1.mat[3][contador1];
-              PrG3P[13][0].position.x = 6.5 + Santiago2 + U1.mat[3][contador1];
-              PrG3P[14][0].position.x = 6.5 + Santiago2 + U1.mat[3][contador1];
-              //Abajo
-              PrG3P[3][0].position.x = 3.5 + Desp_Data[contador1];
-              PrG3P[6][0].position.x = 6.5 + Desp_Data[contador1];
-              PrG3P[7][0].position.x = 3.5 + Desp_Data[contador1];
-              PrG3P[10][0].position.x = 6.5 + Desp_Data[contador1];
-              // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
-              // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
-              // chart.update(); chart2.update();
-            } else {
-              let Santiago2 = + U1.mat[0][contador1] + Desp_Data[contador1] * xxc;
-              let Santiago3 = U1.mat[1][contador1] + Desp_Data[contador1] * yyc;
-
-              //Barras y mesas
-              ///Desplazamiento
-              PrG3P[0][0].position.x = 5 + Santiago2; //Abajo
-              PrG3P[1][0].position.x = 5 + U1.mat[3][contador1] + Santiago2; //Arriba
-              PrG3P[2][0].position.x = 5 + U1.mat[3][contador1] + Santiago2 + U1.mat[6][contador1]; //Arriba
-              //
-
-              //Sensores
-              AcelerometroG.position.x = 5 + Desp_Data[contador1] * xxc;
-              Laser1.position.x = + PrG3P[0][0].position.x;
-              Laser2.position.x = + PrG3P[1][0].position.x;
-              Laser3.position.x = + PrG3P[2][0].position.x;
-
-              Acelerometro1.position.x = -5 + PrG3P[0][0].position.x
-              Acelerometro2.position.x = -5 + PrG3P[1][0].position.x;
-              Acelerometro3.position.x = -5 + PrG3P[2][0].position.x;
+            Mesa1.position.x = 5 + Desp_Data[contador1] * xxc;  //Posición x de la mesa
+            V1_3P.position.x = -5 + PrG3P[0][0].position.x;
+            V2_3P.position.x = -5 + PrG3P[1][0].position.x;
+            V3_3P.position.x = -5 + PrG3P[2][0].position.x;
+            ///Rotación
+            // PrG[0][0].rotation.y = U1.mat[2][contador1]
+            // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
+            // PrG[3][0].rotation.y = U1.mat[8] + U1.mat[5][contador1] + U1.mat[2][contador1];
+            ///Arriba 1
+            PrG3P[8][0].position.x = 3.5 + Santiago2;
+            PrG3P[4][0].position.x = 3.5 + Santiago2;
+            PrG3P[5][0].position.x = 6.5 + Santiago2;
+            PrG3P[9][0].position.x = 6.5 + Santiago2;
+            ///Arriba 2
+            PrG3P[11][0].position.x = 3.5 + Santiago2 + U1.mat[3][contador1];
+            PrG3P[12][0].position.x = 3.5 + Santiago2 + U1.mat[3][contador1];
+            PrG3P[13][0].position.x = 6.5 + Santiago2 + U1.mat[3][contador1];
+            PrG3P[14][0].position.x = 6.5 + Santiago2 + U1.mat[3][contador1];
+            //Abajo
+            PrG3P[3][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
+            PrG3P[6][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
+            PrG3P[7][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
+            PrG3P[10][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
 
 
-              Mesa1.position.x = 5 + Desp_Data[contador1] * xxc;  //Posición x de la mesa
-              V1_3P.position.x = -5 + PrG3P[0][0].position.x;
-              V2_3P.position.x = -5 + PrG3P[1][0].position.x;
-              V3_3P.position.x = -5 + PrG3P[2][0].position.x;
-              ///Rotación
-              // PrG[0][0].rotation.y = U1.mat[2][contador1]
-              // PrG[1][0].rotation.y = U1.mat[5][contador1] + U1.mat[2][contador1];
-              // PrG[3][0].rotation.y = U1.mat[8] + U1.mat[5][contador1] + U1.mat[2][contador1];
-              ///Arriba 1
-              PrG3P[8][0].position.x = 3.5 + Santiago2;
-              PrG3P[4][0].position.x = 3.5 + Santiago2;
-              PrG3P[5][0].position.x = 6.5 + Santiago2;
-              PrG3P[9][0].position.x = 6.5 + Santiago2;
-              ///Arriba 2
-              PrG3P[11][0].position.x = 3.5 + Santiago2 + U1.mat[3][contador1];
-              PrG3P[12][0].position.x = 3.5 + Santiago2 + U1.mat[3][contador1];
-              PrG3P[13][0].position.x = 6.5 + Santiago2 + U1.mat[3][contador1];
-              PrG3P[14][0].position.x = 6.5 + Santiago2 + U1.mat[3][contador1];
-              //Abajo
-              PrG3P[3][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
-              PrG3P[6][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
-              PrG3P[7][0].position.x = 3.5 + Desp_Data[contador1] * xxc;
-              PrG3P[10][0].position.x = 6.5 + Desp_Data[contador1] * xxc;
+            ///MOVIMIENTO EN ZETA
 
+            PrG3P[0][0].position.z = 0 + Santiago3; //Abajo
+            PrG3P[1][0].position.z = 0 + U1.mat[4][contador1] + Santiago3; // Arriba 1
+            PrG3P[2][0].position.z = 0 + U1.mat[4][contador1] + Santiago3 + U1.mat[7][contador1]; // Arriba 2
+            Mesa1.position.z = 0 + Desp_Data[contador1] * yyc;  //Posición x de la mesa
+            V1_3P.position.z = PrG3P[0][0].position.z;
+            V2_3P.position.z = PrG3P[1][0].position.z;
+            V3_3P.position.z = PrG3P[2][0].position.z;
 
-              ///MOVIMIENTO EN ZETA
+            ///Arriba 1
+            PrG3P[8][0].position.z = -1.5 + Santiago3;
+            PrG3P[4][0].position.z = 1.5 + Santiago3;
+            PrG3P[5][0].position.z = 1.5 + +Santiago3;
+            PrG3P[9][0].position.z = -1.5 + Santiago3;
+            ///Arriba 2
+            PrG3P[11][0].position.z = 1.5 + Santiago3 + U1.mat[4][contador1];
+            PrG3P[12][0].position.z = -1.5 + Santiago3 + U1.mat[4][contador1];
+            PrG3P[13][0].position.z = -1.5 + +Santiago3 + U1.mat[4][contador1];
+            PrG3P[14][0].position.z = 1.5 + Santiago3 + U1.mat[4][contador1];
+            //Abajo
+            PrG3P[3][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
+            PrG3P[6][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
+            PrG3P[7][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
+            PrG3P[10][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
 
-              PrG3P[0][0].position.z = 0 + Santiago3; //Abajo
-              PrG3P[1][0].position.z = 0 + U1.mat[4][contador1] + Santiago3; // Arriba 1
-              PrG3P[2][0].position.z = 0 + U1.mat[4][contador1] + Santiago3 + U1.mat[7][contador1]; // Arriba 2
-              Mesa1.position.z = 0 + Desp_Data[contador1] * yyc;  //Posición x de la mesa
-              V1_3P.position.z = PrG3P[0][0].position.z;
-              V2_3P.position.z = PrG3P[1][0].position.z;
-              V3_3P.position.z = PrG3P[2][0].position.z;
+            //Sensores
+            AcelerometroG.position.z = Desp_Data[contador1] * yyc;
+            Laser1.position.z = PrG3P[0][0].position.z
+            Laser2.position.z = PrG3P[1][0].position.z;
+            Laser3.position.z = PrG3P[2][0].position.z;
+            Acelerometro1.position.z = PrG3P[0][0].position.z;
+            Acelerometro2.position.z = PrG3P[1][0].position.z;
+            Acelerometro3.position.z = PrG3P[2][0].position.z;
 
-              ///Arriba 1
-              PrG3P[8][0].position.z = -1.5 + Santiago3;
-              PrG3P[4][0].position.z = 1.5 + Santiago3;
-              PrG3P[5][0].position.z = 1.5 + +Santiago3;
-              PrG3P[9][0].position.z = -1.5 + Santiago3;
-              ///Arriba 2
-              PrG3P[11][0].position.z = 1.5 + Santiago3 + U1.mat[4][contador1];
-              PrG3P[12][0].position.z = -1.5 + Santiago3 + U1.mat[4][contador1];
-              PrG3P[13][0].position.z = -1.5 + +Santiago3 + U1.mat[4][contador1];
-              PrG3P[14][0].position.z = 1.5 + Santiago3 + U1.mat[4][contador1];
-              //Abajo
-              PrG3P[3][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
-              PrG3P[6][0].position.z = 1.5 + Desp_Data[contador1] * yyc;
-              PrG3P[7][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
-              PrG3P[10][0].position.z = -1.5 + Desp_Data[contador1] * yyc;
-
-              //Sensores
-              AcelerometroG.position.z = Desp_Data[contador1] * yyc;
-              Laser1.position.z = PrG3P[0][0].position.z
-              Laser2.position.z = PrG3P[1][0].position.z;
-              Laser3.position.z = PrG3P[2][0].position.z;
-              Acelerometro1.position.z = PrG3P[0][0].position.z;
-              Acelerometro2.position.z = PrG3P[1][0].position.z;
-              Acelerometro3.position.z = PrG3P[2][0].position.z;
-
-              // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
-              // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
-              // chart.update(); chart2.update();
-
-            }
+            // chart.data.datasets[0].data.push({ y: U1.mat[0][contadorglobal], x: t[contadorglobal] })
+            // chart2.data.datasets[0].data.push({ y: U1.mat[1][contadorglobal], x: t[contadorglobal] })
+            // chart.update(); chart2.update();
           }
           const MGV = Number(Porti3P);
           //Donde sucede la magia, es decir donde grafico 
-          // switch (EditResponse) {
-          //   case 1:
-          //     if (CleanResponse == true) {
-          //       chart.data.datasets[0].data.length = 0;
-          //       chart2.data.datasets[0].data.length = 0;
-          //       chart3.data.datasets[0].data.length = 0;
-          //       chart.data.datasets[1].data.length = 0;
-          //       chart2.data.datasets[1].data.length = 0;
-          //       chart3.data.datasets[1].data.length = 0;
-          //       CleanResponse = false;
-          //       chart.update();
-          //       chart2.update();
-          //       chart3.update();
-          //     }
+          switch (EditResponse) {
+            case 1:
+              if (CleanResponse == true) {
+                chart.data.datasets[0].data.length = 0;
+                chart2.data.datasets[0].data.length = 0;
+                chart3.data.datasets[0].data.length = 0;
+                chart.data.datasets[1].data.length = 0;
+                chart2.data.datasets[1].data.length = 0;
+                chart3.data.datasets[1].data.length = 0;
+                CleanResponse = false;
+                chart.update();
+                chart2.update();
+                chart3.update();
+              }
 
-          //     if (Dispg == true) {
-          //       chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[0][contadorglobal] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[1][contadorglobal] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[2][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-          //     } else {
-          //       chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[0][contadorglobal] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[1][contadorglobal] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[2][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+              if (Dispg == true) {
+                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[0][contadorglobal] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[1][contadorglobal] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[2][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
+              } else {
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[0][contadorglobal] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[1][contadorglobal] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[2][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
 
-          //     }
-          //     break;
-          //   case 2:
-          //     if (CleanResponse == true) {
-          //       chart.data.datasets[0].data.length = 0;
-          //       chart2.data.datasets[0].data.length = 0;
-          //       chart3.data.datasets[0].data.length = 0;
-          //       chart.data.datasets[1].data.length = 0;
-          //       chart2.data.datasets[1].data.length = 0;
-          //       chart3.data.datasets[1].data.length = 0;
-          //       CleanResponse = false;
-          //       chart.update();
-          //       chart2.update();
-          //       chart3.update();
-          //     }
-          //     if (Dispg == true) {
-          //       chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[3][contadorglobal] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[4][contadorglobal] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[5][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-          //     } else {
-          //       chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[3][contadorglobal] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[4][contadorglobal] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[5][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-          //     }
+              }
+              break;
+            case 2:
+              if (CleanResponse == true) {
+                chart.data.datasets[0].data.length = 0;
+                chart2.data.datasets[0].data.length = 0;
+                chart3.data.datasets[0].data.length = 0;
+                chart.data.datasets[1].data.length = 0;
+                chart2.data.datasets[1].data.length = 0;
+                chart3.data.datasets[1].data.length = 0;
+                CleanResponse = false;
+                chart.update();
+                chart2.update();
+                chart3.update();
+              }
+              if (Dispg == true) {
+                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[3][contadorglobal] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[4][contadorglobal] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[5][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
+              } else {
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[3][contadorglobal] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[4][contadorglobal] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[5][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+              }
 
-          //     break;
-          //   case 3:
-          //     if (CleanResponse == true) {
-          //       chart.data.datasets[0].data.length = 0;
-          //       chart2.data.datasets[0].data.length = 0;
-          //       chart3.data.datasets[0].data.length = 0;
-          //       chart.data.datasets[1].data.length = 0;
-          //       chart2.data.datasets[1].data.length = 0;
-          //       chart3.data.datasets[1].data.length = 0;
-          //       CleanResponse = false;
-          //       chart.update();
-          //       chart2.update();
-          //       chart3.update();
-          //     }
-          //     if (Dispg == true) {
-          //       chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[6][contadorglobal] + FacDRuido[6][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[7][contadorglobal] + FacDRuido[7][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-          //     } else {
-          //       chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[6][contadorglobal] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[7][contadorglobal] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-          //     }
+              break;
+            case 3:
+              if (CleanResponse == true) {
+                chart.data.datasets[0].data.length = 0;
+                chart2.data.datasets[0].data.length = 0;
+                chart3.data.datasets[0].data.length = 0;
+                chart.data.datasets[1].data.length = 0;
+                chart2.data.datasets[1].data.length = 0;
+                chart3.data.datasets[1].data.length = 0;
+                CleanResponse = false;
+                chart.update();
+                chart2.update();
+                chart3.update();
+              }
+              if (Dispg == true) {
+                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[6][contadorglobal] + FacDRuido[6][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[7][contadorglobal] + FacDRuido[7][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
+              } else {
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[6][contadorglobal] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[7][contadorglobal] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+              }
 
-          //     break;
-          //   case 4:
-          //     if (CleanResponse == true) {
-          //       chart.data.datasets[0].data.length = 0;
-          //       chart2.data.datasets[0].data.length = 0;
-          //       chart3.data.datasets[0].data.length = 0;
-          //       chart.data.datasets[1].data.length = 0;
-          //       chart2.data.datasets[1].data.length = 0;
-          //       chart3.data.datasets[1].data.length = 0;
-          //       CleanResponse = false;
-          //       chart.update();
-          //       chart2.update();
-          //       chart3.update();
-          //     }
-          //     if (Dispg == true) {
+              break;
+            case 4:
+              if (CleanResponse == true) {
+                chart.data.datasets[0].data.length = 0;
+                chart2.data.datasets[0].data.length = 0;
+                chart3.data.datasets[0].data.length = 0;
+                chart.data.datasets[1].data.length = 0;
+                chart2.data.datasets[1].data.length = 0;
+                chart3.data.datasets[1].data.length = 0;
+                CleanResponse = false;
+                chart.update();
+                chart2.update();
+                chart3.update();
+              }
+              if (Dispg == true) {
 
-          //       chart.data.datasets[0].data.push({ y: SensorMultp * UL[0][contadorglobal][0] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
-          //       chart.data.datasets[1].data.push({ y: SensorMultp * UL[0][contadorglobal][1] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * UL[0][contadorglobal][0] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[1].data.push({ y: SensorMultp * UL[0][contadorglobal][1] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
 
-          //       chart2.data.datasets[0].data.push({ y: SensorMultp * UL[2 + MGV][contadorglobal][0] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[1].data.push({ y: SensorMultp * UL[2 + MGV][contadorglobal][1] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-          //     } else {
+                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[2 + MGV][contadorglobal][0] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[2 + MGV][contadorglobal][1] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
+              } else {
 
-          //       chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[0][contadorglobal][0] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
-          //       chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[0][contadorglobal][1] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[0][contadorglobal][0] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[0][contadorglobal][1] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
 
-          //       chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2 + MGV][contadorglobal][0] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2 + MGV][contadorglobal][1] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2 + MGV][contadorglobal][0] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2 + MGV][contadorglobal][1] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
 
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-          //     }
-          //     break;
-          //   case 5:
-          //     if (CleanResponse == true) {
-          //       chart.data.datasets[0].data.length = 0;
-          //       chart2.data.datasets[0].data.length = 0;
-          //       chart3.data.datasets[0].data.length = 0;
-          //       chart.data.datasets[1].data.length = 0;
-          //       chart2.data.datasets[1].data.length = 0;
-          //       chart3.data.datasets[1].data.length = 0;
-          //       CleanResponse = false;
-          //       chart.update();
-          //       chart2.update();
-          //       chart3.update();
-          //     }
-          //     if (Dispg == true) {
+                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+              }
+              break;
+            case 5:
+              if (CleanResponse == true) {
+                chart.data.datasets[0].data.length = 0;
+                chart2.data.datasets[0].data.length = 0;
+                chart3.data.datasets[0].data.length = 0;
+                chart.data.datasets[1].data.length = 0;
+                chart2.data.datasets[1].data.length = 0;
+                chart3.data.datasets[1].data.length = 0;
+                CleanResponse = false;
+                chart.update();
+                chart2.update();
+                chart3.update();
+              }
+              if (Dispg == true) {
 
-          //       chart.data.datasets[0].data.push({ y: SensorMultp * UL[1][contadorglobal][0] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-          //       chart.data.datasets[1].data.push({ y: SensorMultp * UL[1][contadorglobal][1] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * UL[1][contadorglobal][0] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[1].data.push({ y: SensorMultp * UL[1][contadorglobal][1] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
 
-          //       chart2.data.datasets[0].data.push({ y: SensorMultp * UL[3 + MGV][contadorglobal][0] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[1].data.push({ y: SensorMultp * UL[3 + MGV][contadorglobal][1] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-          //     } else {
+                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[3 + MGV][contadorglobal][0] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[3 + MGV][contadorglobal][1] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
+              } else {
 
-          //       chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[1][contadorglobal][0] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
-          //       chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[1][contadorglobal][1] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[1][contadorglobal][0] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[1][contadorglobal][1] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
 
-          //       chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[3 + MGV][contadorglobal][0] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[3 + MGV][contadorglobal][1] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[3 + MGV][contadorglobal][0] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[3 + MGV][contadorglobal][1] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
 
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-          //     }
-          //     break;
-          //   case 6:
-          //     if (CleanResponse == true) {
-          //       chart.data.datasets[0].data.length = 0;
-          //       chart2.data.datasets[0].data.length = 0;
-          //       chart3.data.datasets[0].data.length = 0;
-          //       chart.data.datasets[1].data.length = 0;
-          //       chart2.data.datasets[1].data.length = 0;
-          //       chart3.data.datasets[1].data.length = 0;
-          //       CleanResponse = false;
-          //       chart.update();
-          //       chart2.update();
-          //       chart3.update();
-          //     }
-          //     if (Dispg == true) {
+                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+              }
+              break;
+            case 6:
+              if (CleanResponse == true) {
+                chart.data.datasets[0].data.length = 0;
+                chart2.data.datasets[0].data.length = 0;
+                chart3.data.datasets[0].data.length = 0;
+                chart.data.datasets[1].data.length = 0;
+                chart2.data.datasets[1].data.length = 0;
+                chart3.data.datasets[1].data.length = 0;
+                CleanResponse = false;
+                chart.update();
+                chart2.update();
+                chart3.update();
+              }
+              if (Dispg == true) {
 
-          //       chart.data.datasets[0].data.push({ y: SensorMultp * UL[2][contadorglobal][0] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-          //       chart.data.datasets[1].data.push({ y: SensorMultp * UL[2][contadorglobal][1] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * UL[2][contadorglobal][0] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[1].data.push({ y: SensorMultp * UL[2][contadorglobal][1] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
 
-          //       chart2.data.datasets[0].data.push({ y: SensorMultp * UL[5][contadorglobal][0] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[1].data.push({ y: SensorMultp * UL[5][contadorglobal][1] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-          //     } else {
+                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[5][contadorglobal][0] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[5][contadorglobal][1] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
+                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
+              } else {
 
-          //       chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2][contadorglobal][0] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
-          //       chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2][contadorglobal][1] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2][contadorglobal][0] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
+                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2][contadorglobal][1] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
 
-          //       chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[5][contadorglobal][0] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
-          //       chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[5][contadorglobal][1] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[5][contadorglobal][0] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
+                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[5][contadorglobal][1] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
 
-          //       // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-          //       chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-          //     }
-          //     break;
-          // }
-          // chart.update();
-          // chart2.update();
-          // chart3.update();
-          const xScale = chart.options.scales.x;
-          const yScale = chart.options.scales.y;
-
-          xScale.min = currentIndex;
-          xScale.max = currentIndex+2.58;
-
-          chart.update('none'); // Actualiza sin animación
-
-
-          currentIndex=currentIndex+DTNN;
-
+                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
+                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+              }
+              break;
+          }
+          chart.update();
+          chart2.update();
+          chart3.update();
           contador1++;
           contadorglobal++;
           renderer.render(scene, camera);
@@ -4955,56 +4790,25 @@
             vertex2.fromBufferAttribute(PrG[7][0].geometry.attributes.position, i);
             const x = vertex.y - 1;
             const x1 = vertex2.y - 1;
-            // const x = U1.mat[1][contadorglobal];
 
-            // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1]) 
-            // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
-            // const xflex1 = (x * x) / (2 * Kani.mat[1][1]) - (x * x * x) / (6 * Kani.mat[1][1])
-            // const xflex2 = (x * x) / (2 * Kani.mat[0][0]) - (x * x * x) / (6 * Kani.mat[0][0]);
+            xflex1 = (Kr * x * x - 0.5 * Kr * x * x * x);
+            xflex2 = (Kr * x1 * x1 - 0.5 * Kr * x1 * x1);
 
-            //Lo mejor
-            // const xflex1 = (4100 * x * x) / (2 * Kani.mat[1][1]) //Rigidez arriba
-            // const xflex2 = (300 * x1 * x1) / (2 * Kani.mat[0][0]);
-
-            //Intento 
-            if (AnaYY == true) {
-              xflex1 = (-Kr * x * x + 0.5 * Kr * x * x * x);
-              xflex2 = (-Kr * x1 * x1 + 0.5 * Kr * x1 * x1);
-
-            } else {
-              xflex1 = (Kr * x * x - 0.5 * Kr * x * x * x);
-              xflex2 = (Kr * x1 * x1 - 0.5 * Kr * x1 * x1);
-            }
             // Aplicar deformación asimétrica solo en el extremo superior
-            if (AnaXY == true) {
-              if (vertex.y > -1.2) { // Cambiar el valor según la ubicación deseada del empotramiento
-                const deformation1 = -xflex2 * U1.mat[0][contadorglobal]; // Deformación asimétrica
-                const deformation2 = -xflex1 * U1.mat[3][contadorglobal]; // Deformación asimétrica, arriba
+            if (vertex.y > -1.2) { // Cambiar el valor según la ubicación deseada del empotramiento
+              const deformation1 = -xflex2 * U1.mat[0][contadorglobal]; // Deformación asimétrica
+              const deformation2 = -xflex1 * U1.mat[3][contadorglobal]; // Deformación asimétrica, arriba
 
-                const deformation1y = -xflex2 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
-                const deformation2y = -xflex1 * U1.mat[4][contadorglobal]; // Deformación asimétrica
+              const deformation1y = -xflex2 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
+              const deformation2y = -xflex1 * U1.mat[4][contadorglobal]; // Deformación asimétrica
 
-                vertex.z = vertexS[i] + deformation2 * 0.4;
-                vertex2.z = vertexS[i] + deformation1 * 1.7;
+              vertex.z = vertexS[i] + deformation2 * 0.4;
+              vertex2.z = vertexS[i] + deformation1 * 1.7;
 
-                vertex.x = vertexSX[i] + deformation2y * 0.4;
-                vertex2.x = vertexSX[i] + deformation1y * 1.7;
-              }
-            } else {
-              if (AnaXX == true) {
-                const deformation1 = -xflex2 * U1.mat[0][contadorglobal]; // Deformación asimétrica
-                const deformation2 = -xflex1 * U1.mat[3][contadorglobal]; // Deformación asimétrica, arriba
-                vertex.z = vertexS[i] + deformation2 * 0.4;
-                vertex2.z = vertexS[i] + deformation1 * 1.7;
-              } else {
-                const deformation1 = -xflex2 * U1.mat[1][contadorglobal]; // Deformación asimétrica
-                const deformation2 = -xflex1 * U1.mat[4][contadorglobal]; // Deformación asimétrica, arriba
-                vertex.z = vertexS[i] + deformation2 * 0.4;
-                vertex2.z = vertexS[i] + deformation1 * 1.7;
-              }
-
-
+              vertex.x = vertexSX[i] + deformation2y * 0.4;
+              vertex2.x = vertexSX[i] + deformation1y * 1.7;
             }
+
             //Columnas de abajo
             PrG[2][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
             PrG[5][0].geometry.attributes.position.setXYZ(i, vertex2.x, vertex2.y, vertex2.z);
@@ -5032,69 +4836,32 @@
             const x1 = vertex2.y - 1;
             const x2 = vertex3.y - 1;
             //Intento 
-            if (AnaXXP3 == false && AnaXYP3 == false) {
-              xflex1 = (-Kr * x * x);
-              xflex2 = (-Kr * x1 * x1);
-              xflex3 = (-Kr * x2 * x2);
+            xflex1 = (Kr * x * x);
+            xflex2 = (Kr * x1 * x1);
+            xflex3 = (Kr * x2 * x2);
 
-            } else {
-              xflex1 = (Kr * x * x);
-              xflex2 = (Kr * x1 * x1);
-              xflex3 = (Kr * x2 * x2);
-            }
             // Aplicar deformación asimétrica solo en el extremo superior
-            if (AnaXYP3 == true) {
 
-              if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
-                // const deformation1 = xflex1 * U1.mat[1][contadorglobal] * 45; // Deformación asimétrica, arriba
-                // const deformation2 = xflex2 * U1.mat[0][contadorglobal] * 10; // Deformación asimétrica
-                const deformation1 = -xflex1 * U1.mat[0][contadorglobal]; // Deformación asimétrica, arriba
-                const deformation2 = -xflex2 * U1.mat[3][contadorglobal]; // Deformación asimétrica
-                const deformation3 = -xflex3 * U1.mat[6][contadorglobal]; // Deformación asimétrica
+            if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del empotramiento
+              // const deformation1 = xflex1 * U1.mat[1][contadorglobal] * 45; // Deformación asimétrica, arriba
+              // const deformation2 = xflex2 * U1.mat[0][contadorglobal] * 10; // Deformación asimétrica
+              const deformation1 = -xflex1 * U1.mat[0][contadorglobal]; // Deformación asimétrica, arriba
+              const deformation2 = -xflex2 * U1.mat[3][contadorglobal]; // Deformación asimétrica
+              const deformation3 = -xflex3 * U1.mat[6][contadorglobal]; // Deformación asimétrica
 
-                const deformation1y = -xflex1 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
-                const deformation2y = -xflex2 * U1.mat[4][contadorglobal]; // Deformación asimétrica
-                const deformation3y = -xflex3 * U1.mat[7][contadorglobal]; // Deformación asimétrica
+              const deformation1y = -xflex1 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
+              const deformation2y = -xflex2 * U1.mat[4][contadorglobal]; // Deformación asimétrica
+              const deformation3y = -xflex3 * U1.mat[7][contadorglobal]; // Deformación asimétrica
 
-                vertex.z = vertexS[i] + deformation1 * 0.7;
-                vertex2.z = vertexS[i] + deformation2 * 0.75;
-                vertex3.z = vertexS[i] + deformation3 * 0.7;
+              vertex.z = vertexS[i] + deformation1 * 0.7;
+              vertex2.z = vertexS[i] + deformation2 * 0.75;
+              vertex3.z = vertexS[i] + deformation3 * 0.7;
 
-                vertex.x = vertexSX[i] + deformation1y * 0.7;
-                vertex2.x = vertexSX[i] + deformation2y * 0.75;
-                vertex3.x = vertexSX[i] + deformation3y * 0.7;
-
-
-              }
-
-            } else {
-              if (vertex.y > -1.1) { // Cambiar el valor según la ubicación deseada del 
-
-                if (AnaXXP3 == true) {
-                  const deformation1 = -xflex1 * U1.mat[0][contadorglobal]; // Deformación asimétrica, arriba
-                  const deformation2 = -xflex2 * U1.mat[3][contadorglobal]; // Deformación asimétrica
-                  const deformation3 = -xflex3 * U1.mat[6][contadorglobal]; // Deformación asimétrica
-
-                  vertex.z = vertexS[i] + deformation1 * 0.75;
-                  vertex2.z = vertexS[i] + deformation2 * 0.8;
-                  vertex3.z = vertexS[i] + deformation3 * 0.75;
-
-                } else {
-
-                  const deformation1 = -xflex1 * U1.mat[1][contadorglobal]; // Deformación asimétrica, arriba
-                  const deformation2 = -xflex2 * U1.mat[4][contadorglobal]; // Deformación asimétrica
-                  const deformation3 = -xflex3 * U1.mat[7][contadorglobal]; // Deformación asimétrica
-
-                  vertex.z = vertexS[i] + deformation1 * 0.75;
-                  vertex2.z = vertexS[i] + deformation2 * 0.8;
-                  vertex3.z = vertexS[i] + deformation3 * 0.75;
-
-                }
+              vertex.x = vertexSX[i] + deformation1y * 0.7;
+              vertex2.x = vertexSX[i] + deformation2y * 0.75;
+              vertex3.x = vertexSX[i] + deformation3y * 0.7;
 
 
-
-
-              }
             }
 
 

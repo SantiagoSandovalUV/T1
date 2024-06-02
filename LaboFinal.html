@@ -1404,6 +1404,7 @@
         UPP1 = new Array();
         Ac_DataC = new Array();
         Desp_DataC = new Array();
+        t = [0];
         chart.data.datasets[0].data.length = 0;
         chart2.data.datasets[0].data.length = 0;
         chart3.data.datasets[0].data.length = 0;
@@ -1413,6 +1414,7 @@
         chart.update();
         chart2.update();
         chart3.update();
+        let retornadora = false;
         document.getElementById("select_barra").style.display = "block";
         if (Porti2P == true) {
           uo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
@@ -1442,6 +1444,7 @@
           // Agrega más casos según la cantidad de paneles que tengas
           default:
             alert("You have not selected any movement in the base");
+            retornadora = true;
             return
             break;
         }
@@ -1452,6 +1455,10 @@
           alert("You have not selected any movement in the base");
           return
         }
+        if (retornadora == true) {
+          return
+        }
+
         with (Matrix) { //Código
           // var K_c = scale(create([[2, -1, 0, 0, 0], [-1, 2, -1, 0, 0], [0, -1, 2, -1, 0], [0, 0, -1, 2, -1], [0, 0, 0, -1, 1]]), 100);
           // var M = scale(create([[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, 0, 0, 0, 1]]), 0.259);
@@ -1620,6 +1627,8 @@
         setTimeout(function () {
           UL = DesplazamientosLocales(U1, SensorMultp); UL = UL[0];
           UPPL = DesplazamientosLocales(UPP1, SensorMultpA); UPPL = UPPL[0];
+          ExportarAnyTiempo();
+          LoadCharData();
         }, 350); // 2000 milisegundos = 2 segundos
         animate2();
         Deformar();
@@ -4336,21 +4345,6 @@
           }
         }
       }
-      // Movimiento_defor()
-      // var sn = new Array();
-      // var xs = new Array();
-      // var xf = new Array();
-      // var avisame = new Array();
-      // for (let i = 0; i < C5[0].geometry.attributes.position.count; i++) {
-      //   sn[i] = 0;
-      //   xs[i] = C5[0].geometry.attributes.position.getY(i); // Lineas para expandir
-      //   xf[i] = (xs[i] * xs[i]) / 120 - (xs[i] * xs[i] * xs[i]) / 6;
-      //   if (xs[i] == -0) {
-      //     avisame[i] = i;
-
-      //   }
-
-      // }
 
       function recargar() {
         window.location.href = window.location.href;
@@ -4384,11 +4378,14 @@
             // }
           } else if (AnaXXP3 == true) {
             yyc = 0;
-            // for (let i = 3; i < PrG3P.length - 12; i++) {
-            //   PrG3P[i][0].rotation.y = -Math.PI / 2;
-            // }
           }
         }
+        // Índice para la ventana móvil
+        let currentIndex = 0;
+        const windowSize = U1.mat[0].length * 0.02;
+        const INCS = 3;
+        const MXT = RD10MC(Math.max(...t))+0.1;
+        let DTNN = ( MXT- INCS) / (50 * MXT);
         function Deformar_1() {
           if (Porti2P == true) {
 
@@ -4539,192 +4536,26 @@
           }
           const MGV = Number(Porti3P);
           //Donde sucede la magia, es decir donde grafico 
-          switch (EditResponse) {
-            case 1:
-              if (CleanResponse == true) {
-                chart.data.datasets[0].data.length = 0;
-                chart2.data.datasets[0].data.length = 0;
-                chart3.data.datasets[0].data.length = 0;
-                chart.data.datasets[1].data.length = 0;
-                chart2.data.datasets[1].data.length = 0;
-                chart3.data.datasets[1].data.length = 0;
-                CleanResponse = false;
-                chart.update();
-                chart2.update();
-                chart3.update();
-              }
+          const xScale1 = chart.options.scales.x;
+          const xScale2 = chart2.options.scales.x;
+          const xScale3 = chart3.options.scales.x;
 
-              if (Dispg == true) {
-                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[0][contadorglobal] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[1][contadorglobal] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[2][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-              } else {
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[0][contadorglobal] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[1][contadorglobal] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[2][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
+          //Chart1
+          xScale1.min = currentIndex;
+          xScale1.max = currentIndex + INCS;
+          //Chart2
+          xScale2.min = currentIndex;
+          xScale2.max = currentIndex + INCS;
+          //Chart3
+          xScale3.min = currentIndex;
+          xScale3.max = currentIndex + INCS;
 
-              }
-              break;
-            case 2:
-              if (CleanResponse == true) {
-                chart.data.datasets[0].data.length = 0;
-                chart2.data.datasets[0].data.length = 0;
-                chart3.data.datasets[0].data.length = 0;
-                chart.data.datasets[1].data.length = 0;
-                chart2.data.datasets[1].data.length = 0;
-                chart3.data.datasets[1].data.length = 0;
-                CleanResponse = false;
-                chart.update();
-                chart2.update();
-                chart3.update();
-              }
-              if (Dispg == true) {
-                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[3][contadorglobal] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[4][contadorglobal] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[5][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-              } else {
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[3][contadorglobal] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[4][contadorglobal] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[5][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-              }
+          chart.update('none'); // Actualiza sin animación
+          chart2.update('none'); // Actualiza sin animación
+          chart3.update('none'); // Actualiza sin animación
 
-              break;
-            case 3:
-              if (CleanResponse == true) {
-                chart.data.datasets[0].data.length = 0;
-                chart2.data.datasets[0].data.length = 0;
-                chart3.data.datasets[0].data.length = 0;
-                chart.data.datasets[1].data.length = 0;
-                chart2.data.datasets[1].data.length = 0;
-                chart3.data.datasets[1].data.length = 0;
-                CleanResponse = false;
-                chart.update();
-                chart2.update();
-                chart3.update();
-              }
-              if (Dispg == true) {
-                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[6][contadorglobal] + FacDRuido[6][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[7][contadorglobal] + FacDRuido[7][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-              } else {
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[6][contadorglobal] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[7][contadorglobal] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-              }
+          currentIndex = currentIndex + DTNN;
 
-              break;
-            case 4:
-              if (CleanResponse == true) {
-                chart.data.datasets[0].data.length = 0;
-                chart2.data.datasets[0].data.length = 0;
-                chart3.data.datasets[0].data.length = 0;
-                chart.data.datasets[1].data.length = 0;
-                chart2.data.datasets[1].data.length = 0;
-                chart3.data.datasets[1].data.length = 0;
-                CleanResponse = false;
-                chart.update();
-                chart2.update();
-                chart3.update();
-              }
-              if (Dispg == true) {
-
-                chart.data.datasets[0].data.push({ y: SensorMultp * UL[0][contadorglobal][0] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
-                chart.data.datasets[1].data.push({ y: SensorMultp * UL[0][contadorglobal][1] + FacDRuido[0][contadorglobal], x: t[contadorglobal] });
-
-                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[2 + MGV][contadorglobal][0] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[2 + MGV][contadorglobal][1] + FacDRuido[1][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-              } else {
-
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[0][contadorglobal][0] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
-                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[0][contadorglobal][1] + FacDRuidoA[0][contadorglobal], x: t[contadorglobal] });
-
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2 + MGV][contadorglobal][0] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2 + MGV][contadorglobal][1] + FacDRuidoA[1][contadorglobal], x: t[contadorglobal] });
-
-                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-              }
-              break;
-            case 5:
-              if (CleanResponse == true) {
-                chart.data.datasets[0].data.length = 0;
-                chart2.data.datasets[0].data.length = 0;
-                chart3.data.datasets[0].data.length = 0;
-                chart.data.datasets[1].data.length = 0;
-                chart2.data.datasets[1].data.length = 0;
-                chart3.data.datasets[1].data.length = 0;
-                CleanResponse = false;
-                chart.update();
-                chart2.update();
-                chart3.update();
-              }
-              if (Dispg == true) {
-
-                chart.data.datasets[0].data.push({ y: SensorMultp * UL[1][contadorglobal][0] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-                chart.data.datasets[1].data.push({ y: SensorMultp * UL[1][contadorglobal][1] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-
-                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[3 + MGV][contadorglobal][0] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[3 + MGV][contadorglobal][1] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-              } else {
-
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[1][contadorglobal][0] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
-                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[1][contadorglobal][1] + FacDRuidoA[3][contadorglobal], x: t[contadorglobal] });
-
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[3 + MGV][contadorglobal][0] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[3 + MGV][contadorglobal][1] + FacDRuidoA[4][contadorglobal], x: t[contadorglobal] });
-
-                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-              }
-              break;
-            case 6:
-              if (CleanResponse == true) {
-                chart.data.datasets[0].data.length = 0;
-                chart2.data.datasets[0].data.length = 0;
-                chart3.data.datasets[0].data.length = 0;
-                chart.data.datasets[1].data.length = 0;
-                chart2.data.datasets[1].data.length = 0;
-                chart3.data.datasets[1].data.length = 0;
-                CleanResponse = false;
-                chart.update();
-                chart2.update();
-                chart3.update();
-              }
-              if (Dispg == true) {
-
-                chart.data.datasets[0].data.push({ y: SensorMultp * UL[2][contadorglobal][0] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-                chart.data.datasets[1].data.push({ y: SensorMultp * UL[2][contadorglobal][1] + FacDRuido[3][contadorglobal], x: t[contadorglobal] });
-
-                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[5][contadorglobal][0] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[5][contadorglobal][1] + FacDRuido[4][contadorglobal], x: t[contadorglobal] });
-                // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: Desp_Data[contadorglobal], x: t[contadorglobal] });
-              } else {
-
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2][contadorglobal][0] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
-                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2][contadorglobal][1] + FacDRuidoA[6][contadorglobal], x: t[contadorglobal] });
-
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[5][contadorglobal][0] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
-                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[5][contadorglobal][1] + FacDRuidoA[7][contadorglobal], x: t[contadorglobal] });
-
-                // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
-                chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[contadorglobal] + FacDRuidoAG[0][contadorglobal], x: t[contadorglobal] });
-              }
-              break;
-          }
-          chart.update();
-          chart2.update();
-          chart3.update();
           contador1++;
           contadorglobal++;
           renderer.render(scene, camera);
@@ -4732,8 +4563,8 @@
             clearInterval(DeforTim);
             contador1 = 0;
             contadorglobal = 0;
-            ExportarAnyTiempo();
-            LoadCharData();
+            CEROEJES();
+            // LoadCharData();
             scene.add(EjesMesas);
             if (Porti2P == true) {
               LimpiarGeo(PrG);
@@ -5480,6 +5311,17 @@
           SensorMultp = 1;
         }
       }
+      function CEROEJES() {
+        const xScale1 = chart.options.scales.x;
+        const xScale2 = chart2.options.scales.x;
+        const xScale3 = chart3.options.scales.x;
+        xScale1.min = 0;
+        xScale2.min = 0;
+        xScale3.min = 0;
+        chart.update('none'); // Actualiza sin animación
+        chart2.update('none'); // Actualiza sin animación
+        chart3.update('none'); // Actualiza sin animación
+      }
       function LoadCharData() { //Función para cambiar la respuesta que se gráfica
         console.log('Cargar toda la gráfica')
         chart.data.datasets[0].data.length = 0;
@@ -5931,6 +5773,9 @@
 
 
 
+      }
+      function RD10MC(N) {
+        return Math.ceil(N * 10) / 10;
       }
 
       const loader1 = new THREE.GLTFLoader();
