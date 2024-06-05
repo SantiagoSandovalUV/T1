@@ -1094,6 +1094,7 @@
       controls.target.set(1.2562541711415123, 0.9723298648762979, 0.6724835789757792);
       // camera.position.set(10, 4.5, 15); // posicion de la camara (0, 5, 5)
       controls.update();
+      controls.enabled = false; // Deshabilita la interacción con el mouse
       controls.addEventListener('change', () => { renderer.render(scene, camera) });
       renderer.render(scene, camera);
 
