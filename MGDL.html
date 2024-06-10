@@ -486,7 +486,11 @@
                         class="ti ti-question-mark text-primary"></i></label>
                     <input type="text" class="form-control form-control-sm" name="ME_box1" id="ME_box1" placeholder="">
                   </div>
+
                 </form>
+                <button type="button" id="ActPro" onclick="ActProp()" class="btn btn-primary">Update all properties
+                </button>
+
               </div>
               <!-- <div class="card mt-2" style="width: 100%;">     
               <button type="button" id="StartSimulation" onclick="ActProp()" class="btn btn-primary">Update all properties
@@ -4300,6 +4304,21 @@
             // PrG[i][0].geometry.tangentsNeedUpdate = true;
           }
           renderer.render(scene, camera);
+        }
+      }
+      function ActProp (){
+        for (let i = 0; i < PrG.length; i++) {
+            //Modulo de elásticidad
+            var ModuloE = parseFloat(document.getElementById('ME_box1').value);
+            //Momento de inercia
+            var Altura = parseFloat(document.getElementById('h_box1').value);
+            //Área
+            var Base = parseFloat(document.getElementById('b_box1').value);
+            //Damping
+            PrG[i][1].Propiedades.E = ModuloE;
+            PrG[i][1].Propiedades.h = Altura;
+            PrG[i][1].Propiedades.b = Base;
+          
         }
       }
       // Actualiza las propiedades físicas en la interfaz
