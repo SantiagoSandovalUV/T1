@@ -4343,15 +4343,19 @@
               document.getElementById('Locke').style.visibility = 'hidden';
               document.getElementById('UnLocke').style.visibility = 'visible';
               document.getElementById("StartSimulation").setAttribute("disabled", "true");
+
             } else { //Desbloquear Slab 
+
               var elementos = document.querySelectorAll("#Losas *");
               elementos.forEach(function (elemento) {
                 elemento.disabled = true;
               });
+              document.getElementById("ActPro").setAttribute("disabled", "true");
               var elementos = document.querySelectorAll("#Columnas *");
               elementos.forEach(function (elemento) {
                 elemento.disabled = false;
               });
+              document.getElementById("ActPro").removeAttribute("disabled");
               document.getElementById('LockeCo').style.visibility = 'hidden';
               document.getElementById('UnLockeCo').style.visibility = 'visible';
               document.getElementById('Locke').style.visibility = 'visible';
