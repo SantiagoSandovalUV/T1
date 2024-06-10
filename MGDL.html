@@ -219,7 +219,8 @@
           <h4>STRUCTURAL DYNAMICS LABORATORY</h4>
         </div>
         <div class="col-md-3" style="text-align: left;">
-          <a href="#" onclick="window.open('EstrucLab_Dinámica___Santiago__MGDL_.pdf', 'Laboratory manual', 'width=500,height=500');"
+          <a href="#"
+            onclick="window.open('EstrucLab_Dinámica___Santiago__MGDL_.pdf', 'Laboratory manual', 'width=500,height=500');"
             class="btn btn-sm btn-outline-secondary">Laboratory manual</a>
           <a href="https://santiagosandovaluv.github.io/T1/" class="btn btn-sm btn-outline-secondary">SDOF module</a>
           <a class="btn btn-sm btn-outline-secondary"
@@ -1762,38 +1763,38 @@
           // uo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
           uo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
           upo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
-          let u1,u2,up1,up2;
-          u1=document.getElementById('DespInicial').value;
-          u2=document.getElementById('DespInicial2').value;
-          up1=document.getElementById('VelInicial').value;
-          up2=document.getElementById('VelInicial2').value;
+          let u1, u2, up1, up2;
+          u1 = document.getElementById('DespInicial').value;
+          u2 = document.getElementById('DespInicial2').value;
+          up1 = document.getElementById('VelInicial').value;
+          up2 = document.getElementById('VelInicial2').value;
           if (AnaXX) {
             //Desplazamientos
-            uo.mat[0] = [u1 ? parseFloat(calcularResultado(u1)):0];
-            uo.mat[3] = [u2 ? parseFloat(calcularResultado(u2)):0];
+            uo.mat[0] = [u1 ? parseFloat(calcularResultado(u1)) : 0];
+            uo.mat[3] = [u2 ? parseFloat(calcularResultado(u2)) : 0];
             //Velocidades
-            upo.mat[0] = [up1 ? parseFloat(calcularResultado(up1)):0];
-            upo.mat[3] = [up2 ? parseFloat(calcularResultado(up2)): 0];
+            upo.mat[0] = [up1 ? parseFloat(calcularResultado(up1)) : 0];
+            upo.mat[3] = [up2 ? parseFloat(calcularResultado(up2)) : 0];
           } else if (AnaYY) {
-             //Desplazamientos
-            uo.mat[1] = [u1 ? parseFloat(calcularResultado(u1)):0];
-            uo.mat[4] = [u2 ? parseFloat(calcularResultado(u2)):0];
+            //Desplazamientos
+            uo.mat[1] = [u1 ? parseFloat(calcularResultado(u1)) : 0];
+            uo.mat[4] = [u2 ? parseFloat(calcularResultado(u2)) : 0];
             //Velocidades
-            upo.mat[1] = [up1 ? parseFloat(calcularResultado(up1)):0];
-            upo.mat[4] = [up2 ? parseFloat(calcularResultado(up2)): 0];
+            upo.mat[1] = [up1 ? parseFloat(calcularResultado(up1)) : 0];
+            upo.mat[4] = [up2 ? parseFloat(calcularResultado(up2)) : 0];
           } else {
             //Desplazamientos
             xxc = inputValueX ? parseFloat(calcularResultado(inputValueX)) : 1;
             yyc = inputValueY ? parseFloat(calcularResultado(inputValueY)) : 1;
-            uo.mat[0] = [(u1 ? parseFloat(calcularResultado(u1)):0 ) *xxc];
-            uo.mat[3] = [(u2 ? parseFloat(calcularResultado(u2)):0 ) * xxc];
-            uo.mat[1] = [(u1 ? parseFloat(calcularResultado(u1)):0 ) * yyc];
-            uo.mat[4] = [(u2 ? parseFloat(calcularResultado(u2)):0 ) * yyc];
+            uo.mat[0] = [(u1 ? parseFloat(calcularResultado(u1)) : 0) * xxc];
+            uo.mat[3] = [(u2 ? parseFloat(calcularResultado(u2)) : 0) * xxc];
+            uo.mat[1] = [(u1 ? parseFloat(calcularResultado(u1)) : 0) * yyc];
+            uo.mat[4] = [(u2 ? parseFloat(calcularResultado(u2)) : 0) * yyc];
             //Velocidades
-            upo.mat[0] = [ (up1 ? parseFloat(calcularResultado(up1)):0)  * xxc];
-            upo.mat[3] = [ (up2 ? parseFloat(calcularResultado(up2)):0) * xxc];
-            upo.mat[1] = [ (up1 ? parseFloat(calcularResultado(up1)):0)  * yyc];
-            upo.mat[4] = [ (up2 ? parseFloat(calcularResultado(up2)):0)  * yyc];
+            upo.mat[0] = [(up1 ? parseFloat(calcularResultado(up1)) : 0) * xxc];
+            upo.mat[3] = [(up2 ? parseFloat(calcularResultado(up2)) : 0) * xxc];
+            upo.mat[1] = [(up1 ? parseFloat(calcularResultado(up1)) : 0) * yyc];
+            upo.mat[4] = [(up2 ? parseFloat(calcularResultado(up2)) : 0) * yyc];
 
           }
 
@@ -2814,7 +2815,7 @@
         // dt2 = 1 / 200;
         dt2 = 1 / 50;
         Ac_Data = resampleSignal(Ac_Data, 50, 200);
-        Desp_Data=resampleSignal(Desp_Data, 50, 200);
+        Desp_Data = resampleSignal(Desp_Data, 50, 200);
         with (Matrix) {
           if (Escalar_box1.value.length > 0) {
             Escalar = parseFloat(document.getElementById('Escalar_box1').value);
@@ -4306,8 +4307,9 @@
           renderer.render(scene, camera);
         }
       }
-      function ActProp (){
-        for (let i = 0; i < PrG.length; i++) {
+      function ActProp() {
+        if (Porti2P == true) {
+          for (let i = 0; i < PrG.length; i++) {
             //Modulo de elásticidad
             var ModuloE = parseFloat(document.getElementById('ME_box1').value);
             //Momento de inercia
@@ -4318,7 +4320,22 @@
             PrG[i][1].Propiedades.E = ModuloE;
             PrG[i][1].Propiedades.h = Altura;
             PrG[i][1].Propiedades.b = Base;
-          
+
+          }
+        } else {
+          for (let i = 0; i < PrG3P.length; i++) {
+            //Modulo de elásticidad
+            var ModuloE = parseFloat(document.getElementById('ME_box1').value);
+            //Momento de inercia
+            var Altura = parseFloat(document.getElementById('h_box1').value);
+            //Área
+            var Base = parseFloat(document.getElementById('b_box1').value);
+            //Damping
+            PrG3P[i][1].Propiedades.E = ModuloE;
+            PrG3P[i][1].Propiedades.h = Altura;
+            PrG3P[i][1].Propiedades.b = Base;
+
+          }
         }
       }
       // Actualiza las propiedades físicas en la interfaz
