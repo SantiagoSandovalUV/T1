@@ -970,9 +970,9 @@
           </button> -->
           <button type="button" id="StartSimulation" onclick="Alerta_Calculos()" class="btn btn-primary">Calculate
           </button>
-          <button type="button" id="mostrarPopup" class="btn btn-primary">Export Data
+          <button type="button" id="mostrarPopup" class="btn btn-primary">Export data
           </button>
-          <button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear Fields
+          <button type="button" id="Limpiar" onclick="	recargar()" class="btn btn-primary">Clear fields
           </button>
           <!-- <button type="button" id="mostrarPopup" class="btn btn-primary">Mostrar Popup
           </button> -->
@@ -1758,33 +1758,38 @@
           // uo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
           uo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
           upo = Matrix.create([[0], [0], [0], [0], [0], [0]]);
+          let u1,u2,up1,up2;
+          u1=document.getElementById('DespInicial').value;
+          u2=document.getElementById('DespInicial2').value;
+          up1=document.getElementById('VelInicial').value;
+          up2=document.getElementById('VelInicial2').value;
           if (AnaXX) {
             //Desplazamientos
-            uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
-            uo.mat[3] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
+            uo.mat[0] = [u1 ? parseFloat(calcularResultado(u1)):0];
+            uo.mat[3] = [u2 ? parseFloat(calcularResultado(u2)):0];
             //Velocidades
-            upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
-            upo.mat[3] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
+            upo.mat[0] = [up1 ? parseFloat(calcularResultado(up1)):0];
+            upo.mat[3] = [up2 ? parseFloat(calcularResultado(up2)): 0];
           } else if (AnaYY) {
-            //Desplazamientos
-            uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
-            uo.mat[4] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
+             //Desplazamientos
+            uo.mat[1] = [u1 ? parseFloat(calcularResultado(u1)):0];
+            uo.mat[4] = [u2 ? parseFloat(calcularResultado(u2)):0];
             //Velocidades
-            upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
-            upo.mat[4] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
+            upo.mat[1] = [up1 ? parseFloat(calcularResultado(up1)):0];
+            upo.mat[4] = [up2 ? parseFloat(calcularResultado(up2)): 0];
           } else {
             //Desplazamientos
             xxc = inputValueX ? parseFloat(calcularResultado(inputValueX)) : 1;
             yyc = inputValueY ? parseFloat(calcularResultado(inputValueY)) : 1;
-            uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value)) * xxc];
-            uo.mat[3] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value)) * xxc];
-            uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value)) * yyc];
-            uo.mat[4] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value)) * yyc];
+            uo.mat[0] = [(u1 ? parseFloat(calcularResultado(u1)):0 ) *xxc];
+            uo.mat[3] = [(u2 ? parseFloat(calcularResultado(u2)):0 ) * xxc];
+            uo.mat[1] = [(u1 ? parseFloat(calcularResultado(u1)):0 ) * yyc];
+            uo.mat[4] = [(u2 ? parseFloat(calcularResultado(u2)):0 ) * yyc];
             //Velocidades
-            upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value)) * xxc];
-            upo.mat[3] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value)) * xxc];
-            upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value)) * yyc];
-            upo.mat[4] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value)) * yyc];
+            upo.mat[0] = [ (up1 ? parseFloat(calcularResultado(up1)):0)  * xxc];
+            upo.mat[3] = [ (up2 ? parseFloat(calcularResultado(up2)):0) * xxc];
+            upo.mat[1] = [ (up1 ? parseFloat(calcularResultado(up1)):0)  * yyc];
+            upo.mat[4] = [ (up2 ? parseFloat(calcularResultado(up2)):0)  * yyc];
 
           }
 
@@ -2523,6 +2528,7 @@
             }
           }
           U1 = mult(PHI, q1);
+          console.log(mult(PHI, qp1));
           UPP1 = mult(PHI, qpp1);
           // if (Porti2P == true) {
           //   const up1 = calcularSegundaDerivadaNumerica(U1.mat[0], dt);
@@ -2608,8 +2614,8 @@
         //[Preliminar para dos pisos]
         with (Matrix) {
           if (Porti2P == true) {
-            const [r1, mt1] = TransfCoorde(1, 1.5);
-            const [r2, mt2] = TransfCoorde(1, 1.5);
+            const [r1, mt1] = TransfCoorde(1, 1);
+            const [r2, mt2] = TransfCoorde(1, 1);
             var TA = new Array();
             var TB = new Array();
             var T1 = new Array();
@@ -2619,9 +2625,9 @@
             T1 = LlenarT(2, mt1, mt2);
             T2 = LlenarT(3, mt1, mt2);
           } else {
-            const [r1, mt1] = TransfCoorde(1, 1.5);
-            const [r2, mt2] = TransfCoorde(1, 1.5);
-            const [r3, mt3] = TransfCoorde(1, 1.5);
+            const [r1, mt1] = TransfCoorde(1, 1);
+            const [r2, mt2] = TransfCoorde(1, 1);
+            const [r3, mt3] = TransfCoorde(1, 1);
             var TA = new Array();
             var TB = new Array();
             var T1 = new Array();
@@ -4736,14 +4742,14 @@
         type: 'line',
         data: {
           datasets: [{
-            label: 'P1',
+            label: 'X1',
             // borderColor: 'rgb(13,110,253)',
             borderColor: 'rgb(0,0,0)',
             borderWidth: 2,
             pointRadius: 0,
           },
           {
-            label: 'P2',
+            label: 'X2',
             // borderColor: 'rgb(222,42,22)',
             borderColor: 'rgb(0,18,154)',
             borderWidth: 2,
@@ -4807,14 +4813,14 @@
         type: 'line',
         data: {
           datasets: [{
-            label: 'P1',
+            label: 'Y1',
             // borderColor: 'rgb(13,110,253)',
             borderColor: 'rgb(0,0,0)',
             borderWidth: 2,
             pointRadius: 0,
           },
           {
-            label: 'P2',
+            label: 'Y2',
             // borderColor: 'rgb(222,42,22)',
             borderColor: 'rgb(0,18,154)',
             borderWidth: 2,
@@ -4878,7 +4884,7 @@
         type: 'line',
         data: {
           datasets: [{
-            label: 'P1',
+            label: 'Base',
             // borderColor: 'rgb(13,110,253)',
             borderColor: 'rgb(0,0,0)',
             borderWidth: 2,
