@@ -2459,7 +2459,7 @@
       // Newmark_Multiples(M, K_c, C, po, uo, upo);
       function Newmark_Multiples(M, K, po, uo, upo, dt, pa, zeta) { //Calcula la respuesta en el tiemp
         var gamma = 1 / 2;
-        var betta = 1 / 6;
+        var betta = 1 / 4;
         const [PHI, w, C] = modos(K, M, zeta);
         with (Matrix) {
           //Crear condiciones inciales de velocidad y desplazamiento
