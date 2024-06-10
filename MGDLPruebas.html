@@ -5658,118 +5658,118 @@
           M4 = M3.map((fila, index) => fila.concat(Desp_DataC[index]));
           M5 = M4.map((fila, index) => fila.concat(Ac_DataC[index]));
           data1 = T.map((fila, index) => fila.concat(M5[index]));
-          for (let i = 0; i < UL.length; i++) {
-            data1 = data1.map((fila, index) => fila.concat(UL[i][index]));
-          }
-          for (let i = 0; i < UPPL.length; i++) {
-            data1 = data1.map((fila, index) => fila.concat(UPPL[i][index]));
-          }
+          // for (let i = 0; i < UL.length; i++) {
+          //   data1 = data1.map((fila, index) => fila.concat(UL[i][index]));
+          // }
+          // for (let i = 0; i < UPPL.length; i++) {
+          //   data1 = data1.map((fila, index) => fila.concat(UPPL[i][index]));
+          // }
 
 
           // data1 = KAsambler();
         }
-        if (Porti2P == true) {
-          indicesColumnas = [3, 6, 9, 12]; // Índices de las columnas a eliminar
-          headers = {
-            id: 'Time',
-            nombre1: 'Displacement x [m]',
-            nombre2: 'Displacement y [m]',
-            nombre3: 'Displacement x [m]',
-            nombre4: 'Displacement y [m]',
-            nombre5: 'Acceleration x [m/s^2]',
-            nombre6: 'Acceleration y [m/s^2]',
-            nombre7: 'Acceleration x [m/s^2]',
-            nombre8: 'Acceleration y [m/s^2]',
-            nombre9: 'Base displacement [m]',
-            nombre10: 'Base acceleration [m/s^2]',
-            nombre11: 'Side displacement x1 F1 [m]',
-            nombre12: 'Side displacement x2 F1 [m]',
-            nombre13: 'Side displacement x1 F2 [m]',
-            nombre14: 'Side displacement x2 F2 [m]',
-            nombre15: 'Side displacement y1 F1 [m]',
-            nombre16: 'Side displacement y2 F1 [m]',
-            nombre17: 'Side displacement y1 F2 [m]',
-            nombre18: 'Side displacement y2 F2 [m]',
-            nombre19: 'Side acceleration x1 F1 [m]',
-            nombre20: 'Side acceleration x2 F1 [m]',
-            nombre21: 'Side acceleration x1 F2 [m]',
-            nombre22: 'Side acceleration x2 F2 [m]',
-            nombre23: 'Side acceleration y1 F1 [m]',
-            nombre24: 'Side acceleration y2 F1 [m]',
-            nombre25: 'Side acceleration y1 F2 [m]',
-            nombre26: 'Side acceleration y2 F2 [m]',
+        // if (Porti2P == true) {
+        //   indicesColumnas = [3, 6, 9, 12]; // Índices de las columnas a eliminar
+        //   headers = {
+        //     id: 'Time',
+        //     nombre1: 'Displacement x [m]',
+        //     nombre2: 'Displacement y [m]',
+        //     nombre3: 'Displacement x [m]',
+        //     nombre4: 'Displacement y [m]',
+        //     nombre5: 'Acceleration x [m/s^2]',
+        //     nombre6: 'Acceleration y [m/s^2]',
+        //     nombre7: 'Acceleration x [m/s^2]',
+        //     nombre8: 'Acceleration y [m/s^2]',
+        //     nombre9: 'Base displacement [m]',
+        //     nombre10: 'Base acceleration [m/s^2]',
+        //     nombre11: 'Side displacement x1 F1 [m]',
+        //     nombre12: 'Side displacement x2 F1 [m]',
+        //     nombre13: 'Side displacement x1 F2 [m]',
+        //     nombre14: 'Side displacement x2 F2 [m]',
+        //     nombre15: 'Side displacement y1 F1 [m]',
+        //     nombre16: 'Side displacement y2 F1 [m]',
+        //     nombre17: 'Side displacement y1 F2 [m]',
+        //     nombre18: 'Side displacement y2 F2 [m]',
+        //     nombre19: 'Side acceleration x1 F1 [m]',
+        //     nombre20: 'Side acceleration x2 F1 [m]',
+        //     nombre21: 'Side acceleration x1 F2 [m]',
+        //     nombre22: 'Side acceleration x2 F2 [m]',
+        //     nombre23: 'Side acceleration y1 F1 [m]',
+        //     nombre24: 'Side acceleration y2 F1 [m]',
+        //     nombre25: 'Side acceleration y1 F2 [m]',
+        //     nombre26: 'Side acceleration y2 F2 [m]',
 
-          };
-        } else {
-          indicesColumnas = [3, 6, 9, 12, 15, 18]; // Índices de las columnas a eliminar
-          headers = {
-            id: 'Time',
-            nombre1: 'Displacement x [m]',
-            nombre2: 'Displacement y [m]',
-            nombre3: 'Displacement x [m]',
-            nombre4: 'Displacement y [m]',
-            nombre5: 'Displacement x [m]',
-            nombre6: 'Displacement y [m]',
-            nombre7: 'Acceleration x [m/s^2]',
-            nombre8: 'Acceleration y [m/s^2]',
-            nombre9: 'Acceleration x [m/s^2]',
-            nombre10: 'Acceleration y [m/s^2]',
-            nombre11: 'Acceleration x [m/s^2]',
-            nombre12: 'Acceleration y [m/s^2]',
-            nombre13: 'Base displacement [m]',
-            nombre14: 'Base acceleration [m/s^2]',
-            nombre15: 'Side displacement x1 F1 [m]',
-            nombre16: 'Side displacement x2 F1 [m]',
-            nombre17: 'Side displacement x1 F2 [m]',
-            nombre18: 'Side displacement x2 F2 [m]',
-            nombre19: 'Side displacement x1 F3 [m]',
-            nombre20: 'Side displacement x2 F3 [m]',
-            nombre21: 'Side displacement y1 F1 [m]',
-            nombre22: 'Side displacement y2 F1 [m]',
-            nombre23: 'Side displacement y1 F2 [m]',
-            nombre24: 'Side displacement y2 F2 [m]',
-            nombre25: 'Side displacement y1 F3 [m]',
-            nombre26: 'Side displacement y2 F3 [m]',
-            nombre27: 'Side acceleration x1 F1 [m]',
-            nombre28: 'Side acceleration x2 F1 [m]',
-            nombre29: 'Side acceleration x1 F2 [m]',
-            nombre30: 'Side acceleration x2 F2 [m]',
-            nombre31: 'Side acceleration x1 F3 [m]',
-            nombre32: 'Side acceleration x2 F3 [m]',
-            nombre33: 'Side acceleration y1 F1 [m]',
-            nombre34: 'Side acceleration y2 F1 [m]',
-            nombre35: 'Side acceleration y1 F2 [m]',
-            nombre36: 'Side acceleration y2 F2 [m]',
-            nombre37: 'Side acceleration y1 F3 [m]',
-            nombre38: 'Side acceleration y2 F3 [m]',
-
-
-          };
-        }
-
-        // Ordenar los índices de las columnas en orden descendente
-        indicesColumnas.sort((a, b) => b - a);
-
-        for (let fila of data1) {
-          for (let indiceColumna of indicesColumnas) {
-            fila.splice(indiceColumna, 1);
-          }
-        }
-
-        let end;
-        end = Porti2P ? 26 : 38;
-
-        for (let i = 1; i <= end; i++) {
-          if (!VECORTE.includes(i)) {
-            let propName = `nombre${i}`;
-            delete headers[propName];
-          }
-        }
-        VECORTE.sort((a, b) => a - b);
-        console.log(VECORTE)
-        DatosFinales = data1.map(fila => VECORTE.map(posicion => fila[posicion]));
+        //   };
+        // } else {
+        //   indicesColumnas = [3, 6, 9, 12, 15, 18]; // Índices de las columnas a eliminar
+        //   headers = {
+        //     id: 'Time',
+        //     nombre1: 'Displacement x [m]',
+        //     nombre2: 'Displacement y [m]',
+        //     nombre3: 'Displacement x [m]',
+        //     nombre4: 'Displacement y [m]',
+        //     nombre5: 'Displacement x [m]',
+        //     nombre6: 'Displacement y [m]',
+        //     nombre7: 'Acceleration x [m/s^2]',
+        //     nombre8: 'Acceleration y [m/s^2]',
+        //     nombre9: 'Acceleration x [m/s^2]',
+        //     nombre10: 'Acceleration y [m/s^2]',
+        //     nombre11: 'Acceleration x [m/s^2]',
+        //     nombre12: 'Acceleration y [m/s^2]',
+        //     nombre13: 'Base displacement [m]',
+        //     nombre14: 'Base acceleration [m/s^2]',
+        //     nombre15: 'Side displacement x1 F1 [m]',
+        //     nombre16: 'Side displacement x2 F1 [m]',
+        //     nombre17: 'Side displacement x1 F2 [m]',
+        //     nombre18: 'Side displacement x2 F2 [m]',
+        //     nombre19: 'Side displacement x1 F3 [m]',
+        //     nombre20: 'Side displacement x2 F3 [m]',
+        //     nombre21: 'Side displacement y1 F1 [m]',
+        //     nombre22: 'Side displacement y2 F1 [m]',
+        //     nombre23: 'Side displacement y1 F2 [m]',
+        //     nombre24: 'Side displacement y2 F2 [m]',
+        //     nombre25: 'Side displacement y1 F3 [m]',
+        //     nombre26: 'Side displacement y2 F3 [m]',
+        //     nombre27: 'Side acceleration x1 F1 [m]',
+        //     nombre28: 'Side acceleration x2 F1 [m]',
+        //     nombre29: 'Side acceleration x1 F2 [m]',
+        //     nombre30: 'Side acceleration x2 F2 [m]',
+        //     nombre31: 'Side acceleration x1 F3 [m]',
+        //     nombre32: 'Side acceleration x2 F3 [m]',
+        //     nombre33: 'Side acceleration y1 F1 [m]',
+        //     nombre34: 'Side acceleration y2 F1 [m]',
+        //     nombre35: 'Side acceleration y1 F2 [m]',
+        //     nombre36: 'Side acceleration y2 F2 [m]',
+        //     nombre37: 'Side acceleration y1 F3 [m]',
+        //     nombre38: 'Side acceleration y2 F3 [m]',
 
 
+        //   };
+        // }
+
+        // // Ordenar los índices de las columnas en orden descendente
+        // indicesColumnas.sort((a, b) => b - a);
+
+        // for (let fila of data1) {
+        //   for (let indiceColumna of indicesColumnas) {
+        //     fila.splice(indiceColumna, 1);
+        //   }
+        // }
+
+        // let end;
+        // end = Porti2P ? 26 : 38;
+
+        // for (let i = 1; i <= end; i++) {
+        //   if (!VECORTE.includes(i)) {
+        //     let propName = `nombre${i}`;
+        //     delete headers[propName];
+        //   }
+        // }
+        // VECORTE.sort((a, b) => a - b);
+        // console.log(VECORTE)
+        // DatosFinales = data1.map(fila => VECORTE.map(posicion => fila[posicion]));
+
+        DatosFinales = data1;
         //Para remuestrear
 
         let TG = document.getElementById('targetFrequency').value;
