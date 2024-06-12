@@ -1626,7 +1626,7 @@
         var EsCSan3 = Math.max(...Ac_Data);
         for (let j = 0; j < U1.mat.length; j++) {
           var EsCSan1 = Math.max(...U1.mat[j]);
-          UPP1.mat[j].pop();
+          // UPP1.mat[j].pop();
           var EsCSan2 = Math.max(...UPP1.mat[j]);
           for (let i = 0; i < UPP1.mat[0].length; i++) {
             FacDRuido[j][i] = RuidoDR * Ruido_Gaus(0, 1, EsCSan1);
@@ -1640,7 +1640,7 @@
         setTimeout(function () {
           UL = DesplazamientosLocales(U1, SensorMultp); UL = UL[0];
           UPPL = DesplazamientosLocales(UPP1, SensorMultpA); UPPL = UPPL[0];
-          Ac_Data.pop();
+          // Ac_Data.pop();
           ExportarAnyTiempo();
           LoadCharData();
         }, 350); // 2000 milisegundos = 2 segundos
