@@ -1244,6 +1244,8 @@
       var Desp_DataC = new Array();
       var FacDRuido = new Array();
       var FacDRuidoA = new Array();
+      var U1T = new Array();
+      var UPP1T = new Array();
       let xxc;
       let yyc;
       let StarCheck = false;
@@ -1410,6 +1412,8 @@
         contadorglobal = 0;
         U1 = new Array();
         UPP1 = new Array();
+        U1T = new Array();
+        UPP1T = new Array();
         Ac_DataC = new Array();
         Desp_DataC = new Array();
         t = [0];
@@ -1618,6 +1622,7 @@
         FacDRuido = Array.from({ length: Fils }, () => Array(Colm).fill(0))
         FacDRuidoA = Array.from({ length: Fils }, () => Array(Colm).fill(0))
         FacDRuidoAG = Array.from({ length: Fils }, () => Array(Colm).fill(0))
+
         var EsCSan3 = Math.max(...Ac_Data);
         for (let j = 0; j < U1.mat.length; j++) {
           var EsCSan1 = Math.max(...U1.mat[j]);
@@ -1663,6 +1668,28 @@
           upo = Matrix.create([[0], [0], [0]]);
         }
 
+      }
+      // Función para convertir a totales
+      function Totales (UAT){
+        UT = new Array();
+        DespH = new Array();
+        UT = JSON.parse(JSON.stringify(UAT));
+        with (Matrix){
+          DespH = create([Desp_Data]);
+          UT.mat[0] = add(create([UT.mat[0]]),scale(create([DespH.mat[0]]),xxc)).mat[0]
+          UT.mat[1] = add(create([UT.mat[1]]),scale(create([DespH.mat[0]]),yyc)).mat[0]
+
+          UT.mat[3] = add(create([UT.mat[0]]),create([UT.mat[3]])).mat[0]
+          UT.mat[4] = add(create([UT.mat[1]]),create([UT.mat[4]])).mat[0]
+
+         if (Porti3P == true){
+          UT.mat[6] = add(create([UT.mat[3]]),create([UT.mat[6]])).mat[0]
+          UT.mat[7] = add(create([UT.mat[4]]),create([UT.mat[7]])).mat[0]
+        }
+
+        }
+        return UT;
+        
       }
       // Función para realizar operaciones dentro de las cajas de texto
       function calcularResultado(expresion) {
@@ -1801,41 +1828,48 @@
         } else {
           uo = Matrix.create([[0], [0], [0], [0], [0], [0], [0], [0], [0]]);
           upo = Matrix.create([[0], [0], [0], [0], [0], [0], [0], [0], [0]]);
+          let u1, u2, u3, up1, up2, up3;
+          u1 = document.getElementById('DespInicial').value;
+          u2 = document.getElementById('DespInicial2').value;
+          u3 = document.getElementById('DespInicial3').value;
+          up1 = document.getElementById('VelInicial').value;
+          up2 = document.getElementById('VelInicial2').value;
+          up3 = document.getElementById('VelInicial3').value;
           //Desplazamientos
           if (AnaXXP3) {
-            uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
-            uo.mat[3] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
-            uo.mat[6] = [parseFloat(calcularResultado(document.getElementById('DespInicial3').value))];
+            uo.mat[0] = [u1 ? parseFloat(calcularResultado(u1)) : 0];
+            uo.mat[3] = [u2 ? parseFloat(calcularResultado(u2)) : 0];
+            uo.mat[6] = [u3 ? parseFloat(calcularResultado(u3)) : 0];
             //Velocidades
-            upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
-            upo.mat[3] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
-            upo.mat[6] = [parseFloat(calcularResultado(document.getElementById('VelInicial3').value))];
+            upo.mat[0] = [up1 ? parseFloat(calcularResultado(up1)) : 0];
+            upo.mat[3] = [up2 ? parseFloat(calcularResultado(up2)) : 0];
+            upo.mat[6] = [up3 ? parseFloat(calcularResultado(up3)) : 0];
           } else if (AnaYYP3) {
-            uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value))];
-            uo.mat[4] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value))];
-            uo.mat[7] = [parseFloat(calcularResultado(document.getElementById('DespInicial3').value))];
+            uo.mat[1] = [u1 ? parseFloat(calcularResultado(u1)) : 0];
+            uo.mat[4] = [u2 ? parseFloat(calcularResultado(u2)) : 0];
+            uo.mat[7] = [u3 ? parseFloat(calcularResultado(u3)) : 0];
             //Velocidades
-            upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value))];
-            upo.mat[4] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value))];
-            upo.mat[7] = [parseFloat(calcularResultado(document.getElementById('VelInicial3').value))];
+            upo.mat[1] = [up1 ? parseFloat(calcularResultado(up1)) : 0];
+            upo.mat[4] = [up2 ? parseFloat(calcularResultado(up2)) : 0];
+            upo.mat[7] = [up3 ? parseFloat(calcularResultado(up3)) : 0];
 
           } else {
             xxc = inputValueX ? parseFloat(calcularResultado(inputValueX)) : 1;
             yyc = inputValueY ? parseFloat(calcularResultado(inputValueY)) : 1;
 
-            uo.mat[0] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value)) * xxc];
-            uo.mat[3] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value)) * xxc];
-            uo.mat[6] = [parseFloat(calcularResultado(document.getElementById('DespInicial3').value)) * xxc];
-            uo.mat[1] = [parseFloat(calcularResultado(document.getElementById('DespInicial').value)) * yyc];
-            uo.mat[4] = [parseFloat(calcularResultado(document.getElementById('DespInicial2').value)) * yyc];
-            uo.mat[7] = [parseFloat(calcularResultado(document.getElementById('DespInicial3').value)) * yyc];
+            uo.mat[0] = [(u1 ? parseFloat(calcularResultado(u1)) : 0) * xxc];
+            uo.mat[3] = [(u2 ? parseFloat(calcularResultado(u2)) : 0) * xxc];
+            uo.mat[6] = [(u3 ? parseFloat(calcularResultado(u3)) : 0) * xxc];
+            uo.mat[1] = [(u1 ? parseFloat(calcularResultado(u1)) : 0) * yyc];
+            uo.mat[4] = [(u2 ? parseFloat(calcularResultado(u2)) : 0) * yyc];
+            uo.mat[7] = [(u3 ? parseFloat(calcularResultado(u3)) : 0) * yyc];
 
-            upo.mat[0] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value)) * xxc];
-            upo.mat[3] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value)) * xxc];
-            upo.mat[6] = [parseFloat(calcularResultado(document.getElementById('VelInicial3').value)) * xxc];
-            upo.mat[1] = [parseFloat(calcularResultado(document.getElementById('VelInicial').value)) * yyc];
-            upo.mat[4] = [parseFloat(calcularResultado(document.getElementById('VelInicial2').value)) * yyc];
-            upo.mat[7] = [parseFloat(calcularResultado(document.getElementById('VelInicial3').value)) * yyc];
+            upo.mat[0] = [(up1 ? parseFloat(calcularResultado(up1)) : 0) * xxc];
+            upo.mat[3] = [(up2 ? parseFloat(calcularResultado(up2)) : 0) * xxc];
+            upo.mat[6] = [(up3 ? parseFloat(calcularResultado(up3)) : 0) * xxc];
+            upo.mat[1] = [(up1 ? parseFloat(calcularResultado(up1)) : 0) * yyc];
+            upo.mat[4] = [(up2 ? parseFloat(calcularResultado(up2)) : 0) * yyc];
+            upo.mat[7] = [(up3 ? parseFloat(calcularResultado(up3)) : 0) * yyc];
           }
 
         }
