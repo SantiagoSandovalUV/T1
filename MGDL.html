@@ -1640,6 +1640,7 @@
         setTimeout(function () {
           UL = DesplazamientosLocales(U1, SensorMultp); UL = UL[0];
           UPPL = DesplazamientosLocales(UPP1, SensorMultpA); UPPL = UPPL[0];
+          Ac_Data.pop();
           ExportarAnyTiempo();
           LoadCharData();
         }, 350); // 2000 milisegundos = 2 segundos
@@ -1670,12 +1671,12 @@
 
       }
       // Función para convertir a totales
-      function Totales (UAT){
+      function Totales (UAT,DespH){
         UT = new Array();
-        DespH = new Array();
+        // DespH = new Array();
         UT = JSON.parse(JSON.stringify(UAT));
         with (Matrix){
-          DespH = create([Desp_Data]);
+          DespH = create([DespH]);
           UT.mat[0] = add(create([UT.mat[0]]),scale(create([DespH.mat[0]]),xxc)).mat[0]
           UT.mat[1] = add(create([UT.mat[1]]),scale(create([DespH.mat[0]]),yyc)).mat[0]
 
@@ -5715,13 +5716,20 @@
       var DatosFinales = new Array();
       function ExportarAnyTiempo(VECORTE = 10) {
         data1 = new Array();
+        let ULT = new Array();
+        let UPPLT = new Array();
+        U1T = Totales(U1,Desp_Data);
+        UPP1T = Totales(UPP1,Ac_Data);
         let indiceColumnas;
         with (Matrix) {
           // DesDx = scale(create(Desp_Data), xxc);
           // DesDy = scale(create(Desp_Data), yyc);
 
-          M1 = scale(transpose(U1), SensorMultp).mat;
-          M2 = scale(transpose(UPP1), SensorMultpA).mat;
+          ULT = DesplazamientosLocales(U1T,SensorMultp); ULT = ULT[0];
+          UPPLT = DesplazamientosLocales(UPP1T,SensorMultpA); UPPLT = UPPLT[0];
+
+          M1 = scale(transpose(U1T), SensorMultp).mat;
+          M2 = scale(transpose(UPP1T), SensorMultpA).mat;
           T = transpose(create([t])).mat;
           Ac_DataC = scale(transpose(create([Ac_Data])), SensorMultpAG).mat;
           Desp_DataC = transpose(create([Desp_Data])).mat;
@@ -5732,11 +5740,11 @@
           M4 = M3.map((fila, index) => fila.concat(Desp_DataC[index]));
           M5 = M4.map((fila, index) => fila.concat(Ac_DataC[index]));
           data1 = T.map((fila, index) => fila.concat(M5[index]));
-          for (let i = 0; i < UL.length; i++) {
-            data1 = data1.map((fila, index) => fila.concat(UL[i][index]));
+          for (let i = 0; i < ULT.length; i++) {
+            data1 = data1.map((fila, index) => fila.concat(ULT[i][index]));
           }
-          for (let i = 0; i < UPPL.length; i++) {
-            data1 = data1.map((fila, index) => fila.concat(UPPL[i][index]));
+          for (let i = 0; i < UPPLT.length; i++) {
+            data1 = data1.map((fila, index) => fila.concat(UPPLT[i][index]));
           }
 
 
@@ -5746,14 +5754,14 @@
           indicesColumnas = [3, 6, 9, 12]; // Índices de las columnas a eliminar
           headers = {
             id: 'Time',
-            nombre1: 'Displacement x [m]',
-            nombre2: 'Displacement y [m]',
-            nombre3: 'Displacement x [m]',
-            nombre4: 'Displacement y [m]',
-            nombre5: 'Acceleration x [m/s^2]',
-            nombre6: 'Acceleration y [m/s^2]',
-            nombre7: 'Acceleration x [m/s^2]',
-            nombre8: 'Acceleration y [m/s^2]',
+            nombre1: 'Displacement x F1 [m]',
+            nombre2: 'Displacement y F1 [m]',
+            nombre3: 'Displacement x F2 [m]',
+            nombre4: 'Displacement y F2 [m]',
+            nombre5: 'Acceleration x F1 [m/s^2]',
+            nombre6: 'Acceleration y F1 [m/s^2]',
+            nombre7: 'Acceleration x F2 [m/s^2]',
+            nombre8: 'Acceleration y F2 [m/s^2]',
             nombre9: 'Base displacement [m]',
             nombre10: 'Base acceleration [m/s^2]',
             nombre11: 'Side displacement x1 F1 [m]',
@@ -5778,18 +5786,18 @@
           indicesColumnas = [3, 6, 9, 12, 15, 18]; // Índices de las columnas a eliminar
           headers = {
             id: 'Time',
-            nombre1: 'Displacement x [m]',
-            nombre2: 'Displacement y [m]',
-            nombre3: 'Displacement x [m]',
-            nombre4: 'Displacement y [m]',
-            nombre5: 'Displacement x [m]',
-            nombre6: 'Displacement y [m]',
-            nombre7: 'Acceleration x [m/s^2]',
-            nombre8: 'Acceleration y [m/s^2]',
-            nombre9: 'Acceleration x [m/s^2]',
-            nombre10: 'Acceleration y [m/s^2]',
-            nombre11: 'Acceleration x [m/s^2]',
-            nombre12: 'Acceleration y [m/s^2]',
+            nombre1: 'Displacement x F1 [m]',
+            nombre2: 'Displacement y F1 [m]',
+            nombre3: 'Displacement x F2 [m]',
+            nombre4: 'Displacement y F2 [m]',
+            nombre5: 'Displacement x F3 [m]',
+            nombre6: 'Displacement y F3 [m]',
+            nombre7: 'Acceleration x F1 [m/s^2]',
+            nombre8: 'Acceleration y F1 [m/s^2]',
+            nombre9: 'Acceleration x F2 [m/s^2]',
+            nombre10: 'Acceleration y F2 [m/s^2]',
+            nombre11: 'Acceleration x F3 [m/s^2]',
+            nombre12: 'Acceleration y F3 [m/s^2]',
             nombre13: 'Base displacement [m]',
             nombre14: 'Base acceleration [m/s^2]',
             nombre15: 'Side displacement x1 F1 [m]',
@@ -5843,7 +5851,6 @@
         console.log(VECORTE)
         DatosFinales = data1.map(fila => VECORTE.map(posicion => fila[posicion]));
 
-
         //Para remuestrear
 
         let TG = document.getElementById('targetFrequency').value;
@@ -5865,8 +5872,6 @@
             columnasArray = [];
           }
         }
-
-
 
 
       }
