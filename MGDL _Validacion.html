@@ -428,7 +428,7 @@
                     </form>
                   </form>
                 </div>
-                <form class="row g-1" onsubmit="return false;">
+                <form class="row g-1">
                   <div class="col" style="width:10px; margin: 10px 20px">
                     <label class="form-label" style="font-size: 14px">Self-weight [Kg/m^3] <i
                         data-tippy-content="Slab's Self-weight" class="ti ti-question-mark text-primary"></i></label>
@@ -436,7 +436,7 @@
                       placeholder="">
                   </div>
                 </form>
-                <form class="row g-1" onsubmit="return false;">
+                <form class="row g-1">
                   <div class="col" style="width:180px; margin: 10px 20px">
                     <label class="form-label" style="font-size: 14px; white-space:nowrap"> Slab thickness [m]<i
                         data-tippy-content="Slab's thickness" class="ti ti-question-mark text-primary"></i></label>
@@ -468,7 +468,7 @@
                     </form>
                   </form>
                 </div>
-                <form class="row g-1" onsubmit="return false;">
+                <form class="row g-1">
                   <div class="col" style="width:180px; margin: 10px 20px">
                     <label class="form-label" style="font-size: 14px; white-space:nowrap"> Cross section base
                       b [m] <i data-tippy-content="Frame element's base"
@@ -1162,7 +1162,7 @@
         // Cerrar el popup después de obtener la selección (opcional)
         ExportarAnyTiempo(vectorUnido);
         // console.log(data1)
-        exportCSVFile(headers, DatosFinales, 'DataLV');
+        exportCSVFile(headers, data1, 'DataLV');
         cerrarPopup();
       }
 
@@ -1223,11 +1223,11 @@
         //Masa 
         document.getElementById('Mass_box1').value = 7500;
         //Modulo de elásticidad
-        document.getElementById('ME_box1').value = 4000000;
+        document.getElementById('ME_box1').value = 15000000000;
         //Altura
-        document.getElementById('h_box1').value = 0.3;
+        document.getElementById('h_box1').value = 0.1;
         //Base
-        document.getElementById('b_box1').value = 0.3;
+        document.getElementById('b_box1').value = 0.1;
         //Damping
         document.getElementById('Espesor_box').value = 0.1;
 
@@ -3215,9 +3215,9 @@
         Constructor[0] = cubo1;
         Constructor[1] = {
           Propiedades: {
-            E: 4000000,
-            b: 0.3,
-            h: 0.3,
+            E: 15000000000,
+            b: 0.1,
+            h: 0.1,
             M: 7500,
             Z: 0.1
           },
@@ -3246,9 +3246,9 @@
         Constructor[0] = cubo1;
         Constructor[1] = {
           Propiedades: {
-            E: 4000000,
-            b: 0.3,
-            h: 0.3,
+            E: 15000000000,
+            b: 0.1,
+            h: 0.1,
             M: 7500,
             Z: 0.1
           },
@@ -5728,128 +5728,132 @@
           ULT = DesplazamientosLocales(U1T,SensorMultp); ULT = ULT[0];
           UPPLT = DesplazamientosLocales(UPP1T,SensorMultpA); UPPLT = UPPLT[0];
 
-          M1 = scale(transpose(U1T), SensorMultp).mat;
-          M2 = scale(transpose(UPP1T), SensorMultpA).mat;
+          M1 = scale(transpose(U1), SensorMultp).mat;
+          M2 = scale(transpose(UPP1), SensorMultpA).mat;
           T = transpose(create([t])).mat;
           Ac_DataC = scale(transpose(create([Ac_Data])), SensorMultpAG).mat;
           Desp_DataC = transpose(create([Desp_Data])).mat;
-          if (VECORTE == 10) {
-            return;
-          }
           M3 = M1.map((fila, index) => fila.concat(M2[index]));
           M4 = M3.map((fila, index) => fila.concat(Desp_DataC[index]));
           M5 = M4.map((fila, index) => fila.concat(Ac_DataC[index]));
           data1 = T.map((fila, index) => fila.concat(M5[index]));
-          for (let i = 0; i < ULT.length; i++) {
-            data1 = data1.map((fila, index) => fila.concat(ULT[i][index]));
-          }
-          for (let i = 0; i < UPPLT.length; i++) {
-            data1 = data1.map((fila, index) => fila.concat(UPPLT[i][index]));
-          }
+          // if (VECORTE == 10) {
+          //   return;
+          // }
+          // M3 = M1.map((fila, index) => fila.concat(M2[index]));
+          // M4 = M3.map((fila, index) => fila.concat(Desp_DataC[index]));
+          // M5 = M4.map((fila, index) => fila.concat(Ac_DataC[index]));
+          // data1 = T.map((fila, index) => fila.concat(M5[index]));
+          // for (let i = 0; i < ULT.length; i++) {
+          //   data1 = data1.map((fila, index) => fila.concat(ULT[i][index]));
+          // }
+          // for (let i = 0; i < UPPLT.length; i++) {
+          //   data1 = data1.map((fila, index) => fila.concat(UPPLT[i][index]));
+          // }
 
 
           // data1 = KAsambler();
         }
-        if (Porti2P == true) {
-          indicesColumnas = [3, 6, 9, 12]; // Índices de las columnas a eliminar
-          headers = {
-            id: 'Time',
-            nombre1: 'Displacement x F1 [m]',
-            nombre2: 'Displacement y F1 [m]',
-            nombre3: 'Displacement x F2 [m]',
-            nombre4: 'Displacement y F2 [m]',
-            nombre5: 'Acceleration x F1 [m/s^2]',
-            nombre6: 'Acceleration y F1 [m/s^2]',
-            nombre7: 'Acceleration x F2 [m/s^2]',
-            nombre8: 'Acceleration y F2 [m/s^2]',
-            nombre9: 'Base displacement [m]',
-            nombre10: 'Base acceleration [m/s^2]',
-            nombre11: 'Side displacement x1 F1 [m]',
-            nombre12: 'Side displacement x2 F1 [m]',
-            nombre13: 'Side displacement x1 F2 [m]',
-            nombre14: 'Side displacement x2 F2 [m]',
-            nombre15: 'Side displacement y1 F1 [m]',
-            nombre16: 'Side displacement y2 F1 [m]',
-            nombre17: 'Side displacement y1 F2 [m]',
-            nombre18: 'Side displacement y2 F2 [m]',
-            nombre19: 'Side acceleration x1 F1 [m]',
-            nombre20: 'Side acceleration x2 F1 [m]',
-            nombre21: 'Side acceleration x1 F2 [m]',
-            nombre22: 'Side acceleration x2 F2 [m]',
-            nombre23: 'Side acceleration y1 F1 [m]',
-            nombre24: 'Side acceleration y2 F1 [m]',
-            nombre25: 'Side acceleration y1 F2 [m]',
-            nombre26: 'Side acceleration y2 F2 [m]',
+        // if (Porti2P == true) {
+        //   indicesColumnas = [3, 6, 9, 12]; // Índices de las columnas a eliminar
+        //   headers = {
+        //     id: 'Time',
+        //     nombre1: 'Displacement x F1 [m]',
+        //     nombre2: 'Displacement y F1 [m]',
+        //     nombre3: 'Displacement x F2 [m]',
+        //     nombre4: 'Displacement y F2 [m]',
+        //     nombre5: 'Acceleration x F1 [m/s^2]',
+        //     nombre6: 'Acceleration y F1 [m/s^2]',
+        //     nombre7: 'Acceleration x F2 [m/s^2]',
+        //     nombre8: 'Acceleration y F2 [m/s^2]',
+        //     nombre9: 'Base displacement [m]',
+        //     nombre10: 'Base acceleration [m/s^2]',
+        //     nombre11: 'Side displacement x1 F1 [m]',
+        //     nombre12: 'Side displacement x2 F1 [m]',
+        //     nombre13: 'Side displacement x1 F2 [m]',
+        //     nombre14: 'Side displacement x2 F2 [m]',
+        //     nombre15: 'Side displacement y1 F1 [m]',
+        //     nombre16: 'Side displacement y2 F1 [m]',
+        //     nombre17: 'Side displacement y1 F2 [m]',
+        //     nombre18: 'Side displacement y2 F2 [m]',
+        //     nombre19: 'Side acceleration x1 F1 [m]',
+        //     nombre20: 'Side acceleration x2 F1 [m]',
+        //     nombre21: 'Side acceleration x1 F2 [m]',
+        //     nombre22: 'Side acceleration x2 F2 [m]',
+        //     nombre23: 'Side acceleration y1 F1 [m]',
+        //     nombre24: 'Side acceleration y2 F1 [m]',
+        //     nombre25: 'Side acceleration y1 F2 [m]',
+        //     nombre26: 'Side acceleration y2 F2 [m]',
 
-          };
-        } else {
-          indicesColumnas = [3, 6, 9, 12, 15, 18]; // Índices de las columnas a eliminar
-          headers = {
-            id: 'Time',
-            nombre1: 'Displacement x F1 [m]',
-            nombre2: 'Displacement y F1 [m]',
-            nombre3: 'Displacement x F2 [m]',
-            nombre4: 'Displacement y F2 [m]',
-            nombre5: 'Displacement x F3 [m]',
-            nombre6: 'Displacement y F3 [m]',
-            nombre7: 'Acceleration x F1 [m/s^2]',
-            nombre8: 'Acceleration y F1 [m/s^2]',
-            nombre9: 'Acceleration x F2 [m/s^2]',
-            nombre10: 'Acceleration y F2 [m/s^2]',
-            nombre11: 'Acceleration x F3 [m/s^2]',
-            nombre12: 'Acceleration y F3 [m/s^2]',
-            nombre13: 'Base displacement [m]',
-            nombre14: 'Base acceleration [m/s^2]',
-            nombre15: 'Side displacement x1 F1 [m]',
-            nombre16: 'Side displacement x2 F1 [m]',
-            nombre17: 'Side displacement x1 F2 [m]',
-            nombre18: 'Side displacement x2 F2 [m]',
-            nombre19: 'Side displacement x1 F3 [m]',
-            nombre20: 'Side displacement x2 F3 [m]',
-            nombre21: 'Side displacement y1 F1 [m]',
-            nombre22: 'Side displacement y2 F1 [m]',
-            nombre23: 'Side displacement y1 F2 [m]',
-            nombre24: 'Side displacement y2 F2 [m]',
-            nombre25: 'Side displacement y1 F3 [m]',
-            nombre26: 'Side displacement y2 F3 [m]',
-            nombre27: 'Side acceleration x1 F1 [m]',
-            nombre28: 'Side acceleration x2 F1 [m]',
-            nombre29: 'Side acceleration x1 F2 [m]',
-            nombre30: 'Side acceleration x2 F2 [m]',
-            nombre31: 'Side acceleration x1 F3 [m]',
-            nombre32: 'Side acceleration x2 F3 [m]',
-            nombre33: 'Side acceleration y1 F1 [m]',
-            nombre34: 'Side acceleration y2 F1 [m]',
-            nombre35: 'Side acceleration y1 F2 [m]',
-            nombre36: 'Side acceleration y2 F2 [m]',
-            nombre37: 'Side acceleration y1 F3 [m]',
-            nombre38: 'Side acceleration y2 F3 [m]',
+        //   };
+        // } else {
+        //   indicesColumnas = [3, 6, 9, 12, 15, 18]; // Índices de las columnas a eliminar
+        //   headers = {
+        //     id: 'Time',
+        //     nombre1: 'Displacement x F1 [m]',
+        //     nombre2: 'Displacement y F1 [m]',
+        //     nombre3: 'Displacement x F2 [m]',
+        //     nombre4: 'Displacement y F2 [m]',
+        //     nombre5: 'Displacement x F3 [m]',
+        //     nombre6: 'Displacement y F3 [m]',
+        //     nombre7: 'Acceleration x F1 [m/s^2]',
+        //     nombre8: 'Acceleration y F1 [m/s^2]',
+        //     nombre9: 'Acceleration x F2 [m/s^2]',
+        //     nombre10: 'Acceleration y F2 [m/s^2]',
+        //     nombre11: 'Acceleration x F3 [m/s^2]',
+        //     nombre12: 'Acceleration y F3 [m/s^2]',
+        //     nombre13: 'Base displacement [m]',
+        //     nombre14: 'Base acceleration [m/s^2]',
+        //     nombre15: 'Side displacement x1 F1 [m]',
+        //     nombre16: 'Side displacement x2 F1 [m]',
+        //     nombre17: 'Side displacement x1 F2 [m]',
+        //     nombre18: 'Side displacement x2 F2 [m]',
+        //     nombre19: 'Side displacement x1 F3 [m]',
+        //     nombre20: 'Side displacement x2 F3 [m]',
+        //     nombre21: 'Side displacement y1 F1 [m]',
+        //     nombre22: 'Side displacement y2 F1 [m]',
+        //     nombre23: 'Side displacement y1 F2 [m]',
+        //     nombre24: 'Side displacement y2 F2 [m]',
+        //     nombre25: 'Side displacement y1 F3 [m]',
+        //     nombre26: 'Side displacement y2 F3 [m]',
+        //     nombre27: 'Side acceleration x1 F1 [m]',
+        //     nombre28: 'Side acceleration x2 F1 [m]',
+        //     nombre29: 'Side acceleration x1 F2 [m]',
+        //     nombre30: 'Side acceleration x2 F2 [m]',
+        //     nombre31: 'Side acceleration x1 F3 [m]',
+        //     nombre32: 'Side acceleration x2 F3 [m]',
+        //     nombre33: 'Side acceleration y1 F1 [m]',
+        //     nombre34: 'Side acceleration y2 F1 [m]',
+        //     nombre35: 'Side acceleration y1 F2 [m]',
+        //     nombre36: 'Side acceleration y2 F2 [m]',
+        //     nombre37: 'Side acceleration y1 F3 [m]',
+        //     nombre38: 'Side acceleration y2 F3 [m]',
 
 
-          };
-        }
+        //   };
+        // }
 
-        // Ordenar los índices de las columnas en orden descendente
-        indicesColumnas.sort((a, b) => b - a);
+        // // Ordenar los índices de las columnas en orden descendente
+        // indicesColumnas.sort((a, b) => b - a);
 
-        for (let fila of data1) {
-          for (let indiceColumna of indicesColumnas) {
-            fila.splice(indiceColumna, 1);
-          }
-        }
+        // for (let fila of data1) {
+        //   for (let indiceColumna of indicesColumnas) {
+        //     fila.splice(indiceColumna, 1);
+        //   }
+        // }
 
-        let end;
-        end = Porti2P ? 26 : 38;
+        // let end;
+        // end = Porti2P ? 26 : 38;
 
-        for (let i = 1; i <= end; i++) {
-          if (!VECORTE.includes(i)) {
-            let propName = `nombre${i}`;
-            delete headers[propName];
-          }
-        }
-        VECORTE.sort((a, b) => a - b);
-        console.log(VECORTE)
-        DatosFinales = data1.map(fila => VECORTE.map(posicion => fila[posicion]));
+        // for (let i = 1; i <= end; i++) {
+        //   if (!VECORTE.includes(i)) {
+        //     let propName = `nombre${i}`;
+        //     delete headers[propName];
+        //   }
+        // }
+        // VECORTE.sort((a, b) => a - b);
+        // console.log(VECORTE)
+        // DatosFinales = data1.map(fila => VECORTE.map(posicion => fila[posicion]));
 
         //Para remuestrear
 
@@ -5858,17 +5862,17 @@
         if (TG.length > 0 && targetFrequency < 50) {
           let columnaActual = new Array();
           let columnasArray = new Array();
-          for (let j = 0; j < DatosFinales[0].length; j++) {
+          for (let j = 0; j < data1[0].length; j++) {
             columnaActual = [];
-            for (let i = 0; i < DatosFinales.length; i++) {
-              columnaActual.push(DatosFinales[i][j]);
+            for (let i = 0; i < data1.length; i++) {
+              columnaActual.push(data1[i][j]);
             }
             columnasArray.push(resampleSignal(columnaActual, targetFrequency, 50)); // Agregar el array de la columna actual al array de columnas
           }
           with (Matrix) {
             columnasArray = transpose(create(columnasArray)).mat
-            DatosFinales = [];
-            DatosFinales = columnasArray;
+            data1 = [];
+            data1 = columnasArray;
             columnasArray = [];
           }
         }
