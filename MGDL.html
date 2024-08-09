@@ -1246,6 +1246,8 @@
       var FacDRuidoA = new Array();
       var U1T = new Array();
       var UPP1T = new Array();
+      var ULT = new Array();
+      var UPPLT = new Array();
       let xxc;
       let yyc;
       let StarCheck = false;
@@ -1410,10 +1412,13 @@
         cancelAnimationFrame(Animar);
         // EditResponse = 1;
         contadorglobal = 0;
+        //Limpiar contenedores de respuesta
         U1 = new Array();
         UPP1 = new Array();
         U1T = new Array();
         UPP1T = new Array();
+        ULT = new Array();
+        UPPLT = new Array();
         Ac_DataC = new Array();
         Desp_DataC = new Array();
         t = [0];
@@ -1619,16 +1624,20 @@
         // console.log(SensorMultp)
         Fils = UPP1.mat.length;
         Colm = UPP1.mat[0].length;
-        FacDRuido = Array.from({ length: Fils }, () => Array(Colm).fill(0))
-        FacDRuidoA = Array.from({ length: Fils }, () => Array(Colm).fill(0))
-        FacDRuidoAG = Array.from({ length: Fils }, () => Array(Colm).fill(0))
+        FacDRuido = Array.from({ length: Fils }, () => Array(Colm).fill(0));
+        FacDRuidoA = Array.from({ length: Fils }, () => Array(Colm).fill(0));
+        FacDRuidoAG = Array.from({ length: Fils }, () => Array(Colm).fill(0));
+        U1T = Totales(U1,Desp_Data);
+        UPP1T = Totales(UPP1,Ac_Data);
+        ULT = DesplazamientosLocales(U1T,SensorMultp); ULT = ULT[0];
+        UPPLT = DesplazamientosLocales(UPP1T,SensorMultpA); UPPLT = UPPLT[0];
 
         var EsCSan3 = Math.max(...Ac_Data);
-        for (let j = 0; j < U1.mat.length; j++) {
-          var EsCSan1 = Math.max(...U1.mat[j]);
+        for (let j = 0; j < U1T.mat.length; j++) {
+          var EsCSan1 = Math.max(...U1T.mat[j]);
           // UPP1.mat[j].pop();
-          var EsCSan2 = Math.max(...UPP1.mat[j]);
-          for (let i = 0; i < UPP1.mat[0].length; i++) {
+          var EsCSan2 = Math.max(...UPP1T.mat[j]);
+          for (let i = 0; i < UPP1T.mat[0].length; i++) {
             FacDRuido[j][i] = RuidoDR * Ruido_Gaus(0, 1, EsCSan1);
             FacDRuidoA[j][i] = RuidoMs * Ruido_Gaus(0, 1, EsCSan2);
             if (j == 0) {
@@ -1636,6 +1645,18 @@
             }
           }
         }
+        // for (let j = 0; j < U1.mat.length; j++) {
+        //   var EsCSan1 = Math.max(...U1.mat[j]);
+        //   // UPP1.mat[j].pop();
+        //   var EsCSan2 = Math.max(...UPP1.mat[j]);
+        //   for (let i = 0; i < UPP1.mat[0].length; i++) {
+        //     FacDRuido[j][i] = RuidoDR * Ruido_Gaus(0, 1, EsCSan1);
+        //     FacDRuidoA[j][i] = RuidoMs * Ruido_Gaus(0, 1, EsCSan2);
+        //     if (j == 0) {
+        //       FacDRuidoAG[j][i] = RuidoGr * Ruido_Gaus(0, 1, EsCSan3);
+        //     }
+        //   }
+        // }
 
         setTimeout(function () {
           UL = DesplazamientosLocales(U1, SensorMultp); UL = UL[0];
@@ -5431,7 +5452,7 @@
         switch (EditResponse) {
           case 1:
             // chart.options.plugins.legend.display = true;
-            for (let i = 0; i < UPP1.mat[0].length - 1; i++) {
+            for (let i = 0; i < UPP1T.mat[0].length - 1; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -5440,13 +5461,13 @@
                 }
               }
               if (Dispg == true) {
-                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[0][i] + FacDRuido[0][i], x: t[i] });
-                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[1][i] + FacDRuido[1][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * U1T.mat[0][i] + FacDRuido[0][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * U1T.mat[1][i] + FacDRuido[1][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[2][i], x: t[i] });
                 chart3.data.datasets[0].data.push({ y: Desp_DataC[i], x: t[i] });
               } else {
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[0][i] + FacDRuidoA[0][i], x: t[i] });
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[1][i] + FacDRuidoA[1][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1T.mat[0][i] + FacDRuidoA[0][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1T.mat[1][i] + FacDRuidoA[1][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[2][i], x: t[i] });
                 chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_DataC[i] + FacDRuidoAG[0][i], x: t[i] });
               }
@@ -5454,7 +5475,7 @@
             }
             break;
           case 2:
-            for (let i = 0; i < UPP1.mat[0].length - 1; i++) {
+            for (let i = 0; i < UPP1T.mat[0].length - 1; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -5463,20 +5484,20 @@
                 }
               }
               if (Dispg == true) {
-                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[3][i] + FacDRuido[3][i], x: t[i] });
-                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[4][i] + FacDRuido[4][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * U1T.mat[3][i] + FacDRuido[3][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * U1T.mat[4][i] + FacDRuido[4][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[5][i], x: t[i] });
                 chart3.data.datasets[0].data.push({ y: Desp_DataC[i], x: t[i] });
               } else {
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[3][i] + FacDRuidoA[3][i], x: t[i] });
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[4][i] + FacDRuidoA[4][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1T.mat[3][i] + FacDRuidoA[3][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1T.mat[4][i] + FacDRuidoA[4][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[5][i], x: t[i] });
                 chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_DataC[i] + FacDRuidoAG[0][i], x: t[i] });
               }
             }
             break;
           case 3:
-            for (let i = 0; i < UPP1.mat[0].length - 1; i++) {
+            for (let i = 0; i < UPP1T.mat[0].length - 1; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -5485,13 +5506,13 @@
                 }
               }
               if (Dispg == true) {
-                chart.data.datasets[0].data.push({ y: SensorMultp * U1.mat[6][i] + FacDRuido[6][i], x: t[i] });
-                chart2.data.datasets[0].data.push({ y: SensorMultp * U1.mat[7][i] + FacDRuido[7][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * U1T.mat[6][i] + FacDRuido[6][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * U1T.mat[7][i] + FacDRuido[7][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][i], x: t[i] });
                 chart3.data.datasets[0].data.push({ y: Desp_DataC[i], x: t[i] });
               } else {
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[6][i] + FacDRuidoA[6][i], x: t[i] });
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[7][i] + FacDRuidoA[7][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPP1T.mat[6][i] + FacDRuidoA[6][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPP1T.mat[7][i] + FacDRuidoA[7][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][i], x: t[i] });
                 chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_DataC[i] + FacDRuidoAG[0][i], x: t[i] });
 
@@ -5499,7 +5520,7 @@
             }
             break;
           case 4:
-            for (let i = 0; i < UPP1.mat[0].length - 1; i++) {
+            for (let i = 0; i < UPP1T.mat[0].length - 1; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -5511,20 +5532,20 @@
 
 
 
-                chart.data.datasets[0].data.push({ y: SensorMultp * UL[0][i][0] + FacDRuido[0][i], x: t[i] });
-                chart.data.datasets[1].data.push({ y: SensorMultp * UL[0][i][1] + FacDRuido[0][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * ULT[0][i][0] + FacDRuido[0][i], x: t[i] });
+                chart.data.datasets[1].data.push({ y: SensorMultp * ULT[0][i][1] + FacDRuido[0][i], x: t[i] });
 
-                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[2 + MGV][i][0] + FacDRuido[1][i], x: t[i] });
-                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[2 + MGV][i][1] + FacDRuido[1][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * ULT[2 + MGV][i][0] + FacDRuido[1][i], x: t[i] });
+                chart2.data.datasets[1].data.push({ y: SensorMultp * ULT[2 + MGV][i][1] + FacDRuido[1][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
                 chart3.data.datasets[0].data.push({ y: Desp_Data[i], x: t[i] });
               } else {
 
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[0][i][0] + FacDRuidoA[0][i], x: t[i] });
-                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[0][i][1] + FacDRuidoA[0][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPLT[0][i][0] + FacDRuidoA[0][i], x: t[i] });
+                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPLT[0][i][1] + FacDRuidoA[0][i], x: t[i] });
 
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2 + MGV][i][0] + FacDRuidoA[1][i], x: t[i] });
-                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2 + MGV][i][1] + FacDRuidoA[1][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPLT[2 + MGV][i][0] + FacDRuidoA[1][i], x: t[i] });
+                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPLT[2 + MGV][i][1] + FacDRuidoA[1][i], x: t[i] });
 
                 // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
                 chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i] + FacDRuidoAG[0][i], x: t[i] });
@@ -5533,7 +5554,7 @@
 
             break;
           case 5:
-            for (let i = 0; i < UPP1.mat[0].length - 1; i++) {
+            for (let i = 0; i < UPP1T.mat[0].length - 1; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -5543,20 +5564,20 @@
               }
               if (Dispg == true) {
 
-                chart.data.datasets[0].data.push({ y: SensorMultp * UL[1][i][0] + FacDRuido[3][i], x: t[i] });
-                chart.data.datasets[1].data.push({ y: SensorMultp * UL[1][i][1] + FacDRuido[3][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * ULT[1][i][0] + FacDRuido[3][i], x: t[i] });
+                chart.data.datasets[1].data.push({ y: SensorMultp * ULT[1][i][1] + FacDRuido[3][i], x: t[i] });
 
-                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[3 + MGV][i][0] + FacDRuido[4][i], x: t[i] });
-                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[3 + MGV][i][1] + FacDRuido[4][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * ULT[3 + MGV][i][0] + FacDRuido[4][i], x: t[i] });
+                chart2.data.datasets[1].data.push({ y: SensorMultp * ULT[3 + MGV][i][1] + FacDRuido[4][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
                 chart3.data.datasets[0].data.push({ y: Desp_Data[i], x: t[i] });
               } else {
 
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[1][i][0] + FacDRuidoA[3][i], x: t[i] });
-                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[1][i][1] + FacDRuidoA[3][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPLT[1][i][0] + FacDRuidoA[3][i], x: t[i] });
+                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPLT[1][i][1] + FacDRuidoA[3][i], x: t[i] });
 
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[3 + MGV][i][0] + FacDRuidoA[4][i], x: t[i] });
-                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[3 + MGV][i][1] + FacDRuidoA[4][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPLT[3 + MGV][i][0] + FacDRuidoA[4][i], x: t[i] });
+                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPLT[3 + MGV][i][1] + FacDRuidoA[4][i], x: t[i] });
 
                 // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
                 chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i] + FacDRuidoAG[0][i], x: t[i] });
@@ -5565,7 +5586,7 @@
             break;
           case 6:
 
-            for (let i = 0; i < UPP1.mat[0].length - 1; i++) {
+            for (let i = 0; i < UPP1T.mat[0].length - 1; i++) {
               if (CheckLv == false) {
                 if (i <= 4) {
                   SensorMultp = 5;
@@ -5575,20 +5596,20 @@
               }
               if (Dispg == true) {
 
-                chart.data.datasets[0].data.push({ y: SensorMultp * UL[2][i][0] + FacDRuido[3][i], x: t[i] });
-                chart.data.datasets[1].data.push({ y: SensorMultp * UL[2][i][1] + FacDRuido[3][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultp * ULT[2][i][0] + FacDRuido[3][i], x: t[i] });
+                chart.data.datasets[1].data.push({ y: SensorMultp * ULT[2][i][1] + FacDRuido[3][i], x: t[i] });
 
-                chart2.data.datasets[0].data.push({ y: SensorMultp * UL[5][i][0] + FacDRuido[4][i], x: t[i] });
-                chart2.data.datasets[1].data.push({ y: SensorMultp * UL[5][i][1] + FacDRuido[4][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultp * ULT[5][i][0] + FacDRuido[4][i], x: t[i] });
+                chart2.data.datasets[1].data.push({ y: SensorMultp * ULT[5][i][1] + FacDRuido[4][i], x: t[i] });
                 // chart3.data.datasets[0].data.push({ y: SensorMultp * U1.mat[8][contadorglobal], x: t[contadorglobal] });
                 chart3.data.datasets[0].data.push({ y: Desp_Data[i], x: t[i] });
               } else {
 
-                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPL[2][i][0] + FacDRuidoA[6][i], x: t[i] });
-                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPL[2][i][1] + FacDRuidoA[6][i], x: t[i] });
+                chart.data.datasets[0].data.push({ y: SensorMultpA * UPPLT[2][i][0] + FacDRuidoA[6][i], x: t[i] });
+                chart.data.datasets[1].data.push({ y: SensorMultpA * UPPLT[2][i][1] + FacDRuidoA[6][i], x: t[i] });
 
-                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPL[5][i][0] + FacDRuidoA[7][i], x: t[i] });
-                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPL[5][i][1] + FacDRuidoA[7][i], x: t[i] });
+                chart2.data.datasets[0].data.push({ y: SensorMultpA * UPPLT[5][i][0] + FacDRuidoA[7][i], x: t[i] });
+                chart2.data.datasets[1].data.push({ y: SensorMultpA * UPPLT[5][i][1] + FacDRuidoA[7][i], x: t[i] });
 
                 // chart3.data.datasets[0].data.push({ y: SensorMultpA * UPP1.mat[8][contadorglobal], x: t[contadorglobal] });
                 chart3.data.datasets[0].data.push({ y: SensorMultpAG * Ac_Data[i] + FacDRuidoAG[0][i], x: t[i] });
@@ -5716,17 +5737,16 @@
       var DatosFinales = new Array();
       function ExportarAnyTiempo(VECORTE = 10) {
         data1 = new Array();
-        let ULT = new Array();
-        let UPPLT = new Array();
-        U1T = Totales(U1,Desp_Data);
-        UPP1T = Totales(UPP1,Ac_Data);
+        // ULT = new Array();
+        // UPPLT = new Array();
+        
         let indiceColumnas;
         with (Matrix) {
           // DesDx = scale(create(Desp_Data), xxc);
           // DesDy = scale(create(Desp_Data), yyc);
 
-          ULT = DesplazamientosLocales(U1T,SensorMultp); ULT = ULT[0];
-          UPPLT = DesplazamientosLocales(UPP1T,SensorMultpA); UPPLT = UPPLT[0];
+          // ULT = DesplazamientosLocales(U1T,SensorMultp); ULT = ULT[0];
+          // UPPLT = DesplazamientosLocales(UPP1T,SensorMultpA); UPPLT = UPPLT[0];
 
           M1 = scale(transpose(U1T), SensorMultp).mat;
           M2 = scale(transpose(UPP1T), SensorMultpA).mat;
