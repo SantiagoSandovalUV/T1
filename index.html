@@ -119,6 +119,170 @@
 		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+				Sensor configuration
+			</button>
+		</div>
+		<div class="collapse" id="collapseExample3">
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+								Accelerometer (Top)
+							</button>
+						</div>
+					</h2>
+					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<h6 style="text-align: left;"> [Fs: 50Hz] </h6>
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveSensor()"
+										class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="MassCheck">
+												<label class="form-check-label" for="MassCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAM"
+												id="NoiseAM" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingTwo">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+								Displacement sensor (Top)
+							</button>
+						</div>
+					</h2>
+					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: center;">
+							<h6 style="text-align: left;"> [Fs: 50Hz] </h6>
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="RelativeCheck">
+												<label class="form-check-label" for="RelativeCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAR"
+												id="NoiseAR" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingThree">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+								Accelerometer (Bottom)
+							</button>
+						</div>
+					</h2>
+					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: left;">
+							<h6 style="text-align: left;"> [Fs: 50Hz] </h6>
+							<div class="card mt-3" style="width: 100%;">
+								<div class="card-body" style="text-align: center;">
+									<button type="button" onclick="LoadSensorG()"
+										class="btn btn-primary">Assign</button>
+									<button type="button" onclick="RemoveSensorG()"
+										class="btn btn-primary">Remove</button>
+								</div>
+							</div>
+							<div class="card mt-2" style="width: 100%;">
+								<div class="card-body">
+									<form class="row g-1">
+										<div class="col d-flex justify-content-between align-items-center">
+											<label class="form-label" style="font-size:14px; white-space: nowrap;">
+												Noise amplitude
+												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
+													class="ti ti-question-mark text-primary"></i></label>
+											<div class="form-check form-switch" style="margin-left: 176px;">
+												<input class="form-check-input" type="checkbox" id="GroundCheck">
+												<label class="form-check-label" for="GroundCheck"></label>
+											</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control form-control-sm" name="NoiseAG"
+												id="NoiseAG" placeholder="" disabled>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingFour">
+						<div style="text-align: center;">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+								Signal Resampling
+							</button>
+						</div>
+					</h2>
+					<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" style="text-align: left;">
+							<form class="row g-3">
+								<div class="col" style="width: 90px;">
+									<label class="form-label" style="font-size: 14px">Resampling Frequency [Hz]<i
+											data-tippy-content="ResamplingFrequency, should be less than 50 Hz "
+											class="ti ti-question-mark text-primary"></i></label>
+									<input type="text" class="form-control form-control-sm" name="targetFrequency"
+										id="targetFrequency" placeholder="">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card mb-2" style="width: 100%;">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 				Dynamics properties
 			</button>
@@ -328,170 +492,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="card mb-2" style="width: 100%;">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
-				data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-				Sensor configuration
-			</button>
-		</div>
-		<div class="collapse" id="collapseExample3">
-			<div class="accordion" id="accordionExample">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingOne">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								Accelerometer (Top)
-							</button>
-						</div>
-					</h2>
-					<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: center;">
-							<h6 style="text-align: left;"> [Fs: 50Hz] </h6>
-							<div class="card mt-3" style="width: 100%;">
-								<div class="card-body" style="text-align: center;">
-									<button type="button" onclick="LoadSensor()" class="btn btn-primary">Assign</button>
-									<button type="button" onclick="RemoveSensor()"
-										class="btn btn-primary">Remove</button>
-								</div>
-							</div>
-							<div class="card mt-2" style="width: 100%;">
-								<div class="card-body">
-									<form class="row g-1">
-										<div class="col d-flex justify-content-between align-items-center">
-											<label class="form-label" style="font-size:14px; white-space: nowrap;">
-												Noise amplitude
-												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
-													class="ti ti-question-mark text-primary"></i></label>
-											<div class="form-check form-switch" style="margin-left: 176px;">
-												<input class="form-check-input" type="checkbox" id="MassCheck">
-												<label class="form-check-label" for="MassCheck"></label>
-											</div>
-										</div>
-										<div class="col">
-											<input type="text" class="form-control form-control-sm" name="NoiseAM"
-												id="NoiseAM" placeholder="" disabled>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingTwo">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-								Displacement sensor (Top)
-							</button>
-						</div>
-					</h2>
-					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: center;">
-							<h6 style="text-align: left;"> [Fs: 50Hz] </h6>
-							<div class="card mt-3" style="width: 100%;">
-								<div class="card-body" style="text-align: center;">
-									<button type="button" onclick="LoadLVDT()" class="btn btn-primary">Assign</button>
-									<button type="button" onclick="RemoveLVDT()" class="btn btn-primary">Remove</button>
-								</div>
-							</div>
-							<div class="card mt-2" style="width: 100%;">
-								<div class="card-body">
-									<form class="row g-1">
-										<div class="col d-flex justify-content-between align-items-center">
-											<label class="form-label" style="font-size:14px; white-space: nowrap;">
-												Noise amplitude
-												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
-													class="ti ti-question-mark text-primary"></i></label>
-											<div class="form-check form-switch" style="margin-left: 176px;">
-												<input class="form-check-input" type="checkbox" id="RelativeCheck">
-												<label class="form-check-label" for="RelativeCheck"></label>
-											</div>
-										</div>
-										<div class="col">
-											<input type="text" class="form-control form-control-sm" name="NoiseAR"
-												id="NoiseAR" placeholder="" disabled>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingThree">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-								Accelerometer (Bottom)
-							</button>
-						</div>
-					</h2>
-					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: left;">
-							<h6 style="text-align: left;"> [Fs: 50Hz] </h6>
-							<div class="card mt-3" style="width: 100%;">
-								<div class="card-body" style="text-align: center;">
-									<button type="button" onclick="LoadSensorG()"
-										class="btn btn-primary">Assign</button>
-									<button type="button" onclick="RemoveSensorG()"
-										class="btn btn-primary">Remove</button>
-								</div>
-							</div>
-							<div class="card mt-2" style="width: 100%;">
-								<div class="card-body">
-									<form class="row g-1">
-										<div class="col d-flex justify-content-between align-items-center">
-											<label class="form-label" style="font-size:14px; white-space: nowrap;">
-												Noise amplitude
-												<i data-tippy-content="Modify the magnitude of the Gaussian noise."
-													class="ti ti-question-mark text-primary"></i></label>
-											<div class="form-check form-switch" style="margin-left: 176px;">
-												<input class="form-check-input" type="checkbox" id="GroundCheck">
-												<label class="form-check-label" for="GroundCheck"></label>
-											</div>
-										</div>
-										<div class="col">
-											<input type="text" class="form-control form-control-sm" name="NoiseAG"
-												id="NoiseAG" placeholder="" disabled>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
 
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingFour">
-						<div style="text-align: center;">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-								Signal Resampling
-							</button>
-						</div>
-					</h2>
-					<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-						data-bs-parent="#accordionExample">
-						<div class="accordion-body" style="text-align: left;">
-							<form class="row g-3">
-								<div class="col" style="width: 90px;">
-									<label class="form-label" style="font-size: 14px">Resampling Frequency [Hz]<i
-											data-tippy-content="ResamplingFrequency, should be less than 50 Hz "
-											class="ti ti-question-mark text-primary"></i></label>
-									<input type="text" class="form-control form-control-sm" name="targetFrequency"
-										id="targetFrequency" placeholder="">
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="card mb-2" style="width: 100%;">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" id="BMT">
