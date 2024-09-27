@@ -2062,12 +2062,29 @@
       function K_local(PrG, VecOrden) { //Matrices de rigidez total
         with (Matrix) {
           const KIND3 = Array.from({ length: VecOrden.length }, () => [0]); //Array que contiene las matrices de transformación
+          let Area, Inercia;
+          let n = 0;
+          let controlador = true;
           // console.log(KIND3)
           for (let j1 = 0; j1 < VecOrden.length; j1++) { //Construcción de matrices
             for (let i = 0; i < VecOrden[0].length; i++) { //Construcción de matrices
               var PpE = PrG[VecOrden[j1][i]][1].Propiedades; //Guarda las propiedades del elemento
-              var Area = PpE.b * PpE.h;
-              var Inercia = PpE.b * PpE.h * PpE.h * PpE.h / 12;
+              if (i==n && j1>1){
+                Inercia = PpE.b * PpE.b * PpE.b * PpE.h / 12;
+                if (controlador == true){
+                  n = n+2;
+                  controlador = false;
+                }else{
+                  n = n+1;
+                  controlador = true;
+                  consele.log(n);
+                }
+
+              }else{
+                Inercia = PpE.b * PpE.h * PpE.h * PpE.h / 12;
+
+              }
+              Area = PpE.b * PpE.h;
               // console.log(Area, Inercia)
               var KIND = scale(create([[(Area / Inercia), 0, 0, (-1 * Area / Inercia), 0, 0], [0, 12, 6 * 1, 0, -12, 6 * 1], [0, 0, 4, 0, -6, 2], [0, 0, 0, (Area / Inercia), 0, 0], [0, 0, 0, 0, 12, -6], [0, 0, 0, 0, 0, 4]]), (PpE.E * Inercia / (1)));
               var KIND2 = transpose(KIND);
