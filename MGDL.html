@@ -2931,6 +2931,33 @@
         })
         // StopInterval();
       }
+      function Alerta_ProPAct() {
+        let timerInterval
+        Swal.fire({
+          title: 'Updated properties',
+          text: 'Calculations',
+          html: '<b></b>',
+          timer: 650,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+           
+            console.log('I was closed by the timer')
+          }
+        })
+        // StopInterval();
+      }
       function Alerta_Calculos() {
         let timerInterval
         Swal.fire({
@@ -4413,6 +4440,8 @@
 
           }
         }
+        Alerta_ProPAct();
+
       }
       // Actualiza las propiedades físicas en la interfaz
       function PropFiAct(Drag, PrG) {
